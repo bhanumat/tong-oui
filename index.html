@@ -26,23 +26,30 @@
 
 		<!-- CSS -->
 		<!-- build:css css/style.min.css -->
-		<link rel="stylesheet" href="bower_components/OwlCarousel/owl-carousel/owl.carousel.css" />
+		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap-theme.min.css" />
+		
 		<link rel="stylesheet" type="text/css" href="styles/style.css" />
+
+		<link rel="stylesheet" type="text/css" href="styles/cigna.css" />
 		<!-- endbuild -->
 
 	</head>
 
 	<body class="main-wrapper">
-	
 		<!--[if lt IE 8]>
 		    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
-
-		<!-- Navigation -->
-		<main-nav></main-nav>
-
+		<header>
+			<!-- Navigation -->
+			<main-nav></main-nav>
+		</header>
 		<!-- Main view for templates -->
 		<div data-ng-view="" class="container"></div>
+
+		<footer>
+			<main-footer></main-footer>
+		</footer>
 
 	</body>
 
@@ -72,8 +79,9 @@
 	<script type="text/javascript" src="components/services/LocalStorage.service.js"></script>
 	<script type="text/javascript" src="components/services/queryService.service.js"></script>
 	<script type="text/javascript" src="components/directives/main.nav.directive.js"></script>
-	<script type="text/javascript" src="components/directives/responsive.nav.directive.js"></script>
-	<script type="text/javascript" src="components/directives/owl.slider.directive.js"></script>
+	<script type="text/javascript" src="components/directives/main.footer.directive.js"></script>
+	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/ngSticky/dist/sticky.min.js"></script>
 	<!-- endbuild -->
 
 	<!-- Application sections -->

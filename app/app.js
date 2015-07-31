@@ -15,16 +15,16 @@
   /**
    * Definition of the main app module and its dependencies
    */
+
   angular
     .module('boilerplate', [
-      'ngRoute'
+      'ngRoute','ui.bootstrap','sticky'
     ])
     .config(config);
 
   // safe dependency injection
   // this prevents minification issues
   config.$inject = ['$routeProvider', '$locationProvider', '$httpProvider', '$compileProvider'];
-
   /**
    * App routing
    *
@@ -33,7 +33,7 @@
    * 
    */
   function config($routeProvider, $locationProvider, $httpProvider, $compileProvider) {
-
+    
     $locationProvider.html5Mode(false);
 
     // routes
@@ -53,11 +53,18 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .when('/test', {
+        templateUrl: 'views/test.html',
+        controller: 'MainController',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
-    $httpProvider.interceptors.push('authInterceptor');
+      
+
+      $httpProvider.interceptors.push('authInterceptor');
 
   }
 

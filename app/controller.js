@@ -11,16 +11,22 @@
     .module('boilerplate')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService'];
+  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse'];
 
 
-  function MainController(LocalStorage, QueryService) {
+  function MainController(LocalStorage, QueryService, $scope, $http, $parse) {
 
     // 'controller as' syntax
     var self = this;
 
+    $scope.username = "test";
+    $scope.result = "Ha Ha Ha";
 
     ////////////  function definitions
+
+    $scope.usernameChange = function() {
+      $scope.result = $scope.username + "Ha Ha Ha";
+    };
 
 
     /**

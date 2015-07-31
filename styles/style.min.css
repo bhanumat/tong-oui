@@ -1,7 +1,7 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-hr,input[type=search]{box-sizing:content-box;-moz-box-sizing:content-box}
-legend,td,th{padding:0}
+img,legend{border:0}
 .container,sub,sup{position:relative}
+legend,td,th{padding:0}
 #inner-header ul,ul{list-style-type:none}
 .cf:after,.footer{clear:both}
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
@@ -20,10 +20,9 @@ mark{background:#ff0;color:#000}
 sub,sup{font-size:75%;line-height:0;vertical-align:baseline}
 sup{top:-.5em}
 sub{bottom:-.25em}
-img{border:0}
 svg:not(:root){overflow:hidden}
 figure{margin:1em 40px}
-hr{height:0}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
 pre,textarea{overflow:auto}
 code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
 button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
@@ -36,10 +35,9 @@ button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
 input{line-height:normal}
 input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}
-input[type=search]{-webkit-appearance:textfield;-webkit-box-sizing:content-box}
+input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
 input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}
 fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
-legend{border:0}
 table{border-collapse:collapse;border-spacing:0}
 .italic{font-style:italic}
 .hidden{display:none!important}
@@ -107,27 +105,26 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 #content{margin-top:1.5em}
 .slider{margin-bottom:30px}
 .image-slider{max-height:400px}
+.image-slider img{width:100%}
 .footer{background-color:#231f20;color:#f8f9fa}
-@media only screen and (min-width:481px){.container{width:480px}}
 @media only screen and (min-width:768px){body{font-family:"Open Sans",Helvetica,Arial,sans-serif}
-.container{width:760px}
 .header a{font-weight:700}
 #logo{margin:0;line-height:1}
 .nav{border:0}
 .nav ul{background:#231f20;margin-top:0}
 .nav li{position:relative}
 .nav li a{border-bottom:0}
-.nav li a:focus,.nav li a:hover{color:#fff;text-decoration:underline}}
-@media only screen and (min-width:1030px){.container{width:1040px;margin:0 auto}
-#inner-header{width:1000px}
+.nav li a:focus,.nav li a:hover{color:#fff;text-decoration:underline}
+}
+@media only screen and (min-width:1030px){#inner-header{width:1000px}
 #logo,.main-nav{display:block}
-.hamburger,.responsive-nav{display:none}}
-@media only screen and (min-width:1240px){.container{width:1240px}}
+.hamburger,.responsive-nav{display:none}
+}
 @media print{blockquote,img,pre,tr{page-break-inside:avoid}
 *{background:0 0!important;color:#000!important;text-shadow:none!important;filter:none!important;-ms-filter:none!important}
 a,a:visited{color:#444!important;text-decoration:underline}
-a:after,a:visited:after{content:" (" attr(href)")"}
-a abbr[title]:after,a:visited abbr[title]:after{content:" (" attr(title)")"}
+a:after,a:visited:after{content:" (" attr(href) ")"}
+a abbr[title]:after,a:visited abbr[title]:after{content:" (" attr(title) ")"}
 .ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}
 blockquote,pre{border:1px solid #999}
 thead{display:table-header-group}
@@ -135,4 +132,5 @@ img{max-width:100%!important}
 @page{margin:.5cm}
 h2,h3,p{orphans:3;widows:3}
 h2,h3{page-break-after:avoid}
-.page-navigation,.respond-form,.sidebar,.wp-prev-next,nav{display:none}}
+.page-navigation,.respond-form,.sidebar,.wp-prev-next,nav{display:none}
+}

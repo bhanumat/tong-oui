@@ -4,7 +4,7 @@
   /**
    * Sample factory
    *
-   * You can fetch here some data from API and the use them
+   * You can fetch here some data from API and then use them
    * in controller
    * 
    */

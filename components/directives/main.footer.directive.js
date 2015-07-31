@@ -3,24 +3,19 @@
   'use strict';
 
   /**
-   * Main navigation, just a HTML template
-   * @author Jozef Butko
-   * @ngdoc  Directive
-   *
-   * @example
-   * <main-nav><main-nav/>
-   *
+   * <main-footer><main-footer/>
    */
+   
   angular
     .module('boilerplate')
-    .directive('mainNav', tinMainNav);
+    .directive('mainFooter', tinMainFooter);
 
-  function tinMainNav() {
+  function tinMainFooter() {
 
     // Definition of directive
     var directiveDefinitionObject = {
       restrict: 'E',
-      templateUrl: 'components/directives/main-nav.html',
+      templateUrl: 'components/directives/main-footer.html',
       link: function($scope, elem) {
 
       }
