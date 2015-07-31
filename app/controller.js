@@ -11,10 +11,10 @@
     .module('boilerplate')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse'];
+  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper'];
 
 
-  function MainController(LocalStorage, QueryService, $scope, $http, $parse) {
+  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper) {
 
     // 'controller as' syntax
     var self = this;
@@ -27,6 +27,8 @@
     $scope.usernameChange = function() {
       $scope.result = $scope.username + "Ha Ha Ha";
     };
+
+    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
 
 
     /**
