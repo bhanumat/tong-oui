@@ -99,8 +99,8 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 #logo{margin:.75em 0;display:none}
 #logo a{color:#fff}
 #content{margin-top:1.5em}
-.bg{position:absolute;bottom:0}
-.bg img{position:relative;z-index:0;margin:-10% 0;max-width:100%}
+.bg{position:absolute;bottom:-20%}
+.bg img{position:relative;z-index:0;max-width:100%}
 .slider{margin-bottom:30px}
 .image-slider{max-height:400px}
 .image-slider img{width:100%}

@@ -28,7 +28,7 @@
       $scope.result = $scope.username + "Ha Ha Ha";
     };
 
-    $scope.background = parallaxHelper.createAnimator(-0.3, 150, -150);
+    $scope.background = parallaxHelper.createAnimator(-0.5, 1000, -150);
 
 
     /**
