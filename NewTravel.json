@@ -1,0 +1,774 @@
+{
+    "cignatravel": {
+        "maxdays": 90,
+        "maxtraveller": 5,
+        "maxage": 80,
+        "destination": [
+            {
+                "country": "Argentina",
+                "code": "AR",
+                "id": 1,
+                "type": "schengen"
+            },
+            {
+                "country": "Australia",
+                "code": "AU",
+                "id": 2,
+                "type": "schengen"
+            },
+            {
+                "country": "Austria",
+                "code": "AT",
+                "id": 3,
+                "type": "schengen"
+            },
+            {
+                "country": "Belgium",
+                "code": "BE",
+                "id": 4,
+                "type": "schengen"
+            },
+            {
+                "country": "Brazil",
+                "code": "BR",
+                "id": 5,
+                "type": "schengen"
+            },
+            {
+                "country": "France",
+                "code": "FR",
+                "id": 6,
+                "type": "schengen"
+            },
+            {
+                "country": "French Guiana",
+                "code": "GF",
+                "id": 7,
+                "type": "schengen"
+            },
+            {
+                "country": "French Polynesia",
+                "code": "PF",
+                "id": 8,
+                "type": "schengen"
+            },
+            {
+                "country": "French Southern Territories",
+                "code": "TF",
+                "id": 9,
+                "type": "schengen"
+            },
+            {
+                "country": "Germany",
+                "code": "DE",
+                "id": 10,
+                "type": "schengen"
+            },
+            {
+                "country": "Hong Kong",
+                "code": "HK",
+                "id": 11,
+                "type": "asia"
+            },
+            {
+                "country": "Japan",
+                "code": "JP",
+                "id": 12,
+                "type": "asia"
+            },
+            {
+                "country": "Korea, Republic",
+                "code": "KR",
+                "id": 13,
+                "type": "asia"
+            },
+            {
+                "country": "Macao",
+                "code": "MO",
+                "id": 14,
+                "type": "asia"
+            },
+            {
+                "country": "Malaysia",
+                "code": "MY",
+                "id": 15,
+                "type": "asia"
+            },
+            {
+                "country": "Maldives",
+                "code": "MV",
+                "id": 16,
+                "type": "asia"
+            },
+            {
+                "country": "Netherlands",
+                "code": "NL",
+                "id": 17,
+                "type": "schengen"
+            },
+            {
+                "country": "Norway",
+                "code": "NO",
+                "id": 18,
+                "type": "schengen"
+            },
+            {
+                "country": "Poland",
+                "code": "PL",
+                "id": 19,
+                "type": "schengen"
+            },
+            {
+                "country": "Portugal",
+                "code": "PT",
+                "id": 20,
+                "type": "schengen"
+            },
+            {
+                "country": "Romania",
+                "code": "RO",
+                "id": 21,
+                "type": "schengen"
+            },
+            {
+                "country": "Russian Federation",
+                "code": "RU",
+                "id": 22,
+                "type": "schengen"
+            },
+            {
+                "country": "Serbia and Montenegro",
+                "code": "CS",
+                "id": 23,
+                "type": "schengen"
+            },
+            {
+                "country": "Spain",
+                "code": "ES",
+                "id": 24,
+                "type": "schengen"
+            },
+            {
+                "country": "Sweden",
+                "code": "SE",
+                "id": 25,
+                "type": "schengen"
+            },
+            {
+                "country": "Switzerland",
+                "code": "CH",
+                "id": 26,
+                "type": "schengen"
+            },
+            {
+                "country": "Syrian Arab Republic",
+                "code": "SY",
+                "id": 27,
+                "type": "schengen"
+            },
+            {
+                "country": "Taiwan, Province of China",
+                "code": "TW",
+                "id": 28,
+                "type": "asia"
+            },
+            {
+                "country": "Ukraine",
+                "code": "UA",
+                "id": 29,
+                "type": "schengen"
+            },
+            {
+                "country": "United Arab Emirates",
+                "code": "AE",
+                "id": 30,
+                "type": "schengen"
+            },
+            {
+                "country": "United Kingdom",
+                "code": "GB",
+                "id": 31,
+                "type": "schengen"
+            },
+            {
+                "country": "United States",
+                "code": "US",
+                "id": 32,
+                "type": "schengen"
+            }
+        ],
+        "quotation": {
+            "description": [
+                {
+                    "desc1": "1. การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)"
+                },
+                {
+                    "desc2": "2. การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล"
+                },
+                {
+                    "desc3": "3. ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด"
+                },
+                {
+                    "desc4": "4.1 บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง"
+                },
+                {
+                    "desc5": "4.2 บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษาพยาบาลฉุกเฉิน"
+                }
+            ],
+            "protect": [
+                {
+                    "planid": 1,
+                    "desc1": "500,000"
+                },
+                {
+                    "planid": 1,
+                    "desc2": "500,000"
+                },
+                {
+                    "planid": 1,
+                    "desc3": "1,000,000"
+                },
+                {
+                    "planid": 1,
+                    "desc4": "ü"
+                },
+                {
+                    "planid": 1,
+                    "desc5": "1,000,000"
+                },
+                {
+                    "planid": 2,
+                    "desc1": "1,000,000"
+                },
+                {
+                    "planid": 2,
+                    "desc2": "500,000"
+                },
+                {
+                    "planid": 2,
+                    "desc3": "2,000,000"
+                },
+                {
+                    "planid": 2,
+                    "desc4": "ü"
+                },
+                {
+                    "planid": 2,
+                    "desc5": "2,000,000"
+                },
+                {
+                    "planid": 3,
+                    "desc1": "2,000,000"
+                },
+                {
+                    "planid": 3,
+                    "desc2": "1,000,000"
+                },
+                {
+                    "planid": 3,
+                    "desc3": "3,000,000"
+                },
+                {
+                    "planid": 3,
+                    "desc4": "ü"
+                },
+                {
+                    "planid": 3,
+                    "desc5": "3,000,000"
+                },
+                {
+                    "planid": 4,
+                    "desc1": "3,000,000"
+                },
+                {
+                    "planid": 4,
+                    "desc2": "1,000,000"
+                },
+                {
+                    "planid": 4,
+                    "desc3": "4,000,000"
+                },
+                {
+                    "planid": 4,
+                    "desc4": "ü"
+                },
+                {
+                    "planid": 4,
+                    "desc5": "4,000,000"
+                },
+                {
+                    "planid": 5,
+                    "desc1": "4,000,000"
+                },
+                {
+                    "planid": 5,
+                    "desc2": "1,000,000"
+                },
+                {
+                    "planid": 5,
+                    "desc3": "5,000,000"
+                },
+                {
+                    "planid": 5,
+                    "desc4": "ü"
+                },
+                {
+                    "planid": 5,
+                    "desc5": "5,000,000"
+                }
+            ],
+            "default-planid":1
+        },
+        "flightsecure": {
+            "description": [
+                {
+                    "desc1": "การเลื่อนหรือการบอกเลิกการเดินทางสูงสุด"
+                },
+                {
+                    "desc2": "ค่าใช้จ่ายในการลดจำนวนการเดินทาง"
+                },
+                {
+                    "desc3": "การพลาดการต่อเที่ยวบิน สูงสุด"
+                },
+                {
+                    "desc4": "การชดเชยความล่าช้าในการเดินทาง ทุกๆ 6 ชั่วโมง"
+                },
+                {
+                    "desc5": "ความรับผิดชอบต่อบุคคลภายนอกสูงสุด"
+                }
+            ],
+            "protect": [
+                {
+                    "planid": 1,
+                    "desc1": "8,000"
+                },
+                {
+                    "planid": 1,
+                    "desc2": "8,000"
+                },
+                {
+                    "planid": 1,
+                    "desc3": "4,000"
+                },
+                {
+                    "planid": 1,
+                    "desc4": "4,000"
+                },
+                {
+                    "planid": 1,
+                    "desc5": "500,000"
+                },
+                {
+                    "planid": 2,
+                    "desc1": "15,000"
+                },
+                {
+                    "planid": 2,
+                    "desc2": "15,000"
+                },
+                {
+                    "planid": 2,
+                    "desc3": "8,000"
+                },
+                {
+                    "planid": 2,
+                    "desc4": "6,000"
+                },
+                {
+                    "planid": 2,
+                    "desc5": "1,000,000"
+                },
+                {
+                    "planid": 3,
+                    "desc1": "30,000"
+                },
+                {
+                    "planid": 3,
+                    "desc2": "30,000"
+                },
+                {
+                    "planid": 3,
+                    "desc3": "4,000"
+                },
+                {
+                    "planid": 3,
+                    "desc4": "4,000"
+                },
+                {
+                    "planid": 3,
+                    "desc5": "500,000"
+                },
+                {
+                    "planid": 4,
+                    "desc1": "8,000"
+                },
+                {
+                    "planid": 4,
+                    "desc2": "8,000"
+                },
+                {
+                    "planid": 4,
+                    "desc3": "4,000"
+                },
+                {
+                    "planid": 4,
+                    "desc4": "4,000"
+                },
+                {
+                    "planid": 4,
+                    "desc5": "500,000"
+                },
+                {
+                    "planid": 5,
+                    "desc1": "8,000"
+                },
+                {
+                    "planid": 5,
+                    "desc2": "8,000"
+                },
+                {
+                    "planid": 5,
+                    "desc3": "4,000"
+                },
+                {
+                    "planid": 5,
+                    "desc4": "4,000"
+                },
+                {
+                    "planid": 5,
+                    "desc5": "500,000"
+                }
+            ],"default-tick":true
+        },
+        "propertysafe": {
+            "description": [
+                {
+                    "desc1": "10. การสูญเสียหรือเสียหายของกระเป๋าเดินทางและทรัพย์สินส่วนตัวสูงสุดถึง"
+                },
+                {
+                    "desc2": "11. การล่าช้าของกระเป๋าเดินทาง"
+                },
+                {
+                    "desc3": "12. การสูญหายของกระเป๋าเดินทาง / การสูญหายของเอกสารการเดินทาง"
+                }
+            ],
+            "protect": [
+                {
+                    "planid": 1,
+                    "desc1": "8,000"
+                },
+                {
+                    "planid": 1,
+                    "desc2": "Max<br />8,000"
+                },
+                {
+                    "planid": 1,
+                    "desc3": "1,000/2,500"
+                },
+                {
+                    "planid": 2,
+                    "desc1": "15,000"
+                },
+                {
+                    "planid": 2,
+                    "desc2": "Max<br />8,001"
+                },
+                {
+                    "planid": 2,
+                    "desc3": "3,000/5,000"
+                },
+                {
+                    "planid": 3,
+                    "desc1": "30,000"
+                },
+                {
+                    "planid": 3,
+                    "desc2": "Max<br />15,000"
+                },
+                {
+                    "planid": 3,
+                    "desc3": "5,000/8,000"
+                },
+                {
+                    "planid": 4,
+                    "desc1": "40,000"
+                },
+                {
+                    "planid": 4,
+                    "desc2": "Max<br />20,000"
+                },
+                {
+                    "planid": 4,
+                    "desc3": "6,000/9,000"
+                },
+                {
+                    "planid": 5,
+                    "desc1": "50,000"
+                },
+                {
+                    "planid": 5,
+                    "desc2": "Max<br />25,000"
+                },
+                {
+                    "planid": 5,
+                    "desc3": "7,000/10,000"
+                }
+            ],"default-tick":true
+        },
+        "prices": {
+            "asia": [
+                {
+                    "planid": 1,
+                    "price": 300,
+                    "days": 5
+                },
+                {
+                    "planid": 2,
+                    "price": 550,
+                    "days": 5
+                },
+                {
+                    "planid": 3,
+                    "price": 900,
+                    "days": 5
+                },
+                {
+                    "planid": 4,
+                    "price": 1200,
+                    "days": 5
+                },
+                {
+                    "planid": 5,
+                    "price": 1400,
+                    "days": 5
+                },
+                {
+                    "planid": 1,
+                    "price": 350,
+                    "days": 7
+                },
+                {
+                    "planid": 2,
+                    "price": 700,
+                    "days": 7
+                },
+                {
+                    "planid": 3,
+                    "price": 1100,
+                    "days": 7
+                },
+                {
+                    "planid": 4,
+                    "price": 1450,
+                    "days": 7
+                },
+                {
+                    "planid": 5,
+                    "price": 1750,
+                    "days": 7
+                },
+                {
+                    "planid": 1,
+                    "price": 400,
+                    "days": 10
+                },
+                {
+                    "planid": 2,
+                    "price": 750,
+                    "days": 10
+                },
+                {
+                    "planid": 3,
+                    "price": 1200,
+                    "days": 10
+                },
+                {
+                    "planid": 4,
+                    "price": 1600,
+                    "days": 10
+                },
+                {
+                    "planid": 5,
+                    "price": 2000,
+                    "days": 10
+                }
+            ],
+            "schengen": [
+                {
+                    "planid": 1,
+                    "price": 500,
+                    "days": 5
+                },
+                {
+                    "planid": 2,
+                    "price": 950,
+                    "days": 5
+                },
+                {
+                    "planid": 3,
+                    "price": 1550,
+                    "days": 5
+                },
+                {
+                    "planid": 4,
+                    "price": 1950,
+                    "days": 5
+                },
+                {
+                    "planid": 5,
+                    "price": 2450,
+                    "days": 5
+                },
+                {
+                    "planid": 1,
+                    "price": 600,
+                    "days": 7
+                },
+                {
+                    "planid": 2,
+                    "price": 1050,
+                    "days": 7
+                },
+                {
+                    "planid": 3,
+                    "price": 1700,
+                    "days": 7
+                },
+                {
+                    "planid": 4,
+                    "price": 2250,
+                    "days": 7
+                },
+                {
+                    "planid": 5,
+                    "price": 2900,
+                    "days": 7
+                },
+                {
+                    "planid": 1,
+                    "price": 700,
+                    "days": 10
+                },
+                {
+                    "planid": 2,
+                    "price": 1400,
+                    "days": 10
+                },
+                {
+                    "planid": 3,
+                    "price": 2400,
+                    "days": 10
+                },
+                {
+                    "planid": 4,
+                    "price": 3250,
+                    "days": 10
+                },
+                {
+                    "planid": 5,
+                    "price": 3800,
+                    "days": 10
+                }
+            ]
+        },
+        "province": [
+            {
+                "id": 1,
+                "name": "Bangkok"
+            },
+            {
+                "id": 2,
+                "name": "Chiang Mai"
+            },
+            {
+                "id": 3,
+                "name": "Phuket"
+            },
+            {
+                "id": 4,
+                "name": "Prachin Buri"
+            },
+            {
+                "id": 5,
+                "name": "Chon Buri"
+            }
+        ],
+        "district": [
+            {
+                "id": 1,
+                "name": "Khet Bang Kapi",
+                "provinceid": 1
+            },
+            {
+                "id": 2,
+                "name": "Khet Dusit",
+                "provinceid": 1
+            },
+            {
+                "id": 3,
+                "name": "Khet Bang Sue",
+                "provinceid": 1
+            },
+            {
+                "id": 4,
+                "name": "Khet Don Mueang",
+                "provinceid": 1
+            },
+            {
+                "id": 5,
+                "name": "Khet Huai Khwang",
+                "provinceid": 1
+            },
+            {
+                "id": 6,
+                "name": "Mueang Chiang Mai",
+                "provinceid": 2
+            },
+            {
+                "id": 7,
+                "name": "San Sai",
+                "provinceid": 2
+            },
+            {
+                "id": 8,
+                "name": "Fang",
+                "provinceid": 2
+            },
+            {
+                "id": 9,
+                "name": "Kathu",
+                "provinceid": 3
+            },
+            {
+                "id": 10,
+                "name": "Mueang Phuket",
+                "provinceid": 3
+            },
+            {
+                "id": 11,
+                "name": "Mueang Prachin Buri",
+                "provinceid": 4
+            },
+            {
+                "id": 12,
+                "name": "Kabin Buri",
+                "provinceid": 4
+            },
+            {
+                "id": 13,
+                "name": "Na Di",
+                "provinceid": 4
+            },
+            {
+                "id": 14,
+                "name": "Mueang Chon Buri",
+                "provinceid": 5
+            },
+            {
+                "id": 15,
+                "name": "Si Racha",
+                "provinceid": 5
+            }
+        ]
+    }
+}

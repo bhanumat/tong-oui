@@ -1,70 +1,137 @@
-<div class="row">
-	<div class="col-12-xs">
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
-		<h1>Travel Care +</h1>
+<div class="content-wrapper">
+	<div class="row">
+		<div class="col-12-xs">
+			<div class="banner">
+				<a href="" title=""><img src="http://placehold.it/960x150"></a>
+			</div>
+			<div class="form-navigation">
+				<img src="images/form-navigation.png" alt="">
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-8 col-md-offset-2">
+					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
+					<div class="travel-form">
+						<div class="row form-section">
+							<div class="col-xs-1">
+								<img src="images/icon-destination.png" alt="">
+							</div>
+							<div class="col-xs-11">
+								<div class="row">
+									<div class="col-xs-6 section-heading">
+										<h3>จุดหมายปลายทาง</h3>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<div class="input-group">
+												<select class="form-control" style="width:100%;" ng-model="travel.destination" ng-options="item.country for item in travelData.destination | orderBy:'country'">
+												</select>
+												<span class="input-group-btn">
+													<button class="btn btn-primary" ng-click="addDestinations();" type="button">
+													<span class="glyphicon glyphicon-plus"></span>
+													</button>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div ng-repeat="destination in destinations | limitTo: 10" class="col-xs-6">
+										<div class="travel-destination">
+											<span ng-bind="destination.country"></span>
+											<button class="btn btn-tag" ng-click="removeDestination($index)"><span class="glyphicon glyphicon-remove"></span></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-section">
+							<div class="col-xs-1">
+								<img src="images/icon-schedule.png" alt="">
+							</div>
+							<div class="col-xs-11">
+								<div class="row">
+									<div class="col-xs-12 section-heading">
+										<h3>วันเดินทาง<span ng-bind="travel.days"></span></h3>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<p class="input-group">
+												<input type="text" class="form-control" ng-click="opened = true" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="opened" min-date="today" datepicker-options="dateOptions" show-button-bar="false" />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-link" ng-click="opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+												</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<p class="input-group">
+												<input type="text" class="form-control" ng-click="opened2 = true" ng-change="calcTravelDays();" datepicker-popup="{{format}}" ng-model="travel.endDate" is-open="opened2" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-link" ng-click="opened2 = true"><i class="glyphicon glyphicon-calendar"></i></button>
+												</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-section">
+							<div class="col-xs-1">
+								<img src="images/icon-passenger.png" alt="">
+							</div>
+							<div class="col-xs-11">
+								<div class="row">
+									<div class="col-xs-6 section-heading">
+										<h3>จำนวนผู้ขอประกัน</h3>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<select style="width:100%;" ng-model="travel.passenger">
+												<option ng-repeat="item in range(1,travelData.maxtraveller)">{{item}}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-section">
+							<div class="col-xs-1">
+								<img src="images/icon-coupon.png" alt="">
+							</div>
+							<div class="col-xs-11">
+								<div class="row">
+									<div class="col-xs-6 section-heading">
+										<h3>ใส่รหัสโผรโมชั่น (ถ้ามี)</h3>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<label class="sr-only" for="promotion-code">Promotion Code</label>
+											<input type="text" class="form-control" id="promotion-code" >
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 text-center">
+								<button class="btn btn-super">คำนวณเบี้ยประกัน <span class="glyphicon glyphicon-menu-right"></span></button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="coution">
+									<h4><span class="glyphicon glyphicon-asterisk"></span> หมายเหตุ</h4>
+									<p>• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง • ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการ
+	เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
 	</div>
-</div>
-<div class="bg">
-	<img src="images/bg.jpg" du-parallax y="background" alt="" />
+	<div class="bg">
+		<img src="images/bg3.jpg"/>
+	</div>
 </div>
