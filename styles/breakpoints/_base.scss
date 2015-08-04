@@ -173,7 +173,7 @@ MAIN PAGE
 }
 
 .content-wrapper {
-	background-color: #3da0dc;
+	background-color: #3da1dd;
 }
 
 .content-section {
@@ -184,7 +184,7 @@ MAIN PAGE
 		padding-bottom: 40px;
 	}
 	.form-section {
-		margin-bottom: 20px;
+		margin-bottom: 40px;
 	}
 	.section-heading {
 		h3 {
@@ -209,7 +209,7 @@ MAIN PAGE
 		}
 		.btn-tag {
 			position: absolute;
-			right: 1em;
+			right: 0.5em;
 			color: $white;
 			background: none;
 			height: 44px;
@@ -224,14 +224,27 @@ MAIN PAGE
 
 }
 
+.calendar {
+	width: 100%;
+	border: 1px solid $secondary-color;
+	table {
+		width: 100%;
+	}
+	button {
+		border: 0px;
+	}
+}
+
 .coution {
 	margin-top: 30px;
 	border-radius: 4px;
-	padding: 10px 15px 15px 15px; 
-	background-color: rgba($white,0.6);
-	color: $primary-color;
+	padding: 0; 
+	color: $white;
 	h4 {
-		font-size: 24px;
+		font-size: 22px;
+	}
+	p {
+		font-size: 14px;
 	}
 }
 
@@ -283,4 +296,27 @@ FOOTER STYLES
 	clear: both;
 	background-color: $black;
 	color: $light-gray;
+}
+
+.border-style{
+	border: solid 1px #6FB8E6;
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	box-shadow: 1px 1px 5px #4F4F4F;
+}
+@font-face {
+    font-family: 'psl_kandamodern_extra_proRg';
+    src: url('../fonts/psl162pro-webfont.eot');
+    src: url('../fonts/psl162pro-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/psl162pro-webfont.woff2') format('woff2'),
+         url('../fonts/psl162pro-webfont.woff') format('woff'),
+         url('../fonts/psl162pro-webfont.ttf') format('truetype'),
+         url('../fonts/psl162pro-webfont.svg#psl_kandamodern_extra_proRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.font-psl{
+	font-family: 'psl_kandamodern_extra_proRg';
+	font-size: 40px;
 }

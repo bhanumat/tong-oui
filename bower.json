@@ -27,6 +27,7 @@
     "ngSticky": "~1.7.9",
     "ng-parallax": "~0.1.8",
     "angular-bootstrap": "~0.13.1",
-    "bootstrap-css": "~3.3.4"
+    "bootstrap-css": "~3.3.4",
+    "angular-daterangepicker": "~0.1.16"
   }
 }
