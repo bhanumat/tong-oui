@@ -83,6 +83,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
 	font-weight: 500;
+	font-family: $font;
 
 	a {
 		text-decoration: none;
@@ -182,30 +183,35 @@ MAIN PAGE
 	padding: 0;	
 	.travel-form {
 		padding-bottom: 40px;
+		margin-top:40px;
 	}
 	.form-section {
 		margin-bottom: 40px;
 	}
 	.section-heading {
 		h3 {
-			font-size: 30px;
-			line-height: 30px;
+			font-family: $font;
+			font-size: 32px;
+			line-height: 32px;
 			margin: 6px 0;
 			color: $white;
 		}
 	}
 	.travel-destination {
 		background-color: $secondary-color;
-		border-radius: 4px;
+		@include border-radius(4px);
 		padding: 0; 
 		margin-bottom: 10px;
 		text-align: center;
+		font-size: 25px;
 		color: $white;
-		box-shadow: 1px 1px 1px $text-color;
+		@include box-shadow(1px, 1px, 3px, $text-color);
+		font-family: $font-secondary;
 		& > span {
-			padding: 0 10px;
+			padding: 0 40px 0 10px;
 			line-height: 44px;
 			width: 100%;
+
 		}
 		.btn-tag {
 			position: absolute;
@@ -216,35 +222,58 @@ MAIN PAGE
 		}
 	}
 	h2 {
+		font-family: $font;
 		color: $white;
 		font-size: 60px;
 		line-height: 60px;
-		text-shadow: 1px 1px 4px $text-color;
+		@include text-shadow(1px, 1px, 3px, $text-color);
 	}
 
 }
 
 .calendar {
 	width: 100%;
-	border: 1px solid $secondary-color;
+	border: solid $border-width $form-border-color;
+	@include border-radius($border-radius);
+	@include box-shadow(1px, 1px, 3px, $text-color);
 	table {
 		width: 100%;
+		font-family: $font-secondary;
+		.btn {
+			font-size: 1.1em;
+		}
+		button i {
+			top: 3px;
+		}
+		thead {
+			th {
+				font-size: 18px;
+				small {
+					font-size: 18px;
+				}
+			}
+			
+		}
+		tbody {
+			font-size: 18px;
+		}
+		
 	}
 	button {
 		border: 0px;
 	}
 }
 
-.coution {
+.caution {
 	margin-top: 30px;
-	border-radius: 4px;
+	@include border-radius(4px);
 	padding: 0; 
 	color: $white;
 	h4 {
 		font-size: 22px;
 	}
 	p {
-		font-size: 14px;
+		font-size: 18px;
 	}
 }
 
@@ -264,15 +293,17 @@ MAIN PAGE
 
 .bg {
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 	padding: 0;	
 	z-index: 0;
-	img {
-      position: relative;
-      z-index: 0;
-      margin: -8% 0 0 0;
-      width: 100%;
-    }
+	.bg-inner {
+		img {
+	      position: relative;
+	      z-index: 0;
+	      margin: -15% 0 0 0;
+	      width: 100%;
+	    }
+	}
 }
 
 // slider
@@ -296,27 +327,4 @@ FOOTER STYLES
 	clear: both;
 	background-color: $black;
 	color: $light-gray;
-}
-
-.border-style{
-	border: solid 1px #6FB8E6;
-	border-radius: 5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	box-shadow: 1px 1px 5px #4F4F4F;
-}
-@font-face {
-    font-family: 'psl_kandamodern_extra_proRg';
-    src: url('../fonts/psl162pro-webfont.eot');
-    src: url('../fonts/psl162pro-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/psl162pro-webfont.woff2') format('woff2'),
-         url('../fonts/psl162pro-webfont.woff') format('woff'),
-         url('../fonts/psl162pro-webfont.ttf') format('truetype'),
-         url('../fonts/psl162pro-webfont.svg#psl_kandamodern_extra_proRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-.font-psl{
-	font-family: 'psl_kandamodern_extra_proRg';
-	font-size: 40px;
 }

@@ -18,11 +18,11 @@
 							<div class="col-xs-11">
 								<div class="row">
 									<div class="col-xs-6 section-heading">
-										<h3>จุดหมายปลายทาง</h3>
+									<h3>จุดหมายปลายทาง</h3>
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<div class="input-group border-style">
+											<div class="input-group">
 												<select class="form-control text-center" style="width:100%;" ng-model="travel.destination" ng-options="item.country for item in travelData.destination | orderBy:'country'">
 													<option value="" selected="selected">เลือกประเทศ</option>
 												</select>
@@ -54,8 +54,8 @@
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<p class="input-group border-style">
-												<input type="text" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" ng-click="openCalendar($event);" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="opened" show-weeks="false" min-date="today" datepicker-options="dateOptions" show-button-bar="false"/>   
+											<p class="input-group input-group-outline">
+												<input type="text" placeholder="วันที่เริ่มต้นการเดินทาง" class="form-control text-center" ng-click="openCalendar($event);" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="opened" show-weeks="false" min-date="today" datepicker-options="dateOptions" show-button-bar="false"/>
 												<span class="input-group-btn">
 													<button type="button" class="btn btn-link" ng-click="openCalendar($event);"><img src="images/icon-calendar.jpg" alt=""></button>
 												</span>
@@ -64,7 +64,7 @@
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<p class="input-group border-style">
+											<p class="input-group input-group-outline">
 												<input type="text" placeholder="วันที่สิ้นสุดการเดินทาง"  class="form-control text-center" ng-click="openCalendar($event);" ng-change="calcTravelDays();" datepicker-popup="{{format}}" ng-model="travel.endDate" is-open="opened" show-weeks="false" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" />
 												<span class="input-group-btn">
 													<button type="button" ng-click="openCalendar($event);" class="btn btn-link"><img src="images/icon-calendar.jpg" alt=""></button>
@@ -86,7 +86,7 @@
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<select style="width:100%;" ng-model="travel.passenger" class="border-style">
+											<select style="width:100%;" ng-model="travel.passenger" class="form-control">
 												<option ng-repeat="item in range(1,travelData.maxtraveller)">{{item}}</option>
 											</select>
 										</div>
@@ -106,8 +106,7 @@
 									<div class="col-xs-6">
 										<div class="form-group">
 											<label class="sr-only" for="promotion-code">Promotion Code</label>
-											<input type="text" class="form-control" id="promotion-code" style="border: solid 1px #6FB8E6;border-radius: 5px;
-	-moz-border-radius:5px;-webkit-border-radius:5px;box-shadow: 1px 1px 5px #4F4F4F;">
+											<input type="text" class="form-control" id="promotion-code">
 										</div>
 									</div>
 								</div>
@@ -115,22 +114,27 @@
 						</div>
 						<div class="row">
 							<div class="col-xs-12 text-center">
-								<button class="btn btn-super"><span class="font-psl">คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right" style="padding-top:10px;"></span></button>
+								<button class="btn btn-super"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="coution">
-									<h4><span class="glyphicon glyphicon-asterisk"></span> หมายเหตุ</h4>
+								<div class="caution">
+									<h4><img src="images/icon-caution.png" alt=""> หมายเหตุ</h4>
 									<p>• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง • ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการ
-	เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
+									เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+			<div class="bg">
+				<div class="bg-inner">
+					<img src="images/bg.png"/>
+				</div>
+			</div>
 		</div>
 	</div>
+
 </div>
