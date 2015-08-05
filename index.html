@@ -23,10 +23,24 @@
 		<![endif]-->
 		<!-- or, set /favicon.ico for IE10 win -->
 		<meta name="msapplication-TileColor" content="#f01d4f">
+		<!--
+		    IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+		    For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+		-->
+		<!--[if lt IE 9]>
+		    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+		    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+		    <script>
+		      document.createElement('ui-select');
+		      document.createElement('ui-select-match');
+		      document.createElement('ui-select-choices');
+		    </script>
+		<![endif]-->
 
 		<!-- CSS -->
 		<!-- build:css css/style.min.css -->
-		<link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css" />
 		<link rel="stylesheet" type="text/css" href="styles/cigna.css" />
 		<!-- endbuild -->
@@ -82,6 +96,7 @@
 	<script type="text/javascript" src="bower_components/ngSticky/dist/sticky.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-scroll/angular-scroll.min.js"></script>
 	<script type="text/javascript" src="bower_components/ng-parallax/angular-parallax.min.js"></script>
+	<script type="text/javascript" src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
 	<!-- endbuild -->
 
 	<!-- Application sections -->

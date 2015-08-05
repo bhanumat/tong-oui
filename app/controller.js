@@ -101,7 +101,7 @@
     //datepicker
 
     $scope.background = parallaxHelper.createAnimator(-0.05);
-  }
 
+  }
 
 })();

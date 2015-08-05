@@ -18,7 +18,7 @@
 
   angular
     .module('boilerplate', [
-      'ngRoute','ui.bootstrap','sticky','duParallax'
+      'ngRoute','ui.bootstrap','sticky','duParallax','nya.bootstrap.select'
     ])
     .config(config);
 

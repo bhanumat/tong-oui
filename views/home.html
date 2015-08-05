@@ -23,9 +23,14 @@
 									<div class="col-xs-6">
 										<div class="form-group">
 											<div class="input-group">
-												<select class="form-control text-center" style="width:100%;" ng-model="travel.destination" ng-options="item.country for item in travelData.destination | orderBy:'country'">
-													<option value="" selected="selected">เลือกประเทศ</option>
-												</select>
+												<ol class="nya-bs-select form-control text-center" ng-model="travel.destination" title="เลือกประเทศ" data-size="5" data-live-search="true">
+												    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
+												      	<!-- the text content of anchor element will be used for search -->
+												      	<a>
+												        	{{ item.country }}
+												      	</a>
+												    </li>
+												</ol>
 												<span class="input-group-btn">
 													<button class="btn btn-primary" ng-click="addDestinations();" type="button">
 													<span class="glyphicon glyphicon-plus"></span>
@@ -54,22 +59,22 @@
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<p class="input-group input-group-outline">
+											<div class="input-group input-group-outline">
 												<input type="text" placeholder="วันที่เริ่มต้นการเดินทาง" class="form-control text-center" ng-click="openCalendar($event);" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="opened" show-weeks="false" min-date="today" datepicker-options="dateOptions" show-button-bar="false"/>
 												<span class="input-group-btn">
 													<button type="button" class="btn btn-link" ng-click="openCalendar($event);"><img src="images/icon-calendar.jpg" alt=""></button>
 												</span>
-											</p>
+											</div>
 										</div>
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<p class="input-group input-group-outline">
+											<div class="input-group input-group-outline">
 												<input type="text" placeholder="วันที่สิ้นสุดการเดินทาง"  class="form-control text-center" ng-click="openCalendar($event);" ng-change="calcTravelDays();" datepicker-popup="{{format}}" ng-model="travel.endDate" is-open="opened" show-weeks="false" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" />
 												<span class="input-group-btn">
 													<button type="button" ng-click="openCalendar($event);" class="btn btn-link"><img src="images/icon-calendar.jpg" alt=""></button>
 												</span>
-											</p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -86,9 +91,14 @@
 									</div>
 									<div class="col-xs-6">
 										<div class="form-group">
-											<select style="width:100%;" ng-model="travel.passenger" class="form-control">
-												<option ng-repeat="item in range(1,travelData.maxtraveller)">{{item}}</option>
-											</select>
+											<ol class="nya-bs-select form-control text-center" ng-model="travel.passenger"  title="เลือกจำนวนผู้เดินทาง" data-size="5" data-live-search="true">
+											    <li nya-bs-option="item in range(1,travelData.maxtraveller)">
+											      	<!-- the text content of anchor element will be used for search -->
+											      	<a>
+											        	{{ item }}
+											      	</a>
+												</li>
+											</ol>
 										</div>
 									</div>
 								</div>
