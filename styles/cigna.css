@@ -5299,9 +5299,7 @@ p.body, p.date {
 .wrapper-th {
     width: 100% !important;
 }
-.col-md-12, .col-sm-6 {
-    padding: 0;
-}
+
 .plan-sec-1-icon {
     padding-top: 20px;
 }

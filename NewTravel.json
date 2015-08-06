@@ -1,5 +1,7 @@
 {
     "cignatravel": {
+        "banner_link_url": "http://placehold.it/960x150",
+        "banner_image_url": "http://placehold.it/960x150",
         "maxdays": 90,
         "maxtraveller": 5,
         "maxage": 80,

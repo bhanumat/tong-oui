@@ -189,7 +189,13 @@ MAIN PAGE
 		margin-bottom: 40px;
 	}
 	.section-heading {
+		margin-bottom: 10px;
+		img {
+			margin-right: 10px;
+		}
 		h3 {
+			display: inline-block;
+			vertical-align: middle;
 			font-family: $font;
 			font-size: 32px;
 			line-height: 32px;
@@ -222,10 +228,11 @@ MAIN PAGE
 		}
 	}
 	h2 {
+		padding: 0 10px;
 		font-family: $font;
 		color: $white;
-		font-size: 60px;
-		line-height: 60px;
+		font-size: 45px;
+		line-height: 45px;
 		@include text-shadow(1px, 1px, 3px, $text-color);
 	}
 
@@ -279,7 +286,7 @@ MAIN PAGE
 
 .banner {
 	a {
-
+		display: block;
 	}
 	img {
 		width: 100%;		
@@ -287,8 +294,12 @@ MAIN PAGE
 } 
 
 .form-navigation {
+	padding: 0 20px;
 	margin: 60px 0 20px 0;
 	text-align: center;
+	img {
+		max-width: 100%;
+	}
 }
 
 .bg {

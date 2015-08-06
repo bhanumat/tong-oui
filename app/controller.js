@@ -60,10 +60,10 @@
 
     $scope.travel.date = {startDate: null, endDate: null};
 
-    $scope.openCalendar = function($event) {
+    $scope.openCalendar = function($event,variable) {
       $event.preventDefault();
       $event.stopPropagation();
-      $scope.opened = true;
+      $scope[variable] = true;
     }
 
     $scope.addDays = function(date, days) {
