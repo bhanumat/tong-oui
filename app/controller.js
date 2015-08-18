@@ -60,43 +60,21 @@
 
     $scope.travel.date = {startDate: null, endDate: null};
 
-    $scope.openCalendar = function($event,variable) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope[variable] = true;
-    }
-
     $scope.addDays = function(date, days) {
       var result = new Date(date);
       result.setDate(result.getDate() + days);
       return result;
     }
 
-    $scope.resetEndDate = function() {
-      $scope.travel.endDate = null;
-      $scope.travel.days = "";
-      $scope.maxDate = $scope.addDays($scope.travel.startDate,$scope.travelData.maxdays);
-      $scope.minDate = $scope.addDays($scope.travel.startDate,1);
-    }
 
     $scope.calcTravelDays = function() {
       var oneDay = 24*60*60*1000;
-      if ($scope.travel.startDate) {
-        $scope.travel.days = "รวม "+(Math.floor(( Date.parse($scope.travel.endDate) - Date.parse($scope.travel.startDate) ) / oneDay))+" วัน";
-      };
+      $scope.travel.days = "รวม "+(Math.floor(( Date.parse($scope.travel.endDateForCal) - Date.parse($scope.travel.startDateForCal) ) / oneDay))+" วัน";
     }
    
-    $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
-
     $scope.today = new Date();
-
+    $scope.maxDate = $scope.addDays($scope.today,90);
     $scope.minDate = $scope.addDays($scope.today,1);
-
-    $scope.formats = ['dd MMMM yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
 
     //datepicker
 

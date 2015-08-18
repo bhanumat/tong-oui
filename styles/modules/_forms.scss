@@ -91,6 +91,10 @@ textarea,
 
 } // end input defaults
 
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group-vertical>.btn:hover, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus, .btn-group>.btn:hover {
+  z-index: 0;
+}
+
 
 .form-control {
   height: 44px;
@@ -136,9 +140,10 @@ select {
 
 
 .form-group {
-  height: 44px;
   margin-bottom: 10px;
-
+  .help-block {
+    font-size: 20px;
+  }
   .form-control {
     .form-control {
       height: 42px;
@@ -147,7 +152,7 @@ select {
     }
     font-size: 22px;
     border: solid $border-width $form-border-color;
-    @include border-radius(4px);
+    @include border-radius($border-radius);
     @include box-shadow(1px, 1px, 3px, $text-color);
     &::-webkit-input-placeholder {
        color: $primary-color;
@@ -168,7 +173,7 @@ select {
 
   .input-group {
     height: 44px;
-    @include border-radius(4px);
+    @include border-radius($border-radius);
     @include box-shadow(1px, 1px, 3px, $text-color);
     &.input-group-outline {
        border: solid $border-width $form-border-color;
@@ -209,13 +214,13 @@ select {
     }
     .input-group-addon {
       background-color: $white;
-      border-left: 0px;
+      border-width: 0px;
     }
   }
 
 }
 .nya-bs-select.btn-group {
-  button.btn.form-control {
+  .form-control {
     padding-right:44px;
     .filter-option {
       line-height: 31px;
@@ -238,7 +243,7 @@ select {
       }
     }
     .dropdown-menu.inner:first-child {
-      @include border-radius(4px);
+      @include border-radius($border-radius);
     }
     .dropdown-menu.inner:not(:first-child) {
       @include border-radius-separate(0, 0, $border-radius, $border-radius);
@@ -252,6 +257,71 @@ select {
       }
     }
   }
+}
+
+#ui-datepicker-div {
+  margin-top: 5px;
+  font-family: $font-secondary;
+  color: $primary-color;
+  padding: 2px;
+  
+    .ui-widget-header {
+      color: $primary-color;
+      font-size: 1.2em;
+      background: none;
+      border: 0px none;
+      font-family: $font;
+      font-weight: normal;
+    }
+    .ui-datepicker-calendar {
+      margin: 0 auto;
+      thead {
+        line-height: 1.1em;
+      }
+      th {
+        font-family: $font;
+        font-weight: normal;
+        font-size: 1.1em;
+        width: 14.28%;
+        text-align: right;
+      }
+      .ui-state-default {
+        font-weight: normal;
+        background-image: none;
+        color: $primary-color;
+        background-color: $light-gray;
+        border: $border-width $light-gray solid;
+        font-size: 1.2em;
+        @include transition(0.5s all ease)
+      }
+      .ui-state-active {
+        font-weight: bold;
+        background-color: $primary-color;
+        color: $white;
+        border: $border-width $secondary-color solid;
+      }
+      .ui-state-highlight {
+        border: $border-width $secondary-color solid;
+      }
+      .ui-state-hover {
+        border: $border-width $primary-color solid;
+      }
+    }
+  .ui-datepicker-group {
+    .ui-datepicker-calendar {
+      margin: 0 auto 7px auto;
+    }
+  }
+
+  .ui-datepicker-prev { 
+    top: 1px; 
+    left: 1px;
+  }
+  .ui-datepicker-next { 
+    top: 1px; 
+    right: 1px;
+  }
+
 }
 
 #search-block-form {

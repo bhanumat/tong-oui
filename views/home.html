@@ -25,7 +25,7 @@
 										<h3>จุดหมายปลายทาง</h3>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<div class="form-group">
+										<div class="form-group has-error">
 											<div class="input-group">
 												<ol class="nya-bs-select form-control text-center" ng-model="travel.destination" title="เลือกประเทศ" data-size="5" data-live-search="true">
 												    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
@@ -41,6 +41,7 @@
 													</button>
 												</span>
 											</div>
+											<!-- <p class="help-block">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p> -->
 										</div>
 									</div>
 									<div ng-repeat="destination in destinations | limitTo: 10" class="col-xs-12 col-sm-6">
@@ -62,23 +63,21 @@
 										<h3>วันเดินทาง<span ng-bind="travel.days"></span></h3>
 									</div>
 									<div class="col-sm-6">
-										<div class="form-group">
+										<div class="form-group has-error">
 											<div class="input-group input-group-outline">
-												<input type="text" placeholder="วันที่เริ่มต้นการเดินทาง" class="form-control text-center" ng-click="openCalendar($event,'opened');" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="opened" show-weeks="false" min-date="today" datepicker-options="dateOptions" show-button-bar="false"/>
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-link" ng-click="openCalendar($event,'opened');"><img src="images/icon-calendar.jpg" alt=""></button>
-												</span>
+												<input type="text" start-date-calendar="2" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" />
+												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
 											</div>
+											<!-- <p class="help-block">กรุณาระบุวันที่เริ่มต้นเดินทาง</p> -->
 										</div>
 									</div>
 									<div class="col-sm-6">
-										<div class="form-group">
+										<div class="form-group has-error">
 											<div class="input-group input-group-outline">
-												<input type="text" placeholder="วันที่สิ้นสุดการเดินทาง"  class="form-control text-center" ng-click="openCalendar($event,'opened');" ng-change="calcTravelDays();" datepicker-popup="{{format}}" ng-model="travel.endDate" is-open="opened" show-weeks="false" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" />
-												<span class="input-group-btn">
-													<button type="button" ng-click="openCalendar($event,'opened');" class="btn btn-link"><img src="images/icon-calendar.jpg" alt=""></button>
-												</span>
+												<input type="text" end-date-calendar="2" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" />
+												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
 											</div>
+											<!-- <p class="help-block">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p> -->
 										</div>
 									</div>
 								</div>
@@ -92,10 +91,8 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<div class="input-group input-group-outline">
-												<input type="text" placeholder="วันที่เริ่มต้นการเดินทาง" class="form-control text-center" ng-click="openCalendar($event,'startOpened');" ng-change="resetEndDate();" datepicker-popup="{{format}}" ng-model="travel.startDate" is-open="startOpened" show-weeks="false" min-date="today" datepicker-options="dateOptions" show-button-bar="false"/>
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-link" ng-click="openCalendar($event,'startOpened');"><img src="images/icon-calendar.jpg" alt=""></button>
-												</span>
+												<input type="text" start-date-calendar="1" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" />
+												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
 											</div>
 										</div>
 									</div>
@@ -106,10 +103,8 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<div class="input-group input-group-outline">
-												<input type="text" placeholder="วันที่สิ้นสุดการเดินทาง"  class="form-control text-center" ng-click="openCalendar($event,'endOpened');" ng-change="calcTravelDays();" datepicker-popup="{{format}}" ng-model="travel.endDate" is-open="endOpened" show-weeks="false" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" />
-												<span class="input-group-btn">
-													<button type="button" ng-click="openCalendar($event,'endOpened');" class="btn btn-link"><img src="images/icon-calendar.jpg" alt=""></button>
-												</span>
+												<input type="text" end-date-calendar="1" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" />
+												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
 											</div>
 										</div>
 									</div>

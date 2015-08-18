@@ -29,6 +29,7 @@
     "angular-bootstrap": "~0.13.1",
     "bootstrap-css": "~3.3.4",
     "angular-daterangepicker": "~0.1.16",
-    "nya-bootstrap-select": "~2.0.10"
+    "nya-bootstrap-select": "~2.0.10",
+    "angular-mighty-datepicker": "~0.0.17"
   }
 }
