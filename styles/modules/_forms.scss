@@ -316,10 +316,16 @@ select {
   .ui-datepicker-prev { 
     top: 1px; 
     left: 1px;
+    span {
+      margin-top: -9px;
+    }
   }
   .ui-datepicker-next { 
     top: 1px; 
     right: 1px;
+    span {
+      margin-top: -9px;
+    }
   }
 
 }
