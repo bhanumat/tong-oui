@@ -18,13 +18,13 @@
 
   angular
     .module('boilerplate', [
-      'ngRoute','ui.bootstrap','sticky','duParallax','nya.bootstrap.select'
+      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages'
     ])
     .config(config);
 
   // safe dependency injection
   // this prevents minification issues
-  config.$inject = ['$routeProvider', '$locationProvider', '$httpProvider', '$compileProvider'];
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$compileProvider'];
   /**
    * App routing
    *
@@ -32,37 +32,35 @@
    * into separate file
    * 
    */
-  function config($routeProvider, $locationProvider, $httpProvider, $compileProvider) {
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider) {
     
     $locationProvider.html5Mode(false);
 
     // routes
-    $routeProvider
-      .when('/', {
+    $stateProvider
+      .state('insurance', {
+        url: '/insurance',
         templateUrl: 'views/home.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        controller: 'MainController'
       })
-      .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+      .state('insurance.destination', {
+        url: '/destination',
+        templateUrl: 'views/destination.html'
       })
-      .when('/setup', {
-        templateUrl: 'views/setup.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+      .state('insurance.plan', {
+        url: '/plan',
+        templateUrl: 'views/plan.html'
       })
-      .when('/test', {
-        templateUrl: 'views/test.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+      .state('insurance.profile', {
+        url: '/profile',
+        templateUrl: 'views/profile.html'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('insurance.payment', {
+        url: '/payment',
+        templateUrl: 'views/payment.html'
       });
 
-      
+      $urlRouterProvider.otherwise('/insurance/destination');
 
       $httpProvider.interceptors.push('authInterceptor');
 

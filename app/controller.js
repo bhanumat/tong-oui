@@ -11,15 +11,30 @@
     .module('boilerplate')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter'];
+  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state'];
 
 
-  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter) {
+  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state) {
 
     // 'controller as' syntax
     var self = this;
 
     ////////////  function definitions
+
+    $scope.start = true;
+    if ($scope.start == true) {
+      $scope.start = false;
+      $location.path('/insurance/destination');
+      $location.replace();
+    }
+    
+    $scope.$on('$locationChangeStart', function(next, current) { 
+     if ($location.path() == '/insurance') {
+        $location.path('/insurance/destination');
+        $location.replace();
+      }
+    });
+    
 
     $http.get('/NewTravel.json').
     then(function(response) {
@@ -29,8 +44,22 @@
       
     });
 
-    $scope.destinations = [];
-    $scope.travel = [];
+    $scope.travel = {
+      destinations: []
+    };
+    $scope.tempData = {
+      destination: []
+    };
+    $scope.formStepSubmitted = false;
+
+    $scope.goToPlanSelection=function(isFormValid) {
+      // set to true to show all error messages (if there are any)
+      $scope.formStepSubmitted = true;
+      if(isFormValid) {
+        $scope.formStepSubmitted = false;
+        $state.go('^.plan');
+      }
+    };
 
     $scope.range = function(min, max, step){
       step = step || 1;
@@ -39,26 +68,22 @@
       return input;
     };
 
-    $scope.addDestinations = function() {
-      if($scope.travel.destination){
-        if($scope.destinations.length < 10){
-          $scope.destinations.push($scope.travel.destination);
-          $scope.travelData.destination = $filter('filter')($scope.travelData.destination, {country: "!"+$scope.travel.destination.country}, true);
-          $scope.travel.destination = "";
+    $scope.addDestination = function() {
+      if($scope.tempData.destination){
+        if($scope.travel.destinations.length < 10){
+          $scope.travel.destinations.push($scope.tempData.destination);
+          $scope.travelData.destination = $filter('filter')($scope.travelData.destination, {country: "!"+$scope.tempData.destination.country}, true);
+          $scope.tempData.destination = "";
         }
-       console.log($scope.destinations.length);
       }
     }
 
     $scope.removeDestination = function(index) {
-      console.log($scope.destinations[index]);
-      $scope.travelData.destination.push($scope.destinations[index]);
-      $scope.destinations = $filter('filter')($scope.destinations, {country: "!"+$scope.destinations[index].country}, true);
+      $scope.travelData.destination.push($scope.travel.destinations[index]);
+      $scope.travel.destinations = $filter('filter')($scope.travel.destinations, {country: "!"+$scope.travel.destinations[index].country}, true);
     }
 
     //datepicker
-
-    $scope.travel.date = {startDate: null, endDate: null};
 
     $scope.addDays = function(date, days) {
       var result = new Date(date);
@@ -69,7 +94,8 @@
 
     $scope.calcTravelDays = function() {
       var oneDay = 24*60*60*1000;
-      $scope.travel.days = "รวม "+(Math.floor(( Date.parse($scope.travel.endDateForCal) - Date.parse($scope.travel.startDateForCal) ) / oneDay))+" วัน";
+      $scope.travel.days = (Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay));
+      $scope.tempData.daysAsText = "รวม "+(Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay))+" วัน";
     }
    
     $scope.today = new Date();

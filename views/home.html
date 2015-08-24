@@ -1,181 +1,20 @@
-<div class="content-wrapper">
+<div class="content-wrapper" id="form-container">
 	<div class="row">
 		<div class="col-12-xs">
 			<div class="banner" ng-if="travelData.banner_image_url" >
 				<a ng-if="travelData.banner_link_url" ng-href="{{travelData.banner_link_url}}"><img ng-src="{{travelData.banner_image_url}}"/></a>
 				<img ng-if="!travelData.banner_link_url" ng-src="{{travelData.banner_image_url}}"/>
 			</div>
-			<div class="form-navigation">
+			<div class="form-navigation" id="form-navigation">
 				<img src="images/form-navigation.png" alt="">
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
-					<div class="travel-form">
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-destination.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-destination.png" alt="">
-										</div>
-										<h3>จุดหมายปลายทาง</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<div class="form-group has-error">
-											<div class="input-group">
-												<ol class="nya-bs-select form-control text-center" ng-model="travel.destination" title="เลือกประเทศ" data-size="5" data-live-search="true">
-												    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
-												      	<!-- the text content of anchor element will be used for search -->
-												      	<a>
-												        	{{ item.country }}
-												      	</a>
-												    </li>
-												</ol>
-												<span class="input-group-btn">
-													<button class="btn btn-primary" ng-click="addDestinations();" type="button">
-													<span class="glyphicon glyphicon-plus"></span>
-													</button>
-												</span>
-											</div>
-											<!-- <p class="help-block">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p> -->
-										</div>
-									</div>
-									<div ng-repeat="destination in destinations | limitTo: 10" class="col-xs-12 col-sm-6">
-										<div class="travel-destination">
-											<span ng-bind="destination.country"></span>
-											<button class="btn btn-tag" ng-click="removeDestination($index)"><span class="glyphicon glyphicon-remove"></span></button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-schedule.png" alt="">
-							</div>
-							<div class="hidden-xs col-sm-11">
-								<div class="row">
-									<div class="col-sm-12 section-heading">
-										<h3>วันเดินทาง<span ng-bind="travel.days"></span></h3>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group has-error">
-											<div class="input-group input-group-outline">
-												<input type="text" start-date-calendar="2" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" />
-												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
-											</div>
-											<!-- <p class="help-block">กรุณาระบุวันที่เริ่มต้นเดินทาง</p> -->
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group has-error">
-											<div class="input-group input-group-outline">
-												<input type="text" end-date-calendar="2" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" />
-												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
-											</div>
-											<!-- <p class="help-block">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p> -->
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="visible-xs col-xs-12">
-								<div class="row">
-									<div class="col-xs-12 section-heading">
-										<img src="images/icon-schedule-orange.png" alt="">
-										<h3>เริ่มเดินทาง</h3>
-									</div>
-									<div class="col-xs-12">
-										<div class="form-group">
-											<div class="input-group input-group-outline">
-												<input type="text" start-date-calendar="1" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" />
-												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 section-heading">
-										<img src="images/icon-schedule.png" alt="">
-										<h3>เดินทางกลับ</h3>
-									</div>
-									<div class="col-xs-12">
-										<div class="form-group">
-											<div class="input-group input-group-outline">
-												<input type="text" end-date-calendar="1" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" />
-												<span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
-											</div>
-										</div>
-									</div>
-									<div ng-if="travel.days" class="col-xs-12 section-heading">
-										<h3>เดินทาง<span ng-bind="travel.days"></span></h3>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-passenger.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-passenger.png" alt="">
-										</div>
-										<h3>จำนวนผู้ขอประกัน</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<div class="form-group">
-											<ol class="nya-bs-select form-control text-center" ng-model="travel.passenger"  title="เลือกจำนวนผู้เดินทาง" data-size="5" >
-											    <li nya-bs-option="item in range(1,travelData.maxtraveller)">
-											      	<!-- the text content of anchor element will be used for search -->
-											      	<a>
-											        	{{ item }}
-											      	</a>
-												</li>
-											</ol>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-coupon.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-coupon.png" alt="">
-										</div>
-										<h3>ใส่รหัสโปรโมชั่น (ถ้ามี)</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6 ">
-										<div class="form-group">
-											<label class="sr-only" for="promotion-code">Promotion Code</label>
-											<input type="text" class="form-control" id="promotion-code">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 text-center">
-								<button class="btn btn-super"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="caution">
-									<h4><img src="images/icon-caution.png" alt=""> หมายเหตุ</h4>
-									<p>• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง • ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการ
-									เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
-								</div>
-							</div>
-						</div>
+					<div class="insurance-form-wrapper">
+						<form name="insuranceForm" novalidate id="insurance-form" ng-submit="processForm()">
+				            <div id="form-views" ui-view></div>
+				        </form>
 					</div>
 				</div>
 			</div>
@@ -188,3 +27,7 @@
 	</div>
 
 </div>
+<pre>
+    {{ travel }}
+</pre>
+<pre>insuranceForm.$valid = {{ insuranceForm.$valid | json }}</pre>

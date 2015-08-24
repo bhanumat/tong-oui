@@ -22,8 +22,8 @@
       restrict: 'EA',
       link: function(scope, element, attrs) {
         scope.$watch("travel.endDate", (function(newValue, oldValue) {
-          element.datepicker("option", "maxDate", scope.addDays(scope.travel.endDateForCal,-1));
-          if (scope.travel.startDateForCal) {
+          element.datepicker("option", "maxDate", scope.addDays(scope.tempData.endDateForCal,-1));
+          if (scope.tempData.startDateForCal) {
             scope.calcTravelDays();
           }
         }), true);
@@ -34,7 +34,7 @@
             minDate: new Date(),
             onSelect: function(date) {
               scope.travel.startDate = date;
-              scope.travel.startDateForCal = element.datepicker('getDate');
+              scope.tempData.startDateForCal = element.datepicker('getDate');
               scope.maxDate = scope.addDays(element.datepicker('getDate'),90);
               scope.minDate = scope.addDays(element.datepicker('getDate'),1);
               scope.$apply();

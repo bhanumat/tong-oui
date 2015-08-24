@@ -169,19 +169,53 @@ RESPONSIVE NAV
 MAIN PAGE
 *********************/
 
+/* ANIMATION STYLINGS
+============================================================================= */
+#insurance-form { 
+	position:relative; 
+	min-height:300px; 
+	overflow:hidden; 
+	@include transition(0.5s all ease);
+}
+#form-views { 
+	width:auto; 
+}
+/* basic styling for entering and leaving */
+/* left and right added to ensure full width */
+#form-views.ng-enter,
+#form-views.ng-leave { 
+	position:absolute; 
+	left:30px; 
+	right:30px;
+    @include transition(0.5s all ease);
+}
+    
+/* enter animation */
+#form-views.ng-enter { 
+    @include animation(slideInRight 0.5s both ease); 
+}
+
+/* leave animation */
+#form-views.ng-leave { 
+    @include animation(slideOutLeft 0.5s both ease);   
+}
+
 #content {
 	margin-top: 1.5em;
 }
 
 .content-wrapper {
 	background-color: #3da1dd;
+	@include transition(0.5s all ease);
 }
 
 .content-section {
+	@include transition(0.5s all ease);
 	position: relative;
 	overflow: hidden;
 	padding: 0;	
-	.travel-form {
+	.insurance-form-wrapper {
+		@include transition(0.5s all ease);
 		padding-bottom: 40px;
 		margin-top:40px;
 	}
@@ -328,6 +362,33 @@ MAIN PAGE
 	img {
 		width: 100%;
 	}
+}
+
+/* line 108, ../sass/style.scss */
+.item-container {
+  width: 560px;
+}
+/* line 110, ../sass/style.scss */
+.item-container .item {
+  /*display: inline-block;*/
+  background-color: #00BB87;
+  padding: 25px;
+  margin: 10px 0;
+  border-radius: 8px;
+  color: white;
+}
+/* line 119, ../sass/style.scss */
+.item-container.list .item {
+  float: left;
+  display: inline-block;
+  margin: 10px;
+  padding: 65px;
+}
+
+/* line 128, ../sass/style.scss */
+.item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 187, 135, 0.9);
 }
 
 /*********************

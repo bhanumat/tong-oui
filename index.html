@@ -36,13 +36,13 @@
 		      document.createElement('ui-select-choices');
 		    </script>
 		<![endif]-->
-
+		<base href="/">
 		<!-- CSS -->
 		<!-- build:css css/style.min.css -->
+		<link rel="stylesheet" type="text/css" href="bower_components/angular/angular-csp.css">
 		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
 		<link href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css">
-		<link rel="stylesheet" type="text/css" href="bower_components/angular-mighty-datepicker/build/angular-mighty-datepicker.css" />
 		<link rel="stylesheet" type="text/css" href="styles/style.css" />
 		<link rel="stylesheet" type="text/css" href="styles/cigna.css" />
 		<!-- endbuild -->
@@ -58,7 +58,7 @@
 			<main-nav></main-nav>
 		</header>
 		<!-- Main view for templates -->
-		<div data-ng-view="" class="container content-section"></div>
+		<div ui-view="" class="container content-section"></div>
 		
 		<footer>
 			<main-footer></main-footer>
@@ -84,6 +84,8 @@
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="js/angular/angular-locale_th-th.js"></script>
 	
+	
+	<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<!-- endbuild -->
@@ -103,6 +105,8 @@
 	<script type="text/javascript" src="bower_components/angular-scroll/angular-scroll.min.js"></script>
 	<script type="text/javascript" src="bower_components/ng-parallax/angular-parallax.min.js"></script>
 	<script type="text/javascript" src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-messages/angular-messages.js"></script>
 	
 	<!-- endbuild -->
 
