@@ -1,5 +1,261 @@
-<!-- 404 -->
-<div class="text-center">
-    <h4>Page Not Found</h4>
-    <h1>404</h1>
+<div class="row" sticky sticky-class="sticky" body-class="body-sticky">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 sticky-wrapper">			
+		<div id="summary-bar" class="summary-bar">
+			<div class="nav-icon">
+				<div class="row">
+					<div class="col-12-xs">
+						<img src="images/nav-plan-on-summary.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="insurance-details-heading summary-bar-heading">
+						<h5>รายละเอียดการเดินทาง</h5>
+					 	<a href="">
+					 		<img src="images/icon-edit.png" alt="">
+					 	</a>
+					</div>	
+					<div class="insurance-details summary-bar-details">
+						<div class="row">
+							<div class="col-xs-12">
+								<h6>จุดหมายปลายทาง</h6>
+								<p class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-5">
+								<h6>เริ่มเดินทาง</h6>
+								<p ng-bind="travel.startDate"></p>
+							</div>
+							<div class="col-xs-5">
+								<h6>สิ้นสุดวันเดินทาง</h6>
+								<p ng-bind="travel.endDate"></p>
+							</div>
+							<div class="col-xs-2">
+								<h6>รวม</h6>
+								<p><span ng-bind="travel.days"></span> วัน</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-5">
+								<h6>ผู้ขอประกัน</h6>
+								<p><span ng-bind="travel.passengers"></span> ท่าน</p>
+							</div>
+							<div class="col-xs-7" ng-if="travel.promotionCode">
+								<h6>รหัสโปรโมชั่น</h6>
+								<p ng-bind="travel.promotionCode"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="insurance-plan-heading summary-bar-heading">
+						<h5>ความคุ้มครองที่เลือก</h5>
+						<a href="">
+					 		<img src="images/icon-edit.png" alt="">
+					 	</a>
+					</div>
+					<div class="insurance-plan summary-bar-details">
+						<h6>แผนประกันที่เลือก</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">	
+		<h3>ผลประโยชน์ความคุ้มครอง</h3>
+		<div class="plan-selection">
+			<h4>เลือกความคุ้มครองหลัก</h4>
+			<div class="plan-table row" id="plan-main">
+				<div class="plan-table-heading col-xs-5">
+					<div class="plan-table-top">
+						<h5>ผลประโยชน์</h5>
+					</div>
+					<div class="plan-table-row">
+						<img src="images/icon-plan-1.png" alt="">
+						<p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>
+					</div>
+					<div class="plan-table-row">
+						<img src="images/icon-plan-2.png" alt="">
+						<p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย</p>
+					</div>
+					<div class="plan-table-row">
+						<img src="images/icon-plan-3.png" alt="">
+						<p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษา พยาบาลฉุกเฉิน/ การเคลื่อนย้ายกลับประเทศไทย/ การส่งศพกลับประเทศไทย</p>
+					</div>
+					<div class="plan-table-row">
+						<img src="images/icon-plan-4.png" alt="">
+						<p>บริการข้อมูลก่อนการเดินทาง และบริการ ความช่วยเหลือระหว่างการเดินทาง</p>
+					</div>
+				</div>
+				<div class="plan-table-content col-xs-7">
+					<div class="row plan-wrapper text-center" id="plan-main-scroll">
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 1</small><br>
+									200 บาท
+								</h5>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>ฟรี</p>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 2</small><br>
+									300 บาท
+								</h5>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>ฟรี</p>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 3</small><br>
+									400 บาท
+								</h5>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>ฟรี</p>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 4</small><br>
+									500 บาท
+								</h5>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>ฟรี</p>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 5</small><br>
+									600 บาท
+								</h5>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>1,000,000</p>
+							</div>
+							<div class="plan-table-row">
+								<p>ฟรี</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4>เลือกความคุ้มครองเสริม</h4>
+			<div class="plan-table row" id="plan-options">
+				<div class="plan-table-heading col-xs-5">
+					<div class="plan-table-top">
+						<h5>ผลประโยชน์</h5>
+					</div>
+				</div>
+				<div class="plan-table-content col-xs-7">
+					<div class="row plan-wrapper text-center" id="plan-options-scroll"> 
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 1</small><br>
+									200 บาท
+								</h5>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 2</small><br>
+									300 บาท
+								</h5>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 3</small><br>
+									400 บาท
+								</h5>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 4</small><br>
+									500 บาท
+								</h5>
+							</div>
+						</div>
+						<div class="plan">
+							<div class="plan-table-top">
+								<h5>
+									<small>แผน 5</small><br>
+									600 บาท
+								</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div equalize-height>
+  <div class="element-class" equalize-height-add="item" ng-repeat="item in items">
+    <div class="element-title" ng-bind="item.title"></div>
+    <p class="element-text" ng-bind="item.description"></p>
+  </div>
 </div>

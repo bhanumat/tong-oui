@@ -217,7 +217,7 @@ MAIN PAGE
 	.insurance-form-wrapper {
 		@include transition(0.5s all ease);
 		padding-bottom: 40px;
-		margin-top:40px;
+		margin-top:0;
 	}
 	.form-section {
 		margin-bottom: 40px;
@@ -269,7 +269,157 @@ MAIN PAGE
 		line-height: 45px;
 		@include text-shadow(1px, 1px, 3px, $text-color);
 	}
+	h3 {
+		font-size: 40px;
+		line-height: 42px;
+		color: $white;
+		@include text-shadow(1px, 1px, 3px, $text-color);
+	}
+	h4 {
+		font-size: 34px;
+		line-height: 36px;
+	}
+	h5 {
+		font-size: 30px;
+		line-height: 32px;
+	}
+	h6 {
+		font-size: 22px;
+		line-height: 24px;
+		font-weight: normal;
+	}
 
+}
+
+.body-sticky {
+	#form-views {
+		margin-top: 330px;
+	}
+}
+
+.sticky {
+	z-index: 9999;
+	.sticky-wrapper {
+		width: 100%;
+		margin-left: 0;
+		padding: 0;
+		@include transition(all 0.5s ease);
+		.nav-icon {
+			display: block;
+			text-align: center;
+		}
+	}
+}
+
+.summary-bar {
+	@include box-shadow(1px, 1px, 3px, $text-color);
+	background-color: $white;
+	padding: 1em 0.5em;
+	.nav-icon {
+		display: none;
+		margin-bottom: 1em;
+	}
+	.summary-bar-heading {
+		background-color: $secondary-color;
+		color: $white;
+		padding: 0 1em;
+		h5 {
+			display: inline-block;
+		}
+		a {
+			display: inline-block;
+			float: right;
+			line-height: 32px;
+			margin: 10px 0;
+		}
+	}
+	.summary-bar-details {
+		padding: 0 0.5em;
+		h6 {
+			color: $primary-color;
+			margin-bottom: 0px;
+		}
+		.destination-list {
+
+			span {
+				&:not(:last-child)::after {
+					content: ",";
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+}
+
+.plan-selection {
+	background-color: $white;
+	color: $primary-color;
+	padding: 1em;
+	@include box-shadow(1px, 1px, 3px, $text-color);
+	.plan-table {
+		@include box-shadow(1px, 1px, 3px, $text-color);
+		background: $white;
+		.plan-table-heading {
+			padding: 0;
+			.plan-table-top {
+				padding: 20px;
+				background-color: $secondary-color;
+				color: $white;
+			}
+			.plan-table-row { 
+				font-size: 0;
+			}
+			img {
+				width: 34px; 
+				vertical-align: top;
+			}
+			p {
+				display: inline-block;
+				padding-left: 10px;
+				width: -moz-calc(100% - 34px);
+			    width: -webkit-calc(100% - 34px);
+			    width: calc(100% - 34px);
+			}
+		}
+		.plan-table-row {
+			padding: 10px;
+			background-color: $gray;
+			&:nth-child(odd) {
+				background-color: $white;
+			}
+		}
+		.plan-table-content {
+			padding: 0;
+			.plan-wrapper {
+				font-size: 0;
+				overflow-x: auto;
+        		overflow-y: hidden;
+				width: auto;
+  				white-space: nowrap;
+			}
+			.plan {
+				padding: 0;
+				width: 33.333333333333%;
+				display: inline-block;
+				white-space: normal;
+				.plan-table-top {
+					background-color: $primary-color;
+					color: $white;
+					h5 {
+						margin: 0;
+					}
+					small {
+						color: $white;
+					}
+				}
+				&:nth-child(odd) {
+					.plan-table-top {
+						background-color: $light-primary-color;
+					}
+				}
+			}
+		}
+	}
 }
 
 .calendar {
@@ -345,7 +495,8 @@ MAIN PAGE
 		img {
 	      position: relative;
 	      z-index: 0;
-	      margin: -15% 0 0 0;
+	      // margin: -15% 0 0 0;
+	      margin: 0;
 	      width: 100%;
 	    }
 	}

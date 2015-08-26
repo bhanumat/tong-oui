@@ -1,3 +1,5 @@
+<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 <div class="row form-section">
 							<div class="col-sm-1 hidden-xs">
 								<img src="images/icon-destination.png" alt="">
@@ -127,9 +129,9 @@
 									<div class="col-xs-12 col-sm-6">
 										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.passengers.$invalid && formStepSubmitted }">
 											<ol class="nya-bs-select form-control text-center" ng-model="travel.passengers" name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
-											    <li nya-bs-option="item in range(1,travelData.maxtraveller)">
+											    <li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}" >
 											      	<a>
-											        	{{ item }}
+											        	{{ passenger }}
 											      	</a>
 												</li>
 											</ol>
@@ -176,3 +178,5 @@
 								</div>
 							</div>
 						</div>
+						</div>
+			</div>

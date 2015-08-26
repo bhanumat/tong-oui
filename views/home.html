@@ -11,12 +11,12 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
-					<div class="insurance-form-wrapper">
-						<form name="insuranceForm" novalidate id="insurance-form" ng-submit="processForm()">
-				            <div id="form-views" ui-view></div>
-				        </form>
-					</div>
 				</div>
+			</div>
+			<div class="insurance-form-wrapper">
+				<form name="insuranceForm" novalidate id="insurance-form" ng-submit="processForm()">
+					<div id="form-views" ui-view></div>
+				</form>
 			</div>
 			<div class="bg">
 				<div class="bg-inner">
@@ -25,9 +25,8 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 <pre>
-    {{ travel }}
+	    {{ travel }}
 </pre>
 <pre>insuranceForm.$valid = {{ insuranceForm.$valid | json }}</pre>

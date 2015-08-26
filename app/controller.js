@@ -21,36 +21,58 @@
 
     ////////////  function definitions
 
-    $scope.start = true;
-    if ($scope.start == true) {
-      $scope.start = false;
-      $location.path('/insurance/destination');
-      $location.replace();
-    }
+    // $scope.start = true;
+    // if ($scope.start == true) {
+    //   $scope.start = false;
+    //   $location.path('/insurance/destination');
+    //   $location.replace();
+    // }
     
-    $scope.$on('$locationChangeStart', function(next, current) { 
-     if ($location.path() == '/insurance') {
-        $location.path('/insurance/destination');
-        $location.replace();
-      }
-    });
+    // comment for testing 
+    // $scope.$on('$locationChangeStart', function(next, current) { 
+    //  if ($location.path() == '/insurance') {
+    //     $location.path('/insurance/destination');
+    //     $location.replace();
+    //   }
+    // });
+
+    $scope.items = [
+            { 
+              title: 'Title 1',
+              description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+              description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit'
+            },
+            { 
+              title: 'Title 2',
+              description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur..',
+              description2: 'Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur..'
+            },
+            { 
+              title: 'Title 3',
+              description: 'Lorem ipsum dolor sit amet',
+              description2: 'Lorem ipsum dolor sit amet'
+            },
+          ];
     
+    $scope.tempData = {};
+    $scope.tempData.destination = [];
+    $scope.formStepSubmitted = false;
 
     $http.get('/NewTravel.json').
     then(function(response) {
       $scope.travelData = response.data.cignatravel;
-      
+      $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxtraveller);
+      $scope.travel = {
+        destinations:[{"country":"Argentina","code":"AR","id":1,"type":"schengen"},{"country":"Australia","code":"AU","id":2,"type":"schengen"},{"country":"Belgium","code":"BE","id":4,"type":"schengen"},{"country":"France","code":"FR","id":6,"type":"schengen"}],
+        startDate: "28 สิงหาคม 2015",
+        endDate: "22 กันยายน 2015",
+        days: 25,
+        passengers: 3,
+        promotionCode: "Test Promo Code"
+      };
     }, function(response) {
       
     });
-
-    $scope.travel = {
-      destinations: []
-    };
-    $scope.tempData = {
-      destination: []
-    };
-    $scope.formStepSubmitted = false;
 
     $scope.goToPlanSelection=function(isFormValid) {
       // set to true to show all error messages (if there are any)
