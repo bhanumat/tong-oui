@@ -280,8 +280,8 @@ MAIN PAGE
 		line-height: 36px;
 	}
 	h5 {
-		font-size: 30px;
-		line-height: 32px;
+		font-size: 24px;
+		line-height: 26px;
 	}
 	h6 {
 		font-size: 22px;
@@ -309,6 +309,28 @@ MAIN PAGE
 			text-align: center;
 		}
 	}
+	.summary-bar { 
+		.summary-bar-heading {
+			h5 {
+				margin: 3px 0;
+			}
+			a {
+				margin: 3px 0;
+			}
+		}
+		.summary-bar-details {
+			h6 {
+				display: inline-block;
+			}
+			p {
+				display: inline-block;
+				padding-left: 3px;
+			}
+			.destination-list {
+				display: block;
+			}
+		}
+	}
 }
 
 .summary-bar {
@@ -329,7 +351,7 @@ MAIN PAGE
 		a {
 			display: inline-block;
 			float: right;
-			line-height: 32px;
+			line-height: 26px;
 			margin: 10px 0;
 		}
 	}
@@ -340,7 +362,6 @@ MAIN PAGE
 			margin-bottom: 0px;
 		}
 		.destination-list {
-
 			span {
 				&:not(:last-child)::after {
 					content: ",";
@@ -384,7 +405,7 @@ MAIN PAGE
 		.plan-table-row {
 			padding: 10px;
 			background-color: $gray;
-			&:nth-child(odd) {
+			&:nth-child(even) {
 				background-color: $white;
 			}
 		}
@@ -398,10 +419,13 @@ MAIN PAGE
   				white-space: nowrap;
 			}
 			.plan {
+				
 				padding: 0;
 				width: 33.333333333333%;
 				display: inline-block;
 				white-space: normal;
+				position:relative;
+				z-index: 0;
 				.plan-table-top {
 					background-color: $primary-color;
 					color: $white;
@@ -416,6 +440,29 @@ MAIN PAGE
 					.plan-table-top {
 						background-color: $light-primary-color;
 					}
+				}
+				// &:hover {
+				// 	z-index: 2;
+				// 	//
+				// 	&::after {
+				// 		@include box-shadow(0px, 0px, 40px, $black);
+				// 	}
+				// }
+				&.selected {
+					z-index: 1;
+					&::after {
+						@include box-shadow(0px, 0px, 40px, $black);
+					}
+				}
+				&::after {
+					@include transition(all 0.5s ease);
+					content: "";
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					@include box-shadow(0px, 0px, 0px, $black);
 				}
 			}
 		}
