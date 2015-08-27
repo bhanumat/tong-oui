@@ -590,6 +590,24 @@ MAIN PAGE
 	}
 }
 
+.profile {
+	background-color: $white;
+	color: $primary-color;
+	padding: 1em;
+	@include box-shadow(1px, 1px, 3px, $text-color);
+	.profile-header {
+		background-color: $secondary-color;
+		h4 {
+			text-align: center;
+			color: $white;
+			padding: 0.5em;
+		}
+	}
+	.profile-details-section {
+		margin-top: 15px;
+	}
+}
+
 .calendar {
 	width: 100%;
 	border: solid $border-width $form-border-color;

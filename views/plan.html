@@ -50,7 +50,7 @@
 								<div class="plan-table-top" equalizer="'group2'" >
 									<h5>
 										<span class="option-checkbox">
-											<span ng-class="{'glyphicon-remove': travel.flightSecured,'glyphicon-ok': !travel.flightSecured}" class="glyphicon"></span>
+											<span ng-class="{'glyphicon-remove': travel.flightSecured == false,'glyphicon-ok': travel.flightSecured == true}" class="glyphicon"></span>
 										</span>
 										{{plan.price}} บาท
 									</h5>
@@ -82,7 +82,7 @@
 								<div class="plan-table-top" equalizer="'group3'" >
 									<h5>
 										<span class="option-checkbox">
-											<span ng-class="{'glyphicon-remove': travel.propertySafe,'glyphicon-ok': !travel.propertySafe}" class="glyphicon"></span>
+											<span ng-class="{'glyphicon-remove': travel.propertySafe == false,'glyphicon-ok': travel.propertySafe == true}" class="glyphicon"></span>
 										</span>
 										{{plan.price}} บาท
 									</h5>

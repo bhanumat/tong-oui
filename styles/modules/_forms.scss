@@ -151,24 +151,25 @@ select {
       border: solid 0 $form-border-color;
       @include box-shadow(0, 0, 0, rgba(0,0,0,0));
     }
+    font-family: $font-secondary;
     font-size: 22px;
     border: solid $border-width $form-border-color;
     @include border-radius($border-radius);
     @include box-shadow(1px, 1px, 3px, $text-color);
     &::-webkit-input-placeholder {
-       color: $primary-color;
+       color: $dark-gray;
     }
 
     &:-moz-placeholder { /* Firefox 18- */
-       color: $primary-color;  
+       color: $dark-gray;  
     }
 
     &::-moz-placeholder {  /* Firefox 19+ */
-       color: $primary-color;  
+       color: $dark-gray;  
     }
 
     &:-ms-input-placeholder {  
-       color: $primary-color;  
+       color: $dark-gray;  
     }
   }
 
