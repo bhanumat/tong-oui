@@ -1,5 +1,103 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<!-- Headder -->
+		<div class="row">
+			
+		</div>
+		<!-- Frame -->
+		<div class="row" style="background-color:#FFF;">
+			<div class="col-xs-12" >
+			    <div style="background-color:#00B8EE;text-align:center;">
+			          <h4>ข้อมูลการชำระเงิน</h4>
+			    </div>
+			</div>
+			<div class="col-xs-10 col-xs-offset-1" >
+				<div class="row">
+					<div class="form-group">
+				        <label class="col-xs-12 col-md-4">ประเภทบัตรเครดิต :</label>
+				        <div class="col-xs-12 col-md-8">
+				            <select class="form-control input-sm">
+								<option>-- โปรดเลือกบัตรเครดิต --</option>
+				            </select>
+				        </div>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+				        <label class="col-xs-12 col-md-4">หมายเลขบัตรเครดิต :</label>
+				        <div class="col-xs-3 col-md-2">
+				            <input type="text" class="form-control">
+				        </div>
+				        <div class="col-xs-3 col-md-2">
+				            <input type="text" class="form-control">
+				        </div>
+				        <div class="col-xs-3 col-md-2">
+				            <input type="text" class="form-control">
+				        </div>
+				        <div class="col-xs-3 col-md-2">
+				            <input type="text" class="form-control">
+				        </div>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+				        <label class="col-xs-12 col-md-4">รหัสรักษาความปลอดภัย (CVV2) :</label>
+				        <div class="col-xs-6 col-md-3">
+				            <input type="text" class="form-control">
+				        </div>
+				        <div class="col-xs-6 col-md-3">
+				            <p>CVV2 คืออะไร</p>
+				        </div>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+				        <label class="col-xs-12 col-md-4">วันหมดอายุ (เดือน/ปี) :</label>
+				        <div class="col-xs-6 col-md-3">
+				            <select class="form-control input-sm">
+								<option>01</option>
+				            </select>
+				        </div>
+				        <div class="col-xs-6 col-md-3">
+				            <select class="form-control input-sm">
+								<option>2015</option>
+				            </select>
+				        </div>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12 col-md-4">ชื่อผู้ถือบัตร :</label>
+						<div class="col-xs-12 col-md-8">
+				            <input type="text" class="form-control">
+				        </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12 col-md-4">ประเทศของธนาคารผู้ออกบัตร :</label>
+						<div class="col-xs-12 col-md-8">
+				            <select class="form-control input-sm">
+								<option>Thailand</option>
+				            </select>
+				        </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12 col-md-4">ชื่อธนาคารผู้ออกบัตร :</label>
+						<div class="col-xs-12 col-md-8">
+				            <select class="form-control input-sm">
+								<option>--โปรดเลือกธนาคาร--</option>
+				            </select>
+				        </div>
+					</div>
+				</div>
+			</div>
 
-	<ul class="item-container list">
-		<li class="item toggle" ng-hide="isShow">Item 1</li>
-	</ul>
-  <button class="btn btn-default" ng-click="isShow = !isShow">Submit</button>
+			<div class="col-xs-12 text-center">
+			    <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>ชำระเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+			</div>
+		</div>
+    </div>
+</div>
