@@ -56,6 +56,9 @@
     
     $scope.tempData = {};
     $scope.tempData.destination = [];
+    $scope.tempData.daysAsText = "รวม 25 วัน";
+    $scope.tempData.shortStartDate = "28 ส.ค. 2015";
+    $scope.tempData.shortEndDate = "22 ก.ย. 2015";
     $scope.formStepSubmitted = false;
 
     $http.get('/NewTravel.json').
@@ -82,6 +85,10 @@
         $state.go('^.plan');
       }
     };
+
+    $scope.selectPlan = function(index){
+      $scope.travelData.selectedPlan = index;
+    }
 
     $scope.range = function(min, max, step){
       step = step || 1;

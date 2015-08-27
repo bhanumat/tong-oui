@@ -37,6 +37,9 @@
               scope.tempData.startDateForCal = element.datepicker('getDate');
               scope.maxDate = scope.addDays(element.datepicker('getDate'),90);
               scope.minDate = scope.addDays(element.datepicker('getDate'),1);
+              var monthname=new Array("ม.ค.","ก.พ.","มี.ค","ม.ย","พ.ค","มิ.ย","ก.ค","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+              var monName = monthname[scope.tempData.startDateForCal.getMonth()];
+              scope.tempData.shortStartDate = "" + scope.tempData.startDateForCal.getDate() + " " + monName + " " + scope.tempData.startDateForCal.getFullYear() + "";
               scope.$apply();
             }
           })

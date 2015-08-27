@@ -26,11 +26,11 @@
 						<div class="row">
 							<div class="col-xs-5">
 								<h6>เริ่มเดินทาง</h6>
-								<p ng-bind="travel.startDate"></p>
+								<p ng-bind="tempData.shortStartDate"></p>
 							</div>
 							<div class="col-xs-5">
 								<h6>สิ้นสุดวันเดินทาง</h6>
-								<p ng-bind="travel.endDate"></p>
+								<p ng-bind="tempData.shortEndDate"></p>
 							</div>
 							<div class="col-xs-2">
 								<h6>รวม</h6>
@@ -70,127 +70,26 @@
 		<div class="plan-selection">
 			<h4>เลือกความคุ้มครองหลัก</h4>
 			<div class="plan-table row" id="plan-main">
-				<div class="plan-table-heading col-xs-5">
-					<div class="plan-table-top">
+
+				<div class="plan-table-heading col-xs-5" equalizer="'table-group'">
+					<div class="plan-table-top" equalizer="'group'">
 						<h5>ผลประโยชน์</h5>
 					</div>
-					<div class="plan-table-row">
-						<img src="images/icon-plan-1.png" alt="">
-						<p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>
-					</div>
-					<div class="plan-table-row">
-						<img src="images/icon-plan-2.png" alt="">
-						<p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย</p>
-					</div>
-					<div class="plan-table-row">
-						<img src="images/icon-plan-3.png" alt="">
-						<p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษา พยาบาลฉุกเฉิน/ การเคลื่อนย้ายกลับประเทศไทย/ การส่งศพกลับประเทศไทย</p>
-					</div>
-					<div class="plan-table-row">
-						<img src="images/icon-plan-4.png" alt="">
-						<p>บริการข้อมูลก่อนการเดินทาง และบริการ ความช่วยเหลือระหว่างการเดินทาง</p>
+					<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in travelData.quotation.description">
+						<div ng-bind-html="description"></div>
 					</div>
 				</div>
-				<div class="plan-table-content col-xs-7">
+				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
 					<div class="row plan-wrapper text-center" id="plan-main-scroll">
-						<div class="plan">
-							<div class="plan-table-top">
+						<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.quotation.protect" ng-click="selectPlan($index)">
+							<div class="plan-table-top" equalizer="'group'">
 								<h5>
-									<small>แผน 1</small><br>
-									200 บาท
+									<small>แผน {{plan.planid}}</small><br>
+									{{plan.price}} บาท
 								</h5>
 							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>ฟรี</p>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 2</small><br>
-									300 บาท
-								</h5>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>ฟรี</p>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 3</small><br>
-									400 บาท
-								</h5>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>ฟรี</p>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 4</small><br>
-									500 บาท
-								</h5>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>ฟรี</p>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 5</small><br>
-									600 บาท
-								</h5>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>1,000,000</p>
-							</div>
-							<div class="plan-table-row">
-								<p>ฟรี</p>
+							<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in plan.description">
+								<p ng-bind-html="description"></p>
 							</div>
 						</div>
 					</div>
@@ -198,53 +97,52 @@
 			</div>
 			<h4>เลือกความคุ้มครองเสริม</h4>
 			<div class="plan-table row" id="plan-options">
-				<div class="plan-table-heading col-xs-5">
-					<div class="plan-table-top">
-						<h5>ผลประโยชน์</h5>
+				<div class="clearfix">
+					<div class="plan-table-heading col-xs-5" equalizer="'table-group2'">
+						<div class="plan-table-top" equalizer="'group2'">
+							<h5>เลือก Flight Secure B เพิ่ม</h5>
+						</div>
+						<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in travelData.flightsecure.description">
+							<p ng-bind-html="description"></p>
+						</div>
+					</div>
+					<div class="plan-table-content col-xs-7" equalizer="'table-group2'">
+						<div class="row plan-wrapper text-center" id="plan-options1-scroll"> 
+							<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.flightsecure.protect" ng-click="selectPlan($index)">
+								<div class="plan-table-top" equalizer="'group2'">
+									<h5>
+										{{plan.price}} บาท
+									</h5>
+								</div>
+								<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in plan.description">
+									<p ng-bind="description"></p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="plan-table-content col-xs-7">
-					<div class="row plan-wrapper text-center" id="plan-options-scroll"> 
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 1</small><br>
-									200 บาท
-								</h5>
+				<div class="clearfix">
+					<div class="plan-table-heading col-xs-5" equalizer="'table-group3'">
+						<div class="plan-table-top" equalizer="'group3'">
+							<h5>เลือก Property Safe C เพิ่ม</h5>
+						</div>
+						<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in travelData.propertysafe.description">
+							<p ng-bind-html="description"></p>
+						</div>
+					</div>
+					<div class="plan-table-content col-xs-7" equalizer="'table-grou3'">
+						<div class="row plan-wrapper text-center" id="plan-options2-scroll"> 
+							<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.propertysafe.protect" ng-click="selectPlan($index)">
+								<div class="plan-table-top" equalizer="'group3'">
+									<h5>
+										{{plan.price}} บาท
+									</h5>
+								</div>
+								<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in plan.description">
+									<p ng-bind-html="description"></p>
+								</div>
 							</div>
 						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 2</small><br>
-									300 บาท
-								</h5>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 3</small><br>
-									400 บาท
-								</h5>
-							</div>
-						</div>
-						<div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 4</small><br>
-									500 บาท
-								</h5>
-							</div>
-						</div>
-						<!-- <div class="plan">
-							<div class="plan-table-top">
-								<h5>
-									<small>แผน 5</small><br>
-									600 บาท
-								</h5>
-							</div>
-						</div> -->
 					</div>
 				</div>
 			</div>

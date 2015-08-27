@@ -18,7 +18,7 @@
 
   angular
     .module('boilerplate', [
-      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages'
+      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages','ngEqualizer','ngSanitize'
     ])
     .config(config);
 
