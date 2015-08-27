@@ -87,7 +87,7 @@
     };
 
     $scope.selectPlan = function(index){
-      $scope.travelData.selectedPlan = index;
+      $scope.travel.selectedPlan = index;
     }
 
     $scope.range = function(min, max, step){

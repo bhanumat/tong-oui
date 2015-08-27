@@ -81,7 +81,7 @@
 				</div>
 				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
 					<div class="row plan-wrapper text-center" id="plan-main-scroll">
-						<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.quotation.protect" ng-click="selectPlan($index)">
+						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.quotation.protect" ng-click="selectPlan(plan.planid)">
 							<div class="plan-table-top" equalizer="'group'">
 								<h5>
 									<small>แผน {{plan.planid}}</small><br>
@@ -108,7 +108,7 @@
 					</div>
 					<div class="plan-table-content col-xs-7" equalizer="'table-group2'">
 						<div class="row plan-wrapper text-center" id="plan-options1-scroll"> 
-							<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.flightsecure.protect" ng-click="selectPlan($index)">
+							<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.flightsecure.protect" ng-click="selectPlan(plan.planid)">
 								<div class="plan-table-top" equalizer="'group2'">
 									<h5>
 										{{plan.price}} บาท
@@ -132,7 +132,7 @@
 					</div>
 					<div class="plan-table-content col-xs-7" equalizer="'table-grou3'">
 						<div class="row plan-wrapper text-center" id="plan-options2-scroll"> 
-							<div class="plan" ng-class="{'selected':$index == travelData.selectedPlan}" ng-repeat="plan in travelData.propertysafe.protect" ng-click="selectPlan($index)">
+							<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.propertysafe.protect" ng-click="selectPlan(plan.planid)">
 								<div class="plan-table-top" equalizer="'group3'">
 									<h5>
 										{{plan.price}} บาท
