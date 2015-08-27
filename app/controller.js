@@ -59,6 +59,10 @@
     $scope.tempData.daysAsText = "รวม 25 วัน";
     $scope.tempData.shortStartDate = "28 ส.ค. 2015";
     $scope.tempData.shortEndDate = "22 ก.ย. 2015";
+    $scope.tempData.option1IsCollapsed = false;
+    $scope.tempData.option2IsCollapsed = false;
+    $scope.tempData.discount = 50;
+    $scope.tempData.discountType = "percent";
     $scope.formStepSubmitted = false;
 
     $http.get('/NewTravel.json').
@@ -71,13 +75,68 @@
         endDate: "22 กันยายน 2015",
         days: 25,
         passengers: 3,
-        promotionCode: "Test Promo Code"
+        promotionCode: "Test Promo Code",
+        selectedPlan: $scope.travelData.quotation.defaultPlanid,
+        flightSecured: $scope.travelData.flightsecure.defaultTick,
+        propertySafe: $scope.travelData.propertysafe.defaultTick
       };
+
+      $scope.calculateTotalPrice();
+      $scope.calculatePrice();
+
     }, function(response) {
       
     });
 
-    $scope.goToPlanSelection=function(isFormValid) {
+
+    $scope.calculateTotalPrice = function(){
+      for (i=0;i<$scope.travelData.quotation.protect.length;i++) {
+        if($scope.travelData.quotation.protect[i].planid == $scope.travel.selectedPlan){
+          $scope.tempData.totalPrice = $scope.travelData.quotation.protect[i].price;
+          if($scope.travel.flightSecured) {
+            $scope.tempData.totalPrice += $scope.travelData.flightsecure.protect[i].price;
+          }
+          if($scope.travel.propertySafe) {
+            $scope.tempData.totalPrice += $scope.travelData.propertysafe.protect[i].price;
+          }
+        }
+      }
+    };
+
+    $scope.calculatePrice = function(){
+      if($scope.tempData.discount){
+        if ($scope.tempData.discountType == "percent") {
+          if($scope.tempData.totalPrice * ((100-$scope.tempData.discount)/100) < 0 ){
+            $scope.tempData.price = 0;
+          }
+          $scope.tempData.price = $scope.tempData.totalPrice * ((100-$scope.tempData.discount)/100);
+        }
+        else if ($scope.tempData.discountType == "direct") {
+          if(($scope.tempData.totalPrice - $scope.tempData.discount) < 0 ){
+            $scope.tempData.price = 0;
+          }
+          $scope.tempData.price = $scope.tempData.totalPrice - $scope.tempData.discount;
+        }
+        $scope.tempData.discountAsBath = $scope.tempData.totalPrice - $scope.tempData.price;
+      }
+      else {
+        $scope.tempData.price = $scope.tempData.totalPrice;
+      }
+    };
+
+    $scope.propertySafeToggle = function(){
+      $scope.travel.propertySafe = !$scope.travel.propertySafe;
+      $scope.calculateTotalPrice();
+      $scope.calculatePrice();
+    };
+
+    $scope.flightSecuredToggle = function(){
+      $scope.travel.flightSecured = !$scope.travel.flightSecured;
+      $scope.calculateTotalPrice();
+      $scope.calculatePrice();
+    };
+
+    $scope.goToPlanSelection = function(isFormValid) {
       // set to true to show all error messages (if there are any)
       $scope.formStepSubmitted = true;
       if(isFormValid) {
@@ -86,8 +145,19 @@
       }
     };
 
-    $scope.selectPlan = function(index){
-      $scope.travel.selectedPlan = index;
+    $scope.goToProfile = function(isFormValid) {
+      // set to true to show all error messages (if there are any)
+      $scope.formStepSubmitted = true;
+      if(isFormValid) {
+        $scope.formStepSubmitted = false;
+        $state.go('^.profile');
+      }
+    };
+
+    $scope.selectPlan = function(planId,price){
+      $scope.travel.selectedPlan = planId;
+      $scope.calculateTotalPrice();
+      $scope.calculatePrice();
     }
 
     $scope.range = function(min, max, step){

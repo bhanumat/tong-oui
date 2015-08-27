@@ -1,4 +1,3 @@
-.clearfix::after,.slide-wrapper .carousel-indicators,.slides::after{visibility:hidden}
 #cboxClose:active,#cboxNext:active,#cboxPrevious:active,#cboxSlideshow:active,#colorbox,.flex-container a:active,.flex-container a:focus,.flexslider a:active,.flexslider a:focus,.tabs-left>.nav-tabs>li:focus,.tabs-left>.nav-tabs>li>a:focus,.tabs-right>.nav-tabs>li:focus,.tabs-right>.nav-tabs>li>a:focus{outline:0}
 .view-navigation .flexslider,.view-slide-block .flexslider{min-height:0!important}
 .herobanner-campaign-travel-care-plus{background:#000;color:#ff0;width:420px}
@@ -170,7 +169,7 @@ div.indexmenu{margin-left:auto;margin-right:auto;width:960px}
 .wthfont,fieldset.collapsible legend{margin:0}
 .cigna-block div.header{color:#fff;font-family:proximaNovaBlack;font-size:18px;text-transform:uppercase;width:100%}
 .cigna-block div.detail{color:#fff;font-family:Arial;font-size:14px;padding:12px 0;width:52%}
-.thfont,.wthfont{font-family:kittithada_bold_75regular!important;font-size:23px!important;font-weight:400}
+.thfont,.wthfont{font-weight:400;font-family:kittithada_bold_75regular!important;font-size:23px!important}
 .thfont{color:#505050!important;line-height:85%!important;padding:0}
 .wthfont{color:#fff;padding:10px 11px!important}
 fieldset.collapsible .fieldset-legend{font-family:kittithada_bold_75regular;font-size:20px;padding:5px 10px}
@@ -206,7 +205,7 @@ body{background:#efefef}
 .all-lang .country-list li a,.all-lang h4{font-family:arial,sans-serif;font-weight:400}
 .mrow1 .col3 .thai-lang{color:#62136d}
 .thai-lang img{display:inline-block;margin:-1px 0 0;padding:0 0 0 5px}
-.thai-lang .arrow-down,.thai-lang .arrow-up{border-left:4px solid transparent;border-right:4px solid transparent;display:inline-block;float:none;height:0;margin:0 0 0 5px;width:0;vertical-align:middle}
+.thai-lang .arrow-down,.thai-lang .arrow-up{vertical-align:middle;border-left:4px solid transparent;border-right:4px solid transparent;display:inline-block;float:none;height:0;margin:0 0 0 5px;width:0}
 .thai-lang .arrow-down{border-top:4px solid #fff}
 .thai-lang .arrow-up{border-bottom:4px solid #fff}
 .mrow1 .col3 .thai-lang .arrow-down{border-top-color:#62136d}
@@ -232,7 +231,7 @@ body{background:#efefef}
 .all-lang .country-list li a.united-kingdom{background-position:right -177px}
 .all-lang .country-list li a.cigna-expatriate{background:0 0}
 .all-lang .country-list li a.united-states{background-position:right -196px;font-weight:700}
-.region-top-menu ul li a,h1,h2,h3,h4,h5,h6,h7{font-weight:400;font-family:kittithada_bold_75regular}
+.region-top-menu ul li a,h1,h2,h3,h4,h5,h6,h7{font-family:kittithada_bold_75regular;font-weight:400}
 .all-lang .country-list li a.india{background-position:right -214px}
 .all-lang .country-list li a.cigna-envoy{background:0 0}
 a,a:hover{color:#fff;text-decoration:none}
@@ -253,12 +252,13 @@ a,a:hover{color:#fff;text-decoration:none}
 .mainmenu-searchbox{padding:18px 0 6px}
 .mainmenu-searchbox .form-control{border:2px solid #9d9d9d;border-radius:0;font-family:kittithada_bold_75regular;font-size:18px;height:25px;line-height:100%;padding:0 5px}
 .mainmenu-searchbox .btn-default{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/icon_search_bar_top.png) -2px -2px no-repeat;border-color:#9d9d9d;border-radius:0;color:transparent;height:25px;padding-right:2px;width:25px}
+.mobile-menu ul li,.mobile-menu ul li ul li{list-style-type:none;background:#b81d8c;padding:0}
 .mobile-search{border:5px solid #ff4e00}
 .mobile-search input.custom-search-box{color:#505050;font-family:kittithada_bold_75regular;font-size:22px!important;line-height:100%!important}
 .mobile-menu ul{margin:0;padding:0}
-.mobile-menu ul li{background:#b81d8c;border-bottom:2px solid #fff;list-style-type:none;margin:0;padding:0;position:relative}
-.mobile-menu ul li a,.mobile-menu ul li ul li a{display:block;font-size:20px;font-family:kittithada_bold_75regular;margin:0;color:#fff}
-.mobile-menu ul li ul li{background:#b81d8c;border-bottom:medium none;list-style-type:none;margin:0;padding:0}
+.mobile-menu ul li{border-bottom:2px solid #fff;margin:0;position:relative}
+.mobile-menu ul li a,.mobile-menu ul li ul li a{color:#fff;font-family:kittithada_bold_75regular;margin:0;display:block;font-size:20px}
+.mobile-menu ul li ul li{border-bottom:medium none;margin:0}
 .mobile-menu ul li:last-child{background:#00aeef}
 .mobile-menu ul li ul li:last-child,.mobile-menu ul li ul li:nth-last-child(2),.mobile-menu ul li ul li:nth-last-child(3),.mobile-menu ul li ul li:nth-last-child(4){background:#b81d8c}
 .mobile-menu ul li:nth-last-child(2),.mobile-menu ul li:nth-last-child(3),.mobile-menu ul li:nth-last-child(4){background:#9d9d9d}
@@ -297,7 +297,7 @@ ul>li.last.leaf.active-trail>a{border-left:6px solid #62136d;color:#62136d}
 .menu-container ul li{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/menuDivider.png) 0 16px no-repeat;float:left;height:53px;list-style-type:none;padding:0;position:inherit;text-align:center}
 .menu-container ul li.two-lines{text-align:left}
 .menu-container ul li a{display:block;padding:17px 8px;position:relative}
-.menu-container ul li a span.arrow-down,.menu-container ul li a.active span.arrow-down,.menu-container ul li a:hover span.arrow-down{border-left:4px solid transparent;border-right:4px solid transparent;display:inline;font-size:0;height:5px;margin:0 0 0 5px;position:absolute;top:24px;width:0;vertical-align:middle}
+.menu-container ul li a span.arrow-down,.menu-container ul li a.active span.arrow-down,.menu-container ul li a:hover span.arrow-down{vertical-align:middle;border-left:4px solid transparent;border-right:4px solid transparent;display:inline;font-size:0;height:5px;margin:0 0 0 5px;position:absolute;top:24px;width:0}
 .menu-container ul li a span.arrow-down{border-top:4px solid #505050}
 .menu-container ul li a.active span.arrow-down,.menu-container ul li a:hover span.arrow-down{border-top:4px solid #fff}
 .menu-container ul li.two-lines a{display:block;padding:7px 8px 7px 14px;position:relative}
@@ -319,6 +319,7 @@ ul>li.last.leaf.active-trail>a{border-left:6px solid #62136d;color:#62136d}
 .border-menu-right{border-right:2px solid #fff}
 .border-white-right{border-right:1px solid #fff}
 .slide-wrapper{width:1280px!important}
+.slide-wrapper .carousel-indicators{visibility:hidden}
 .slide-wrapper .chevron-left,.slide-wrapper .chevron-right{display:inline-block;position:absolute;top:40%;z-index:5}
 .slide-wrapper .chevron-left{left:20%}
 .slide-wrapper .chevron-right{right:20%}
@@ -331,7 +332,6 @@ ul>li.last.leaf.active-trail>a{border-left:6px solid #62136d;color:#62136d}
 .ribbon-menu-wrapper{left:0;margin-top:-20px;position:absolute;right:0;width:100%;z-index:9}
 .mobile-ribbon-menu-wrapper{display:none}
 .mobile-ribbon-menu-wrapper nav{background:#fe4e00;border:none;color:#fff}
-.l-ribbon-bottom,.l-ribbon-top{border-style:solid;border-width:63px;float:left}
 .mobile-ribbon-menu-wrapper nav .mobile-ribbon-menu-title{font-family:"Arial Bold",Gadget,sans-serif;font-size:1.9em;font-weight:400;margin-bottom:8px;margin-top:8px;text-align:center}
 .mobile-ribbon-menu-wrapper nav .glyphicon{color:#fff}
 .mobile-ribbon-menu-wrapper .navbar-default .navbar-nav>.active>a,.mobile-ribbon-menu-wrapper .navbar-default .navbar-nav>.active>a:focus,.mobile-ribbon-menu-wrapper .navbar-default .navbar-nav>.active>a:hover{background:0 0;color:#fff}
@@ -342,12 +342,13 @@ ul>li.last.leaf.active-trail>a{border-left:6px solid #62136d;color:#62136d}
 .ribbon-menu-container ul li{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/menu-divider-white.png);background-position:right center;background-repeat:no-repeat;color:#fff;display:inline-block;font-size:15px;margin:0;padding:0;vertical-align:middle}
 .ribbon-menu-container ul li:first-child,.ribbon-menu-container ul li:last-child{background-image:none}
 .ribbon-menu-container ul li a{display:table-cell;font-family:Arial,Details,Arial;font-weight:700;height:62px;padding:20px 30px;vertical-align:middle}
+.l-ribbon-bottom,.l-ribbon-top{border-width:63px;float:left;height:0;position:relative;width:0}
 .all-product .all-product-caption p,.select-menu-wrapper .thumbnail .caption p{font-weight:400}
 .ribbon-menu-container ul li:nth-child(2) a{padding-left:0}
 .ribbon-menu-container ul li:last-child a{padding-right:0}
-.l-ribbon-top{border-color:#fe4e00 transparent transparent;height:0;left:-36px;position:relative;top:0;width:0}
-.l-ribbon-bottom{border-color:transparent transparent #fe4e00;height:0;left:-161px;position:relative;top:-64px;width:0}
-.r-ribbon-bottom,.r-ribbon-top{border-style:solid;border-width:50px;float:right;height:0;width:0;position:relative}
+.l-ribbon-top{border-color:#fe4e00 transparent transparent;border-style:solid;left:-36px;top:0}
+.l-ribbon-bottom{border-color:transparent transparent #fe4e00;border-style:solid;left:-161px;top:-64px}
+.r-ribbon-bottom,.r-ribbon-top{position:relative;border-style:solid;border-width:50px;float:right;height:0;width:0}
 .r-ribbon-top{border-color:#fe4e00 transparent transparent;right:-45px;top:-62px}
 .r-ribbon-bottom{border-color:transparent transparent #fe4e00;right:-145px;top:-100px}
 .select-menu-wrapper{margin-top:60px}
@@ -464,7 +465,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .hero-title-wrapper{height:368px;left:6px;position:relative;top:-8px;z-index:4}
 .hero-title-table{display:table;height:100%;width:100%}
 .hero-title-cell{display:table-cell;height:100%;vertical-align:middle;width:100%}
-.hero-title h1,.hero-title span{display:block;font-family:kittithada_bold_75regular;font-weight:400;color:#fff}
+.hero-title h1,.hero-title span{color:#fff;display:block;font-family:kittithada_bold_75regular;font-weight:400}
 .hero-title h1{font-size:70px;line-height:.9em;text-transform:uppercase;width:55%}
 .hero-title span{font-size:32px;line-height:30px;margin-top:10px;width:50%}
 .hero-title .button-arrow-contain{float:left;margin-top:40px}
@@ -484,7 +485,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .hero-ribbon-wrapper div.content ul li .caret,.mobile-slide-product{display:none}
 .hero-ribbon-wrapper div.content ul li:first-child,.hero-ribbon-wrapper div.content ul li:last-child{border:none}
 .hero-ribbon-wrapper div.content ul li a,.hero-ribbon-wrapper div.content ul li a:hover{color:#fff;font:13px proximaNovaBlack;padding:0 10px;text-decoration:none}
-.color-black:hover,.color-blue-bottom:hover,.contact-content a,.view-taxonomy-faq .views-field-nothing{text-decoration:underline}
+.color-black:hover,.color-blue-bottom:hover{text-decoration:underline}
 .hero-ribbon-wrapper span.left{background-position:-60px -306px}
 .hero-ribbon-wrapper span.right{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/arrow-orange-right.png);background-position:0 0}
 .product-container{margin-bottom:20px;margin-top:0}
@@ -496,7 +497,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .product-container .thumbnail.health .caption p{padding:0 15px}
 .product-container .product-date{bottom:40px;position:absolute}
 .product-container .thumbnail .caption h3{color:#fff;font:24px/.9em kittithada_bold_75regular;margin:10px 0 5px;text-align:center;text-transform:uppercase}
-.button-arrow-contain,.product-container .button-arrow-contain{display:block;height:30px;left:0;margin-left:auto;margin-right:auto;cursor:pointer}
+.button-arrow-contain,.product-container .button-arrow-contain{cursor:pointer;display:block;height:30px;left:0;margin-left:auto;margin-right:auto}
 .product-container .thumbnail .caption h2{color:#fff;font:32px kittithada_bold_75regular;text-align:center}
 .product-container .thumbnail .caption h1{color:#fff;font:30px kittithada_bold_75regular;margin-top:-10px;text-align:center;text-transform:uppercase}
 .product-container .thumbnail .caption p{color:#fff;font:12px Arial;margin-bottom:50px;margin-top:10px;padding-left:0;padding-right:0;text-align:center}
@@ -504,7 +505,6 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .product-container .button-arrow-contain{bottom:20px;right:0;width:153px}
 .product-container form .button-arrow-contain{bottom:15px}
 .color-blue-bottom,.color-blue-bottom:hover{color:#00aeef;font-size:18px}
-.draggable a.tabledrag-handle,a .glyphicon-spin,a.tabledrag-handle:hover,fieldset .panel-heading a.panel-title:hover{text-decoration:none}
 .button-arrow-contain .button-arrow-wrapper{display:table;height:100%;position:relative;width:100%}
 .button-arrow-contain .button-arrow-wrapper span{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png);background-repeat:no-repeat;display:table-cell;height:30px;text-align:center;vertical-align:middle;width:10px}
 .button-arrow-contain .button-arrow-wrapper span.content a,.button-arrow-contain .button-arrow-wrapper span.content a:hover{font:21px kittithada_bold_75regular;text-decoration:none}
@@ -547,12 +547,12 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .thumbnail form input[type=checkbox]{border:1px solid #62136d;margin:0 5px 0 0}
 .thumbnail form label{color:#62136d!important;font:18px kittithada_bold_75regular;padding-left:10px}
 .thumbnail form button{background:0 0;border:none;border-radius:0;color:#fff;font:26px kittithada_bold_75regular;padding:0}
-.travel-title h1.en,.travel-title span.en{font:58px/.9em proximaNovaBlack;text-transform:uppercase}
+.travel-title h1.en,.travel-title span.en{text-transform:uppercase;font:58px/.9em proximaNovaBlack}
 .travelbanner-content{height:368px;margin-left:auto;margin-right:auto;position:relative;width:960px}
 .travel-title-wrapper{float:right;height:368px;position:relative;right:6px;top:-8px;z-index:4}
 .travel-title-table{display:table;height:100%;width:100%}
 .travel-title-cell{display:table-cell;height:100%;vertical-align:middle;width:100%}
-.travel-title h1.en,.travel-title span.en,.travel-title span.th{display:block;color:#fff;width:100%}
+.travel-title h1.en,.travel-title span.en,.travel-title span.th{width:100%;color:#fff;display:block}
 .travel-title span.en{margin-top:10px}
 .travel-title span.th{font:58px/.9em kittithada_bold_75regular;margin-top:10px}
 .travel-title p{color:#fff;font:26px kittithada_bold_75regular}
@@ -581,7 +581,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .contact-form textarea{height:156px}
 .contact-form button{border:none;border-radius:0;padding:2px 5px!important}
 .contact-form button,.contact-form button:focus,.contact-form button:hover{background:#fff;color:#ff4e00;display:block;font-size:21px;height:30px;margin:13px auto 6px;position:relative;width:120px}
-.contact-form button::after,.contact-form button::before{display:table-cell;height:30px;position:absolute;text-align:center;top:0;width:11px;vertical-align:middle;content:""}
+.contact-form button::after,.contact-form button::before{vertical-align:middle;content:"";display:table-cell;height:30px;position:absolute;text-align:center;top:0;width:11px}
 .contact-form button::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png) left -930px no-repeat;left:-11px}
 .contact-form button::after{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png) left -961px no-repeat;right:-10px}
 .block-new-left .view-news .views-row{background:#ef8200;color:#fff;font-size:13px}
@@ -620,7 +620,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .news-listing-3 .node-news .field-name-title-field,.news-listing-4 .node-news .field-name-title-field,.news-listing-5 .node-news .field-name-title-field{color:#fff;font-family:kittithada_bold_75regular;font-size:32px;line-height:.9em}
 .node-news img,.view-health .views-field-field-image img,.view-news .views-field-field-image img{height:auto;width:100%}
 .page-health-wellness .easy_social_box,.page-news .easy_social_box{margin-left:20px;margin-right:0;padding-bottom:5px}
-.health-box .easy_social_box,.node-type-our-products .easy_social_box{margin-left:15px;padding-bottom:0;margin-right:0}
+.health-box .easy_social_box,.node-type-our-products .easy_social_box{margin-right:0;margin-left:15px;padding-bottom:0}
 .front .easy_social_box{margin-left:12px;margin-right:0;margin-top:15px;padding-bottom:5px}
 @media (max-width:650px){.front .easy_social_box{margin-left:12px;margin-right:0;margin-top:15px;padding-bottom:5px}
 }
@@ -631,7 +631,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .news-listing-5 .node-news .field-name-title-field{background:#e9168c;padding:20px}
 .node-news .easy_social_box{padding:20px}
 .node-news .field-name-body{font-size:13px;padding:0 20px 20px}
-.news-in-the-world .views-row,.page-news .news-in-the-world .views-row{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/bg-news-world.png) 6px 20px no-repeat;font-size:13px;margin-top:-20px;padding:0;float:left}
+.news-in-the-world .views-row,.page-news .news-in-the-world .views-row{float:left;background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/bg-news-world.png) 6px 20px no-repeat;font-size:13px;margin-top:-20px;padding:0}
 .news-in-the-world{color:#e9168c}
 @media (max-width:320px){.product-container .button-arrow-contain{bottom:32px!important}
 @media (max-width:350px){.news-in-the-world .views-row,.page-news .news-in-the-world .views-row{clear:both;width:100%!important}
@@ -717,8 +717,8 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .mrow1 .col3{left:40%;margin:4.5em 0 0;position:absolute}
 .mrow1 .col3 a{color:#62136d;font-weight:700;margin:14px 0 0}
 .mrow2 .col1{color:#fff;float:left;font-weight:700;padding:8px 0 0 13px;width:68%}
-.hero-title h1,.hero-title span{font-family:kittithada_bold_75regular;font-weight:400;color:#fff}
-.mrow2 .col2,.mrow2 .col3{float:left;width:16%;text-align:center}
+.mrow2 .col2,.mrow2 .col3{text-align:center;float:left;width:16%}
+.hero-title h1,.hero-title span{color:#fff;font-family:kittithada_bold_75regular;font-weight:400}
 .mrow2 .col2{border-left:1px solid rgba(255,255,255,0)}
 .slide-wrapper .carousel-indicators{margin-bottom:50px;visibility:visible!important}
 #carousel-example-generic .carousel-indicators li{background-color:#9d9d9d!important;border:none}
@@ -823,10 +823,10 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .view-taxonomy-faq .field-content-question{font-size:22px;font-weight:700}
 .view-taxonomy-faq .field-content-answer{font-size:19px;font-weight:700}
 .view-taxonomy-faq .faq-a,.view-taxonomy-faq .faq-q{background:0 0!important;min-height:50px;padding:0!important}
-.view-taxonomy-faq .faq-a .field-content,.view-taxonomy-faq .faq-q .field-content{line-height:.9em;padding-top:10px;width:80%;font-family:kittithada_bold_75regular;float:left}
+.view-taxonomy-faq .faq-a .field-content,.view-taxonomy-faq .faq-q .field-content{float:left;font-family:kittithada_bold_75regular;line-height:.9em;padding-top:10px;width:80%}
 .view-taxonomy-faq .faq-q .field-content{font-size:23px}
 .view-taxonomy-faq .faq-a .field-content{color:#000;font-size:19px;height:125px;overflow:hidden}
-.view-taxonomy-faq .views-field-nothing{font-size:small;font-weight:700;margin-bottom:10px;min-width:435px;text-align:right}
+.view-taxonomy-faq .views-field-nothing{font-size:small;font-weight:700;margin-bottom:10px;min-width:435px;text-align:right;text-decoration:underline}
 .view-taxonomy-faq .views-field-nothing a{color:#000;font-family:kittithada_bold_75regular;font-size:19px;font-weight:400}
 .view-taxonomy-faq .views-responsive-grid .views-row{min-height:185px;overflow:hidden}
 .view-taxonomy-faq .faq-q-title-2{color:#102161}
@@ -837,20 +837,19 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .view-taxonomy-faq .faq-q-title-8{color:#61196c}
 .view-taxonomy-faq .faq-q-title-9{color:#ec008c}
 .contact-content{color:#fff;margin:10px 0 0;min-height:252px;padding:17px 25px}
-.contact-content a{color:#f8e300}
+.contact-content a{color:#f8e300;text-decoration:underline}
 .contact-content h2{font:32px/.8em kittithada_bold_75regular;margin:0 0 5px}
-.health-related .more-link,.health-related ul li a,.ul-checked li,.wait-to-pay li strong{font-family:kittithada_bold_75regular}
 .contact-content p{font-size:12px;margin:0 0 5px}
 .contact-content .print-map{bottom:17px;left:30px;position:absolute;width:100px}
 .contact-content .google-map{bottom:17px;left:132px;margin-left:10px;position:absolute;width:135px!important}
 .how-to-claim{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/how-to-claim-line.png) center 122px no-repeat #fff;padding:10px 20px}
 .how-to-claim .col-md-12{margin:0 0 20px}
 .send-doc{color:#ef8200;padding:0 0 0 10px}
-.send-doc li,.wait-to-pay li{margin:0;padding:0 0 10px 30px;list-style-type:none}
+.send-doc li,.wait-to-pay li{list-style-type:none;margin:0;padding:0 0 10px 30px}
 .send-doc span{color:#fff}
 .send-doc li{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/bg-lo-claim-toggle-white.png) left 5px no-repeat}
 .wait-to-pay li{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/bg-lo-claim-toggle-white.png) left 10px no-repeat}
-.wait-to-pay li strong{font-size:24px}
+.wait-to-pay li strong{font-family:kittithada_bold_75regular;font-size:24px}
 .wait-to-pay{color:#fff;padding:0 0 0 10px}
 .how-to-claim-content{display:table-cell;font:22px/100% kittithada_bold_75regular;height:108px;vertical-align:middle}
 .how-to-claim-toggle .claim-toggle-q{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/arrow-down-green.png) 30px center no-repeat #fff;border-bottom:1px solid #62136d;cursor:pointer;font:24px/100% kittithada_bold_75regular;margin:10px 0 0;padding:10px 40px 10px 70px}
@@ -858,10 +857,10 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .how-to-claim-toggle .claim-toggle-a ul{margin-left:40px;padding:0}
 .how-to-claim-toggle .claim-toggle-a ul li{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/bg-lo-claim-toggle.png) left 5px no-repeat;list-style-type:none;margin:0;padding:0 0 10px 30px}
 .how-to-claim-toggle .claim-toggle-a ul li a{color:#00aeef;text-decoration:underline}
+a .glyphicon-spin,a.tabledrag-handle:hover,fieldset .panel-heading a.panel-title:hover{text-decoration:none}
 .payment-content{background:#fff;margin:10px 0 0;padding:20px 0}
 .payment-bank-q img,.payment-content .payment-left img{margin:0 auto}
 .payment-content .payment-number{color:#0e1e63;font-family:proximaNovaBlack;font-size:26px;left:15px;position:absolute;top:10px}
-.mission-value,.mission-value h3,.view-slide-block{position:relative}
 .payment-content h2{color:#0e1e63;font-size:32px}
 .payment-content .payment-left img.number-2{padding:25px 0 0}
 .payment-content .payment-right img{float:left;padding:0 10px 10px 0}
@@ -897,6 +896,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .buynow-product-list-content .col-md-3 h2 span,.buynow-product-list-content .col-md-4 h2 span{font-family:proximaNovaBlack;font-size:30px;font-weight:400}
 .why-cigna{margin:0}
 .why-cigna-read-more{font-family:Arial;font-size:14px;padding:30px 40px}
+.health-related .more-link,.health-related ul li a,.ul-checked li{font-family:kittithada_bold_75regular}
 .why-cigna-read-more .button-arrow-contain{float:left;width:auto}
 @media (max-width:400px){.view-taxonomy-faq .views-label-field-answer,.view-taxonomy-faq .views-label-title{padding:0 15px}
 .view-taxonomy-faq .views-field-nothing{min-width:0}
@@ -907,7 +907,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .view-taxonomy-faq .views-responsive-grid .views-column-first,.view-taxonomy-faq .views-responsive-grid .views-column-last{padding:0 10px}
 .view-taxonomy-faq .views-responsive-grid .views-column .views-field-name{padding-bottom:10px}
 .our_products-content{text-align:left}
-.view-slide-block{margin:0 auto;max-width:1280px}
+.view-slide-block{margin:0 auto;max-width:1280px;position:relative}
 .view-slide-block .views-slideshow-controls-bottom{margin:-32px 0 0;position:absolute;top:50%;width:100%;z-index:999}
 .view-slide-block .views-slideshow-controls-bottom #views_slideshow_controls_text_previous_slide_block-block{left:5%;position:absolute}
 .view-slide-block .views-slideshow-controls-bottom #views_slideshow_controls_text_previous_slide_block-block a{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/prev-icn.png) no-repeat;display:block;overflow:hidden;padding:10px;text-indent:-99em}
@@ -916,6 +916,7 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .view-slide-block .views-slideshow-controls-bottom #views_slideshow_controls_text_next_slide_block-block a{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/next-icn.png) no-repeat;display:block;overflow:hidden;padding:10px;text-indent:-99em}
 input[type=checkbox]{display:none}
 label::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/check_nonactive.jpg) left center/19px 19px no-repeat;bottom:1px;content:"";display:inline-block;height:19px;left:0;margin-right:10px;position:absolute;width:19px}
+.mission-value,.mission-value h3{position:relative}
 .health-box h3::after,.health-box h3::before{content:"";display:block}
 input[type=checkbox]:checked+label::before{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/check_active.jpg);color:#f3f3f3;content:"";font-size:15px;line-height:15px;text-align:center;text-shadow:1px 1px 1px rgba(0,0,0,.2)}
 #simplenews-subscriptions-multi-block-form>div>div>a{color:#fff;font-size:66px;margin-top:-135px}
@@ -968,7 +969,7 @@ h2.block-title{font-size:26px}
 #site-map a{color:#1dafec}
 #site-map ul{overflow:hidden}
 #site-map ul li{color:#1dafec;float:left;width:33%}
-.about-international,.mission-ul{color:#fec741;font-size:24px;font-family:kittithada_bold_75regular;line-height:100%}
+.about-international,.mission-ul{line-height:100%;font-family:kittithada_bold_75regular;color:#fec741;font-size:24px}
 #site-map ul li ul li{float:none;list-style-type:disc;width:100%}
 #site-map .caret{border-top-color:#1dafec;cursor:pointer;margin:0 7px 0 -15px}
 .cigna-team{padding-bottom:12px;padding-top:12px}
@@ -984,7 +985,7 @@ h3.mission{margin:0;padding:10px 0 17px}
 .mission-ul li span{color:#000}
 .mission-ul li span.big{font-size:40px}
 .mission-value{padding:0 20px 0 70px}
-.mission-value h3::before,.mission-value h3:first-child::before,.mission-value h3:last-child::before{height:100%;left:-42px;position:absolute;top:0;width:20px;content:"";display:block}
+.mission-value h3::before,.mission-value h3:first-child::before,.mission-value h3:last-child::before{display:block;content:"";height:100%;left:-42px;position:absolute;top:0;width:20px}
 .mission-value h3::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/about/mission-value-center.png) 0 -70px/20px auto no-repeat}
 .mission-value h3:first-child::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/about/mission-value-top.png) 0 27px/20px auto no-repeat}
 .mission-value h3:last-child::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/about/mission-value-bottom.png) 0 -70px/20px auto no-repeat}
@@ -999,7 +1000,7 @@ h3.mission{margin:0;padding:10px 0 17px}
 .about-cigna-2549 h1::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/about/about-cigna-dot-pink.png) no-repeat}
 .about-cigna-2550 h1::before{background:url(http://www.cigna.co.th/sites/all/themes/cignas/images/about/about-cigna-dot-orange.png) no-repeat}
 .cancer-qoute{color:#fff;font-family:kittithada_bold_75regular;font-size:28px;line-height:100%;padding:10px 50px;position:relative;text-align:center}
-.cancer-qoute::after,.cancer-qoute::before{color:#a171a7;font-family:Arial;font-size:150px;position:absolute;top:5px;line-height:100%}
+.cancer-qoute::after,.cancer-qoute::before{line-height:100%;position:absolute;color:#a171a7;font-family:Arial;font-size:150px;top:5px}
 .cancer-qoute::before{content:"“";left:0}
 .cancer-qoute::after{content:"”";right:0}
 .views-exposed-form .views-exposed-widget{margin:0 0 12px;padding:0 6px!important}
@@ -1007,7 +1008,7 @@ h3.mission{margin:0;padding:10px 0 17px}
 .views-exposed-form .views-submit-button{position:relative}
 .views-exposed-form .views-submit-button::before{background:#00aeef;color:#fff;content:"เพื่อแสดงทริปที่ใช่ สไตล์ที่ชอบ";display:block;font-family:kittithada_bold_75regular;font-size:24px;height:100%;left:6px;line-height:100%;margin:0;min-height:213px;padding:130px 0 0;position:absolute;top:0;width:149px;z-index:-1}
 .views-exposed-form .views-submit-button button{background:#fff;border:none;border-radius:0;color:#00aeef;font-family:kittithada_bold_75regular;font-size:21px;margin:91px 0 0!important;padding:0 45px!important;position:relative}
-.views-exposed-form .views-submit-button button::after,.views-exposed-form .views-submit-button button::before{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png);background-repeat:no-repeat;content:"";height:30px;position:absolute;text-align:center;top:0;vertical-align:middle;width:10px;display:block}
+.views-exposed-form .views-submit-button button::after,.views-exposed-form .views-submit-button button::before{display:block;background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png);background-repeat:no-repeat;content:"";height:30px;position:absolute;text-align:center;top:0;vertical-align:middle;width:10px}
 .views-exposed-form .views-submit-button button::before{background-position:left -930px;left:-10px}
 .views-exposed-form .views-submit-button button::after{background-position:left -961px;right:-10px}
 .views-exposed-widget label{color:#fff;display:block;font-family:kittithada_bold_75regular;font-size:24px;margin:0;padding:45px 10px 0}
@@ -1035,7 +1036,7 @@ h3.mission{margin:0;padding:10px 0 17px}
 .view-travel-planner-tool .view-content .views-row .tip-list .tip-detail .tip-body{float:left;padding:6px 0 0}
 .view-travel-planner-tool .view-content .views-row .tip-list .tip-detail .tip-view{float:right}
 .view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a{background:#fff;border:none;border-radius:0;color:#00aeef;display:block;font-family:kittithada_bold_75regular;font-size:21px;margin:0 auto;padding:0 20px!important;position:relative;width:100px}
-.view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::after,.view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::before{background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png);background-repeat:no-repeat;content:"";display:block;height:30px;position:absolute;text-align:center;vertical-align:middle;width:10px;top:0}
+.view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::after,.view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::before{top:0;background-image:url(http://www.cigna.co.th/sites/all/themes/cignas/images/sprites-pointed-arrow.png);background-repeat:no-repeat;content:"";display:block;height:30px;position:absolute;text-align:center;vertical-align:middle;width:10px}
 .view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::before{background-position:left -930px;left:-10px}
 .view-travel-planner-tool .view-content .views-row .tip-list .tip-detail a::after{background-position:left -961px;right:-10px}
 .bgcolor-for-japan{background:#0e1e63!important}
@@ -1390,8 +1391,8 @@ img.tmb{width:90px!important}
 .pr-news-list-items{width:100%}
 img.pr-img{width:738px}
 .thai-lang .arrow-down{border-top:4px solid #fff!important;display:block!important;float:right;margin-right:-15px;margin-top:-15px}
-.buynow-product-list-content .col-md-3:first-child,.buynow-product-list-content .col-md-3:last-child,.buynow-product-list-content .col-md-3:nth-last-child(2),.buynow-product-list-content .col-md-4:first-child,.buynow-product-list-content .col-md-4:last-child{border:none}
 .page-node-210 .pr-readmore,.page-node-211 .pr-readmore,.page-node-212 .pr-readmore,.page-node-264 .pr-readmore,div.mobile-travel-banner-button-container{display:none}
+.buynow-product-list-content .col-md-3:first-child,.buynow-product-list-content .col-md-3:last-child,.buynow-product-list-content .col-md-3:nth-last-child(2),.buynow-product-list-content .col-md-4:first-child,.buynow-product-list-content .col-md-4:last-child{border:none}
 .hospitalContainer{margin-left:10px!important;margin-right:10px!important}
 .news-listing-4 .views-field.views-field-body.col-sm-7 .field-content,.news-listing-5 .views-field.views-field-body.col-sm-7 .field-content{margin-left:0}
 .news-listing-4 .item-list .views-row,.news-listing-5 .item-list .views-row{padding:15px}
@@ -1660,8 +1661,8 @@ table .checkbox input[type=checkbox],table .radio input[type=radio]{max-width:in
 #simplenews-subscriptions-multi-block-form .alert-success::before{color:#fff;content:url(http://www.cigna.co.th/sites/all/themes/cignas/images/newsletter-thankyou.png);display:block;font-family:kittithada_bold_75regular;font-size:46px;font-weight:700;height:65px;margin-top:50px;width:100%}
 #simplenews-subscriptions-multi-block-form .alert-success{background-color:#63216c;color:transparent;font:24px kittithada_bold_75regular;height:330px;left:0;margin-top:-147px;position:absolute;text-align:center;z-index:10}
 #simplenews-subscriptions-multi-block-form .alert-danger{background-color:#62136d;color:#fff;font:24px kittithada_bold_75regular;height:330px;left:10px;margin-top:-147px;position:absolute;text-align:center;width:100%;z-index:10}
-.field .field-label,.pr-price,.views-exposed-form label{font-weight:700}
 #block-views-news-block-4 .view-news ul li h2,#block-views-news-block-5 .view-news ul li h2{margin-right:15px;margin-top:0;min-height:65px}
+.field .field-label,.pr-price,.views-exposed-form label{font-weight:700}
 #simplenews-subscriptions-multi-block-form .alert-danger ul li,#simplenews-subscriptions-multi-block-form .alert-success ul li{list-style:none}
 #simplenews-subscriptions-multi-block-form .form-checkboxes .error{background:0 0}
 #simplenews-subscriptions-multi-block-form .btn-default[disabled]{background:0 0;height:30px}
@@ -1774,7 +1775,7 @@ img.pr-img{height:auto;max-width:100%;min-height:274px;outline:0}
 .pr-table-plan-header-right-l{float:left;width:730px}
 .pr-table-plan-header-right-r{float:right;width:130px}
 .pr-table-plan-content{width:960px}
-.pr-table-plan-colum,.pr-table-plan-colum-last{background:#fff;height:280px;padding:24px 36px 36px;text-align:center;width:320px;float:left}
+.pr-table-plan-colum,.pr-table-plan-colum-last{float:left;background:#fff;height:280px;padding:24px 36px 36px;text-align:center;width:320px}
 .pr-table-plan-colum{border-right:2px solid #dfdfdf}
 .pr-pretext{margin:12px 0 0}
 .pr-table-news{width:960px}
@@ -1799,13 +1800,12 @@ img.pr-img{height:auto;max-width:100%;min-height:274px;outline:0}
 .pr-table-plan-header{color:#fff;padding:24px 12px;width:100%}
 .pr-table-plan-header-left{float:left;width:20%}
 .pr-table-plan-header-right{float:right;width:80%}
-.pr-table-plan-header-right-l{float:none;width:100%}
-.pr-table-plan-header-right-r{float:none;margin:0 auto;width:100%}
+.pr-news-left,.pr-news-right,.pr-table-plan-header-right-l,.pr-table-plan-header-right-r{width:100%;float:none}
+.pr-table-plan-header-right-r{margin:0 auto}
 .pr-table-plan-content{width:100%}
 .pr-table-plan-colum,.pr-table-plan-colum-last{border-right:medium none;float:none;width:100%}
 .pr-img-container,.pr-table-news{width:100%}
-.pr-news-left{float:none;margin:0 0 12px;width:100%}
-.pr-news-right{float:none;width:100%}
+.pr-news-left{margin:0 0 12px}
 .pr-news-detail{width:100%}
 }
 .field-label-inline .field-items,.field-label-inline .field-label,.views-exposed-form .views-exposed-widget{float:left}
@@ -1864,7 +1864,7 @@ fieldset.collapsible .fieldset-legend{display:block}
 .form-textarea-wrapper textarea{box-sizing:border-box;display:block;margin:0;width:100%}
 .resizable-textarea .grippie{-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background:url(http://www.cigna.co.th/misc/grippie.png) center 2px no-repeat #eee;border-color:#ddd;border-image:none;border-style:solid;border-width:0 1px 1px;cursor:s-resize;height:9px;overflow:hidden}
 body.drag{cursor:move}
-.draggable a.tabledrag-handle{cursor:move;float:left;height:1.7em;margin-left:-1em;overflow:hidden}
+.draggable a.tabledrag-handle{cursor:move;float:left;height:1.7em;margin-left:-1em;overflow:hidden;text-decoration:none}
 a.tabledrag-handle .handle{background:url(http://www.cigna.co.th/misc/draggable.png) 6px 9px no-repeat;height:13px;margin:-.4em .5em;padding:.42em .5em;width:13px}
 a.tabledrag-handle-hover .handle{background-position:6px -11px}
 div.indentation{float:left;height:1.7em;margin:-.4em .2em -.4em -.4em;padding:.42em 0 .42em .6em;width:20px}
@@ -1887,7 +1887,7 @@ tr .ajax-progress .throbber{margin:0 2px}
 .element-hidden,html.js .js-hide{display:none}
 .element-invisible{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute!important}
 .element-invisible.element-focusable:active,.element-invisible.element-focusable:focus{clip:auto;height:auto;overflow:visible;position:static!important}
-.clearfix::after{clear:both;content:".";display:block;height:0}
+.clearfix::after{clear:both;content:".";display:block;height:0;visibility:hidden}
 * html .clearfix{height:1%}
 :first-child+html .clearfix{min-height:1%}
 .rteindent1{margin-left:40px}
@@ -1927,9 +1927,9 @@ div#allButtons,fieldset#edit-appearance div#groupLayout{border:0;margin:1em 0;ov
 #cboxOverlay{height:100%;position:fixed;width:100%;background:#000}
 #cboxBottomLeft,#cboxMiddleLeft{clear:left}
 #cboxContent{position:relative}
+#cboxCurrent,#cboxTitle{top:-20px;position:absolute}
 #cboxTitle{margin:0}
 #cboxLoadingGraphic,#cboxLoadingOverlay{height:100%;left:0;position:absolute;top:0;width:100%}
-#cboxCurrent,#cboxSlideshow,#cboxTitle{position:absolute;top:-20px}
 .cboxPhoto{border:0;display:block;float:left;margin:auto}
 .cboxIframe{border:0;display:block;height:100%;margin:0;padding:0;width:100%}
 #cboxContent,#cboxLoadedContent,#colorbox{box-sizing:content-box}
@@ -1941,13 +1941,14 @@ div#allButtons,fieldset#edit-appearance div#groupLayout{border:0;margin:1em 0;ov
 #cboxCurrent{color:#ccc;right:0}
 #cboxLoadingGraphic{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/loading.gif) center center no-repeat}
 #cboxClose,#cboxNext,#cboxPrevious,#cboxSlideshow{cursor:pointer;background:0 0;border:0;margin:0;overflow:visible;padding:0;width:auto}
-#cboxSlideshow{color:#fff;right:90px}
-#cboxNext,#cboxPrevious{height:65px;margin-top:-32px;top:50%;width:28px;position:absolute;text-indent:-9999px}
-#cboxPrevious{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) left top no-repeat;left:5px}
+#cboxSlideshow{color:#fff;position:absolute;right:90px;top:-20px}
+#cboxNext,#cboxPrevious{height:65px;margin-top:-32px;top:50%;width:28px}
+#cboxClose,#cboxNext{text-indent:-9999px;position:absolute;right:5px}
+#cboxPrevious{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) left top no-repeat;left:5px;position:absolute;text-indent:-9999px}
 #cboxPrevious:hover{background-position:left bottom}
-#cboxNext{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) right top no-repeat;right:5px}
+#cboxNext{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) right top no-repeat}
 #cboxNext:hover{background-position:right bottom}
-#cboxClose{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) center top no-repeat;display:block;height:19px;position:absolute;right:5px;text-indent:-9999px;top:5px;width:38px}
+#cboxClose{background:url(http://www.cigna.co.th/sites/all/libraries/colorbox/example3/images/controls.png) center top no-repeat;display:block;height:19px;top:5px;width:38px}
 #cboxClose:hover{background-position:center bottom}
 .ctools-locked{border:1px solid red;color:red;padding:1em}
 .ctools-owns-lock{background:#ffd;border:1px solid #f0c020;padding:1em}
@@ -1964,7 +1965,7 @@ div.ctools-ajaxing{background:url(http://www.cigna.co.th/sites/all/modules/ctool
 .flex-direction-nav a,.no-js .slides>li:first-child,.slides::after,html[xmlns] .slides{display:block}
 .flexslider .slides img{display:block;width:100%}
 .flex-pauseplay span{text-transform:capitalize}
-.slides::after{clear:both;content:" ";height:0;line-height:0}
+.slides::after{clear:both;content:" ";height:0;line-height:0;visibility:hidden}
 * html .slides{height:1%}
 .flex-viewport{max-height:2000px;transition:all 1s ease 0s}
 .loading .flex-viewport{max-height:300px}

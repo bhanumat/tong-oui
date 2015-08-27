@@ -264,7 +264,7 @@
                     }
                 }
             ],
-            "default-planid":1
+            "defaultPlanid":2
         },
         "flightsecure": {
             "description": {
@@ -331,7 +331,7 @@
                     }
                 }
             ],
-            "default-tick":true
+            "defaultTick":true
         },
         "propertysafe": {
             "description": {
@@ -387,7 +387,7 @@
                     }
                 }
             ],
-            "default-tick":true
+            "defaultTick":true
         },
         "province": [
             {
