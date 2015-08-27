@@ -29,12 +29,20 @@
     // }
     
     // comment for testing 
-    // $scope.$on('$locationChangeStart', function(next, current) { 
-    //  if ($location.path() == '/insurance') {
-    //     $location.path('/insurance/destination');
-    //     $location.replace();
-    //   }
-    // });
+
+    $scope.$on('$locationChangeStart', function(next, current) { 
+      if ($location.path() == '/insurance') {
+        $location.path('/insurance/destination');
+        $location.replace();
+      }
+      else if ($location.path() == '/plan') {
+        $location.path('/insurance/plan');
+        $location.replace();
+      }
+      else {
+        $scope.tempData.currentState = $location.path();
+      }
+    });
 
     $scope.items = [
             { 
@@ -64,6 +72,7 @@
     $scope.tempData.discount = 50;
     $scope.tempData.discountType = "percent";
     $scope.formStepSubmitted = false;
+    $scope.tempData.currentState = $location.path();
 
     $http.get('/NewTravel.json').
     then(function(response) {

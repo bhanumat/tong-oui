@@ -182,23 +182,23 @@ MAIN PAGE
 }
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
-#form-views.ng-enter,
-#form-views.ng-leave { 
-	position:absolute; 
-	left:30px; 
-	right:30px;
-    @include transition(0.5s all ease);
-}
+// #form-views.ng-enter,
+// #form-views.ng-leave { 
+// 	position:absolute; 
+// 	left:30px; 
+// 	right:30px;
+//     @include transition(0.5s all ease);
+// }
     
-/* enter animation */
-#form-views.ng-enter { 
-    @include animation(slideInRight 0.5s both ease); 
-}
+// /* enter animation */
+// #form-views.ng-enter { 
+//     @include animation(slideInRight 0.5s both ease); 
+// }
 
-/* leave animation */
-#form-views.ng-leave { 
-    @include animation(slideOutLeft 0.5s both ease);   
-}
+// /* leave animation */
+// #form-views.ng-leave { 
+//     @include animation(slideOutLeft 0.5s both ease);   
+// }
 
 #content {
 	margin-top: 1.5em;

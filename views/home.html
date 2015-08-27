@@ -13,6 +13,80 @@
 					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
 				</div>
 			</div>
+			<div class="row" sticky sticky-class="sticky" body-class="body-sticky" ng-if="tempData.currentState != '/insurance/destination'">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 sticky-wrapper">			
+					<div id="summary-bar" class="summary-bar">
+						<div class="nav-icon">
+							<div class="row">
+								<div class="col-12-xs">
+									<img src="images/nav-plan-on-summary.png" alt="">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="insurance-details-heading summary-bar-heading">
+									<h5>รายละเอียดการเดินทาง</h5>
+								 	<a href="">
+								 		<img src="images/icon-edit.png" alt="">
+								 	</a>
+								</div>	
+								<div class="insurance-details summary-bar-details">
+									<div class="row">
+										<div class="col-xs-12">
+											<h6>จุดหมายปลายทาง</h6>
+											<p class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-5">
+											<h6>เริ่มเดินทาง</h6>
+											<p ng-bind="tempData.shortStartDate"></p>
+										</div>
+										<div class="col-xs-5">
+											<h6>สิ้นสุดวันเดินทาง</h6>
+											<p ng-bind="tempData.shortEndDate"></p>
+										</div>
+										<div class="col-xs-2">
+											<h6>รวม</h6>
+											<p><span ng-bind="travel.days"></span> วัน</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-5">
+											<h6>ผู้ขอประกัน</h6>
+											<p><span ng-bind="travel.passengers"></span> ท่าน</p>
+										</div>
+										<div class="col-xs-7" ng-if="travel.promotionCode">
+											<h6>รหัสโปรโมชั่น</h6>
+											<p ng-bind="travel.promotionCode"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="insurance-plan-heading summary-bar-heading">
+									<h5>ความคุ้มครองที่เลือก</h5>
+									<a href="#plan" offset="330" du-smooth-scroll>
+								 		<img src="images/icon-edit.png" alt="">
+								 	</a>
+								</div>
+								<div class="insurance-plan summary-bar-details">
+									<h6>แผนประกันที่เลือก</h6>
+									<p>แผน {{ travel.selectedPlan }} - Travel Care A<span ng-if="travel.flightSecured">, Flight Secure B</span><span ng-if="travel.propertySafe">, Property Safe C</span></p>
+									<div class="price-summary">
+										<p>ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
+										<p ng-if="tempData.discountAsBath">
+											ส่วนลด <span ng-if="tempData.discountType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsBath | number}} บาท</span>
+										</p>
+										<h6>เบี้ยประกันรวม <span class="right"><span class="large">{{ tempData.price | number }}</span> บาท</span></h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="insurance-form-wrapper">
 				<form name="insuranceForm" novalidate id="insurance-form" ng-submit="processForm()">
 					<div id="form-views" ui-view></div>
