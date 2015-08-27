@@ -63,7 +63,11 @@ strong{font-weight:600}
 .fixed{position:fixed}
 .relative{position:relative}
 .absolute{position:absolute}
+<<<<<<< HEAD
+#insurance-form,footer{overflow:hidden;position:relative}
+=======
 #insurance-form,footer{position:relative;overflow:hidden}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .full-width{width:100%}
 .half-width{width:50%}
 .center{margin:0 auto}
@@ -147,8 +151,13 @@ select option{text-align:left}
 #ui-datepicker-div .ui-datepicker-calendar{margin:0 auto}
 #ui-datepicker-div .ui-datepicker-calendar thead{line-height:1.1em}
 #ui-datepicker-div .ui-datepicker-calendar th{font-weight:400;font-size:1.1em;width:14.28%;text-align:right}
+<<<<<<< HEAD
+#ui-datepicker-div .ui-datepicker-calendar .ui-state-default{font-weight:400;background-image:none;color:#124b78;background-color:#f8f9fa;border:1px solid #f8f9fa;font-size:1.2em;transition:.5s all ease}
+#insurance-form,#ui-datepicker-div .ui-datepicker-calendar .ui-state-default{-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease}
+=======
 #ui-datepicker-div .ui-datepicker-calendar .ui-state-default{font-weight:400;background-image:none;color:#124b78;background-color:#f8f9fa;border:1px solid #f8f9fa;font-size:1.2em;-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease;transition:.5s all ease}
 #form-views.ng-enter,#form-views.ng-leave,#insurance-form{-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 #ui-datepicker-div .ui-datepicker-calendar .ui-state-active{font-weight:700;background-color:#124b78;color:#fff;border:1px solid #21B9EC}
 #ui-datepicker-div .ui-datepicker-calendar .ui-state-highlight{border:1px solid #21B9EC}
 #ui-datepicker-div .ui-datepicker-calendar .ui-state-hover{border:1px solid #124b78}
@@ -184,19 +193,32 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 #insurance-form{min-height:300px;transition:.5s all ease}
 #form-views{width:auto}
 #form-views.ng-enter,#form-views.ng-leave{position:absolute;left:30px;right:30px;transition:.5s all ease}
+<<<<<<< HEAD
+#form-views.ng-enter,#form-views.ng-leave,.content-wrapper{-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease}
+=======
 .content-section,.content-wrapper{-webkit-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease;-khtml-transition:.5s all ease}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 #form-views.ng-enter{-webkit-animation:slideInRight .5s both ease;-khtml-animation:slideInRight .5s both ease;-moz-animation:slideInRight .5s both ease;-ms-animation:slideInRight .5s both ease;-o-animation:slideInRight .5s both ease;animation:slideInRight .5s both ease}
 #form-views.ng-leave{-webkit-animation:slideOutLeft .5s both ease;-khtml-animation:slideOutLeft .5s both ease;-moz-animation:slideOutLeft .5s both ease;-ms-animation:slideOutLeft .5s both ease;-o-animation:slideOutLeft .5s both ease;animation:slideOutLeft .5s both ease}
 #content{margin-top:1.5em}
 .content-wrapper{background-color:#3da1dd;transition:.5s all ease}
 .content-section{transition:.5s all ease;position:relative;overflow:hidden;padding:0}
+<<<<<<< HEAD
+.content-section,.content-section .insurance-form-wrapper{-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease}
+.content-section .insurance-form-wrapper{transition:.5s all ease;padding-bottom:40px;margin-top:0}
+=======
 .content-section .insurance-form-wrapper{-webkit-transition:.5s all ease;-khtml-transition:.5s all ease;-moz-transition:.5s all ease;-ms-transition:.5s all ease;-o-transition:.5s all ease;transition:.5s all ease;padding-bottom:40px;margin-top:0}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .content-section .form-section{margin-bottom:40px}
 .content-section .section-heading{margin-bottom:10px}
 .content-section .section-heading img{margin-right:10px}
 .content-section .section-heading h3{display:inline-block;vertical-align:middle;font-size:32px;line-height:32px;margin:6px 0;color:#fff}
 .content-section .travel-destination{background-color:#21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;padding:0;margin-bottom:10px;text-align:center;font-size:25px;color:#fff;box-shadow:1px 1px 3px #5c6b80;font-family:DBThaiTextX,Helvetica,Arial,sans-serif}
+<<<<<<< HEAD
+.content-section .travel-destination,.summary-bar{-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80}
+=======
 .plan-selection,.summary-bar{-webkit-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .content-section .travel-destination>span{padding:0 40px 0 10px;line-height:44px;width:100%}
 .content-section .travel-destination .btn-tag{position:absolute;right:.5em;color:#fff;background:0 0;height:44px}
 .content-section h2{padding:0 10px;font-family:psl_kandamodern_extra_proRg,Helvetica,Arial,sans-serif;color:#fff;font-size:45px;line-height:45px;text-shadow:1px 1px 3px #5c6b80}
@@ -206,7 +228,12 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .content-section h6{font-size:22px;line-height:24px;font-weight:400}
 .body-sticky #form-views{margin-top:330px}
 .sticky{z-index:9999}
+<<<<<<< HEAD
+.sticky .sticky-wrapper{width:100%;margin-left:0;padding:0;transition:all .5s ease}
+.plan-selection .plan-table .plan-table-content .plan::after,.sticky .sticky-wrapper{-webkit-transition:all .5s ease;-khtml-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease}
+=======
 .sticky .sticky-wrapper{width:100%;margin-left:0;padding:0;-webkit-transition:all .5s ease;-khtml-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .sticky .sticky-wrapper .nav-icon{display:block;text-align:center}
 .sticky .summary-bar .summary-bar-heading a,.sticky .summary-bar .summary-bar-heading h5{margin:3px 0}
 .sticky .summary-bar .summary-bar-details h6{display:inline-block}
@@ -221,7 +248,12 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .summary-bar .summary-bar-details h6{color:#124b78;margin-bottom:0}
 .summary-bar .summary-bar-details .destination-list span:not(:last-child)::after{content:",";margin-right:5px}
 .plan-selection{background-color:#fff;color:#124b78;padding:1em;box-shadow:1px 1px 3px #5c6b80}
+<<<<<<< HEAD
+.plan-selection,.plan-selection .plan-table{-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80}
+.plan-selection .plan-table{box-shadow:1px 1px 3px #5c6b80;background:#fff}
+=======
 .plan-selection .plan-table{-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80;background:#fff}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .plan-selection .plan-table .plan-table-heading{padding:0}
 .plan-selection .plan-table .plan-table-heading .plan-table-top{padding:20px;background-color:#21B9EC;color:#fff}
 .plan-selection .plan-table .plan-table-heading .plan-table-row{font-size:0}
@@ -231,7 +263,11 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .caution,.plan-selection .plan-table .plan-table-content{padding:0}
 .plan-selection .plan-table .plan-table-row:nth-child(even){background-color:#fff}
 .plan-selection .plan-table .plan-table-content .plan-wrapper{font-size:0;overflow-x:auto;overflow-y:hidden;width:auto;white-space:nowrap}
+<<<<<<< HEAD
+.plan-selection .plan-table .plan-table-content .plan{cursor:pointer;padding:0;width:33.33333%;display:inline-block;white-space:normal;position:relative;z-index:0}
+=======
 .plan-selection .plan-table .plan-table-content .plan{padding:0;width:33.33333%;display:inline-block;white-space:normal;position:relative;z-index:0}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .banner img,.bg .bg-inner img,.calendar,.calendar table,.image-slider img{width:100%}
 .plan-selection .plan-table .plan-table-content .plan .plan-table-top{background-color:#124b78;color:#fff}
 .plan-selection .plan-table .plan-table-content .plan .plan-table-top h5{margin:0}
@@ -239,7 +275,11 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .plan-selection .plan-table .plan-table-content .plan:nth-child(odd) .plan-table-top{background-color:#3169af}
 .plan-selection .plan-table .plan-table-content .plan.selected{z-index:1}
 .plan-selection .plan-table .plan-table-content .plan.selected::after{-webkit-box-shadow:0 0 40px #231f20;-khtml-box-shadow:0 0 40px #231f20;-moz-box-shadow:0 0 40px #231f20;-ms-box-shadow:0 0 40px #231f20;-o-box-shadow:0 0 40px #231f20;box-shadow:0 0 40px #231f20}
+<<<<<<< HEAD
+.plan-selection .plan-table .plan-table-content .plan::after{transition:all .5s ease;content:"";left:0;top:0;width:100%;height:100%;position:absolute;-webkit-box-shadow:0 0 0 #231f20;-khtml-box-shadow:0 0 0 #231f20;-moz-box-shadow:0 0 0 #231f20;-ms-box-shadow:0 0 0 #231f20;-o-box-shadow:0 0 0 #231f20;box-shadow:0 0 0 #231f20}
+=======
 .plan-selection .plan-table .plan-table-content .plan::after{-webkit-transition:all .5s ease;-khtml-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;content:"";left:0;top:0;width:100%;height:100%;position:absolute;-webkit-box-shadow:0 0 0 #231f20;-khtml-box-shadow:0 0 0 #231f20;-moz-box-shadow:0 0 0 #231f20;-ms-box-shadow:0 0 0 #231f20;-o-box-shadow:0 0 0 #231f20;box-shadow:0 0 0 #231f20}
+>>>>>>> 11893ddee530eb797c9524863a2383c1ea96392e
 .bg,.bg .bg-inner img{position:relative;z-index:0}
 .calendar{border:1px solid #21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80}
 .calendar table{font-family:DBThaiTextX,Helvetica,Arial,sans-serif}
