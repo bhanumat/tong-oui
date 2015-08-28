@@ -46,16 +46,18 @@
                                                                         <input class="form-control" type="text" name="lastname" placeholder="นามสกุล">
                                                                   </div>
                                                             </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="english-firstname">ชื่อ (ภาษาอังกฤษ)</label>
-                                                                        <input class="form-control" type="text" name="english-firstname" placeholder="ชื่อ (ภาษาอังกฤษ)">
+                                                            <div ng-if="tempData.isSchengen">
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="english-firstname">ชื่อ (ภาษาอังกฤษ)</label>
+                                                                              <input class="form-control" type="text" name="english-firstname" placeholder="ชื่อ (ภาษาอังกฤษ)">
+                                                                        </div>
                                                                   </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="english-lastname">นามสกุล (ภาษาอังกฤษ)</label>
-                                                                        <input class="form-control" type="text" name="english-lastname" placeholder="นามสกุล (ภาษาอังกฤษ)">
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="english-lastname">นามสกุล (ภาษาอังกฤษ)</label>
+                                                                              <input class="form-control" type="text" name="english-lastname" placeholder="นามสกุล (ภาษาอังกฤษ)">
+                                                                        </div>
                                                                   </div>
                                                             </div>
                                                             <div class="col-xs-12 col-sm-6">
@@ -127,10 +129,12 @@
                                                                         <input class="form-control" type="text" name="address" placeholder="ที่อยู่">
                                                                   </div>
                                                             </div>
-                                                            <div class="col-xs-12">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
-                                                                        <input class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
+                                                            <div ng-if="tempData.isSchengen">
+                                                                  <div class="col-xs-12">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
+                                                                              <input class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
+                                                                        </div>
                                                                   </div>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-6">
@@ -195,6 +199,13 @@
                                           </div>
                                     </div>
                               </div>
+                        </div>
+                  </div>
+            </div>
+            <div ng-repeat="profile in range(1,travel.passengers)">
+                  <div class="profile">
+                        <div class="profile-add-button">
+                              <h4>Add new profile</h4>
                         </div>
                   </div>
             </div>

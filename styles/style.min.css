@@ -113,16 +113,17 @@ select option{text-align:left}
 .form-group .help-block{font-size:20px}
 .form-group .form-control{font-size:22px;border:1px solid #21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80}
 .form-group .form-control .form-control{height:42px;border:0 solid #21B9EC;-webkit-box-shadow:0 0 0 transparent;-khtml-box-shadow:0 0 0 transparent;-moz-box-shadow:0 0 0 transparent;-ms-box-shadow:0 0 0 transparent;-o-box-shadow:0 0 0 transparent;box-shadow:0 0 0 transparent}
+.form-group .input-group,.nya-bs-select.form-control .dropdown-menu{-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80}
 .form-group .form-control::-webkit-input-placeholder{color:#888}
 .form-group .form-control:-moz-placeholder{color:#888}
 .form-group .form-control::-moz-placeholder{color:#888}
 .form-group .form-control:-ms-input-placeholder{color:#888}
-.form-group .input-group{height:44px;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80}
+.form-group .input-group{height:44px;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80}
 .form-group .input-group.input-group-outline{border:1px solid #21B9EC}
 .form-group .input-group.input-group-outline .form-control{padding-right:0}
 .form-group .input-group .form-control{z-index:auto;border:0 solid #21B9EC;-webkit-box-shadow:0 0 0 transparent;-khtml-box-shadow:0 0 0 transparent;-moz-box-shadow:0 0 0 transparent;-ms-box-shadow:0 0 0 transparent;-o-box-shadow:0 0 0 transparent;box-shadow:0 0 0 transparent}
 .nya-bs-select.form-control.open,.nya-bs-select.form-control:hover{border-color:#124b78}
-.content-section .travel-destination,.nya-bs-select.form-control .dropdown-menu{-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80}
+.content-section .travel-destination,.nya-bs-select.form-control .dropdown-menu{-webkit-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80}
 .form-group .input-group .form-control .form-control{height:44px;padding-right:12px}
 .form-group .input-group .form-control .form-control .caret{display:none}
 .form-group .input-group .input-group-btn{width:1%}
@@ -193,7 +194,7 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .content-section .section-heading{margin-bottom:10px}
 .content-section .section-heading img{margin-right:10px}
 .content-section .section-heading h3{display:inline-block;vertical-align:middle;font-size:32px;line-height:32px;margin:6px 0;color:#fff}
-.content-section .travel-destination{background-color:#21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;padding:0;margin-bottom:10px;text-align:center;font-size:25px;color:#fff;box-shadow:1px 1px 3px #5c6b80;font-family:DBThaiTextX,Helvetica,Arial,sans-serif}
+.content-section .travel-destination{background-color:#21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;padding:0;margin-bottom:10px;text-align:center;font-size:25px;color:#fff;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80;font-family:DBThaiTextX,Helvetica,Arial,sans-serif}
 .plan-selection,.summary-bar{-webkit-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;-khtml-box-shadow:1px 1px 3px #5c6b80}
 .content-section h2,.content-section h3,.content-section h4,.content-section h5,.content-section h6{font-family:psl_kandamodern_extra_proRg,Helvetica,Arial,sans-serif}
 .content-section .travel-destination>span{padding:0 40px 0 10px;line-height:44px;width:100%}
@@ -263,8 +264,8 @@ a:link,a:visited:link{-webkit-tap-highlight-color:rgba(0,0,0,.3)}
 .calendar,.profile{-khtml-box-shadow:1px 1px 3px #5c6b80}
 .profile{color:#124b78;padding:1em;box-shadow:1px 1px 3px #5c6b80}
 .profile .profile-header{background-color:#21B9EC}
-.profile .profile-header h4{text-align:center;color:#fff;padding:.5em}
-.profile .profile-details-section{margin-top:1em}
+.profile .profile-header h4{text-align:center;color:#fff;padding:.5em;margin-top:0}
+.profile .profile-details-section{margin-top:15px}
 .calendar{border:1px solid #21B9EC;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 3px #5c6b80;-moz-box-shadow:1px 1px 3px #5c6b80;-ms-box-shadow:1px 1px 3px #5c6b80;-o-box-shadow:1px 1px 3px #5c6b80;box-shadow:1px 1px 3px #5c6b80}
 .calendar table{font-family:DBThaiTextX,Helvetica,Arial,sans-serif}
 .calendar table .btn{font-size:1.1em}

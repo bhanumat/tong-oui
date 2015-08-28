@@ -74,14 +74,19 @@
 
       $scope.calculateTotalPrice();
       $scope.calculatePrice();
+      $scope.isSchengen();
 
     }, function(response) {
       
     });
 
+    // $scope.travel.passengersProfile = [];
+    // $scope.travel.passengersProfile.beneficiaries = [];
+
+
 
     $scope.calculateTotalPrice = function(){
-      for (i=0;i<$scope.travelData.quotation.protect.length;i++) {
+      for (var i=0;i<$scope.travelData.quotation.protect.length;i++) {
         if($scope.travelData.quotation.protect[i].planid == $scope.travel.selectedPlan){
           $scope.tempData.totalPrice = $scope.travelData.quotation.protect[i].price;
           if($scope.travel.flightSecured) {
@@ -114,6 +119,19 @@
       else {
         $scope.tempData.price = $scope.tempData.totalPrice;
       }
+    };
+
+    $scope.isSchengen = function(){
+      for (var i = 0; i < $scope.travel.destinations.length; i++) {
+        if($scope.travel.destinations[i].type == "schengen"){
+          $scope.tempData.isSchengen = true;
+          return true;
+        }
+        else {
+          $scope.tempData.isSchengen = false;
+        }
+      }
+      return false;
     };
 
     $scope.propertySafeToggle = function(){
@@ -150,7 +168,7 @@
       $scope.travel.selectedPlan = planId;
       $scope.calculateTotalPrice();
       $scope.calculatePrice();
-    }
+    };
 
     $scope.range = function(min, max, step){
       step = step || 1;
@@ -165,6 +183,7 @@
           $scope.travel.destinations.push($scope.tempData.destination);
           $scope.travelData.destination = $filter('filter')($scope.travelData.destination, {country: "!"+$scope.tempData.destination.country}, true);
           $scope.tempData.destination = "";
+          $scope.isSchengen();
         }
       }
     }
@@ -172,6 +191,7 @@
     $scope.removeDestination = function(index) {
       $scope.travelData.destination.push($scope.travel.destinations[index]);
       $scope.travel.destinations = $filter('filter')($scope.travel.destinations, {country: "!"+$scope.travel.destinations[index].country}, true);
+      $scope.isSchengen();
     }
 
     //datepicker
