@@ -297,7 +297,7 @@ MAIN PAGE
 
 .body-sticky {
 	#form-views {
-		margin-top: 300px;
+		margin-top: 200px;
 	}
 }
 
@@ -606,6 +606,33 @@ MAIN PAGE
 	}
 	.profile-details-section {
 		margin-top: 15px;
+	}
+	&.add {
+		.profile-details {
+			display: none;
+		}
+		.profile-header {
+			display: none;
+		}
+		.profile-summary {
+			display: none;
+		}
+	}
+	&.edit {
+		.profile-add-button {
+			display: none;
+		}
+		.profile-summary {
+			display: none;
+		}
+	}
+	&.saved {
+		.profile-add-button {
+			display: none;
+		}
+		.profile-details {
+			display: none;
+		}
 	}
 }
 

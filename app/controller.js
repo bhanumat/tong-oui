@@ -55,6 +55,10 @@
     $scope.tempData.discountType = "percent";
     $scope.formStepSubmitted = false;
     $scope.tempData.currentState = $location.path();
+    $scope.tempData.passengersProfile = ['add'];
+    $scope.tempData.passengersProfile[1] = "edit";
+    $scope.tempData.passengersProfile[2] = "add";
+    $scope.tempData.passengersProfile[3] = "add";
 
     $http.get('/NewTravel.json').
     then(function(response) {
@@ -80,7 +84,7 @@
       
     });
 
-    // $scope.travel.passengersProfile = [];
+    // 
     // $scope.travel.passengersProfile.beneficiaries = [];
 
 

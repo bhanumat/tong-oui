@@ -1,216 +1,215 @@
 <div class="row">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
             <h3>ข้อมูลผู้ขอประกัน</h3>
-            <div class="profile">
-                  <div class="row">
-                        <div class="col-xs-12" >
-                              <div class="profile-header">
-                                    <h4>ผู้ขอประกันคนที่ 1</h4>
-                              </div>
-                              <div class="profile-details">
-                                    <div class="profile-details-section">
-                                          <div class="profile-details-section-header">
-                                                <div class="row">
-                                                      <div class="col-xs-1 text-right">
-                                                            <img src="images/icon-profile.png" alt="">
-                                                      </div>
-                                                      <div class="col-xs-11">
-                                                            <div class="row">
-                                                                  <div class="col-xs-12">
-                                                                        <h5>ข้อมูลส่วนตัว</h5>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                          <div class="row">
-                                                <div class="col-xs-10 col-xs-offset-1">
-                                                      <div class="row">
-                                                            <div class="col-xs-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
-                                                                        <input class="form-control" type="text" name="title" placeholder="คำนำหน้าชื่อ">
-
-                                                                  </div>
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                             <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="firstname">ชื่อ</label>
-                                                                        <input class="form-control" type="text" name="firstname" placeholder="ชื่อ">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="lastname">นามสกุล</label>
-                                                                        <input class="form-control" type="text" name="lastname" placeholder="นามสกุล">
-                                                                  </div>
-                                                            </div>
-                                                            <div ng-if="tempData.isSchengen">
-                                                                  <div class="col-xs-12 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="english-firstname">ชื่อ (ภาษาอังกฤษ)</label>
-                                                                              <input class="form-control" type="text" name="english-firstname" placeholder="ชื่อ (ภาษาอังกฤษ)">
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-xs-12 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="english-lastname">นามสกุล (ภาษาอังกฤษ)</label>
-                                                                              <input class="form-control" type="text" name="english-lastname" placeholder="นามสกุล (ภาษาอังกฤษ)">
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="national-id">เลขที่บัตรประชาชน</label>
-                                                                        <input class="form-control" type="text" name="national-id" placeholder="เลขที่บัตรประชาชน">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="passport-id">เลขที่หนังสือเดินทาง</label>
-                                                                        <input class="form-control" type="text" name="passport-id" placeholder="เลขที่หนังสือเดินทาง">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-4 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="birth-date">วันเดือนปีเกิด</label>
-                                                                        <input class="form-control" type="text" name="birth-date" placeholder="วันเดือนปีเกิด">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-4 col-sm-3">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="gender">เพศ</label>
-                                                                        <input class="form-control" type="text" name="gender" placeholder="เพศ">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-4 col-sm-3">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="occupation">อาชีพ</label>
-                                                                        <input class="form-control" type="text" name="occupation" placeholder="อาชีพ">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="email">อีเมล</label>
-                                                                        <input class="form-control" type="email" name="email" placeholder="อีเมล">
-                                                                  </div>
-                                                            </div>
-                                                            <!-- <div class="col-xs-12 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <input class="form-control" placeholder="รหัสผ่าน">
-                                                                  </div>
-                                                            </div> -->
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div class="profile-details-section">
-                                          <div class="profile-details-section-header">
-                                                <div class="row">
-                                                      <div class="col-xs-1 text-right">
-                                                            <img src="images/icon-address.png" alt="">
-                                                      </div>
-                                                      <div class="col-xs-11">
-                                                            <div class="row">
-                                                                  <div class="col-xs-12">
-                                                                        <h5>ที่อยู่</h5>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                          <div class="row">
-                                                <div class="col-xs-10 col-xs-offset-1">
-                                                      <div class="row">
-                                                            <div class="col-xs-12">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="address">ที่อยู่</label>
-                                                                        <input class="form-control" type="text" name="address" placeholder="ที่อยู่">
-                                                                  </div>
-                                                            </div>
-                                                            <div ng-if="tempData.isSchengen">
-                                                                  <div class="col-xs-12">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
-                                                                              <input class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="district">เขต/อำเภอ</label>
-                                                                        <input class="form-control" type="text" name="district" placeholder="เขต/อำเภอ">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
-                                                                        <input class="form-control" type="text" name="subdistrict" placeholder="แขวง/ตำบล">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="province">จังหวัด</label>
-                                                                        <input class="form-control" type="text" name="province" placeholder="จังหวัด">
-                                                                  </div>
-                                                            </div>
-                                                            <div class="col-xs-6 col-sm-6">
-                                                                  <div class="form-group">
-                                                                        <label class="sr-only" for="postcode">จังหวัด</label>
-                                                                        <input class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์">
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div class="profile-details-section">
-                                          <div class="profile-details-section-header">
-                                                <div class="row">
-                                                      <div class="col-xs-1 text-right">
-                                                            <img src="images/icon-beneficiary.png" alt="">
-                                                      </div>
-                                                      <div class="col-xs-11">
-                                                            <div class="row">
-                                                                  <div class="col-xs-12">
-                                                                        <h5>ผู้รับผลประโยชน์</h5>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                          <div class="row">
-                                                <div class="col-xs-10 col-xs-offset-1">
-                                                      <div class="row">
-                                                            <div class="col-xs-12">
-                                                                  <p>ในกรณีที่ท่านไม่ระบุผู้รับประโยชน์ ชื่อผู้รับประโยชน์จะต้องเป็นทายาทตามกฎหมาย ได้แก่ บิดา มารดา คู่สมรส และบุตร</p>
-                                                                  <button type="button" class="btn btn-primary">+ เพิ่มผู้รับผลประโยชน์</button>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div class="profile-details-section">
-                                          <div class="row">
-                                                <div class="col-xs-12 text-center">
-                                                      <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-            </div>
             <div ng-repeat="profile in range(1,travel.passengers)">
-                  <div class="profile">
-                        <div class="profile-add-button">
-                              <h4>Add new profile</h4>
+                  <div class="profile" ng-class="{'{{tempData.passengersProfile[profile]}}':true}">
+                        <div class="row">
+                              <div class="col-xs-12" >
+                                    <div class="profile-add-button">
+                                          <h4>ผู้ขอประกันคนที่ {{profile}}</h4>
+                                    </div>
+                                    <div class="profile-header">
+                                          <h4>ผู้ขอประกันคนที่ {{profile}}</h4>
+                                    </div>
+                                    <div class="profile-details">
+                                          <div class="profile-details-section">
+                                                <div class="profile-details-section-header">
+                                                      <div class="row">
+                                                            <div class="col-xs-1 text-right">
+                                                                  <img src="images/icon-profile.png" alt="">
+                                                            </div>
+                                                            <div class="col-xs-11">
+                                                                  <div class="row">
+                                                                        <div class="col-xs-12">
+                                                                              <h5>ข้อมูลส่วนตัว</h5>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                                <div class="row">
+                                                      <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="row">
+                                                                  <div class="col-xs-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].title" type="text" name="title" placeholder="คำนำหน้าชื่อ">
+
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="clearfix"></div>
+                                                                   <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="firstname">ชื่อ</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].firstname" type="text" name="firstname" placeholder="ชื่อ">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="lastname">นามสกุล</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].lastname" type="text" name="lastname" placeholder="นามสกุล">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div ng-if="tempData.isSchengen">
+                                                                        <div class="col-xs-12 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="englishFirstname">ชื่อ (ภาษาอังกฤษ)</label>
+                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].englishFirstname" type="text" name="englishFirstname" placeholder="ชื่อ (ภาษาอังกฤษ)">
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="col-xs-12 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="englishLastname">นามสกุล (ภาษาอังกฤษ)</label>
+                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].englishLastname" type="text" name="englishLastname" placeholder="นามสกุล (ภาษาอังกฤษ)">
+                                                                              </div>
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="nationalId">เลขที่บัตรประชาชน</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].nationalId" type="text" name="nationalId" placeholder="เลขที่บัตรประชาชน">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="passportId">เลขที่หนังสือเดินทาง</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].passportId" type="text" name="passportId" placeholder="เลขที่หนังสือเดินทาง">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-4 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="birthDate">วันเดือนปีเกิด</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].birthDate" type="text" name="birthDate" placeholder="วันเดือนปีเกิด">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-4 col-sm-3">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="gender">เพศ</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].gender" type="text" name="gender" placeholder="เพศ">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-4 col-sm-3">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="occupation">อาชีพ</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].occupation" type="text" name="occupation" placeholder="อาชีพ">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="email">อีเมล</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].email" type="email" name="email" placeholder="อีเมล">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="phone">เบอร์โทรศัพท์</label>
+                                                                              <input class="form-control" ng-model="travel.passengersProfile[profile].phone" type="text" name="phone" placeholder="เบอร์โทรศัพท์">
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="profile-details-section">
+                                                <div class="profile-details-section-header">
+                                                      <div class="row">
+                                                            <div class="col-xs-1 text-right">
+                                                                  <img src="images/icon-address.png" alt="">
+                                                            </div>
+                                                            <div class="col-xs-11">
+                                                                  <div class="row">
+                                                                        <div class="col-xs-12">
+                                                                              <h5>ที่อยู่</h5>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                                <div class="row">
+                                                      <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="row">
+                                                                  <div class="col-xs-12">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="address">ที่อยู่</label>
+                                                                              <input class="form-control" type="text" name="address" placeholder="ที่อยู่">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div ng-if="tempData.isSchengen">
+                                                                        <div class="col-xs-12">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
+                                                                                    <input class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
+                                                                              </div>
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="district">เขต/อำเภอ</label>
+                                                                              <input class="form-control" type="text" name="district" placeholder="เขต/อำเภอ">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
+                                                                              <input class="form-control" type="text" name="subdistrict" placeholder="แขวง/ตำบล">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="province">จังหวัด</label>
+                                                                              <input class="form-control" type="text" name="province" placeholder="จังหวัด">
+                                                                        </div>
+                                                                  </div>
+                                                                  <div class="col-xs-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                              <label class="sr-only" for="postcode">จังหวัด</label>
+                                                                              <input class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์">
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="profile-details-section">
+                                                <div class="profile-details-section-header">
+                                                      <div class="row">
+                                                            <div class="col-xs-1 text-right">
+                                                                  <img src="images/icon-beneficiary.png" alt="">
+                                                            </div>
+                                                            <div class="col-xs-11">
+                                                                  <div class="row">
+                                                                        <div class="col-xs-12">
+                                                                              <h5>ผู้รับผลประโยชน์</h5>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                                <div class="row">
+                                                      <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="row">
+                                                                  <div class="col-xs-12">
+                                                                        <p>ในกรณีที่ท่านไม่ระบุผู้รับประโยชน์ ชื่อผู้รับประโยชน์จะต้องเป็นทายาทตามกฎหมาย ได้แก่ บิดา มารดา คู่สมรส และบุตร</p>
+                                                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่มผู้รับผลประโยชน์</button>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="profile-details-section">
+                                                <div class="row">
+                                                      <div class="col-xs-12 text-center">
+                                                            <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>ยืนยัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
                   </div>
             </div>
             
-                  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                  <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1"> -->
                        
                         
                         <!-- PART 3 -->
@@ -242,7 +241,7 @@
                         </div> -->
                         <!-- PART 4 -->
                         <!-- PART 5 -->
-                        <div class="row">
+                        <!-- <div class="row"> -->
                               <!--  <div class="col-xs-12">
                                     <div class="checkbox">
                                           <label><input type="checkbox">ยินยอมให้บริษัทฯ ใช้หมายเลขโทรศัพท์มือถือ และ/หรือ ข้อมูลทางอิเลคทรอนิกส์ที่ให้ไว้ข้างต้นนี้ ในการแจ้งผลการอนุมัติ รวมทั้งข่าวสารอื่นๆ</label>
@@ -251,8 +250,8 @@
                               
                               
                               
-                        </div>
-                  </div>
-            </div>
+                        <!-- </div>
+                  </div> -->
       </div>
 </div>
+
