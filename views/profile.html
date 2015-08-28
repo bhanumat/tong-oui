@@ -2,11 +2,14 @@
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
             <h3>ข้อมูลผู้ขอประกัน</h3>
             <div ng-repeat="profile in range(1,travel.passengers)">
-                  <div class="profile" ng-class="{'{{tempData.passengersProfile[profile].stage}}':true}">
+                  <div class="profile" ng-class="{'edit':tempData.passengersProfile[profile].stage == 'edit','saved':tempData.passengersProfile[profile].stage == 'saved'}">
                         <div class="row">
                               <div class="col-xs-12" >
-                                    <div class="profile-add-button">
-                                          <h4>ผู้ขอประกันคนที่ {{profile}}</h4>
+                                    <div class="profile-add-button" ng-click="tempData.passengersProfile[profile].stage = 'edit'">
+                                          <h4>
+                                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                                ผู้ขอประกันคนที่ {{profile}}
+                                          </h4>
                                     </div>
                                     <div class="profile-header">
                                           <h4>ผู้ขอประกันคนที่ {{profile}}</h4>
@@ -128,42 +131,56 @@
                                                 <div class="row">
                                                       <div class="col-xs-10 col-xs-offset-1">
                                                             <div class="row">
-                                                                  <div class="col-xs-12">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="address">ที่อยู่</label>
-                                                                              <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" type="text" name="address" placeholder="ที่อยู่">
+                                                                  <div ng-hide="tempData.passengersProfile[profile].isManualAddress">
+                                                                        <div class="col-xs-12 col-sm-4">
+                                                                              <button ng-click="addBeneficiary(profile);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
+                                                                        </div>
+                                                                        <div class="col-xs-12 col-sm-8">
+                                                                              <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
+                                                                                    <span class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger)" ng-repeat="passenger in range(1,profile-1)">
+                                                                                          {{passenger}}      
+                                                                                    </span>
+                                                                              </p>
                                                                         </div>
                                                                   </div>
-                                                                  <div ng-if="tempData.isSchengen">
+                                                                  <div ng-if="tempData.passengersProfile[profile].isManualAddress">
                                                                         <div class="col-xs-12">
                                                                               <div class="form-group">
-                                                                                    <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
-                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
+                                                                                    <label class="sr-only" for="address">ที่อยู่</label>
+                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" type="text" name="address" placeholder="ที่อยู่">
                                                                               </div>
                                                                         </div>
-                                                                  </div>
-                                                                  <div class="col-xs-6 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="district">เขต/อำเภอ</label>
-                                                                              <input ng-model="travel.passengersProfile[profile].addressData.district" class="form-control" type="text" name="district" placeholder="เขต/อำเภอ">
+                                                                        <div ng-if="tempData.isSchengen">
+                                                                              <div class="col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                          <label class="sr-only" for="english-address">(ภาษาอังกฤษ)</label>
+                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="english-address" placeholder="ที่อยู่ (ภาษาอังกฤษ)">
+                                                                                    </div>
+                                                                              </div>
                                                                         </div>
-                                                                  </div>
-                                                                  <div class="col-xs-6 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
-                                                                              <input ng-model="travel.passengersProfile[profile].addressData.subdistrict" class="form-control" type="text" name="subdistrict" placeholder="แขวง/ตำบล">
+                                                                        <div class="col-xs-6 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="district">เขต/อำเภอ</label>
+                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.district" class="form-control" type="text" name="district" placeholder="เขต/อำเภอ">
+                                                                              </div>
                                                                         </div>
-                                                                  </div>
-                                                                  <div class="col-xs-6 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="province">จังหวัด</label>
-                                                                              <input ng-model="travel.passengersProfile[profile].addressData.province" class="form-control" type="text" name="province" placeholder="จังหวัด">
+                                                                        <div class="col-xs-6 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
+                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.subdistrict" class="form-control" type="text" name="subdistrict" placeholder="แขวง/ตำบล">
+                                                                              </div>
                                                                         </div>
-                                                                  </div>
-                                                                  <div class="col-xs-6 col-sm-6">
-                                                                        <div class="form-group">
-                                                                              <label class="sr-only" for="postcode">จังหวัด</label>
-                                                                              <input ng-model="travel.passengersProfile[profile].addressData.postcode" class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์">
+                                                                        <div class="col-xs-6 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="province">จังหวัด</label>
+                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.province" class="form-control" type="text" name="province" placeholder="จังหวัด">
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="col-xs-6 col-sm-6">
+                                                                              <div class="form-group">
+                                                                                    <label class="sr-only" for="postcode">จังหวัด</label>
+                                                                                    <input ng-model="travel.passengersProfile[profile].addressData.postcode" class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์">
+                                                                              </div>
                                                                         </div>
                                                                   </div>
                                                             </div>
@@ -230,7 +247,7 @@
                                           <div class="profile-details-section submit">
                                                 <div class="row">
                                                       <div class="col-xs-12 text-center">
-                                                            <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>ยืนยัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+                                                            <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>บันทึกข้อมูล</span> <span class="glyphicon glyphicon-menu-right"></span></button>
                                                       </div>
                                                 </div>
                                           </div>
@@ -244,32 +261,6 @@
                        
                         
                         <!-- PART 3 -->
-                        <!-- <div class="row">
-                              <div class="col-xs-12 col-sm-12">
-                                    <h5>ผู้รับผลประโยชน์</h5>
-                                    <p>ในกรณีที่ท่านไม่ระบุผู้รับประโยชน์ ชื่อผู้รับประโยชน์จะต้องเป็นทายาทตามกฎหมาย ได้แก่ บิดา มารดา คู่สมรส และบุตร</p>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group">
-                                          <input class="form-control" placeholder="คำนำหน้าชื่อ">
-                                    </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group">
-                                          <input class="form-control" placeholder="ความสัมพันธ์">
-                                    </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group">
-                                          <input class="form-control" placeholder="ชื่อ">
-                                    </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group">
-                                          <input class="form-control" placeholder="นามสกุล">
-                                    </div>
-                              </div>
-                        </div> -->
                         <!-- PART 4 -->
                         <!-- PART 5 -->
                         <!-- <div class="row"> -->
@@ -283,6 +274,11 @@
                               
                         <!-- </div>
                   </div> -->
+            <div class="row">
+                  <div class="col-xs-12 text-center">
+                        <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+                  </div>
+            </div>
       </div>
 </div>
 

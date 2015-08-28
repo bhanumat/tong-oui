@@ -59,6 +59,7 @@
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
     $scope.tempData.passengersProfile[1].beneficiaries = 0; 
+    $scope.tempData.passengersProfile[1].isManualAddress = true; 
 
     $http.get('/NewTravel.json').
     then(function(response) {
@@ -125,10 +126,20 @@
       }
     };
 
+    $scope.copyPassengerAddress = function(index){
+        
+    };
+
     $scope.addBeneficiary = function(index) {
-      if($scope.tempData.passengersProfile[index].beneficiaries < 3) {
-        $scope.tempData.passengersProfile[index].beneficiaries += 1;
+      if($scope.tempData.passengersProfile[index].beneficiaries){
+        if($scope.tempData.passengersProfile[index].beneficiaries < 3) {
+          $scope.tempData.passengersProfile[index].beneficiaries += 1;
+        }
       }
+      else {
+        $scope.tempData.passengersProfile[index].beneficiaries = 1;
+      }
+      
     };
 
     $scope.isSchengen = function(){

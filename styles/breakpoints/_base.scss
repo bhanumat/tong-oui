@@ -8,42 +8,38 @@ Mobile
 GENERAL STYLES
 *********************/
 
-
-
 body {
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	background-color: $gray;
-	color: $text-color;
-	font-family: $font;
-	font-size: 100%;
-	line-height: 1.5;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: $gray;
+    color: $text-color;
+    font-family: $font;
+    font-size: 100%;
+    line-height: 1.5;
 }
 
 html {
-	height: 100%;
-	box-sizing: border-box;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-
-
 
 /*********************
 LAYOUT & GRID STYLES
 *********************/
 
 .wrap {
-	width: 96%;
-	margin: 0 auto;
+    width: 96%;
+    margin: 0 auto;
 }
 
 /*********************
@@ -51,29 +47,24 @@ LINK STYLES
 *********************/
 
 a, a:visited {
-	color: $link-color;
-	text-decoration: none;
-
-	/* on hover */
-	&:hover, &:focus {
-		color: $link-hover;
-		text-decoration: underline;
-	}
-
-	/* on click */
-	&:active {
-
-	}
-
-	/* mobile tap color */
-	&:link {
-		/*
-		this highlights links on iPhones/iPads.
-		so it basically works like the :hover selector
-		for mobile devices.
-		*/
-		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
-	}
+    color: $link-color;
+    text-decoration: none;
+    /* on hover */
+    &:hover, &:focus {
+        color: $link-hover;
+        text-decoration: underline;
+    }
+    /* on click */
+    &:active {}
+    /* mobile tap color */
+    &:link {
+        /*
+        this highlights links on iPhones/iPads.
+        so it basically works like the :hover selector
+        for mobile devices.
+        */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+    }
 }
 
 /******************************************************************
@@ -81,33 +72,32 @@ H1, H2, H3, H4, H5 STYLES
 ******************************************************************/
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
-	text-rendering: optimizelegibility;
-	font-weight: 500;
-	font-family: $font;
-
-	a {
-		text-decoration: none;
-	}
+    text-rendering: optimizelegibility;
+    font-weight: 500;
+    font-family: $font;
+    a {
+        text-decoration: none;
+    }
 }
 
 h1, .h1 {
-	font-size: 2.5em;
-	line-height: 1.333em;
+    font-size: 2.5em;
+    line-height: 1.333em;
 }
 
 h2, .h2 {
-	font-size: 1.75em;
-	line-height: 1.4em;
-	margin-bottom: 0.375em;
+    font-size: 1.75em;
+    line-height: 1.4em;
+    margin-bottom: 0.375em;
 }
 
 h3, .h3 {
-	font-size: 1.75rem;
+    font-size: 1.75rem;
 }
 
 h4, .h4 {
-	font-size: 0.875rem;
-	font-weight: 700;
+    font-size: 0.875rem;
+    font-weight: 700;
 }
 
 /*********************
@@ -115,55 +105,48 @@ HEADER STYLES
 *********************/
 
 .header {
-	background-color: $white;
+    background-color: $white;
 }
 
 #inner-header {
-	width: 100%;
-	padding: 0 50px;
-	text-align: center;
-
-	a {
-		font-size: $small;
-		color: $black;
-	}
-
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	li {
-		display: inline-block;
-		margin-right: 50px;
-		line-height: 50px;
-
-		&:last-child {
-			margin-right: 0;
-		}
-	}
+    width: 100%;
+    padding: 0 50px;
+    text-align: center;
+    a {
+        font-size: $small;
+        color: $black;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        display: inline-block;
+        margin-right: 50px;
+        line-height: 50px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 #logo {
-	margin: 0.75em 0;
-	display: none;
-
-	a {
-		color: $white;
-	}
+    margin: 0.75em 0;
+    display: none;
+    a {
+        color: $white;
+    }
 }
 
 footer {
-	overflow: hidden;
-	position: relative;
+    overflow: hidden;
+    position: relative;
 }
-
 
 /*********************
 RESPONSIVE NAV
 *********************/
-
 
 /*********************
 MAIN PAGE
@@ -171,15 +154,17 @@ MAIN PAGE
 
 /* ANIMATION STYLINGS
 ============================================================================= */
-#insurance-form { 
-	position:relative; 
-	min-height:300px; 
-	overflow:hidden; 
-	@include transition(0.5s all ease);
+#insurance-form {
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    @include transition(0.5s all ease);
 }
-#form-views { 
-	width:auto; 
+
+#form-views {
+    width: auto;
 }
+
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
 // #form-views.ng-enter,
@@ -189,593 +174,650 @@ MAIN PAGE
 // 	right:30px;
 //     @include transition(0.5s all ease);
 // }
-    
-// /* enter animation */
+
+// /* enter animation
 // #form-views.ng-enter { 
 //     @include animation(slideInRight 0.5s both ease); 
 // }
 
-// /* leave animation */
+// /* leave animation
 // #form-views.ng-leave { 
 //     @include animation(slideOutLeft 0.5s both ease);   
 // }
 
 #content {
-	margin-top: 1.5em;
+    margin-top: 1.5em;
 }
 
 .content-wrapper {
-	background-color: #3da1dd;
-	@include transition(0.5s all ease);
+    background-color: #3da1dd;
+    @include transition(0.5s all ease);
 }
 
 .content-section {
-	@include transition(0.5s all ease);
-	position: relative;
-	overflow: hidden;
-	padding: 0;	
-	.insurance-form-wrapper {
-		@include transition(0.5s all ease);
-		padding-bottom: 40px;
-		margin-top:0;
-	}
-	.form-section {
-		margin-bottom: 40px;
-	}
-	.section-heading {
-		margin-bottom: 10px;
-		img {
-			margin-right: 10px;
-		}
-		h3 {
-			display: inline-block;
-			vertical-align: middle;
-			font-family: $font;
-			font-size: 32px;
-			line-height: 32px;
-			margin: 6px 0;
-			color: $white;
-		}
-	}
-	.travel-destination {
-		background-color: $secondary-color;
-		@include border-radius(4px);
-		padding: 0; 
-		margin-bottom: 10px;
-		text-align: center;
-		font-size: 25px;
-		color: $white;
-		@include box-shadow(1px, 1px, 3px, $text-color);
-		font-family: $font-secondary;
-		& > span {
-			padding: 0 40px 0 10px;
-			line-height: 44px;
-			width: 100%;
-
-		}
-		.btn-tag {
-			position: absolute;
-			right: 0.5em;
-			color: $white;
-			background: none;
-			height: 44px;
-		}
-	}
-	h2 {
-		padding: 0 10px;
-		font-family: $font;
-		color: $white;
-		font-size: 45px;
-		line-height: 45px;
-		@include text-shadow(1px, 1px, 3px, $text-color);
-	}
-	h3 {
-		font-family: $font;
-		font-size: 40px;
-		line-height: 42px;
-		color: $white;
-		@include text-shadow(1px, 1px, 3px, $text-color);
-	}
-	h4 {
-		font-family: $font;
-		font-size: 34px;
-		line-height: 36px;
-	}
-	h5 {
-		font-family: $font;
-		font-size: 24px;
-		line-height: 26px;
-	}
-	h6 {
-		font-family: $font;
-		font-size: 22px;
-		line-height: 24px;
-		font-weight: normal;
-	}
-
+    @include transition(0.5s all ease);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    .insurance-form-wrapper {
+        @include transition(0.5s all ease);
+        padding-bottom: 40px;
+        margin-top: 0;
+    }
+    .form-section {
+        margin-bottom: 40px;
+    }
+    .section-heading {
+        margin-bottom: 10px;
+        img {
+            margin-right: 10px;
+        }
+        h3 {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: $font;
+            font-size: 32px;
+            line-height: 32px;
+            margin: 6px 0;
+            color: $white;
+        }
+    }
+    .travel-destination {
+        background-color: $secondary-color;
+        @include border-radius(4px);
+        padding: 0;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 25px;
+        color: $white;
+        @include box-shadow(1px, 1px, 3px, $text-color);
+        font-family: $font-secondary;
+        & > span {
+            padding: 0 40px 0 10px;
+            line-height: 44px;
+            width: 100%;
+        }
+        .btn-tag {
+            position: absolute;
+            right: 0.5em;
+            color: $white;
+            background: none;
+            height: 44px;
+        }
+    }
+    h2 {
+        padding: 0 10px;
+        font-family: $font;
+        color: $white;
+        font-size: 45px;
+        line-height: 45px;
+        @include text-shadow(1px, 1px, 3px, $text-color);
+    }
+    h3 {
+        font-family: $font;
+        font-size: 40px;
+        line-height: 42px;
+        color: $white;
+        @include text-shadow(1px, 1px, 3px, $text-color);
+    }
+    h4 {
+        font-family: $font;
+        font-size: 34px;
+        line-height: 36px;
+    }
+    h5 {
+        font-family: $font;
+        font-size: 24px;
+        line-height: 26px;
+    }
+    h6 {
+        font-family: $font;
+        font-size: 22px;
+        line-height: 24px;
+        font-weight: normal;
+    }
 }
 
 .body-sticky {
-	#form-views {
-		margin-top: 200px;
-	}
+    #form-views {
+        margin-top: 200px;
+    }
 }
 
 .sticky {
-	z-index: 9999;
-	.sticky-wrapper {
-		width: 100%;
-		margin-left: 0;
-		padding: 0;
-		@include transition(all 0.5s ease);
-		.nav-icon {
-			display: block;
-			text-align: center;
-		}
-	}
-	.summary-bar { 
-		.summary-bar-heading {
-			h5 {
-				margin: 3px 0;
-			}
-			a {
-				margin: 3px 0;
-			}
-		}
-		.summary-bar-details {
-			h6 {
-				display: inline-block;
-			}
-			p {
-				display: inline-block;
-				padding-left: 3px;
-			}
-			.destination-list {
-				display: block;
-			}
-			&.insurance-plan {
-				p {
-					display: block;
-				}
-				h6 {
-					display: block;
-				}
-			}
-		}
-	}
+    z-index: 9999;
+    .sticky-wrapper {
+        width: 100%;
+        margin-left: 0;
+        padding: 0;
+        @include transition(all 0.5s ease);
+        .nav-icon {
+            display: block;
+            text-align: center;
+        }
+    }
+    .summary-bar {
+        .summary-bar-heading {
+            h5 {
+                margin: 3px 0;
+            }
+            a {
+                margin: 3px 0;
+            }
+        }
+        .summary-bar-details {
+            h6 {
+                display: inline-block;
+            }
+            p {
+                display: inline-block;
+                padding-left: 3px;
+            }
+            .destination-list {
+                display: block;
+            }
+            &.insurance-plan {
+                p {
+                    display: block;
+                }
+                h6 {
+                    display: block;
+                }
+            }
+        }
+    }
 }
 
 .summary-bar {
-	@include box-shadow(1px, 1px, 3px, $text-color);
-	background-color: $white;
-	padding: 1em 0.5em;
-	.nav-icon {
-		display: none;
-		margin-bottom: 1em;
-	}
-	.summary-bar-heading {
-		background-color: $secondary-color;
-		color: $white;
-		padding: 0 1em;
-		h5 {
-			display: inline-block;
-		}
-		a {
-			display: inline-block;
-			float: right;
-			line-height: 26px;
-			margin: 10px 0;
-		}
-	}
-	.summary-bar-details {
-		padding: 0 0.5em;
-		h6 {
-			color: $primary-color;
-			margin-bottom: 0px;
-		}
-		.destination-list {
-			span {
-				&:not(:last-child)::after {
-					content: ",";
-					margin-right: 5px;
-				}
-			}
-		}
-	}
-	.price-summary {
-		p {
-			margin-bottom: 0;
-		}
-		.right {
-			float: right;
-		}
-		h6 {
-			margin-top: 0;
-			color: $secondary-brand-color;
-		}
-		.large {
-			font-size: 30px;
-		}
-	}
+    @include box-shadow(1px, 1px, 3px, $text-color);
+    background-color: $white;
+    padding: 1em 0.5em;
+    .nav-icon {
+        display: none;
+        margin-bottom: 1em;
+    }
+    .summary-bar-heading {
+        background-color: $secondary-color;
+        color: $white;
+        padding: 0 1em;
+        h5 {
+            display: inline-block;
+        }
+        a {
+            display: inline-block;
+            float: right;
+            line-height: 26px;
+            margin: 10px 0;
+        }
+    }
+    .summary-bar-details {
+        padding: 0 0.5em;
+        h6 {
+            color: $primary-color;
+            margin-bottom: 0px;
+        }
+        .destination-list {
+            span {
+                &:not(:last-child)::after {
+                    content: ",";
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .price-summary {
+        p {
+            margin-bottom: 0;
+        }
+        .right {
+            float: right;
+        }
+        h6 {
+            margin-top: 0;
+            color: $secondary-brand-color;
+        }
+        .large {
+            font-size: 30px;
+        }
+    }
 }
 
 #plan-options {
-	.plan-table-heading { 
-		.plan-table-top {
-			padding: 10px 20px;
-			cursor: pointer;
-			span {
-				margin-right: 5px;
-			}
-			h5 {
-				display: inline-block;
-				font-size: 30px;
-			}
-		}
-	}
-	.plan-table-content { 
-		.plan-table-top {
-			h5 {
-				font-size: 36px;
-				margin: 12px 0;
-			}
-		}
-		.plan {
-			cursor: inherit;
-			&.selected { 
-				cursor: pointer;
-			}
-		}
-	}
+    .plan-table-heading {
+        .plan-table-top {
+            padding: 10px 20px;
+            cursor: pointer;
+            span {
+                margin-right: 5px;
+            }
+            h5 {
+                display: inline-block;
+                font-size: 30px;
+            }
+        }
+    }
+    .plan-table-content {
+        .plan-table-top {
+            h5 {
+                font-size: 36px;
+                margin: 12px 0;
+            }
+        }
+        .plan {
+            cursor: inherit;
+            &.selected {
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .plan-selection {
-	& > .row {
-		margin-bottom: 60px;
-	}
-	background-color: $white;
-	color: $primary-color;
-	padding: 1px 1em;
-	@include box-shadow(1px, 1px, 3px, $text-color);
-	.plan-table {
-		@include box-shadow(1px, 1px, 3px, $text-color);
-		background: $white;
-		.plan-table-heading {
-			padding: 0;
-			.plan-table-top {
-				padding: 20px;
-				background-color: $secondary-color;
-				color: $white;
-				h5 {
-					line-height: 32px;
-				}
-			}
-			.plan-table-row { 
-				font-size: 0;
-			}
-			img {
-				width: 34px; 
-				vertical-align: top;
-			}
-			p {
-				display: inline-block;
-				padding-left: 10px;
-				width: -moz-calc(100% - 34px);
-			    width: -webkit-calc(100% - 34px);
-			    width: calc(100% - 34px);
-			}
-		}
-		.plan-table-row {
-			padding: 10px;
-			background-color: $gray;
-			&:nth-child(even) {
-				background-color: $white;
-			}
-		}
-		.plan-table-content {
-			padding: 0;
-			.plan-wrapper {
-				font-size: 0;
-				overflow-x: auto;
-        		overflow-y: hidden;
-				width: auto;
-  				white-space: nowrap;
-			}
-			.plan {
-				.radiobox {
-					@include transition(all 0.5s ease);
-					@include box-sizing(border-box);
-					width: 20px;
-					height: 20px;
-					display: block;
-					margin: 0 auto 5px auto;
-					@include border-radius(10px);
-					position: relative;
-  					border: 2px solid $white;
-
-					&::after {
-						@include transition(all 0.5s ease);
-						content: "";
-						width: 12px;
-						height: 12px;
-						margin-top: 50%;
-						margin-left: 50%;
-						position: absolute;
-						top: -6px;
-						left: -6px;
-						@include border-radius(10px);
-						background-color: rgba(0,0,0,0);
-						display: block;
-
-					}
-				}
-				.option-checkbox {
-					@include transition(all 0.5s ease); 
-					@include border-radius($border-radius);
-					@include box-sizing(border-box);
-					font-size: 12px;
-					width: 20px;
-					height: 20px;
-					display: inline-block;
-					background-color: rgba($black,0.2);
-					border: 2px solid rgba($black,0.1);
-					position: relative;
-					overflow: hidden;
-					span {
-						@include opacity(0);
-						@include transition(all 0.5s ease); 
-						top: -2px;
-					}
-				}
-				cursor: pointer;
-				padding: 0;
-				width: 33.333333333333%;
-				display: inline-block;
-				white-space: normal;
-				position:relative;
-				z-index: 0;
-				.plan-table-top {
-					background-color: $primary-color;
-					color: $white;
-					padding: 10px 0 5px 0;
-					h5 {
-						margin: 0;
-					}
-					small {
-						color: $white;
-					}
-				}
-				&:nth-child(odd) {
-					.plan-table-top {
-						background-color: $light-primary-color;
-					}
-				}
-				&:hover {
-					.radiobox {
-	  					border: 2px solid rgba(0,0,0,0);
-						&::after {
-							background-color: $white;
-						}
-					}
-				}
-				&.selected {
-					z-index: 1;
-					&::after {
-						@include box-shadow(0px, 0px, 40px, $black);
-					}
-					.radiobox {
-	  					border: 2px solid $white;
-						&::after {
-							background-color: $white;
-						}
-					}
-					.option-checkbox {
-						span {
-							@include opacity(1);
-						}
-					}
-				}
-				&::after {
-					@include transition(all 0.5s ease);
-					content: "";
-					left: 0;
-					top: 0;
-					width: 100%;
-					height: 100%;
-					position: absolute;
-					@include box-shadow(0px, 0px, 0px, $black);
-				}
-			}
-		}
-	}
+    & > .row {
+        margin-bottom: 60px;
+    }
+    background-color: $white;
+    color: $primary-color;
+    padding: 1px 1em;
+    @include box-shadow(1px, 1px, 3px, $text-color);
+    .plan-table {
+        @include box-shadow(1px, 1px, 3px, $text-color);
+        background: $white;
+        .plan-table-heading {
+            padding: 0;
+            .plan-table-top {
+                padding: 20px;
+                background-color: $secondary-color;
+                color: $white;
+                h5 {
+                    line-height: 32px;
+                }
+            }
+            .plan-table-row {
+                font-size: 0;
+            }
+            img {
+                width: 34px;
+                vertical-align: top;
+            }
+            p {
+                display: inline-block;
+                padding-left: 10px;
+                width: -moz-calc(100% - 34px);
+                width: -webkit-calc(100% - 34px);
+                width: calc(100% - 34px);
+            }
+        }
+        .plan-table-row {
+            padding: 10px;
+            background-color: $gray;
+            &:nth-child(even) {
+                background-color: $white;
+            }
+        }
+        .plan-table-content {
+            padding: 0;
+            .plan-wrapper {
+                font-size: 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                width: auto;
+                white-space: nowrap;
+            }
+            .plan {
+                .radiobox {
+                    @include transition(all 0.5s ease);
+                    @include box-sizing(border-box);
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    margin: 0 auto 5px auto;
+                    @include border-radius(10px);
+                    position: relative;
+                    border: 2px solid $white;
+                    &::after {
+                        @include transition(all 0.5s ease);
+                        content: "";
+                        width: 12px;
+                        height: 12px;
+                        margin-top: 50%;
+                        margin-left: 50%;
+                        position: absolute;
+                        top: -6px;
+                        left: -6px;
+                        @include border-radius(10px);
+                        background-color: rgba(0, 0, 0, 0);
+                        display: block;
+                    }
+                }
+                .option-checkbox {
+                    @include transition(all 0.5s ease);
+                    @include border-radius($border-radius);
+                    @include box-sizing(border-box);
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    display: inline-block;
+                    background-color: rgba($black, 0.2);
+                    border: 2px solid rgba($black, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                    span {
+                        @include opacity(0);
+                        @include transition(all 0.5s ease);
+                        top: -2px;
+                    }
+                }
+                cursor: pointer;
+                padding: 0;
+                width: 33.333333333333%;
+                display: inline-block;
+                white-space: normal;
+                position: relative;
+                z-index: 0;
+                .plan-table-top {
+                    background-color: $primary-color;
+                    color: $white;
+                    padding: 10px 0 5px 0;
+                    h5 {
+                        margin: 0;
+                    }
+                    small {
+                        color: $white;
+                    }
+                }
+                &:nth-child(odd) {
+                    .plan-table-top {
+                        background-color: $light-primary-color;
+                    }
+                }
+                &:hover {
+                    .radiobox {
+                        border: 2px solid rgba(0, 0, 0, 0);
+                        &::after {
+                            background-color: $white;
+                        }
+                    }
+                }
+                &.selected {
+                    z-index: 1;
+                    &::after {
+                        @include box-shadow(0px, 0px, 40px, $black);
+                    }
+                    .radiobox {
+                        border: 2px solid $white;
+                        &::after {
+                            background-color: $white;
+                        }
+                    }
+                    .option-checkbox {
+                        span {
+                            @include opacity(1);
+                        }
+                    }
+                }
+                &::after {
+                    @include transition(all 0.5s ease);
+                    content: "";
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    @include box-shadow(0px, 0px, 0px, $black);
+                }
+            }
+        }
+    }
 }
 
 .profile {
-	background-color: $white;
-	color: $primary-color;
-	padding: 1em;
-	@include box-shadow(1px, 1px, 3px, $text-color);
-
-	.profile-details {
-		display: none;
-		p {
-			margin-bottom: 10px;
-		}
-	}
-	.profile-summary {
-		display: none;
-	}
-
-	.profile-header {
-		display: none;
-		background-color: $secondary-color;
-		h4 {
-			text-align: center;
-			color: $white;
-			padding: 0.5em;
-			margin-top: 5px;
-		}
-	}
-	.profile-details-section {
-		margin-top: 15px;
-		&.submit {
-			margin: 40px 0;
-		}
-	}
-
-	.beneficiary {
-		float: left;
-		margin-bottom: 0px;
-	}
-	
-	&.edit {
-		.profile-details {
-			display: block;
-		}
-		.profile-header {
-			display: block;
-		}
-		.profile-add-button {
-			display: none;
-		}
-		.profile-summary {
-			display: none;
-		}
-	}
-	&.saved {
-		.profile-summary {
-			display: block;
-		}
-		.profile-header {
-			display: block;
-		}
-		.profile-add-button {
-			display: none;
-		}
-		.profile-details {
-			display: none;
-		}
-	}
+    background-color: $secondary-color;
+    color: $primary-color;
+    padding: 0;
+    margin-bottom: 40px;
+    @include box-shadow(1px, 1px, 3px, $text-color);
+    @include transition(all 0.5s ease);
+    cursor: pointer;
+    .profile-add-button {
+        padding: 5px;
+        display: block;
+        h4 {
+            text-align: center;
+            color: $white;
+            span {
+                float: left;
+            }
+        }
+    }
+    .copyPassengerAddressButton {
+        @include transition(all 0.5s ease);
+        @include box-sizing(border-box);
+        text-align: center;
+        width: 44px;
+        height: 44px;
+        display: inline-block;
+        line-height: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        @include border-radius(22px);
+        position: relative;
+        border: 2px solid $secondary-color;
+        margin-left: 5px;
+        color: $secondary-color;
+        z-index: 1;
+        &::before {
+            z-index: -1;
+            @include transition(all 0.5s ease);
+            content: "";
+            width: 34px;
+            height: 34px;
+            margin-top: 50%;
+            margin-left: 50%;
+            position: absolute;
+            top: -17px;
+            left: -17px;
+            @include border-radius(17px);
+            background-color: rgba(0, 0, 0, 0);
+            display: block;
+        }
+        &:hover {
+            border: 2px solid rgba(0, 0, 0, 0);
+            color: $white;
+            &::before {
+                background-color: $secondary-color;
+            }
+        }
+        &.active {
+        	border: 2px solid $secondary-color;
+        	color: $white;
+        	&::before {
+                background-color: $secondary-color;
+            }
+        }
+    }
+    .profile-details {
+        display: none;
+        p {
+            margin-bottom: 10px;
+        }
+    }
+    .profile-summary {
+        display: none;
+    }
+    .profile-header {
+        display: none;
+        background-color: $secondary-color;
+        h4 {
+            text-align: center;
+            color: $white;
+            padding: 0.5em;
+            margin-top: 5px;
+        }
+    }
+    .profile-details-section {
+        margin-top: 15px;
+        &.submit {
+            margin: 40px 0;
+        }
+    }
+    .beneficiary {
+        float: left;
+        margin-bottom: 0px;
+    }
+    &.edit {
+        padding: 1em;
+        cursor: inherit;
+        background-color: $white;
+        .profile-details {
+            display: block;
+        }
+        .profile-header {
+            display: block;
+        }
+        .profile-add-button {
+            display: none;
+        }
+        .profile-summary {
+            display: none;
+        }
+    }
+    &.saved {
+        padding: 1em;
+        cursor: inherit;
+        background-color: $white;
+        .profile-summary {
+            display: block;
+        }
+        .profile-header {
+            display: block;
+        }
+        .profile-add-button {
+            display: none;
+        }
+        .profile-details {
+            display: none;
+        }
+    }
 }
 
 .calendar {
-	width: 100%;
-	border: solid $border-width $form-border-color;
-	@include border-radius($border-radius);
-	@include box-shadow(1px, 1px, 3px, $text-color);
-	table {
-		width: 100%;
-		font-family: $font-secondary;
-		.btn {
-			font-size: 1.1em;
-		}
-		button i {
-			top: 3px;
-		}
-		thead {
-			th {
-				font-size: 18px;
-				small {
-					font-size: 18px;
-				}
-			}
-			
-		}
-		tbody {
-			font-size: 18px;
-		}
-		
-	}
-	button {
-		border: 0px;
-	}
+    width: 100%;
+    border: solid $border-width $form-border-color;
+    @include border-radius($border-radius);
+    @include box-shadow(1px, 1px, 3px, $text-color);
+    table {
+        width: 100%;
+        font-family: $font-secondary;
+        .btn {
+            font-size: 1.1em;
+        }
+        button i {
+            top: 3px;
+        }
+        thead {
+            th {
+                font-size: 18px;
+                small {
+                    font-size: 18px;
+                }
+            }
+        }
+        tbody {
+            font-size: 18px;
+        }
+    }
+    button {
+        border: 0px;
+    }
 }
 
 .caution {
-	margin-top: 30px;
-	@include border-radius(4px);
-	padding: 0; 
-	color: $white;
-	h4 {
-		font-size: 22px;
-	}
-	p {
-		font-size: 18px;
-	}
+    margin-top: 30px;
+    @include border-radius(4px);
+    padding: 0;
+    color: $white;
+    h4 {
+        font-size: 22px;
+    }
+    p {
+        font-size: 18px;
+    }
 }
 
 .banner {
-	a {
-		display: block;
-	}
-	img {
-		width: 100%;		
-	}
-} 
+    a {
+        display: block;
+    }
+    img {
+        width: 100%;
+    }
+}
 
 .form-navigation {
-	padding: 0 20px;
-	margin: 60px 0 20px 0;
-	text-align: center;
-	img {
-		max-width: 100%;
-	}
+    padding: 0 20px;
+    margin: 60px 0 20px 0;
+    text-align: center;
+    img {
+        max-width: 100%;
+    }
 }
 
 .bg {
-	position: relative;
-	overflow: visible;
-	padding: 0;	
-	z-index: 0;
-	.bg-inner {
-		img {
-	      position: relative;
-	      z-index: 0;
-	      // margin: -15% 0 0 0;
-	      margin: 0;
-	      width: 100%;
-	    }
-	}
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    z-index: 0;
+    .bg-inner {
+        img {
+            position: relative;
+            z-index: 0;
+            // margin: -15% 0 0 0;
+            margin: 0;
+            width: 100%;
+        }
+    }
 }
 
 // slider
 .slider {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .image-slider {
-	max-height: 400px;
-
-	img {
-		width: 100%;
-	}
+    max-height: 400px;
+    img {
+        width: 100%;
+    }
 }
 
 /* line 108, ../sass/style.scss */
 .item-container {
-  width: 560px;
+    width: 560px;
 }
+
 /* line 110, ../sass/style.scss */
 .item-container .item {
-  /*display: inline-block;*/
-  background-color: #00BB87;
-  padding: 25px;
-  margin: 10px 0;
-  border-radius: 8px;
-  color: white;
+    /*display: inline-block;*/
+    background-color: #00BB87;
+    padding: 25px;
+    margin: 10px 0;
+    border-radius: 8px;
+    color: white;
 }
+
 /* line 119, ../sass/style.scss */
 .item-container.list .item {
-  float: left;
-  display: inline-block;
-  margin: 10px;
-  padding: 65px;
+    float: left;
+    display: inline-block;
+    margin: 10px;
+    padding: 65px;
 }
 
 /* line 128, ../sass/style.scss */
 .item:hover {
-  cursor: pointer;
-  background-color: rgba(0, 187, 135, 0.9);
+    cursor: pointer;
+    background-color: rgba(0, 187, 135, 0.9);
 }
 
 /*********************
@@ -783,7 +825,7 @@ FOOTER STYLES
 *********************/
 
 .footer {
-	clear: both;
-	background-color: $black;
-	color: $light-gray;
+    clear: both;
+    background-color: $black;
+    color: $light-gray;
 }
