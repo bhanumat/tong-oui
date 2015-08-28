@@ -55,10 +55,10 @@
     $scope.tempData.discountType = "percent";
     $scope.formStepSubmitted = false;
     $scope.tempData.currentState = $location.path();
-    $scope.tempData.passengersProfile = ['add'];
-    $scope.tempData.passengersProfile[1] = "edit";
-    $scope.tempData.passengersProfile[2] = "add";
-    $scope.tempData.passengersProfile[3] = "add";
+    $scope.tempData.passengersProfile = [];
+    $scope.tempData.passengersProfile[1] = {};
+    $scope.tempData.passengersProfile[1].stage = "edit";
+    $scope.tempData.passengersProfile[1].beneficiaries = 0; 
 
     $http.get('/NewTravel.json').
     then(function(response) {
@@ -122,6 +122,12 @@
       }
       else {
         $scope.tempData.price = $scope.tempData.totalPrice;
+      }
+    };
+
+    $scope.addBeneficiary = function(index) {
+      if($scope.tempData.passengersProfile[index].beneficiaries < 3) {
+        $scope.tempData.passengersProfile[index].beneficiaries += 1;
       }
     };
 

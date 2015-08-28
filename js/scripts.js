@@ -8,7 +8,7 @@
      */
 
     jQuery(document).ready(function($){
-		$(this).on('mouseover','#plan-main',function(){
+		$(this).on('mouseover','#plan',function(){
 			$('#plan-main-scroll').on('scroll',function(){
 				$('#plan-options1-scroll').scrollLeft($(this).scrollLeft());
 				$('#plan-options2-scroll').scrollLeft($(this).scrollLeft());
