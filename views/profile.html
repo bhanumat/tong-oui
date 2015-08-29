@@ -5,7 +5,7 @@
                   <div class="profile" ng-class="{'edit':tempData.passengersProfile[profile].stage == 'edit','saved':tempData.passengersProfile[profile].stage == 'saved'}">
                         <div class="row">
                               <div class="col-xs-12" >
-                                    <div class="profile-add-button" ng-click="tempData.passengersProfile[profile].stage = 'edit'">
+                                    <div class="profile-add-button" ng-click="changeStage(profile,'edit');">
                                           <h4>
                                                 <span class="glyphicon glyphicon-plus-sign"></span>
                                                 ผู้ขอประกันคนที่ {{profile}}
@@ -133,11 +133,11 @@
                                                             <div class="row">
                                                                   <div ng-hide="tempData.passengersProfile[profile].isManualAddress">
                                                                         <div class="col-xs-12 col-sm-4">
-                                                                              <button ng-click="addBeneficiary(profile);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
+                                                                              <button ng-click="addAddress(profile);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
                                                                         </div>
                                                                         <div class="col-xs-12 col-sm-8">
                                                                               <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
-                                                                                    <span class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger)" ng-repeat="passenger in range(1,profile-1)">
+                                                                                    <span ng-class="{'active':tempData.passengersProfile[profile].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger,profile)" ng-repeat="passenger in range(1,profile-1)">
                                                                                           {{passenger}}      
                                                                                     </span>
                                                                               </p>

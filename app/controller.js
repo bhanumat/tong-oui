@@ -74,7 +74,8 @@
         promotionCode: "Test Promo Code",
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
-        propertySafe: $scope.travelData.propertysafe.defaultTick
+        propertySafe: $scope.travelData.propertysafe.defaultTick,
+        
       };
 
       $scope.calculateTotalPrice();
@@ -126,8 +127,29 @@
       }
     };
 
-    $scope.copyPassengerAddress = function(index){
+    $scope.changeStage = function(index,stage){
+      if(!$scope.tempData.passengersProfile[index]) {
+        $scope.tempData.passengersProfile[index] = {};
+        $scope.tempData.passengersProfile[index].stage = '';
+      }
+      // if(stage == 'edit') {
         
+      // }
+      $scope.tempData.passengersProfile[index].stage = stage;
+    }
+
+    $scope.copyPassengerAddress = function(templateIndex,targetIndex){
+      if (!$scope.travel.passengersProfile[targetIndex]) {
+        $scope.travel.passengersProfile[targetIndex] = {};
+      }
+      $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
+      $scope.travel.passengersProfile[targetIndex].addressData = {};
+      $scope.travel.passengersProfile[targetIndex].addressData = $scope.travel.passengersProfile[templateIndex].addressData;   
+    };
+
+    $scope.addAddress = function(index) {
+        $scope.tempData.passengersProfile[index].isManualAddress = true;
+        $scope.travel.passengersProfile[index].addressData = {};
     };
 
     $scope.addBeneficiary = function(index) {
