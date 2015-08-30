@@ -21,12 +21,12 @@
 
     ////////////  function definitions
 
-    // $scope.start = true;
-    // if ($scope.start == true) {
-    //   $scope.start = false;
-    //   $location.path('/insurance/destination');
-    //   $location.replace();
-    // }
+    $scope.start = true;
+    if ($scope.start == true) {
+      $scope.start = false;
+      $location.path('/insurance/destination');
+      $location.replace();
+    }
     
     // comment for testing 
 
@@ -46,9 +46,6 @@
     
     $scope.tempData = {};
     $scope.tempData.destination = [];
-    $scope.tempData.daysAsText = "รวม 25 วัน";
-    $scope.tempData.shortStartDate = "28 ส.ค. 2015";
-    $scope.tempData.shortEndDate = "22 ก.ย. 2015";
     $scope.tempData.option1IsCollapsed = false;
     $scope.tempData.option2IsCollapsed = false;
     $scope.tempData.discount = 50;
@@ -58,7 +55,6 @@
     $scope.tempData.passengersProfile = [];
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
-    // $scope.tempData.passengersProfile[1].beneficiaries = 0; 
     $scope.tempData.passengersProfile[1].isManualAddress = true; 
 
     $http.get('/NewTravel.json').
@@ -66,16 +62,9 @@
       $scope.travelData = response.data.cignatravel;
       $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxtraveller);
       $scope.travel = {
-        destinations:[{"country":"Argentina","code":"AR","id":1,"type":"schengen"},{"country":"Australia","code":"AU","id":2,"type":"schengen"},{"country":"Belgium","code":"BE","id":4,"type":"schengen"},{"country":"France","code":"FR","id":6,"type":"schengen"}],
-        startDate: "28 สิงหาคม 2015",
-        endDate: "22 กันยายน 2015",
-        days: 25,
-        passengers: 3,
-        promotionCode: "Test Promo Code",
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
         propertySafe: $scope.travelData.propertysafe.defaultTick,
-        
       };
 
       $scope.calculateTotalPrice();
@@ -97,6 +86,19 @@
             $scope.tempData.totalPrice += $scope.travelData.propertysafe.protect[i].price;
           }
           $scope.tempData.totalPrice *= $scope.travel.passengers;
+        }
+      }
+    };
+
+    $scope.editSummarybar = function(isFormValid){
+      $scope.summaryBarSubmitted = true;
+      if(!$scope.editingSummarybar) {
+        $scope.editingSummarybar = true;
+      }
+      else {
+        if(isFormValid) {
+          $scope.summaryBarSubmitted = false;
+          $scope.editingSummarybar = false;
         }
       }
     };
@@ -126,17 +128,28 @@
       if(!$scope.tempData.passengersProfile[index]) {
         $scope.tempData.passengersProfile[index] = {};
         $scope.tempData.passengersProfile[index].stage = '';
+        $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
+        $scope.travel.passengersProfile[index] = {}
+        $scope.travel.passengersProfile[index].birthDate = '';
       }
-      if(validate){
-        $scope.profileFormSubmitted = false;
+      if(stage == 'edit') {
+        $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
         $scope.tempData.passengersProfile[index].stage = stage;
-      }
-      else{
-        $scope.profileFormSubmitted = true;
-      }
+        $scope.tempData.passengersProfile[index].profileForm = null;
+      } 
       if(stage == 'saved') {
-
-        
+        $scope.tempData.passengersProfile[index].profileFormSubmitted = true;
+        if(validate){
+          $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
+          $scope.tempData.passengersProfile[index].profileForm = true;
+          $scope.tempData.passengersProfile[index].stage = stage;
+        }
+      } 
+      if(stage == 'reset') {
+        $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
+        $scope.travel.passengersProfile[index] = {};
+        $scope.tempData.passengersProfile[index].stage = "";
+        $scope.tempData.passengersProfile[index].profileForm = null;
       }
       
     }
@@ -191,10 +204,30 @@
       $scope.calculatePrice();
     };
 
+    $scope.termsToggle = function(index){
+      if(!$scope.tempData.passengersProfile[index].termsAccepted) {
+        $scope.tempData.passengersProfile[index].termsAccepted = true;
+      }
+      else {
+        $scope.tempData.passengersProfile[index].termsAccepted = false;
+      }
+      console.log($scope.tempData.passengersProfile[index].termsAccepted);
+    };
+
+
     $scope.flightSecuredToggle = function(){
       $scope.travel.flightSecured = !$scope.travel.flightSecured;
       $scope.calculateTotalPrice();
       $scope.calculatePrice();
+    };
+
+    $scope.goToOrder = function(isFormValid) {
+      // set to true to show all error messages (if there are any)
+      $scope.formStepSubmitted = true;
+      if(isFormValid) {
+        $scope.formStepSubmitted = false;
+        $state.go('^.thankyou');
+      }
     };
 
     $scope.goToPlanSelection = function(isFormValid) {
@@ -203,6 +236,16 @@
       if(isFormValid) {
         $scope.formStepSubmitted = false;
         $state.go('^.plan');
+      }
+    };
+
+    $scope.goToPayment = function(isFormValid) {
+      // set to true to show all error messages (if there are any)
+      $scope.formStepSubmitted = true;
+
+      if(isFormValid) {
+        $scope.formStepSubmitted = false;
+        $state.go('^.payment');
       }
     };
 

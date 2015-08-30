@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">	
+		<div class="thankyou">
+			<div class="thankyou-header">
+				<h3>
+					<small>ขอบคุณที่สั่งซื้อ</small><br>
+					แผนประกันภัยต่างประเทศ Travel Care +<br>
+					<small>ระบบสั่งซื้อดำเนินการเรียบร้อยแล้ว</small>
+				</h3>
+			</div>
+			<div class="thankyou-details">
+				<p class="order-detail">หมายเลขสั่งซื้อของคุณคือ <span class="ordernumber">000001</span></p>
+				<p><img src="images/icon-sms.png" alt="">ทันทีที่คุณได้รับ SMS ยืนยันการสั่งซื้อจากซิกน่าคุณจะได้รับความคุ้มครองตามวันที่ระบุไว้ในกรมธรรม์</p>
+				<p><img src="images/icon-email.png" alt="">รายละเือียดการสั่งซื้อของคุณจะถูกสั่งไปยังอีเมลที่ได้ระบุในข้อมูลส่วนบุคคลและกรมธรรม์จะถูกจัดส่งตามที่อยู่ที่คุณได้ให้ไว้กับเราค่ะ</p>
+			</div>
+			<div class="banner" ng-if="travelData.banner_image_url" >
+				<a ng-if="travelData.banner_link_url" ng-href="{{travelData.banner_link_url}}"><img ng-src="{{travelData.banner_image_url}}"/></a>
+				<img ng-if="!travelData.banner_link_url" ng-src="{{travelData.banner_image_url}}"/>
+			</div>
+		</div>
+	</div>
+</div>

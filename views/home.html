@@ -1,85 +1,148 @@
 <div class="content-wrapper" id="form-container">
 	<div class="row">
 		<div class="col-12-xs">
-			<div class="banner" ng-if="travelData.banner_image_url" >
-				<a ng-if="travelData.banner_link_url" ng-href="{{travelData.banner_link_url}}"><img ng-src="{{travelData.banner_image_url}}"/></a>
-				<img ng-if="!travelData.banner_link_url" ng-src="{{travelData.banner_image_url}}"/>
-			</div>
 			<div class="form-navigation" id="form-navigation">
-				<img src="images/form-navigation.png" alt="">
+				<img ng-show="tempData.currentState == '/insurance/destination'" src="images/form-navigation.png" alt="">
+				<img ng-show="tempData.currentState == '/insurance/plan'" src="images/form-navigation-2.png" alt="">
+				<img ng-show="tempData.currentState == '/insurance/profile'" src="images/form-navigation-3.png" alt="">
+				<img ng-show="tempData.currentState == '/insurance/payment'" src="images/form-navigation-4.png" alt="">
+				<img ng-show="tempData.currentState == '/insurance/thankyou'" src="images/form-navigation-5.png" alt="">
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div ng-if="tempData.currentState == '/insurance/destination'" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
+				</div>
+				<div ng-if="tempData.currentState != '/insurance/destination' && tempData.currentState != '/insurance/thankyou' " class="col-xs-12 col-sm-10 col-sm-offset-1">
 					<h2>แผนประกันภัย<br>เดินทางต่างประเทศ Travel Care +</h2>
 				</div>
 			</div>
-			<div class="row" sticky sticky-class="sticky" body-class="body-sticky" ng-if="tempData.currentState != '/insurance/destination'">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 sticky-wrapper">			
+			<div class="row" sticky sticky-class="sticky" body-class="body-sticky" ng-if="tempData.currentState != '/insurance/destination' && tempData.currentState != '/insurance/thankyou' ">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 sticky-wrapper">
 					<div id="summary-bar" class="summary-bar">
 						<!-- <div class="nav-icon">
-							<div class="row">
-								<div class="col-12-xs">
-									<img src="images/nav-plan-on-summary.png" alt="">
+								<div class="row">
+										<div class="col-12-xs">
+												<img src="images/nav-plan-on-summary.png" alt="">
+										</div>
 								</div>
-							</div>
 						</div> -->
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="insurance-details-heading summary-bar-heading">
 									<h5>รายละเอียดการเดินทาง</h5>
-								 	<a href="">
-								 		<img src="images/icon-edit.png" alt="">
-								 	</a>
-								</div>	
+									<a ng-click="editSummarybar(summaryForm.$valid&&(travel.destinations.length));" href="">
+										<img src="images/icon-edit.png" alt="">
+									</a>
+								</div>
 								<div class="insurance-details summary-bar-details">
-									<div class="row">
-										<div class="col-xs-12">
-											<h6>จุดหมายปลายทาง</h6>
-											<p class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
+									<ng-form name="summaryForm" novalidate>
+										<div class="row">
+											<div class="col-xs-12">
+												<h6>จุดหมายปลายทาง</h6>
+												<p ng-hide="editingSummarybar" class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
+												<div ng-show="editingSummarybar" class="form-group" ng-class="{ 'has-error' : !travel.destinations.length && summaryBarSubmitted }">
+													<div class="input-group">
+														<ol class="nya-bs-select form-control text-center" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
+															<li nya-bs-option="item in travelData.destination | orderBy:'country'">
+																<!-- the text content of anchor element will be used for search -->
+																<a>
+																	{{ item.country }}
+																</a>
+															</li>
+														</ol>
+														<span class="input-group-btn">
+															<button class="btn btn-primary" ng-click="addDestination();" type="button">
+															<span class="glyphicon glyphicon-plus"></span>
+															</button>
+														</span>
+													</div>
+													<div class="help-block" ng-messages="{hasDestination:!travel.destinations.length}" ng-if="summaryBarSubmitted">
+														<p ng-message="hasDestination">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p>
+													</div>
+												</div>
+												<div ng-show="editingSummarybar" ng-repeat="destination in travel.destinations | limitTo: 10" class="col-xs-12 col-sm-6">
+													<div class="travel-destination">
+														<span ng-bind="destination.country"></span>
+														<button class="btn btn-tag" ng-click="removeDestination($index)"><span class="glyphicon glyphicon-remove"></span></button>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-5">
-											<h6>เริ่มเดินทาง</h6>
-											<p ng-bind="tempData.shortStartDate"></p>
+										<div class="row">
+											<div class="col-xs-5">
+												<h6>เริ่มเดินทาง</h6>
+												<p ng-hide="editingSummarybar" ng-bind="tempData.shortStartDate"></p>
+												<div ng-show="editingSummarybar" class="form-group" ng-class="{ 'has-error' : summaryForm.startDate.$invalid && summaryBarSubmitted }">
+													<input type="text" name="startDate" start-date-calendar="2" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+													<div class="help-block" ng-messages="summaryForm.startDate.$error" ng-if="summaryBarSubmitted || summaryForm.startDate.$touched">
+														<p ng-message="required">กรุณาระบุวันที่เริ่มต้นเดินทาง</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-5">
+												<h6>สิ้นสุดวันเดินทาง</h6>
+												<p ng-hide="editingSummarybar" ng-bind="tempData.shortEndDate"></p>
+												<div ng-show="editingSummarybar" class="form-group" ng-class="{ 'has-error' : summaryForm.endDate.$invalid && summaryBarSubmitted }">
+													<input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+													<div class="help-block" ng-messages="summaryForm.endDate.$error" ng-if="summaryBarSubmitted || summaryForm.endDate.$touched">
+														<p ng-message="required">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-2">
+												<h6>รวม</h6>
+												<p><span ng-bind="travel.days"></span> วัน</p>
+											</div>
 										</div>
-										<div class="col-xs-5">
-											<h6>สิ้นสุดวันเดินทาง</h6>
-											<p ng-bind="tempData.shortEndDate"></p>
+										<div class="row">
+											<div class="col-xs-5">
+												<h6>ผู้ขอประกัน</h6>
+												<p ng-hide="editingSummarybar"><span ng-bind="travel.passengers"></span> ท่าน</p>
+												<div ng-show="editingSummarybar" class="form-group" ng-class="{ 'has-error' : summaryForm.passengers.$invalid && summaryBarSubmitted }">
+													<ol class="nya-bs-select form-control text-center" ng-model="travel.passengers" name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
+														<li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}" >
+															<a>
+																{{ passenger }}
+															</a>
+														</li>
+													</ol>
+													<div class="help-block" ng-messages="summaryForm.passengers.$error" ng-if="summaryBarSubmitted || summaryForm.passengers.$touched">
+														<p ng-message="required">กรุณาเลือกจำนวณผู้ขอประกัน</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-7" ng-if="travel.promotionCode">
+												<h6>รหัสโปรโมชั่น</h6>
+												<div ng-show="editingSummarybar" class="form-group">
+													<label class="sr-only" for="promotionCode">Promotion Code</label>
+													<input type="text" ng-model="travel.promotionCode" name="promotionCode" class="form-control" id="promotion-code">
+												</div>
+												<p ng-hide="editingSummarybar" ng-bind="travel.promotionCode"></p>
+											</div>
 										</div>
-										<div class="col-xs-2">
-											<h6>รวม</h6>
-											<p><span ng-bind="travel.days"></span> วัน</p>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-5">
-											<h6>ผู้ขอประกัน</h6>
-											<p><span ng-bind="travel.passengers"></span> ท่าน</p>
-										</div>
-										<div class="col-xs-7" ng-if="travel.promotionCode">
-											<h6>รหัสโปรโมชั่น</h6>
-											<p ng-bind="travel.promotionCode"></p>
-										</div>
-									</div>
+									</ng-form>
 								</div>
 							</div>
 							<div class="col-xs-6">
 								<div class="insurance-plan-heading summary-bar-heading">
 									<h5>ความคุ้มครองที่เลือก</h5>
 									<a href="#plan" offset="330" du-smooth-scroll>
-								 		<img src="images/icon-edit.png" alt="">
-								 	</a>
+										<img src="images/icon-edit.png" alt="">
+									</a>
 								</div>
 								<div class="insurance-plan summary-bar-details">
-									<h6>แผนประกันที่เลือก</h6>
-									<p>แผน {{ travel.selectedPlan }} - Travel Care A<span ng-if="travel.flightSecured">, Flight Secure B</span><span ng-if="travel.propertySafe">, Property Safe C</span></p>
-									<div class="price-summary">
-										<p>ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
-										<p ng-if="tempData.discountAsBath">
-											ส่วนลด <span ng-if="tempData.discountType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsBath | number}} บาท</span>
-										</p>
-										<h6>เบี้ยประกันรวม <span class="right"><span class="large">{{ tempData.price | number }}</span> บาท</span></h6>
+									<div class="row">
+										<div class="col-xs-12">
+											<h6>แผนประกันที่เลือก</h6>
+											<p>แผน {{ travel.selectedPlan }} - Travel Care A<span ng-if="travel.flightSecured">, Flight Secure B</span><span ng-if="travel.propertySafe">, Property Safe C</span></p>
+											<div class="price-summary">
+												<p>ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
+												<p ng-if="tempData.discountAsBath">
+													ส่วนลด <span ng-if="tempData.discountType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsBath | number}} บาท</span>
+												</p>
+												<h6>เบี้ยประกันรวม <span class="right"><span class="large">{{ tempData.price | number }}</span> บาท</span></h6>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -100,8 +163,3 @@
 		</div>
 	</div>
 </div>
-<pre>
-	    {{ travel }}
-</pre>
-<pre>insuranceForm.$valid = {{ insuranceForm.$valid | json }}</pre>
-<pre>insuranceForm.$error = {{ insuranceForm.$error | json }}</pre>

@@ -1,505 +1,593 @@
 <div class="row">
-      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-            <h3>ข้อมูลผู้ขอประกัน</h3>
-            <div ng-repeat="profile in range(1,travel.passengers)">
-                  <ng-form name="profileForm" novalidate>
-                        <div class="profile" ng-class="{'edit':tempData.passengersProfile[profile].stage == 'edit','saved':tempData.passengersProfile[profile].stage == 'saved'}">
-                              <div class="row">
-                                    <div class="col-xs-12" >
-                                          <div class="profile-add-button" ng-click="changeStage(profile,'edit',profileForm.$valid);">
-                                                <h4>
-                                                      <span class="glyphicon glyphicon-plus-sign"></span>
-                                                      ผู้ขอประกันคนที่ {{profile}}
-                                                </h4>
-                                          </div>
-                                          <div class="profile-header">
-                                                <h4>ผู้ขอประกันคนที่ {{profile}} <div class="right" ng-if="tempData.passengersProfile[profile].stage == 'saved'"><span ng-click="changeStage(profile,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(profile,'reset',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span></div></h4>
-                                          </div>
-                                          <div class="profile-details">
-                                                <div class="profile-details-section">
-                                                      <div class="profile-details-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-profile.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ข้อมูลส่วนตัว</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-xs-10 col-xs-offset-1">
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.title.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].title" type="text" name="title" placeholder="คำนำหน้าชื่อ" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.title.$error" ng-if="profileFormSubmitted || profileForm.title.$touched">
-                                                                                          <p ng-message="required">กรุณาเลือกคำนำหน้าชื่อ</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="clearfix"></div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                         <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.firstname.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="firstname">ชื่อ</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].firstname" type="text" name="firstname" placeholder="ชื่อ" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.firstname.$error" ng-if="profileFormSubmitted || profileForm.firstname.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกชื่อ</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.lastname.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="lastname">นามสกุล</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].lastname" type="text" name="lastname" placeholder="นามสกุล" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.lastname.$error" ng-if="profileFormSubmitted || profileForm.lastname.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกนามสกุล</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row" ng-if="tempData.isSchengen">
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.englishFirstname.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="englishFirstname">ชื่อ (ภาษาอังกฤษ)</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].englishFirstname" type="text" name="englishFirstname" placeholder="ชื่อ (ภาษาอังกฤษ)" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.englishFirstname.$error" ng-if="profileFormSubmitted || profileForm.englishFirstname.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกชื่อ (ภาษาอังกฤษ)</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.englishLastname.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="englishLastname">นามสกุล (ภาษาอังกฤษ)</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].englishLastname" type="text" name="englishLastname" placeholder="นามสกุล (ภาษาอังกฤษ)" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.englishLastname.$error" ng-if="profileFormSubmitted || profileForm.englishLastname.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกนามสกุล (ภาษาอังกฤษ)</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.nationalId.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="nationalId">เลขที่บัตรประชาชน</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].nationalId" type="text" name="nationalId" placeholder="เลขที่บัตรประชาชน" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.nationalId.$error" ng-if="profileFormSubmitted || profileForm.nationalId.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกเลขที่บัตรประชาชน</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.passportId.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="passportId">เลขที่หนังสือเดินทาง</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].passportId" type="text" name="passportId" placeholder="เลขที่หนังสือเดินทาง" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.passportId.$error" ng-if="profileFormSubmitted || profileForm.passportId.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกเลขที่หนังสือเดินทาง</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-4 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.birthDate.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="birthDate">วันเดือนปีเกิด</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].birthDate" type="text" name="birthDate" placeholder="วันเดือนปีเกิด" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.birthDate.$error" ng-if="profileFormSubmitted || profileForm.birthDate.$touched">
-                                                                                          <p ng-message="required">กรุณาระบุวันเดือนปีเกิด</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-4 col-sm-3">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.gender.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="gender">เพศ</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].gender" type="text" name="gender" placeholder="เพศ" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.gender.$error" ng-if="profileFormSubmitted || profileForm.gender.$touched">
-                                                                                          <p ng-message="required">กรุณเลือกเพศ</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-4 col-sm-3">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.occupation.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="occupation">อาชีพ</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].occupation" type="text" name="occupation" placeholder="อาชีพ" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.occupation.$error" ng-if="profileFormSubmitted || profileForm.occupation.$touched">
-                                                                                          <p ng-message="required">กรุณาเลือกอาชีพ</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.email.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="email">อีเมล</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].email" type="email" name="email" placeholder="อีเมล" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.email.$error" ng-if="profileFormSubmitted || profileForm.email.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกอีเมล</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-xs-12 col-sm-6">
-                                                                              <div class="form-group" ng-class="{ 'has-error' : profileForm.phone.$invalid && profileFormSubmitted }">
-                                                                                    <label class="sr-only" for="phone">เบอร์โทรศัพท์</label>
-                                                                                    <input class="form-control" ng-model="travel.passengersProfile[profile].phone" type="text" name="phone" placeholder="เบอร์โทรศัพท์" required>
-                                                                                    <div class="help-block" ng-messages="profileForm.phone.$error" ng-if="profileFormSubmitted || profileForm.phone.$touched">
-                                                                                          <p ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="profile-details-section">
-                                                      <div class="profile-details-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-address.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ที่อยู่</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-xs-10 col-xs-offset-1">
-                                                                  <div class="row">
-                                                                        <div ng-hide="tempData.passengersProfile[profile].isManualAddress">
-                                                                              <div class="col-xs-12 col-sm-4">
-                                                                                    <button ng-click="addAddress(profile);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
-                                                                              </div>
-                                                                              <div class="col-xs-12 col-sm-8">
-                                                                                    <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
-                                                                                          <span ng-class="{'active':tempData.passengersProfile[profile].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger,profile)" ng-repeat="passenger in range(1,profile-1)">
-                                                                                                {{passenger}}      
-                                                                                          </span>
-                                                                                    </p>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div ng-if="tempData.passengersProfile[profile].isManualAddress">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <div class="form-group" ng-class="{ 'has-error' : profileForm.address.$invalid && profileFormSubmitted }">
-                                                                                          <label class="sr-only" for="address">ที่อยู่</label>
-                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" type="text" name="address" placeholder="ที่อยู่" required>
-                                                                                          <div class="help-block" ng-messages="profileForm.address.$error" ng-if="profileFormSubmitted || profileForm.address.$touched">
-                                                                                                <p ng-message="required">กรุณากรอกที่อยู่</p>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div ng-if="tempData.isSchengen">
-                                                                              <div class="row">
-                                                                                    <div class="col-xs-12">
-                                                                                          <div class="form-group" ng-class="{ 'has-error' : profileForm.englishAddress.$invalid && profileFormSubmitted }">
-                                                                                                <label class="sr-only" for="englishAddress">ที่อยู่ (ภาษาอังกฤษ)</label>
-                                                                                                <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษ)" required>
-                                                                                                <div class="help-block" ng-messages="profileForm.englishAddress.$error" ng-if="profileFormSubmitted || profileForm.englishAddress.$touched">
-                                                                                                      <p ng-message="required">กรุณากรอกที่อยู่ (ภาษาอังกฤษ)</p>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                              <div class="col-xs-6 col-sm-6">
-                                                                                    <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && profileFormSubmitted }">
-                                                                                          <label class="sr-only" for="district">เขต/อำเภอ</label>
-                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.district" class="form-control" type="text" name="district" placeholder="เขต/อำเภอ" required>
-                                                                                          <div class="help-block" ng-messages="profileForm.district.$error" ng-if="profileFormSubmitted || profileForm.district.$touched">
-                                                                                                <p ng-message="required">กรุณาเลือกเขต/อำเภอ</p>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                              <div class="col-xs-6 col-sm-6">
-                                                                                    <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && profileFormSubmitted }">
-                                                                                          <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
-                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.subdistrict" class="form-control" type="text" name="subdistrict" placeholder="แขวง/ตำบล" required>
-                                                                                          <div class="help-block" ng-messages="profileForm.subdistrict.$error" ng-if="profileFormSubmitted || profileForm.subdistrict.$touched">
-                                                                                                <p ng-message="required">กรุณาเลือกแขวง/ตำบล</p>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                              <div class="col-xs-6 col-sm-6">
-                                                                                    <div class="form-group" ng-class="{ 'has-error' : profileForm.province.$invalid && profileFormSubmitted }">
-                                                                                          <label class="sr-only" for="province">จังหวัด</label>
-                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.province" class="form-control" type="text" name="province" placeholder="จังหวัด" required>
-                                                                                          <div class="help-block" ng-messages="profileForm.province.$error" ng-if="profileFormSubmitted || profileForm.province.$touched">
-                                                                                                <p ng-message="required">กรุณาเลือกจังหวัด</p>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                              <div class="col-xs-6 col-sm-6">
-                                                                                    <div class="form-group" ng-class="{ 'has-error' : profileForm.postcode.$invalid && profileFormSubmitted }">
-                                                                                          <label class="sr-only" for="postcode">รหัสไปรษณีย์</label>
-                                                                                          <input ng-model="travel.passengersProfile[profile].addressData.postcode" class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์" required>
-                                                                                          <div class="help-block" ng-messages="profileForm.postcode.$error" ng-if="profileFormSubmitted || profileForm.postcode.$touched">
-                                                                                                <p ng-message="required">กรุณากรอกรหัสไปรษณีย์</p>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="profile-details-section">
-                                                      <div class="profile-details-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-beneficiary.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ผู้รับผลประโยชน์</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-xs-10 col-xs-offset-1">
-                                                                  <div class="row">
-                                                                        <div class="col-xs-12">
-                                                                              <p>ในกรณีที่ท่านไม่ระบุผู้รับประโยชน์ ชื่อผู้รับประโยชน์จะต้องเป็นทายาทตามกฎหมาย ได้แก่ บิดา มารดา คู่สมรส และบุตร</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <ng-form name="beneficiaryForm" novalidate ng-if="tempData.passengersProfile[profile].beneficiaries" ng-repeat="beneficiary in range(1,tempData.passengersProfile[profile].beneficiaries)">
-                                                                        <div class="beneficiary">
-                                                                              <div class="row">
-                                                                                    <div class="col-xs-12 col-sm-6">
-                                                                                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.title.$invalid && (beneficiaryFormSubmitted || profileFormSubmitted) }">
-                                                                                                <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
-                                                                                                <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].title" type="text" name="title" class="form-control" placeholder="คำนำหน้าชื่อ" required>
-                                                                                                <div class="help-block" ng-messages="beneficiaryForm.title.$error" ng-if="beneficiaryFormSubmitted || profileFormSubmitted || beneficiaryForm.title.$touched">
-                                                                                                      <p ng-message="required">กรุณากรอกคำนำหน้าชื่อ</p>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </div>
-                                                                                    <div class="col-xs-12 col-sm-6">
-                                                                                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.relationship.$invalid && (beneficiaryFormSubmitted || profileFormSubmitted) }">
-                                                                                                <label class="sr-only" for="relationship">ความสัมพันธ์</label>
-                                                                                                <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].relationship" type="text" name="relationship" class="form-control" placeholder="ความสัมพันธ์" required>
-                                                                                                <div class="help-block" ng-messages="beneficiaryForm.relationship.$error" ng-if="beneficiaryFormSubmitted || profileFormSubmitted || beneficiaryForm.relationship.$touched">
-                                                                                                      <p ng-message="required">กรุณาระบุความสัมพันธ์</p>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                              <div class="row">
-                                                                                    <div class="col-xs-12 col-sm-6">
-                                                                                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.firstname.$invalid && (beneficiaryFormSubmitted || profileFormSubmitted) }">
-                                                                                                <label class="sr-only" for="firstname">ชื่อ</label>
-                                                                                                <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].firstname" type="text" name="firstname" class="form-control" placeholder="ชื่อ" required>
-                                                                                                <div class="help-block" ng-messages="beneficiaryForm.firstname.$error" ng-if="beneficiaryFormSubmitted || profileFormSubmitted || beneficiaryForm.firstname.$touched">
-                                                                                                      <p ng-message="required">กรุณากรอกชื่อ</p>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </div>
-                                                                                    <div class="col-xs-12 col-sm-6">
-                                                                                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.lastname.$invalid && (beneficiaryFormSubmitted || profileFormSubmitted) }">
-                                                                                                <label class="sr-only" for="lastname">นามสกุล</label>
-                                                                                                <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].lastname" type="text" name="lastname" class="form-control" placeholder="นามสกุล" required>
-                                                                                                <div class="help-block" ng-messages="beneficiaryForm.lastname.$error" ng-if="beneficiaryFormSubmitted || profileFormSubmitted || beneficiaryForm.lastname.$touched">
-                                                                                                      <p ng-message="required">กรุณากรอกนามสกุล</p>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <button ng-if="tempData.passengersProfile[profile].beneficiaries == beneficiary && tempData.passengersProfile[profile].beneficiaries != 3 " ng-click="addBeneficiary(profile,beneficiaryForm.$valid);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่มผู้รับผลประโยชน์</button>
-                                                                              </div>
-                                                                        </div>
-                                                                  </ng-form>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-12">
-                                                                              <button ng-if="!tempData.passengersProfile[profile].beneficiaries" ng-click="addBeneficiary(profile,beneficiaryForm.$valid);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่มผู้รับผลประโยชน์</button>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="profile-details-section submit">
-                                                      <div class="row">
-                                                            <div class="col-xs-12 text-center">
-                                                                  <button ng-click="changeStage(profile,'saved',profileForm.$valid);" class="btn btn-super"><span>บันทึกข้อมูล</span> <span class="glyphicon glyphicon-menu-right"></span></button>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                          <div class="profile-summary">
-                                                <div class="profile-summary-section">
-                                                      <div class="profile-summary-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-profile.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ข้อมูลส่วนตัว</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-xs-10 col-xs-offset-1">
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>ชื่อ - นามสกุล</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].title}} {{travel.passengersProfile[profile].firstname}} {{travel.passengersProfile[profile].lastname}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].title}} {{travel.passengersProfile[profile].englishFirstname}} {{travel.passengersProfile[profile].englishFirstname}}</span></p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>เลขที่บัตรประชาชน</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].nationalId}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>เลขที่หนังสือเดินทาง</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].passportId}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>วัน / เดือน / ปีเกิด</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].birthDate}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>เพศ</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].gender}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>อาชีพ</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].occupation}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>อีเมล</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].email}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                              <p>เบอร์โทรศํพท์</p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                              <p>{{travel.passengersProfile[profile].phone}}</p>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="profile-summary-section">
-                                                      <div class="profile-summary-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-address.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ที่อยู่</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-xs-10 col-xs-offset-1">
-                                                                  <div class="row"> 
-                                                                        <div class="col-xs-6 col-xs-offset-6">
-                                                                              <p>{{travel.passengersProfile[profile].addressData.address}} แขวง{{travel.passengersProfile[profile].subdistrict}}, เขต{{travel.passengersProfile[profile].district}}, {{travel.passengersProfile[profile].province}} {{travel.passengersProfile[profile].addressData.postcode}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].addressData.address}} {{travel.passengersProfile[profile].subdistrict}}, {{travel.passengersProfile[profile].district}}, {{travel.passengersProfile[profile].province}} {{travel.passengersProfile[profile].addressData.postcode}}</span></p>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                      
-                                                <div class="profile-summary-section" ng-if="tempData.passengersProfile[profile].beneficiaries">
-                                                      <div class="profile-summary-section-header">
-                                                            <div class="row">
-                                                                  <div class="col-xs-1 text-right">
-                                                                        <img src="images/icon-beneficiary.png" alt="">
-                                                                  </div>
-                                                                  <div class="col-xs-11">
-                                                                        <div class="row">
-                                                                              <div class="col-xs-12">
-                                                                                    <h5>ผู้รับผลประโยชน์</h5>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+    <h3>ข้อมูลผู้ขอประกัน</h3>
+    <div class="profileGroup" ng-repeat="profile in range(1,travel.passengers)">
+      <ng-form name="profileForm" novalidate>
+      <div class="profile" ng-class="{'edit':tempData.passengersProfile[profile].stage == 'edit','saved':tempData.passengersProfile[profile].stage == 'saved'}">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="profile-add-button" ng-click="changeStage(profile,'edit',profileForm.$valid);">
+              <h4>
+              <span class="glyphicon glyphicon-plus-sign"></span>
+              ผู้ขอประกันคนที่ {{profile}}
+              </h4>
+            </div>
+            <div class="profile-header">
+              <h4>ผู้ขอประกันคนที่ {{profile}} <div class="right" ng-if="tempData.passengersProfile[profile].stage == 'saved'"><span ng-click="changeStage(profile,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(profile,'reset',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span></div></h4>
+            </div>
+            <div ng-if="tempData.passengersProfile[profile].stage == 'edit'" class="profile-details">
+              <div class="profile-details-section">
+                <div class="profile-details-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-profile.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ข้อมูลส่วนตัว</h5>
                         </div>
-                  </ng-form>
-            </div>
-            
-                  <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1"> -->
-                       
-                        
-                        <!-- PART 3 -->
-                        <!-- PART 4 -->
-                        <!-- PART 5 -->
-                        <!-- <div class="row"> -->
-                              <!--  <div class="col-xs-12">
-                                    <div class="checkbox">
-                                          <label><input type="checkbox">ยินยอมให้บริษัทฯ ใช้หมายเลขโทรศัพท์มือถือ และ/หรือ ข้อมูลทางอิเลคทรอนิกส์ที่ให้ไว้ข้างต้นนี้ ในการแจ้งผลการอนุมัติ รวมทั้งข่าวสารอื่นๆ</label>
-                                    </div>
-                              </div> -->
-                              
-                              
-                              
-                        <!-- </div>
-                  </div> -->
-            <div class="row">
-                  <div class="col-xs-12 text-center">
-                        <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.title.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
+                          <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].title" name="title" title="คำนำหน้าชื่อ" data-size="5" required>
+                            <li nya-bs-option="title in travelData.formData.title | orderBy:'id'">
+                              <!-- the text content of anchor element will be used for search -->
+                              <a>
+                                {{ title.name }}
+                              </a>
+                            </li>
+                          </ol>
+                          <div class="help-block" ng-messages="profileForm.title.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.title.$touched">
+                            <p ng-message="required">กรุณาเลือกคำนำหน้าชื่อ</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.firstname.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="firstname">ชื่อ</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].firstname" type="text" name="firstname" placeholder="ชื่อ" ng-pattern="/[ก-ฮ]/" required>
+                          <div class="help-block" ng-messages="profileForm.firstname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.firstname.$touched">
+                            <p ng-message="required">กรุณากรอกชื่อ</p>
+                            <p ng-message="pattern">กรุณากรอกชื่อเป็นภาษาไทย</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.lastname.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="lastname">นามสกุล</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].lastname" type="text" name="lastname" placeholder="นามสกุล" ng-pattern="/[ก-ฮ]/" required>
+                          <div class="help-block" ng-messages="profileForm.lastname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.lastname.$touched">
+                            <p ng-message="required">กรุณากรอกนามสกุล</p>
+                            <p ng-message="pattern">กรุณากรอกนามสกุลเป็นภาษาไทย</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" ng-if="tempData.isSchengen">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.englishFirstname.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="englishFirstname">ชื่อ (ภาษาอังกฤษ)</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishFirstname" type="text" name="englishFirstname" placeholder="ชื่อ (ภาษาอังกฤษ)" ng-pattern="/[a-z]/" required>
+                          <div class="help-block" ng-messages="profileForm.englishFirstname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishFirstname.$touched">
+                            <p ng-message="required">กรุณากรอกชื่อ (ภาษาอังกฤษ)</p>
+                            <p ng-message="pattern">กรุณากรอกชื่อเป็นภาษาอังกฤษ</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.englishLastname.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="englishLastname">นามสกุล (ภาษาอังกฤษ)</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishLastname" type="text" name="englishLastname" placeholder="นามสกุล (ภาษาอังกฤษ)" ng-pattern="/[a-z]/" required>
+                          <div class="help-block" ng-messages="profileForm.englishLastname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishLastname.$touched">
+                            <p ng-message="required">กรุณากรอกนามสกุล (ภาษาอังกฤษ)</p>
+                            <p ng-message="pattern">กรุณากรอกนามสกุลเป็นภาษาอังกฤษ</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.nationalId.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="nationalId">เลขที่บัตรประชาชน</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].nationalId" type="text" name="nationalId" placeholder="เลขที่บัตรประชาชน" ng-pattern="/^\d{13}$/" required>
+                          <div class="help-block" ng-messages="profileForm.nationalId.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.nationalId.$touched">
+                            <p ng-message="required">กรุณากรอกเลขที่บัตรประชาชน</p>
+                            <p ng-message="pattern">กรุณากรอกเลขที่บัตรประชาชนเป็นตัวเลข 13 หลัก</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.passportId.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="passportId">เลขที่หนังสือเดินทาง</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].passportId" type="text" name="passportId" placeholder="เลขที่หนังสือเดินทาง" required>
+                          <div class="help-block" ng-messages="profileForm.passportId.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.passportId.$touched">
+                            <p ng-message="required">กรุณากรอกเลขที่หนังสือเดินทาง</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-4 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.birthDate.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="birthDate">วัน / เดือน / ปีเกิด</label>
+                          <div class="input-group input-group-outline">
+                            <input type="text" name="birthDate" birth-date-calendar="1" index="{{profile}}" ng-model="travel.passengersProfile[profile].birthDate" placeholder="วัน / เดือน / ปีเกิด" class="form-control text-center" required/>
+                            <span class="input-group-addon"><img src="images/icon-calendar.jpg" alt=""></span>
+                          </div>
+                          <div class="help-block" ng-messages="profileForm.birthDate.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.birthDate.$touched">
+                            <p ng-message="required">กรุณาระบุ วัน / เดือน / ปีเกิด เกิด</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-4 col-sm-3">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.gender.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="gender">เพศ</label>
+                          <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].gender" name="gender" title="เพศ" data-size="5" required>
+                            <li nya-bs-option="gender in travelData.formData.gender | orderBy:'id'">
+                              <!-- the text content of anchor element will be used for search -->
+                              <a>
+                                {{ gender.name }}
+                              </a>
+                            </li>
+                          </ol>
+                          <div class="help-block" ng-messages="profileForm.gender.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.gender.$touched">
+                            <p ng-message="required">กรุณเลือกเพศ</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-4 col-sm-3">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.occupation.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="occupation">อาชีพ</label>
+                          <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].occupation" name="occupation" title="อาชีพ" data-size="5" required>
+                            <li nya-bs-option="occupation in travelData.formData.occupation | orderBy:'id'">
+                              <!-- the text content of anchor element will be used for search -->
+                              <a>
+                                {{ occupation.name }}
+                              </a>
+                            </li>
+                          </ol>
+                          <div class="help-block" ng-messages="profileForm.occupation.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.occupation.$touched">
+                            <p ng-message="required">กรุณาเลือกอาชีพ</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.email.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="email">อีเมล</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].email" type="email" name="email" placeholder="อีเมล" required>
+                          <div class="help-block" ng-messages="profileForm.email.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.email.$touched">
+                            <p ng-message="required">กรุณากรอกอีเมล</p>
+                            <p ng-message="email">กรุณากรอกอีเมลที่ถูกต้อง</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group" ng-class="{ 'has-error' : profileForm.phone.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                          <label class="sr-only" for="phone">เบอร์โทรศัพท์</label>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].phone" type="text" name="phone" placeholder="เบอร์โทรศัพท์" required>
+                          <div class="help-block" ng-messages="profileForm.phone.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.phone.$touched">
+                            <p ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-details-section">
+                <div class="profile-details-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-address.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ที่อยู่</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                      <div ng-if="!tempData.passengersProfile[profile].isManualAddress">
+                        <div class="col-xs-12 col-sm-4">
+                          <button ng-click="addAddress(profile);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-8">
+                          <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
+                            <span ng-class="{'active':tempData.passengersProfile[profile].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger,profile)" ng-repeat="passenger in range(1,profile-1)">
+                              {{passenger}}
+                            </span>
+                          </p>
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.referenceAddress.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <input type="hidden" name="referenceAddress" ng-model="tempData.passengersProfile[profile].referenceAddress" required>
+                            <div class="help-block" ng-messages="profileForm.referenceAddress.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.referenceAddress.$touched">
+                              <p ng-message="required">กรุณากรอกที่อยู่หรือเลือกใช้ที่อยู่เดียวกับผู้ขอประกันท่านอื่น</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div ng-if="tempData.passengersProfile[profile].isManualAddress">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.address.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <label class="sr-only" for="address">ที่อยู่</label>
+                            <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" type="text" name="address" placeholder="ที่อยู่" ng-pattern="/[ก-ฮ]/" required>
+                            <div class="help-block" ng-messages="profileForm.address.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.address.$touched">
+                              <p ng-message="required">กรุณากรอกที่อยู่</p>
+                              <p ng-message="pattern">กรุณากรอกที่อยู่เป็นภาษาไทย</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="tempData.isSchengen">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group" ng-class="{ 'has-error' : profileForm.englishAddress.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                              <label class="sr-only" for="englishAddress">ที่อยู่ (ภาษาอังกฤษ)</label>
+                              <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษ)" ng-pattern="/[a-z]/" required>
+                              <div class="help-block" ng-messages="profileForm.englishAddress.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishAddress.$touched">
+                                <p ng-message="required">กรุณากรอกที่อยู่ (ภาษาอังกฤษ)</p>
+                                <p ng-message="pattern">กรุณากรอกที่อยู่เป็นภาษาอังกฤษ</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.province.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <label class="sr-only" for="province">จังหวัด</label>
+                            <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].addressData.province" name="province" title="จังหวัด" data-size="5" required>
+                              <li nya-bs-option="province in travelData.formData.province | orderBy:'name'">
+                                <!-- the text content of anchor element will be used for search -->
+                                <a>
+                                  {{ province.name }}
+                                </a>
+                              </li>
+                            </ol>
+                            <div class="help-block" ng-messages="profileForm.province.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.province.$touched">
+                              <p ng-message="required">กรุณาเลือกจังหวัด</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <label class="sr-only" for="district">เขต/อำเภอ</label>
+                            <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].addressData.district" name="district" title="เขต/อำเภอ" data-size="5" required>
+                              <li nya-bs-option="district in travelData.formData.province[travel.passengersProfile[profile].addressData.province.id - 1].district | orderBy:'name'">
+                                <!-- the text content of anchor element will be used for search -->
+                                <a>
+                                  {{ district.name }}
+                                </a>
+                              </li>
+                            </ol>
+                            <div class="help-block" ng-messages="profileForm.district.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.district.$touched">
+                              <p ng-message="required">กรุณาเลือกเขต/อำเภอ</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
+                            <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].addressData.subdistrict" name="subdistrict" title="แขวง/ตำบล" data-size="5" required>
+                              <li nya-bs-option="subdistrict in travelData.formData.province[travel.passengersProfile[profile].addressData.province.id - 1].district[travel.passengersProfile[profile].addressData.district.id - 1].subdistrict | orderBy:'name'" ng-click="travel.passengersProfile[profile].addressData.postcode = subdistrict.postcode">
+                                <!-- the text content of anchor element will be used for search -->
+                                <a>
+                                  {{ subdistrict.name }}
+                                </a>
+                              </li>
+                            </ol>
+                            <div class="help-block" ng-messages="profileForm.subdistrict.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.subdistrict.$touched">
+                              <p ng-message="required">กรุณาเลือกแขวง/ตำบล</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : profileForm.postcode.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                            <label class="sr-only" for="postcode">รหัสไปรษณีย์</label>
+                            <input ng-model="travel.passengersProfile[profile].addressData.postcode" class="form-control" type="text" name="postcode" placeholder="รหัสไปรษณีย์" ng-pattern="/^\d{5}$/" required>
+                            <div class="help-block" ng-messages="profileForm.postcode.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.postcode.$touched">
+                              <p ng-message="required">กรุณากรอกรหัสไปรษณีย์</p>
+                              <p ng-message="pattern">กรุณากรอกรหัสไปรษณีย์ที่ถูกต้อง</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-details-section">
+                <div class="profile-details-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-beneficiary.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ผู้รับผลประโยชน์</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <p>ในกรณีที่ท่านไม่ระบุผู้รับประโยชน์ ชื่อผู้รับประโยชน์จะต้องเป็นทายาทตามกฎหมาย ได้แก่ บิดา มารดา คู่สมรส และบุตร</p>
+                      </div>
+                    </div>
+                    <ng-form name="beneficiaryForm" novalidate ng-if="tempData.passengersProfile[profile].beneficiaries" ng-repeat="beneficiary in range(1,tempData.passengersProfile[profile].beneficiaries)">
+                    <div class="beneficiary">
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.title.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted) }">
+                            <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
+                            <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].title" name="title" title="คำนำหน้าชื่อ" data-size="5" required>
+                              <li nya-bs-option="title in travelData.formData.title | orderBy:'id'">
+                                <!-- the text content of anchor element will be used for search -->
+                                <a>
+                                  {{ title.name }}
+                                </a>
+                              </li>
+                            </ol>
+                            <div class="help-block" ng-messages="beneficiaryForm.title.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.title.$touched">
+                              <p ng-message="required">กรุณากรอกคำนำหน้าชื่อ</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.relationship.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted) }">
+                            <label class="sr-only" for="relationship">ความสัมพันธ์</label>
+                            <ol class="nya-bs-select form-control" ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].relationship" name="relationship" title="ความสัมพันธ์" data-size="5" required>
+                              <li nya-bs-option="relationship in travelData.formData.relationship | orderBy:'id'">
+                                <!-- the text content of anchor element will be used for search -->
+                                <a>
+                                  {{ relationship.name }}
+                                </a>
+                              </li>
+                            </ol>
+                            <div class="help-block" ng-messages="beneficiaryForm.relationship.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.relationship.$touched">
+                              <p ng-message="required">กรุณาระบุความสัมพันธ์</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.firstname.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted) }">
+                            <label class="sr-only" for="firstname">ชื่อ</label>
+                            <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].firstname" type="text" name="firstname" class="form-control" placeholder="ชื่อ" required>
+                            <div class="help-block" ng-messages="beneficiaryForm.firstname.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.firstname.$touched">
+                              <p ng-message="required">กรุณากรอกชื่อ</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                          <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.lastname.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted) }">
+                            <label class="sr-only" for="lastname">นามสกุล</label>
+                            <input ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].lastname" type="text" name="lastname" class="form-control" placeholder="นามสกุล" required>
+                            <div class="help-block" ng-messages="beneficiaryForm.lastname.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.lastname.$touched">
+                              <p ng-message="required">กรุณากรอกนามสกุล</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <button ng-if="tempData.passengersProfile[profile].beneficiaries == beneficiary && tempData.passengersProfile[profile].beneficiaries != 3 " ng-click="addBeneficiary(profile,beneficiaryForm.$valid);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่มผู้รับผลประโยชน์</button>
+                      </div>
+                    </div>
+                    </ng-form>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <button ng-if="!tempData.passengersProfile[profile].beneficiaries" ng-click="addBeneficiary(profile,beneficiaryForm.$valid);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่มผู้รับผลประโยชน์</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="form-group" ng-class="{ 'has-error' : profileForm.termsAccepted.$invalid && tempData.passengersProfile[profile].profileFormSubmitted }">
+                      <div class="checkbox" ng-class="{ 'checked' : tempData.passengersProfile[profile].termsAccepted == true }">
+                        <label for="termsAccepted" ng-click="termsToggle(profile);">
+                          <input type="checkbox" name="termsAccepted" ng-model="tempData.passengersProfile[profile].termsAccepted" required>
+                          ยินยอมให้บริษัทฯ ใช้หมายเลขโทรศัพท์มือถือ และ/หรือ ข้อมูลทางอิเลคทรอนิกส์ที่ให้ไว้ข้างต้นนี้ ในการแจ้งผลการอนุมัติ รวมทั้งข่าวสารอื่นๆ
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-details-section submit">
+                <div class="row">
+                  <div class="col-xs-12 text-center">
+                    <button ng-click="changeStage(profile,'saved',profileForm.$valid);" class="btn btn-super"><span>บันทึกข้อมูล</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div ng-if="tempData.passengersProfile[profile].stage == 'saved'" class="profile-summary">
+              <div class="profile-summary-section">
+                <div class="profile-summary-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-profile.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ข้อมูลส่วนตัว</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>ชื่อ - นามสกุล</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].title.name}} {{travel.passengersProfile[profile].firstname}} {{travel.passengersProfile[profile].lastname}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].title.engname}} {{travel.passengersProfile[profile].englishFirstname}} {{travel.passengersProfile[profile].englishFirstname}}</span></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>เลขที่บัตรประชาชน</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].nationalId}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>เลขที่หนังสือเดินทาง</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].passportId}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>วัน / เดือน / ปีเกิด</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].birthDate}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>เพศ</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].gender.name}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>อาชีพ</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].occupation.name}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>อีเมล</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].email}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <p>เบอร์โทรศํพท์</p>
+                      </div>
+                      <div class="col-xs-6">
+                        <p>{{travel.passengersProfile[profile].phone}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-summary-section">
+                <div class="profile-summary-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-address.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ที่อยู่</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                      <div class="col-xs-6 col-xs-offset-6">
+                        <p>{{travel.passengersProfile[profile].addressData.address}} แขวง{{travel.passengersProfile[profile].addressData.subdistrict.name}}, เขต{{travel.passengersProfile[profile].addressData.district.name}}, {{travel.passengersProfile[profile].addressData.province.name}} {{travel.passengersProfile[profile].addressData.postcode}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].addressData.englishAddress}} {{travel.passengersProfile[profile].addressData.subdistrict.engname}}, {{travel.passengersProfile[profile].addressData.district.engname}}, {{travel.passengersProfile[profile].addressData.province.engname}} {{travel.passengersProfile[profile].addressData.postcode}}</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="profile-summary-section" ng-if="tempData.passengersProfile[profile].beneficiaries">
+                <div class="profile-summary-section-header">
+                  <div class="row">
+                    <div class="col-xs-1 text-right">
+                      <img src="images/icon-beneficiary.png" alt="">
+                    </div>
+                    <div class="col-xs-11">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h5>ผู้รับผลประโยชน์</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                      <div class="row">
+                        <div class="col-xs-6 col-xs-offset-6">
+                          <p ng-repeat="beneficiary in travel.passengersProfile[profile].beneficiaries">{{beneficiary.title.name}} {{beneficiary.relationship.name}} {{beneficiary.firstname}} {{beneficiary.lastname}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      </ng-form>
+      <ng-form name="profileFormSubmittion" class="text-center" novalidate>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group" ng-class="{ 'has-error' : profileFormSubmittion.profileForm.$invalid && formStepSubmitted }">
+              <input type="hidden" name="profileForm" ng-model="tempData.passengersProfile[profile].profileForm" required>
+              <div class="help-block" ng-messages="profileFormSubmittion.profileForm.$error" ng-if="formStepSubmitted">
+                <p ng-message="required">กรุณากรอกข้อมูลของผู้ขอประกันคนที่ {{profile}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-form>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPayment(insuranceForm.$valid)" class="btn btn-super"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+      </div>
+    </div>
+  </div>
 </div>
-

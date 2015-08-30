@@ -389,104 +389,186 @@
             ],
             "defaultTick":true
         },
-        "province": [
-            {
-                "id": 1,
-                "name": "Bangkok"
-            },
-            {
-                "id": 2,
-                "name": "Chiang Mai"
-            },
-            {
-                "id": 3,
-                "name": "Phuket"
-            },
-            {
-                "id": 4,
-                "name": "Prachin Buri"
-            },
-            {
-                "id": 5,
-                "name": "Chon Buri"
-            }
-        ],
-        "district": [
-            {
-                "id": 1,
-                "name": "Khet Bang Kapi",
-                "provinceid": 1
-            },
-            {
-                "id": 2,
-                "name": "Khet Dusit",
-                "provinceid": 1
-            },
-            {
-                "id": 3,
-                "name": "Khet Bang Sue",
-                "provinceid": 1
-            },
-            {
-                "id": 4,
-                "name": "Khet Don Mueang",
-                "provinceid": 1
-            },
-            {
-                "id": 5,
-                "name": "Khet Huai Khwang",
-                "provinceid": 1
-            },
-            {
-                "id": 6,
-                "name": "Mueang Chiang Mai",
-                "provinceid": 2
-            },
-            {
-                "id": 7,
-                "name": "San Sai",
-                "provinceid": 2
-            },
-            {
-                "id": 8,
-                "name": "Fang",
-                "provinceid": 2
-            },
-            {
-                "id": 9,
-                "name": "Kathu",
-                "provinceid": 3
-            },
-            {
-                "id": 10,
-                "name": "Mueang Phuket",
-                "provinceid": 3
-            },
-            {
-                "id": 11,
-                "name": "Mueang Prachin Buri",
-                "provinceid": 4
-            },
-            {
-                "id": 12,
-                "name": "Kabin Buri",
-                "provinceid": 4
-            },
-            {
-                "id": 13,
-                "name": "Na Di",
-                "provinceid": 4
-            },
-            {
-                "id": 14,
-                "name": "Mueang Chon Buri",
-                "provinceid": 5
-            },
-            {
-                "id": 15,
-                "name": "Si Racha",
-                "provinceid": 5
-            }
-        ]
+        "formData": {
+            "paymentMethod": [
+                {
+                    "id": 1,
+                    "name": "Mastercard"
+                },
+                {
+                    "id": 2,
+                    "name": "Visa"
+                }
+            ],
+            "paymentBankCountry": [
+                {
+                    "id": 1,
+                    "name": "ประเทศไทย"
+                },
+                {
+                    "id": 2,
+                    "name": "สาธารณรัฐประชาชนจีน"
+                },
+                {
+                    "id": 3,
+                    "name": "สาธารณรัฐไซปรัส"
+                },
+                {
+                    "id": 4,
+                    "name": "สาธารณรัฐประชาธิปไตยติมอร์-เลสเต"
+                },
+                {
+                    "id": 5,
+                    "name": "สาธารณรัฐจอร์เจีย"
+                },
+                {
+                    "id": 6,
+                    "name": "สาธารณรัฐอินเดีย"
+                },
+                {
+                    "id": 7,
+                    "name": "สาธารณรัฐอินโดนีเซีย"
+                },
+                {
+                    "id": 8,
+                    "name": "สาธารณรัฐอิสลามอิหร่าน"
+                },
+                {
+                    "id": 9,
+                    "name": "สาธารณรัฐอิรัก"
+                },
+                {
+                    "id": 10,
+                    "name": "รัฐอิสราเอล"
+                },
+                {
+                    "id": 11,
+                    "name": "ญี่ปุ่น"
+                }
+            ],
+            "paymentBank": [
+                {
+                    "id": 1,
+                    "name": "ธนาคารกสิกรไทย"
+                },
+                {
+                    "id": 2,
+                    "name": "ธนาคารไทยพาณิชย์"
+                },
+                {
+                    "id": 3,
+                    "name": "ธนาคารกรุงไทย"
+                },
+                {
+                    "id": 4,
+                    "name": "ธนาคารทหารไทย"
+                }
+            ],
+            "province": [
+                {
+                    "id": 1,
+                    "name": "กรุงเทพฯ",
+                    "engname": "Bangkok",
+                    "district": [
+                        {
+                            "id": 1,
+                            "name": "ดุสิต",
+                            "engname": "Dusit",
+                            "subdistrict": [
+                                {
+                                    "name": "สวนจิตรลดา",
+                                    "engname": "Suan Chitlada",
+                                    "postcode": "10300"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "title": [
+                {
+                    "id": 1,
+                    "name": "นาย",
+                    "engname": "Mr."
+                },
+                {
+                    "id": 2,
+                    "name": "นาง",
+                    "engname": "Mrs."
+                },
+                {
+                    "id": 3,
+                    "name": "นางสาว",
+                    "engname": "Ms."
+                }
+
+            ],
+            "gender": [
+                {
+                    "id": 1,
+                    "name": "ชาย",
+                    "engname": "Male"
+                },
+                {
+                    "id": 2,
+                    "name": "หญิง",
+                    "engname": "Female"
+                }
+            ],
+            "occupation": [
+                {
+                    "id": 1,
+                    "name": "อาชีพ 1",
+                    "engname": "Occupation 1"
+                },
+                {
+                    "id": 2,
+                    "name": "อาชีพ 2",
+                    "engname": "Occupation 2"
+                },
+                {
+                    "id": 3,
+                    "name": "อาชีพ 3",
+                    "engname": "Occupation 3"
+                },
+                {
+                    "id": 4,
+                    "name": "อาชีพ 4",
+                    "engname": "Occupation 4"
+                },
+                {
+                    "id": 5,
+                    "name": "อาชีพ 5",
+                    "engname": "Occupation 5"
+                }
+            ],
+            "relationship": [
+                {
+                    "id": 1,
+                    "name": "บิดา",
+                    "engname": "Father"
+                },
+                {
+                    "id": 2,
+                    "name": "มารดา",
+                    "engname": "Mother"
+                },
+                {
+                    "id": 3,
+                    "name": "คู่สมรส",
+                    "engname": "Spouse"
+                },
+                {
+                    "id": 4,
+                    "name": "พี่น้อง",
+                    "engname": "Sibling"
+                },
+                {
+                    "id": 5,
+                    "name": "บุตร",
+                    "engname": "Child"
+                }
+            ]
+        }
     }
 }

@@ -570,12 +570,93 @@ MAIN PAGE
         }
     }
 }
-
+.thankyou {
+	@include box-shadow(1px, 1px, 3px, $text-color);
+	position: relative;
+	margin-top: 40px;
+	padding: 1em;
+	background-color: $white;
+    color: $primary-color;
+	.thankyou-header {
+		text-align: center;
+		h3 {
+			color: $primary-color;
+			@include text-shadow(0px, 0px, 0px, $text-color);
+			small {
+				color: $dark-gray;
+				font-family: $font-secondary;
+			}
+		}
+	}
+	.thankyou-details {
+		margin-bottom: 40px;
+		.order-detail {
+			padding: 0;
+			margin: 30px 0;
+			font-size: 32px;
+			text-align: center;
+			.ordernumber {
+				font-size: 32px;
+				font-weight: bold;
+				color: $secondary-brand-color;
+			}
+		}
+		p {
+			padding: 0px 60px;
+			img {
+				margin-right: 15px;
+			}
+		}
+	}
+}
+.cvv2-lightbox {
+	position: fixed;
+	display: block;
+	z-index: 9999;
+	top: 0;	
+	left: 0;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba($primary-color,0.9);
+	cursor: pointer;
+	&:before {
+	  content: '';
+	  display: inline-block;
+	  height: 100%;
+	  vertical-align: middle;
+	}
+	img {
+		display: inline-block;
+  		vertical-align: middle;
+	}
+}
+.payment {
+	@include box-shadow(1px, 1px, 3px, $text-color);
+	position: relative;
+	margin-top: 40px;
+	padding: 1em;
+	background-color: $white;
+    color: $primary-color;
+	.payment-header {
+		background-color: $secondary-color;
+    	color: $white;
+	}
+	.payment-details {
+		margin: 30px 0;
+		.submit {
+			margin: 40px 0 20px 0;
+		}
+	}
+}
+.profileGroup {
+	margin-bottom: 40px;
+}
 .profile {
     background-color: $secondary-color;
     color: $primary-color;
     padding: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0;
     @include box-shadow(1px, 1px, 3px, $text-color);
     @include transition(all 0.5s ease);
     cursor: pointer;
@@ -586,10 +667,71 @@ MAIN PAGE
             text-align: center;
             color: $white;
             span {
-                float: left;
-            }
+                position: absolute;
+			    left: 15px;
+			    top: initial;            
+			}
         }
     }
+    .form-group{
+    	.checkbox {
+    		margin-top: 60px;
+    		padding: 0 5px;
+    		label {
+    			padding-left: 30px;
+    			font-size: 18px;
+    			font-family: $font-secondary;
+    			&::before {
+    				content: "";
+    				@include transition(all 0.5s ease);
+                    @include border-radius($border-radius);
+                    @include box-sizing(border-box);
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    display: inline-block;
+                    background-color: rgba($black, 0.2);
+                    background-image: none;
+                    border: 2px solid rgba($black, 0.1);
+                    position: absolute;
+    				overflow: hidden;
+    				top: 0px;
+    				left: 5px;
+    			}
+    			&:hover {
+    				&::before {
+    					background-color: rgba($primary-color, 0.8);
+    					border: 2px solid rgba($primary-color, 0.6);
+    				}
+    			}
+    		}
+    		&.checked {
+    			label {
+    				&::before {
+    					background-color: rgba($primary-color, 0.8);
+    					border: 2px solid rgba($primary-color, 0.6);
+    				}
+    			}
+    		}
+	    }
+	    &.has-error {
+	    	.checkbox {
+	    		label {
+	    			color: $alert-red;
+		    		&::before {
+	    				background-color: rgba($alert-red, 0.4);
+	    				border: 2px solid rgba($alert-red, 0.2);
+	    			}
+	    			&:hover {
+	    				&::before {
+	    					background-color: rgba($primary-color, 0.8);
+	    					border: 2px solid rgba($primary-color, 0.6);
+	    				}
+	    			}
+    			}
+	    	}
+	    }
+	}
     .copyPassengerAddressButton {
         @include transition(all 0.5s ease);
         @include box-sizing(border-box);
@@ -666,7 +808,7 @@ MAIN PAGE
         }
     }
     .profile-details-section {
-        margin-top: 15px;
+        margin-top: 25px;
         &.submit {
             margin: 40px 0;
         }
@@ -700,6 +842,9 @@ MAIN PAGE
         background-color: $white;
         .profile-summary {
             display: block;
+            .profile-summary-section {
+		        margin: 25px 0;
+		    }
         }
         .profile-header {
             display: block;
@@ -784,7 +929,7 @@ MAIN PAGE
         img {
             position: relative;
             z-index: 0;
-            // margin: -15% 0 0 0;
+            margin: 0 0 0 0;
             margin: 0;
             width: 100%;
         }

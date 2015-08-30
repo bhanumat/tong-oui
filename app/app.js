@@ -58,6 +58,10 @@
       .state('insurance.payment', {
         url: '/payment',
         templateUrl: 'views/payment.html'
+      })
+      .state('insurance.thankyou', {
+        url: '/thankyou',
+        templateUrl: 'views/thankyou.html'
       });
 
       $urlRouterProvider.otherwise('/insurance/destination');
