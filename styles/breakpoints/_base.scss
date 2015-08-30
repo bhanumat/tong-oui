@@ -653,6 +653,16 @@ MAIN PAGE
             color: $white;
             padding: 0.5em;
             margin-top: 5px;
+            .right {
+           		float: right;
+            }
+            span {
+            	cursor: pointer;
+            	margin-left: 15px;
+            	img {
+            		margin-top: -5px;
+            	}
+            }
         }
     }
     .profile-details-section {
@@ -662,6 +672,8 @@ MAIN PAGE
         }
     }
     .beneficiary {
+    	clear: both;
+    	width: 100%;
         float: left;
         margin-bottom: 0px;
     }

@@ -58,7 +58,7 @@
     $scope.tempData.passengersProfile = [];
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
-    $scope.tempData.passengersProfile[1].beneficiaries = 0; 
+    // $scope.tempData.passengersProfile[1].beneficiaries = 0; 
     $scope.tempData.passengersProfile[1].isManualAddress = true; 
 
     $http.get('/NewTravel.json').
@@ -85,11 +85,6 @@
     }, function(response) {
       
     });
-
-    // 
-    // $scope.travel.passengersProfile.beneficiaries = [];
-
-
 
     $scope.calculateTotalPrice = function(){
       for (var i=0;i<$scope.travelData.quotation.protect.length;i++) {
@@ -127,15 +122,23 @@
       }
     };
 
-    $scope.changeStage = function(index,stage){
+    $scope.changeStage = function(index,stage,validate){
       if(!$scope.tempData.passengersProfile[index]) {
         $scope.tempData.passengersProfile[index] = {};
         $scope.tempData.passengersProfile[index].stage = '';
       }
-      // if(stage == 'edit') {
+      if(validate){
+        $scope.profileFormSubmitted = false;
+        $scope.tempData.passengersProfile[index].stage = stage;
+      }
+      else{
+        $scope.profileFormSubmitted = true;
+      }
+      if(stage == 'saved') {
+
         
-      // }
-      $scope.tempData.passengersProfile[index].stage = stage;
+      }
+      
     }
 
     $scope.copyPassengerAddress = function(templateIndex,targetIndex){
@@ -152,16 +155,21 @@
         $scope.travel.passengersProfile[index].addressData = {};
     };
 
-    $scope.addBeneficiary = function(index) {
+    $scope.addBeneficiary = function(index,validate) {
       if($scope.tempData.passengersProfile[index].beneficiaries){
-        if($scope.tempData.passengersProfile[index].beneficiaries < 3) {
-          $scope.tempData.passengersProfile[index].beneficiaries += 1;
+        if (validate) {
+          $scope.beneficiaryFormSubmitted = false;
+          if($scope.tempData.passengersProfile[index].beneficiaries < 3) {
+            $scope.tempData.passengersProfile[index].beneficiaries += 1;
+          }
+        }
+        else {
+          $scope.beneficiaryFormSubmitted = true;
         }
       }
       else {
         $scope.tempData.passengersProfile[index].beneficiaries = 1;
       }
-      
     };
 
     $scope.isSchengen = function(){

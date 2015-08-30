@@ -219,7 +219,32 @@ select {
       border-width: 0px;
     }
   }
+  &.has-error {
+    .form-control {
+      &:focus {
+            @include box-shadow(1px, 1px, 3px, $text-color);
+      }
+      border-color: $alert-red;
+      &::-webkit-input-placeholder {
+         color: rgba($alert-red,0.4);
+      }
 
+      &:-moz-placeholder { /* Firefox 18- */
+         color: rgba($alert-red,0.4);  
+      }
+
+      &::-moz-placeholder {  /* Firefox 19+ */
+         color: rgba($alert-red,0.4);  
+      }
+
+      &:-ms-input-placeholder {  
+         color: rgba($alert-red,0.4);  
+      }
+    }
+    .help-block {
+      color: $alert-red;
+    }
+  }
 }
 .nya-bs-select.form-control {
   @include transition(all 0.24s ease-in-out);
