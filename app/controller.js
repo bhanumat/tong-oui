@@ -65,9 +65,9 @@
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
         propertySafe: $scope.travelData.propertysafe.defaultTick,
+        destinations: []
       };
 
-      $scope.calculateTotalPrice();
       $scope.calculatePrice();
       $scope.isSchengen();
 
@@ -78,12 +78,12 @@
     $scope.calculateTotalPrice = function(){
       for (var i=0;i<$scope.travelData.quotation.protect.length;i++) {
         if($scope.travelData.quotation.protect[i].planid == $scope.travel.selectedPlan){
-          $scope.tempData.totalPrice = $scope.travelData.quotation.protect[i].price;
+          $scope.tempData.totalPrice = $scope.getPriceRate($scope.travelData.quotation.protect[i]);
           if($scope.travel.flightSecured) {
-            $scope.tempData.totalPrice += $scope.travelData.flightsecure.protect[i].price;
+            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.flightsecure.protect[i]);
           }
           if($scope.travel.propertySafe) {
-            $scope.tempData.totalPrice += $scope.travelData.propertysafe.protect[i].price;
+            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.propertysafe.protect[i]);
           }
           $scope.tempData.totalPrice *= $scope.travel.passengers;
         }
@@ -97,6 +97,7 @@
       }
       else {
         if(isFormValid) {
+          $scope.calculatePrice();
           $scope.summaryBarSubmitted = false;
           $scope.editingSummarybar = false;
         }
@@ -104,6 +105,7 @@
     };
 
     $scope.calculatePrice = function(){
+      $scope.calculateTotalPrice();
       if($scope.tempData.discount){
         if ($scope.tempData.discountType == "percent") {
           if($scope.tempData.totalPrice * ((100-$scope.tempData.discount)/100) < 0 ){
@@ -198,10 +200,62 @@
       return false;
     };
 
-    $scope.propertySafeToggle = function(){
-      $scope.travel.propertySafe = !$scope.travel.propertySafe;
-      $scope.calculateTotalPrice();
-      $scope.calculatePrice();
+    $scope.isAsia = function(){
+      for (var i = 0; i < $scope.travel.destinations.length; i++) {
+        if($scope.travel.destinations[i].type == "asia"){
+          $scope.tempData.isAsia = true;
+          return true;
+        }
+        else {
+          $scope.tempData.isAsia = false;
+        }
+      }
+      return false;
+    };
+
+    $scope.isWorldWide = function(){
+      if( $scope.isSchengen() && $scope.isAsia() ) {
+        return true;
+      }
+      return false;
+    };
+
+    $scope.getProtectionArea = function(){
+      if($scope.isWorldWide()) {
+        return 'world';
+      }
+      else if($scope.isAsia()) {
+        return 'asia';
+      }
+      else {
+        return 'schengen';
+      }
+      return false;
+    };
+
+    $scope.getPriceRate = function(plan){
+      var price = 0;
+      for(var i = 0; i < plan.price[$scope.getProtectionArea()].length - 1; i++) {
+        if(plan.price[$scope.getProtectionArea()][i].day < $scope.travel.days){
+          price = plan.price[$scope.getProtectionArea()][i+1].fee;
+        }
+        else if(plan.price[$scope.getProtectionArea()][i].day == $scope.travel.days){
+          price = plan.price[$scope.getProtectionArea()][i].fee;
+          return price;
+          
+        }
+      }
+      return price;
+      
+    };
+
+
+
+    $scope.propertySafeToggle = function(selected){
+      if(selected){
+        $scope.travel.propertySafe = !$scope.travel.propertySafe;
+        $scope.calculatePrice();
+      };
     };
 
     $scope.termsToggle = function(index){
@@ -215,10 +269,11 @@
     };
 
 
-    $scope.flightSecuredToggle = function(){
-      $scope.travel.flightSecured = !$scope.travel.flightSecured;
-      $scope.calculateTotalPrice();
-      $scope.calculatePrice();
+    $scope.flightSecuredToggle = function(selected){
+      if (selected) {
+        $scope.travel.flightSecured = !$scope.travel.flightSecured;
+        $scope.calculatePrice();
+      };
     };
 
     $scope.goToOrder = function(isFormValid) {
@@ -234,6 +289,7 @@
       // set to true to show all error messages (if there are any)
       $scope.formStepSubmitted = true;
       if(isFormValid) {
+        $scope.calculatePrice();
         $scope.formStepSubmitted = false;
         $state.go('^.plan');
       }
@@ -258,9 +314,8 @@
       }
     };
 
-    $scope.selectPlan = function(planId,price){
+    $scope.selectPlan = function(planId){
       $scope.travel.selectedPlan = planId;
-      $scope.calculateTotalPrice();
       $scope.calculatePrice();
     };
 
@@ -304,8 +359,8 @@
     }
    
     $scope.today = new Date();
-    $scope.maxDate = $scope.addDays($scope.today,90);
-    $scope.minDate = $scope.addDays($scope.today,1);
+    $scope.tempData.maxDate = $scope.addDays($scope.today,90);
+    $scope.tempData.minDate = $scope.addDays($scope.today,1);
 
     //datepicker
 

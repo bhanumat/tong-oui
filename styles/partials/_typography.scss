@@ -21,13 +21,25 @@ Typography
 
 @font-face {
   font-family: 'DBThaiTextX';
-  src: url('../fonts/DBThaiTextX.eot') format('embedded-opentype');
+  src: url('../fonts/DBThaiTextX.eot?#iefix') format('embedded-opentype');
   src: url('../fonts/DBThaiTextX.woff') format('woff'), 
-url('../fonts/DBThaiTextX.ttf') format('truetype'), 
-url('../fonts/DBThaiTextX.svg#DBThaiTextX') format('svg');
+       url('../fonts/DBThaiTextX.ttf') format('truetype'), 
+       url('../fonts/DBThaiTextX.svg#DBThaiTextX') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
+
+@font-face {
+  font-family: 'DBThaiTextX';
+  src: url('../fonts/DBThaiTextX-Bold.eot?#iefix') format('embedded-opentype'),  
+       url('../fonts/DBThaiTextX-Bold.woff') format('woff'), 
+       url('../fonts/DBThaiTextX-Bold.ttf')  format('truetype'), 
+       url('../fonts/DBThaiTextX-Bold.svg#DBThaiTextX-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
 
 
 
@@ -65,8 +77,11 @@ more here: http://www.newnet-soft.com/blog/csstypography
 */
 
 p {
+  font-weight: bold;
+  color: $dark;
   font-family: $font-secondary;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 22px;
   -ms-word-wrap: break-word;
   word-break: break-word; //non-standart css for webkit
   word-wrap: break-word;

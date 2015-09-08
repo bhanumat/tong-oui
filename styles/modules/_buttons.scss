@@ -22,11 +22,14 @@ Buttons
 
 	&.btn-super {
 		font-family: $font;
-		padding: 5px 40px;
+		padding: 5px 30px 5px 0;
 		color: $white;
 		font-size: 30px;
 		background-color: $secondary-brand-color;
 		box-shadow: 1px 1px 1px $text-color;
+		span {
+			display: block;
+		}
 		span.glyphicon {
 			vertical-align: sub;
 			font-size: 30px;
@@ -47,4 +50,16 @@ Buttons
 
 .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
     margin-left: 0px;
+}
+
+.btn.btn-super.step-submit-button {
+	.glyphicon-menu-right {
+		display: block;
+	    font-size: 20px;
+	    height: 22px;
+	    position: absolute;
+	    right: 20px;
+	    top: 18px;
+	    width: 22px;
+	}
 }

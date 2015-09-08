@@ -11,21 +11,25 @@ $light-gray:        #f8f9fa;
 $gray:              #eaedf2;
 $text-color:        #5c6b80;
 $dark-gray:			#888;
+$dark: #333;
 
 $link-color:        $white;
 $link-hover:        darken($link-color, 9%);
 
-$border-color:      #ccc;
-$disabled-gray:     #cfcfcf;
-$alert-red:					red;
-$alert-green:				#645564;
-$alert-blue:				blue;
-
-$primary-color: #124b78;
 $light-primary-color: #3169af;
 $secondary-color: #21B9EC; 
 $secondary-brand-color: #f3853d; 
 
+$primary-color: #124b78;
+
+
 $border-width: 1px;
-$form-border-color: $secondary-color;
+$form-border-color: #929497;
 $border-radius: 4px;
+
+$border-color:      #ccc;
+$disabled-gray:     #cfcfcf;
+$alert-red:					#FF4E00;
+$alert-green:				#645564;
+$alert-blue:				blue;
+

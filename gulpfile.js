@@ -147,16 +147,6 @@ gulp.task('sass:build', function() {
       style: 'compact'
     }))
     .pipe($.autoprefixer('last 3 version'))
-    .pipe($.uncss({
-      html: ['./index.html', './views/**/*.html', './components/**/*.html'],
-      ignore: [
-        '.index',
-        '.slick',
-        /\.owl+/,
-        /\.owl-next/,
-        /\.owl-prev/
-      ]
-    }))
     .pipe($.minifyCss({
       keepBreaks: true,
       aggressiveMerging: false,

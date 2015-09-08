@@ -190,6 +190,7 @@ MAIN PAGE
 }
 
 .content-wrapper {
+    padding-top: 60px;
     background-color: #3da1dd;
     @include transition(0.5s all ease);
 }
@@ -223,6 +224,7 @@ MAIN PAGE
         }
     }
     .travel-destination {
+        font-weight: bold;
         background-color: $secondary-color;
         @include border-radius(4px);
         padding: 0;
@@ -283,9 +285,35 @@ MAIN PAGE
         margin-top: 200px;
     }
 }
+.go-to-top {
+    @include transition(all 0.5s ease);
+    cursor: pointer;
+    position: fixed;
+    display: block;
+    @include opacity(0);
+    right: -100px;
+    bottom: 15px;
+    text-align: center;
+    color: $primary-color;
+    span {
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 10px auto;
+        background-color: $primary-color;
+        color: $white;
+        border-radius: 15px;
+        padding-top: 4px;
+        font-size: 20px;
+    }
+}
 
 .sticky {
     z-index: 9999;
+    .go-to-top {
+        right: 15px;
+        @include opacity(1);
+    }
     .sticky-wrapper {
         width: 100%;
         margin-left: 0;
@@ -297,6 +325,13 @@ MAIN PAGE
         }
     }
     .summary-bar {
+        p {
+            font-size: 18px;
+        }
+        .sep {
+            display: none;
+        }
+        padding: 0.5em 0;
         .summary-bar-heading {
             h5 {
                 margin: 3px 0;
@@ -306,22 +341,36 @@ MAIN PAGE
             }
         }
         .summary-bar-details {
+            .destination-list {
+                margin-bottom: 10px
+            }
             h6 {
+                margin-top: 0;
                 display: inline-block;
             }
             p {
                 display: inline-block;
                 padding-left: 3px;
+                margin-bottom: 0;
             }
             .destination-list {
                 display: block;
             }
             &.insurance-plan {
                 p {
+                    margin-bottom: 10px;
                     display: block;
                 }
                 h6 {
                     display: block;
+                }
+                .price-summary {
+                    h6 {
+                        margin-top: 10px;
+                    }
+                    p {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
@@ -332,6 +381,16 @@ MAIN PAGE
     @include box-shadow(1px, 1px, 3px, $text-color);
     background-color: $white;
     padding: 1em 0.5em;
+    p {
+        font-weight: normal;
+        font-size: 22px;
+        line-height: 22px;
+    }
+    .sep {
+        display: inline-block;
+        width: 100%;
+        height:18px;
+    }
     .nav-icon {
         display: none;
         margin-bottom: 1em;
@@ -351,10 +410,11 @@ MAIN PAGE
         }
     }
     .summary-bar-details {
+        margin-top: 10px;
         padding: 0 0.5em;
         h6 {
             color: $primary-color;
-            margin-bottom: 0px;
+            margin: 0px;
         }
         .destination-list {
             span {
@@ -373,16 +433,22 @@ MAIN PAGE
             float: right;
         }
         h6 {
-            margin-top: 0;
+            margin-top: 10px;
             color: $secondary-brand-color;
         }
         .large {
-            font-size: 30px;
+            margin-top: -3px;
+            display: inline-block;
+            font-size: 40px;
         }
     }
 }
 
 #plan-options {
+    margin-bottom: 40px;
+    .plan-table {
+        margin-bottom: 20px;
+    }
     .plan-table-heading {
         .plan-table-top {
             padding: 10px 20px;
@@ -392,15 +458,19 @@ MAIN PAGE
             }
             h5 {
                 display: inline-block;
-                font-size: 30px;
+                line-height: 30px;
+                font-size: 28px;
             }
         }
     }
     .plan-table-content {
         .plan-table-top {
             h5 {
-                font-size: 36px;
-                margin: 12px 0;
+                font-size: 40px;
+                margin: 6px 0 4px 0;
+                small {
+                    margin-left: -5px;
+                }
             }
         }
         .plan {
@@ -414,7 +484,7 @@ MAIN PAGE
 
 .plan-selection {
     & > .row {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
     background-color: $white;
     color: $primary-color;
@@ -422,19 +492,51 @@ MAIN PAGE
     @include box-shadow(1px, 1px, 3px, $text-color);
     .plan-table {
         @include box-shadow(1px, 1px, 3px, $text-color);
-        background: $white;
+        background-color: $white;
+        position: relative;
+        overflow: hidden;
+        &.one-plan {
+            .plan-table-heading {
+                width: 75%;
+            }
+            .plan-table-content {
+                width: 25%;
+                .plan {
+                    width: -moz-calc(100% - 40px);
+                    width: -webkit-calc(100% - 40px);
+                    width: calc(100% - 40px);
+                }
+            }
+        }
+        &.two-plan {
+            .plan-table-heading {
+                width: 50%;
+            }
+            .plan-table-content {
+                width: 50%;
+                .plan {
+                    width: -moz-calc(50% - 20px);
+                    width: -webkit-calc(50% - 20px);
+                    width: calc(50% - 20px);
+                }
+            }
+        }
         .plan-table-heading {
+            width: 40%;
             padding: 0;
+            background-color: $white;
             .plan-table-top {
                 padding: 20px;
                 background-color: $secondary-color;
                 color: $white;
                 h5 {
-                    line-height: 32px;
+                    font-size: 30px;
+                    line-height: 47px;
                 }
             }
             .plan-table-row {
                 font-size: 0;
+                padding-right: 30px;
             }
             img {
                 width: 34px;
@@ -456,22 +558,52 @@ MAIN PAGE
             }
         }
         .plan-table-content {
+            width: 60%;
+            background-color: $light-primary-color;
             padding: 0;
+            .plan-navigation {
+                cursor: pointer;
+                color: $white;
+                font-size: 20px;
+               
+                padding: 45px 0;
+                position: absolute;
+                top: 0;
+                width: 20px;
+                z-index: 10;
+
+            }
             .plan-wrapper {
                 font-size: 0;
-                overflow-x: auto;
+                overflow-x: hidden;
                 overflow-y: hidden;
                 width: auto;
                 white-space: nowrap;
+                margin-left: -20px;
             }
             .plan {
+                @include transition(all 0.5s ease);
+                &:first-child {
+                    margin-left: 20px;
+                    &.hidePlan {
+                        margin-left: -moz-calc(-30.5% + 20px);
+                        margin-left: -webkit-calc(-30.5% + 20px);
+                        margin-left: calc(-30.5% + 20px);
+                    }
+                }
+                &:last-child {
+                    margin-right: 20px;
+                }
+                &.hidePlan {
+                    margin-left: -30.5%;
+                }
                 .radiobox {
                     @include transition(all 0.5s ease);
                     @include box-sizing(border-box);
                     width: 20px;
                     height: 20px;
                     display: block;
-                    margin: 0 auto 5px auto;
+                    margin: 0 auto 0 auto;
                     @include border-radius(10px);
                     position: relative;
                     border: 2px solid $white;
@@ -494,6 +626,7 @@ MAIN PAGE
                     @include transition(all 0.5s ease);
                     @include border-radius($border-radius);
                     @include box-sizing(border-box);
+                    top: 1px;
                     font-size: 12px;
                     width: 20px;
                     height: 20px;
@@ -502,15 +635,24 @@ MAIN PAGE
                     border: 2px solid rgba($black, 0.1);
                     position: relative;
                     overflow: hidden;
+                    .icon-check {
+                        background-image: url("../images/icon-check.png");
+                    }
                     span {
+                        width: 16px;
+                        height: 16px;
+                        background: none center no-repeat;
+                        display: block;
                         @include opacity(0);
                         @include transition(all 0.5s ease);
-                        top: -2px;
                     }
+                }  
+                p {
+                    font-size: 24px;
                 }
                 cursor: pointer;
                 padding: 0;
-                width: 33.333333333333%;
+                width: 30.5%;
                 display: inline-block;
                 white-space: normal;
                 position: relative;
@@ -518,11 +660,21 @@ MAIN PAGE
                 .plan-table-top {
                     background-color: $primary-color;
                     color: $white;
-                    padding: 10px 0 5px 0;
+                    padding: 10px 0 1px 0;
                     h5 {
+                        font-size: 36px;
                         margin: 0;
                     }
+                    p {
+                        color: $white;
+                        font-size: 15px;
+                    }
                     small {
+                        font-size: 0.6em;
+                        color: $white;
+                    }
+                    big {
+                        font-size: 1.25em;
                         color: $white;
                     }
                 }
@@ -542,7 +694,7 @@ MAIN PAGE
                 &.selected {
                     z-index: 1;
                     &::after {
-                        @include box-shadow(0px, 0px, 40px, $black);
+                        @include box-shadow(0px, 0px, 20px, $black);
                     }
                     .radiobox {
                         border: 2px solid $white;
@@ -898,7 +1050,7 @@ MAIN PAGE
         font-size: 22px;
     }
     p {
-        font-size: 18px;
+        color: $white;
     }
 }
 
@@ -913,7 +1065,7 @@ MAIN PAGE
 
 .form-navigation {
     padding: 0 20px;
-    margin: 60px 0 20px 0;
+    margin: 20px 0 60px 0;
     text-align: center;
     img {
         max-width: 100%;
@@ -986,3 +1138,4 @@ FOOTER STYLES
     background-color: $black;
     color: $light-gray;
 }
+

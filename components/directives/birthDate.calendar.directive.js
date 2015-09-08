@@ -15,6 +15,8 @@
           
           return element.datepicker({
             dateFormat: 'dd MM yy',
+            changeMonth: true,
+            changeYear: true,
             numberOfMonths: parseInt(attrs["birthDateCalendar"]),
             maxDate: new Date(),
             onSelect: function(date) {

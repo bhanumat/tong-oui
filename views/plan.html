@@ -3,7 +3,7 @@
 		<h3>ผลประโยชน์ความคุ้มครอง</h3>
 		<div class="plan-selection">
 			<h4>เลือกความคุ้มครองหลัก</h4>
-			<div class="plan-table row" id="plan">
+			<div class="plan-table row" id="plan" ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
 
 				<div class="plan-table-heading col-xs-5" equalizer="'table-group'">
 					<div class="plan-table-top" equalizer="'group'">
@@ -14,82 +14,91 @@
 					</div>
 				</div>
 				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
+					<span ng-show="travel.selectedPlan > 2 && travelData.quotation.protect.length > 3" class="glyphicon glyphicon-menu-left plan-navigation" style="left:-20px;" equalizer="'group'" ng-click="selectPlan(travel.selectedPlan-1)"></span>
 					<div class="row plan-wrapper text-center" id="plan-main-scroll">
-						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.quotation.protect" ng-click="selectPlan(plan.planid,plan.price)">
+						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protect.length - 1) }" ng-repeat="plan in travelData.quotation.protect" ng-click="selectPlan(plan.planid)">
 							<div class="plan-table-top" equalizer="'group'">
 								<span class="radiobox"></span>
 								<h5>
 									<small>แผน {{plan.planid}}</small><br>
-									{{plan.price}} บาท
+									<big>{{getPriceRate(plan) | number}}</big> บาท
 								</h5>
+								<p>ความคุ้มครองสูงสุด (บาท)</p>
 							</div>
 							<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in plan.description">
 								<p ng-bind-html="description"></p>
 							</div>
 						</div>
 					</div>
+					<span ng-show="travel.selectedPlan < travelData.quotation.protect.length - 1" class="glyphicon glyphicon-menu-right plan-navigation" style="right:-0px;" equalizer="'group'" ng-click="selectPlan(travel.selectedPlan+1)"></span>
 				</div>
 			</div>
 			<h4>เลือกความคุ้มครองเสริม</h4>
-			<div class="plan-table row" id="plan-options">
-				<div class="clearfix">
-					<div class="plan-table-heading col-xs-5" >
-						<div class="plan-table-top" equalizer="'group2'" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-							<h5>เลือก Flight Secure B เพิ่ม</h5>
-						</div>
-						<div collapse="tempData.option1IsCollapsed">
-							<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in travelData.flightsecure.description" >
-								<p ng-bind-html="description"></p>
+			<div id="plan-options">
+				<div class="plan-table row"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
+					<div class="clearfix">
+						<div class="plan-table-heading col-xs-5" >
+							<div class="plan-table-top" equalizer="'group2'" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
+								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
+								<h5>เลือก Flight Secure B เพิ่ม</h5>
+							</div>
+							<div collapse="tempData.option1IsCollapsed">
+								<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in travelData.flightsecure.description" >
+									<p ng-bind-html="description"></p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="plan-table-content col-xs-7" >
-						<div class="row plan-wrapper text-center" id="plan-options1-scroll"> 
-							<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.flightsecure.protect" ng-click="flightSecuredToggle();">
-								<div class="plan-table-top" equalizer="'group2'" >
-									<h5>
-										<span class="option-checkbox">
-											<span ng-class="{'glyphicon-remove': travel.flightSecured == false,'glyphicon-ok': travel.flightSecured == true}" class="glyphicon"></span>
-										</span>
-										{{plan.price}} บาท
-									</h5>
-								</div>
-								<div collapse="tempData.option1IsCollapsed">
-									<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in plan.description">
-										<p ng-bind="description"></p>
+						<div class="plan-table-content col-xs-7" >
+							<div class="row plan-wrapper text-center" id="plan-options1-scroll"> 
+								<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protect.length - 1) }" ng-repeat="plan in travelData.flightsecure.protect" ng-click="flightSecuredToggle(plan.planid == travel.selectedPlan);">
+									<div class="plan-table-top" equalizer="'group2'" >
+										<h5>
+											<span class="option-checkbox">
+												<span ng-class="{'icon-check': travel.flightSecured == true}" class=""></span>
+											</span>
+											{{getPriceRate(plan) | number}} <small>บาท</small>
+										</h5>
+										<p>ความคุ้มครองสูงสุด (บาท)</p>
+									</div>
+									<div collapse="tempData.option1IsCollapsed">
+										<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in plan.description">
+											<p ng-bind="description"></p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="clearfix">
-					<div class="plan-table-heading col-xs-5" >
-						<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-							<h5>เลือก Property Safe C เพิ่ม</h5>
-						</div>
-						<div collapse="tempData.option2IsCollapsed">
-							<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in travelData.propertysafe.description">
-								<p ng-bind-html="description"></p>
+				<div class="plan-table row"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
+					<div class="clearfix">
+						<div class="plan-table-heading col-xs-5" >
+							<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
+								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
+								<h5>เลือก Property Safe C เพิ่ม</h5>
+							</div>
+							<div collapse="tempData.option2IsCollapsed">
+								<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in travelData.propertysafe.description">
+									<p ng-bind-html="description"></p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="plan-table-content col-xs-7">
-						<div class="row plan-wrapper text-center" id="plan-options2-scroll"> 
-							<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}" ng-repeat="plan in travelData.propertysafe.protect" ng-click="propertySafeToggle();">  
-								<div class="plan-table-top" equalizer="'group3'" >
-									<h5>
-										<span class="option-checkbox">
-											<span ng-class="{'glyphicon-remove': travel.propertySafe == false,'glyphicon-ok': travel.propertySafe == true}" class="glyphicon"></span>
-										</span>
-										{{plan.price}} บาท
-									</h5>
-								</div>
-								<div collapse="tempData.option2IsCollapsed">
-									<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in plan.description">
-										<p ng-bind-html="description"></p>
+						<div class="plan-table-content col-xs-7">
+							<div class="row plan-wrapper text-center" id="plan-options2-scroll"> 
+								<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protect.length - 1) }" ng-repeat="plan in travelData.propertysafe.protect" ng-click="propertySafeToggle(plan.planid == travel.selectedPlan);">  
+									<div class="plan-table-top" equalizer="'group3'" >
+										<h5>
+											<span class="option-checkbox">
+												<span ng-class="{'icon-check': travel.propertySafe == true}" class=""></span>
+											</span>
+											{{getPriceRate(plan) | number}} <small>บาท</small>
+										</h5>
+										<p>ความคุ้มครองสูงสุด (บาท)</p>
+									</div>
+									<div collapse="tempData.option2IsCollapsed">
+										<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in plan.description">
+											<p ng-bind-html="description"></p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -98,8 +107,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 text-center">
-					<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToProfile(insuranceForm.$valid)" class="btn btn-super"><span>ยืนยัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+				<div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center" style="padding: 0;">
+					<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToProfile(insuranceForm.$valid)" class="btn btn-super btn-block step-submit-button"><span>ยืนยัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
 				</div>
 			</div>
 		</div>
