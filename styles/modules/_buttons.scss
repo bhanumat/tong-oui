@@ -7,6 +7,7 @@ Buttons
 .btn {
 	font-family: $font-secondary;
 	color: $primary-color;
+	font-weight: bold;
 	font-size: 22px;
 	.glyphicon {
 		font-size:15px;
@@ -21,6 +22,7 @@ Buttons
 	}
 
 	&.btn-super {
+		font-weight: normal;
 		font-family: $font;
 		padding: 5px 30px 5px 0;
 		color: $white;

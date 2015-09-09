@@ -1275,19 +1275,84 @@
                 {
                     "id": 1,
                     "name": "นาย",
-                    "engname": "Mr."
+                    "engname": "Mr.",
+                    "relationship": [
+                        {
+                            "id": 1,
+                            "name": "บิดา",
+                            "engname": "Father"
+                        },
+                        {
+                            "id": 3,
+                            "name": "คู่สมรส",
+                            "engname": "Spouse"
+                        },
+                        {
+                            "id": 4,
+                            "name": "พี่น้อง",
+                            "engname": "Sibling"
+                        },
+                        {
+                            "id": 5,
+                            "name": "บุตร",
+                            "engname": "Child"
+                        }
+                    ]
                 },
                 {
                     "id": 2,
                     "name": "นาง",
-                    "engname": "Mrs."
+                    "engname": "Mrs.",
+                    "relationship": [
+                        {
+                            "id": 2,
+                            "name": "มารดา",
+                            "engname": "Mother"
+                        },
+                        {
+                            "id": 3,
+                            "name": "คู่สมรส",
+                            "engname": "Spouse"
+                        },
+                        {
+                            "id": 4,
+                            "name": "พี่น้อง",
+                            "engname": "Sibling"
+                        },
+                        {
+                            "id": 5,
+                            "name": "บุตร",
+                            "engname": "Child"
+                        }
+                    ]
                 },
                 {
                     "id": 3,
                     "name": "นางสาว",
-                    "engname": "Ms."
+                    "engname": "Ms.",
+                    "relationship": [
+                        {
+                            "id": 2,
+                            "name": "มารดา",
+                            "engname": "Mother"
+                        },
+                        {
+                            "id": 3,
+                            "name": "คู่สมรส",
+                            "engname": "Spouse"
+                        },
+                        {
+                            "id": 4,
+                            "name": "พี่น้อง",
+                            "engname": "Sibling"
+                        },
+                        {
+                            "id": 5,
+                            "name": "บุตร",
+                            "engname": "Child"
+                        }
+                    ]
                 }
-
             ],
             "gender": [
                 {
@@ -1326,33 +1391,6 @@
                     "id": 5,
                     "name": "อาชีพ 5",
                     "engname": "Occupation 5"
-                }
-            ],
-            "relationship": [
-                {
-                    "id": 1,
-                    "name": "บิดา",
-                    "engname": "Father"
-                },
-                {
-                    "id": 2,
-                    "name": "มารดา",
-                    "engname": "Mother"
-                },
-                {
-                    "id": 3,
-                    "name": "คู่สมรส",
-                    "engname": "Spouse"
-                },
-                {
-                    "id": 4,
-                    "name": "พี่น้อง",
-                    "engname": "Sibling"
-                },
-                {
-                    "id": 5,
-                    "name": "บุตร",
-                    "engname": "Child"
                 }
             ]
         }

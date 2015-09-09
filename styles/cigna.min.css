@@ -772,7 +772,6 @@ img.footernav-stat-healthy{content:url(http://www.cigna.co.th/sites/all/themes/c
 .view-taxonomy-faq .views-responsive-grid .views-column{float:left;padding-bottom:5%;width:50%}
 }
 @media (max-width:650px){.mrow1 .col1{width:69%}
-.col-xs-2{width:50%}
 .hero-ribbon-container{display:none}
 .m-hero-ribbon-container{display:block}
 .product-container .thumbnail{height:620px}

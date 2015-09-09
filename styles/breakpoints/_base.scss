@@ -190,7 +190,7 @@ MAIN PAGE
 }
 
 .content-wrapper {
-    padding-top: 60px;
+    padding-top: 0px;
     background-color: #3da1dd;
     @include transition(0.5s all ease);
 }
@@ -206,11 +206,15 @@ MAIN PAGE
         margin-top: 0;
     }
     .form-section {
-        margin-bottom: 40px;
+        margin-bottom: 15px;
+        &:first-child {
+            margin-bottom: 40px;
+        }
     }
     .section-heading {
         margin-bottom: 10px;
-        img {
+        img {   
+            width: 30px;
             margin-right: 10px;
         }
         h3 {
@@ -257,15 +261,15 @@ MAIN PAGE
     }
     h3 {
         font-family: $font;
-        font-size: 40px;
-        line-height: 42px;
+        font-size: 30px;
+        line-height: 32px;
         color: $white;
         @include text-shadow(1px, 1px, 3px, $text-color);
     }
     h4 {
         font-family: $font;
-        font-size: 34px;
-        line-height: 36px;
+        font-size: 24px;
+        line-height: 26px;
     }
     h5 {
         font-family: $font;
@@ -282,7 +286,7 @@ MAIN PAGE
 
 .body-sticky {
     #form-views {
-        margin-top: 200px;
+        margin-top: 400px;
     }
 }
 .go-to-top {
@@ -349,9 +353,7 @@ MAIN PAGE
                 display: inline-block;
             }
             p {
-                display: inline-block;
-                padding-left: 3px;
-                margin-bottom: 0;
+                display: block;
             }
             .destination-list {
                 display: block;
@@ -380,7 +382,7 @@ MAIN PAGE
 .summary-bar {
     @include box-shadow(1px, 1px, 3px, $text-color);
     background-color: $white;
-    padding: 1em 0.5em;
+    padding: 0.5em 0em;
     p {
         font-weight: normal;
         font-size: 22px;
@@ -410,7 +412,8 @@ MAIN PAGE
         }
     }
     .summary-bar-details {
-        margin-top: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         padding: 0 0.5em;
         h6 {
             color: $primary-color;
@@ -642,6 +645,7 @@ MAIN PAGE
                         width: 16px;
                         height: 16px;
                         background: none center no-repeat;
+                        background-size:15px 12px;
                         display: block;
                         @include opacity(0);
                         @include transition(all 0.5s ease);
@@ -786,8 +790,8 @@ MAIN PAGE
 .payment {
 	@include box-shadow(1px, 1px, 3px, $text-color);
 	position: relative;
-	margin-top: 40px;
-	padding: 1em;
+	margin: 20px 0 40px 0;
+	padding: 0.5em;
 	background-color: $white;
     color: $primary-color;
 	.payment-header {
@@ -795,10 +799,7 @@ MAIN PAGE
     	color: $white;
 	}
 	.payment-details {
-		margin: 30px 0;
-		.submit {
-			margin: 40px 0 20px 0;
-		}
+		margin: 10px 0;
 	}
 }
 .profileGroup {
@@ -831,8 +832,11 @@ MAIN PAGE
     		padding: 0 5px;
     		label {
     			padding-left: 30px;
-    			font-size: 18px;
+    			font-size: 20px;
+                line-height: 22px;
     			font-family: $font-secondary;
+                color: $dark;
+                font-weight: bold;
     			&::before {
     				content: "";
     				@include transition(all 0.5s ease);
@@ -844,6 +848,9 @@ MAIN PAGE
                     display: inline-block;
                     background-color: rgba($black, 0.2);
                     background-image: none;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 15px 12px;
                     border: 2px solid rgba($black, 0.1);
                     position: absolute;
     				overflow: hidden;
@@ -860,6 +867,7 @@ MAIN PAGE
     		&.checked {
     			label {
     				&::before {
+                        background-image: url("../images/icon-check.png");
     					background-color: rgba($primary-color, 0.8);
     					border: 2px solid rgba($primary-color, 0.6);
     				}
@@ -970,13 +978,38 @@ MAIN PAGE
     	width: 100%;
         float: left;
         margin-bottom: 0px;
+        .remove {
+            background-color: $primary-color;
+            background-image: url("../images/icon-delete.png");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 10px 10px;
+            border-radius: $border-radius;
+            display: block;
+            height: 26px;
+            position: absolute;
+            right: 7px;
+            top: 9px;
+            width: 26px;
+            cursor: pointer;
+        }
     }
     &.edit {
-        padding: 1em;
+        padding: 0;
         cursor: inherit;
         background-color: $white;
         .profile-details {
             display: block;
+            .profile-details-section-header {
+                img {
+                    width: 30px;
+                    margin-right: 10px;
+                    margin-top: -3px;
+                }
+                h5 {
+                    display: inline-block;
+                }
+            }
         }
         .profile-header {
             display: block;
@@ -996,6 +1029,20 @@ MAIN PAGE
             display: block;
             .profile-summary-section {
 		        margin: 25px 0;
+                p {
+                    font-size: 18px;
+                    line-height: 22px;
+                }
+                .profile-summary-section-header {
+                    img {
+                        width: 30px;
+                        margin-right: 10px;
+                        margin-top: -3px;
+                    }
+                    h5 {
+                        display: inline-block;
+                    }
+                }
 		    }
         }
         .profile-header {
@@ -1042,12 +1089,16 @@ MAIN PAGE
 }
 
 .caution {
-    margin-top: 30px;
+    padding: 0 0.5em;
+    margin-top: -10px;
+    margin-bottom: 20px;
     @include border-radius(4px);
-    padding: 0;
     color: $white;
     h4 {
         font-size: 22px;
+        img {
+            margin-top: -5px;
+        }
     }
     p {
         color: $white;

@@ -3,7 +3,7 @@
 		<h3>ผลประโยชน์ความคุ้มครอง</h3>
 		<div class="plan-selection">
 			<h4>เลือกความคุ้มครองหลัก</h4>
-			<div class="plan-table row" id="plan" ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
+			<div class="plan-table row hidden-xs" id="plan" ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
 
 				<div class="plan-table-heading col-xs-5" equalizer="'table-group'">
 					<div class="plan-table-top" equalizer="'group'">
@@ -35,7 +35,7 @@
 			</div>
 			<h4>เลือกความคุ้มครองเสริม</h4>
 			<div id="plan-options">
-				<div class="plan-table row"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
+				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
 					<div class="clearfix">
 						<div class="plan-table-heading col-xs-5" >
 							<div class="plan-table-top" equalizer="'group2'" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
@@ -70,7 +70,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="plan-table row"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
+				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
 					<div class="clearfix">
 						<div class="plan-table-heading col-xs-5" >
 							<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">

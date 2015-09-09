@@ -1,167 +1,176 @@
 <div class="row">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-					<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-destination.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-destination.png" alt="">
-										</div>
-										<h3>จุดหมายปลายทาง</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<div class="form-group" ng-class="{ 'has-error' : !travel.destinations.length && formStepSubmitted  }">
-											<ol class="nya-bs-select form-control text-center" id="destination" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
-											    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
-											      	<a>
-											        	{{ item.country }}
-											      	</a>
-											    </li>
-											</ol>
-											<div class="help-block" ng-messages="{hasDestination:!travel.destinations.length}" ng-if="formStepSubmitted">
-												<p ng-message="hasDestination">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p>
-											</div>
-										</div>
-									</div>
-									<div ng-repeat="destination in travel.destinations | limitTo: 10" class="col-xs-12 col-sm-6">
-										<div class="travel-destination">
-											<span ng-bind="destination.country"></span>
-											<button class="btn btn-tag" ng-click="removeDestination($index)"><img src="images/icon-delete.png" alt="" style="margin-top: -4px;"></button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-schedule.png" alt="">
-							</div>
-							<div class="hidden-xs col-sm-11">
-								<div class="row">
-									<div class="col-sm-12 section-heading">
-										<h3>วันเดินทาง<span ng-bind="tempData.daysAsText"></span></h3>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.startDate.$invalid && (formStepSubmitted || insuranceForm.startDate.$touched) }">
-											<input type="text" name="startDate" start-date-calendar="2" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
-											<div class="help-block" ng-messages="insuranceForm.startDate.$error" ng-if="formStepSubmitted || insuranceForm.startDate.$touched">
-											    <p ng-message="required">กรุณาระบุวันที่เริ่มต้นเดินทาง</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.endDate.$invalid && (formStepSubmitted || insuranceForm.endDate.$touched) }">
-											<input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
-											<div class="help-block" ng-messages="insuranceForm.endDate.$error" ng-if="formStepSubmitted || insuranceForm.endDate.$touched">
-											    <p ng-message="required">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="visible-xs col-xs-12">
-								<div class="row">
-									<div class="col-xs-12 section-heading">
-										<img src="images/icon-schedule-orange.png" alt="">
-										<h3>เริ่มเดินทาง</h3>
-									</div>
-									<div class="col-xs-12">
-										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.startDate.$invalid && (formStepSubmitted || insuranceForm.startDate.$touched) }">
-											<input type="text" name="startDate" start-date-calendar="1" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
-											<div class="help-block" ng-messages="insuranceForm.startDate.$error" ng-if="formStepSubmitted || insuranceForm.startDate.$touched">
-											    <p ng-message="required">กรุณาระบุวันที่เริ่มต้นเดินทาง</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 section-heading">
-										<img src="images/icon-schedule.png" alt="">
-										<h3>เดินทางกลับ</h3>
-									</div>
-									<div class="col-xs-12">
-										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.endDate.$invalid && (formStepSubmitted || insuranceForm.endDate.$touched) }">
-											<input name="endDate" type="text" end-date-calendar="1" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
-											<div class="help-block" ng-messages="insuranceForm.endDate.$error" ng-if="formStepSubmitted || insuranceForm.endDate.$touched">
-											    <p ng-message="required">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p>
-											</div>
-										</div>
-									</div>
-									<div ng-if="tempData.daysAsText" class="col-xs-12 section-heading">
-										<h3>เดินทาง<span ng-bind="tempData.daysAsText"></span></h3>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-passenger.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-passenger.png" alt="">
-										</div>
-										<h3>จำนวนผู้ขอประกัน</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6">
-										<div class="form-group" ng-class="{ 'has-error' : insuranceForm.passengers.$invalid && (formStepSubmitted || insuranceForm.passengers.$touched) }">
-											<ol class="nya-bs-select form-control text-center" ng-class="{'filled': travel.passengers}" ng-model="travel.passengers" name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
-											    <li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}" >
-											      	<a>
-											        	{{ passenger }}
-											      	</a>
-												</li>
-											</ol>
-											<div class="help-block" ng-messages="insuranceForm.passengers.$error" ng-if="formStepSubmitted || insuranceForm.passengers.$touched">
-											    <p ng-message="required">กรุณาเลือกจำนวณผู้ขอประกัน</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-section" ng-if="travelData.hasPromotion">
-							<div class="col-sm-1 hidden-xs">
-								<img src="images/icon-coupon.png" alt="">
-							</div>
-							<div class="col-xs-12 col-sm-11">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 section-heading">
-										<div class="visible-xs-inline-block">
-											<img src="images/icon-coupon.png" alt="">
-										</div>
-										<h3>ใส่รหัสโปรโมชั่น (ถ้ามี)</h3>
-									</div>
-									<div class="col-xs-12 col-sm-6 ">
-										<div class="form-group">
-											<label class="sr-only" for="promotionCode">Promotion Code</label>
-											<input type="text" ng-model="travel.promotionCode" name="promotionCode" class="form-control" id="promotion-code">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
-										<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super btn-block step-submit-button"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="caution">
-									<h4><img src="images/icon-caution.png" alt=""> หมายเหตุ</h4>
-									<p>• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง • ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการ
-									เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
-								</div>
-							</div>
-						</div>
-						</div>
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<div class="row form-section">
+			<div class="col-sm-1 hidden-xs">
+				<img src="images/icon-destination.png" alt="">
 			</div>
+			<div class="col-xs-12 col-sm-11">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 section-heading">
+						<div class="visible-xs-inline-block">
+							<img src="images/icon-destination.png" alt="">
+						</div>
+						<h3>จุดหมายปลายทาง</h3>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<div class="form-group" ng-class="{ 'has-error' : !travel.destinations.length && formStepSubmitted  }">
+							<ol class="nya-bs-select form-control text-center" id="destination" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
+								<li nya-bs-option="item in travelData.destination | orderBy:'country'">
+									<a>
+										{{ item.country }}
+									</a>
+								</li>
+							</ol>
+							<div class="help-block" ng-messages="{hasDestination:!travel.destinations.length}" ng-if="formStepSubmitted">
+								<p ng-message="hasDestination">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p>
+							</div>
+						</div>
+					</div>
+					<div ng-repeat="destination in travel.destinations | limitTo: 10" class="col-xs-12 col-sm-6">
+						<div class="travel-destination">
+							<span ng-bind="destination.country"></span>
+							<button class="btn btn-tag" ng-click="removeDestination($index)"><img src="images/icon-delete.png" alt="" style="margin-top: -4px;"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row form-section">
+			<div class="col-sm-1 hidden-xs">
+				<img src="images/icon-schedule.png" alt="">
+			</div>
+			<div class="hidden-xs col-sm-11">
+				<div class="row">
+					<div class="col-sm-12 section-heading">
+						<h3>วันเดินทาง<span ng-bind="tempData.daysAsText"></span></h3>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group" ng-class="{ 'has-error' : insuranceForm.startDate.$invalid && (formStepSubmitted || insuranceForm.startDate.$touched) }">
+							<input type="text" name="startDate" start-date-calendar="2" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+							<div class="help-block" ng-messages="insuranceForm.startDate.$error" ng-if="formStepSubmitted || insuranceForm.startDate.$touched">
+								<p ng-message="required">กรุณาระบุวันที่เริ่มต้นเดินทาง</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group" ng-class="{ 'has-error' : insuranceForm.endDate.$invalid && (formStepSubmitted || insuranceForm.endDate.$touched) }">
+							<input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+							<div class="help-block" ng-messages="insuranceForm.endDate.$error" ng-if="formStepSubmitted || insuranceForm.endDate.$touched">
+								<p ng-message="required">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="visible-xs col-xs-12">
+				<div class="row">
+					<div class="col-xs-12 section-heading">
+						<img src="images/icon-schedule-orange.png" alt="">
+						<h3>เริ่มเดินทาง</h3>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group" ng-class="{ 'has-error' : insuranceForm.startDate.$invalid && (formStepSubmitted || insuranceForm.startDate.$touched) }">
+							<input type="text" name="startDate" start-date-calendar="1" ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+							<div class="help-block" ng-messages="insuranceForm.startDate.$error" ng-if="formStepSubmitted || insuranceForm.startDate.$touched">
+								<p ng-message="required">กรุณาระบุวันที่เริ่มต้นเดินทาง</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 section-heading">
+						<img src="images/icon-schedule.png" alt="">
+						<h3>เดินทางกลับ</h3>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group" ng-class="{ 'has-error' : insuranceForm.endDate.$invalid && (formStepSubmitted || insuranceForm.endDate.$touched) }">
+							<input name="endDate" type="text" end-date-calendar="1" ng-model="travel.endDate" placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+							<div class="help-block" ng-messages="insuranceForm.endDate.$error" ng-if="formStepSubmitted || insuranceForm.endDate.$touched">
+								<p ng-message="required">กรุณาระบุวันที่สิ้นสุดการเดินทาง</p>
+							</div>
+						</div>
+					</div>
+					<div ng-if="tempData.daysAsText" class="col-xs-12 section-heading">
+						<h3>เดินทาง<span ng-bind="tempData.daysAsText"></span></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row form-section">
+			<div class="col-sm-1 hidden-xs">
+				<img src="images/icon-passenger.png" alt="">
+			</div>
+			<div class="col-xs-12 col-sm-11">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 section-heading">
+						<div class="visible-xs-inline-block">
+							<img src="images/icon-passenger.png" alt="">
+						</div>
+						<h3>จำนวนผู้ขอประกัน</h3>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<div class="form-group" ng-class="{ 'has-error' : insuranceForm.passengers.$invalid && (formStepSubmitted || insuranceForm.passengers.$touched) }">
+							<ol class="nya-bs-select form-control text-center" ng-class="{'filled': travel.passengers}" ng-model="travel.passengers" name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
+								<li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}" >
+									<a>
+										{{ passenger }}
+									</a>
+								</li>
+							</ol>
+							<div class="help-block" ng-messages="insuranceForm.passengers.$error" ng-if="formStepSubmitted || insuranceForm.passengers.$touched">
+								<p ng-message="required">กรุณาเลือกจำนวณผู้ขอประกัน</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row form-section" ng-if="travelData.hasPromotion">
+			<div class="col-sm-1 hidden-xs">
+				<img src="images/icon-coupon.png" alt="">
+			</div>
+			<div class="col-xs-12 col-sm-11">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 section-heading">
+						<div class="visible-xs-inline-block">
+							<img src="images/icon-coupon.png" alt="">
+						</div>
+						<h3>ใส่รหัสโปรโมชั่น (ถ้ามี)</h3>
+					</div>
+					<div class="col-xs-12 col-sm-6 ">
+						<div class="form-group">
+							<label class="sr-only" for="promotionCode">Promotion Code</label>
+							<input type="text" ng-model="travel.promotionCode" name="promotionCode" class="form-control" id="promotion-code">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row hidden-xs">
+			<div class="col-xs-12">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+						<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super btn-block step-submit-button"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="caution">
+					<h4><img src="images/icon-caution.png" alt=""> หมายเหตุ</h4>
+					<p>• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง • ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการ
+					เดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย</p>
+				</div>
+			</div>
+		</div>
+		<div class="row visible-xs">
+			<div class="col-xs-12">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+						<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPlanSelection(insuranceForm.$valid&&(travel.destinations.length))" class="btn btn-super btn-block step-submit-button"><span>คำนวณเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

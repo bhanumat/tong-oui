@@ -21,12 +21,12 @@
 
     ////////////  function definitions
 
-    $scope.start = true;
-    if ($scope.start == true) {
-      $scope.start = false;
-      $location.path('/insurance/destination');
-      $location.replace();
-    }
+    // $scope.start = true;
+    // if ($scope.start == true) {
+    //   $scope.start = false;
+    //   $location.path('/insurance/destination');
+    //   $location.replace();
+    // }
     
     // comment for testing 
 
@@ -150,6 +150,7 @@
       if(stage == 'reset') {
         $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
         $scope.travel.passengersProfile[index] = {};
+        $scope.tempData.passengersProfile[index].termsAccepted = false;
         $scope.tempData.passengersProfile[index].stage = "";
         $scope.tempData.passengersProfile[index].profileForm = null;
       }
@@ -186,6 +187,22 @@
         $scope.tempData.passengersProfile[index].beneficiaries = 1;
       }
     };
+
+    $scope.deleteBeneficiary = function(profileId,beneficiaryId) {
+      $scope.tempData.passengersProfile[profileId].beneficiaries -= 1;
+      for (var i = beneficiaryId; i < 3; i++) {
+        if($scope.travel.passengersProfile[profileId].beneficiaries[i+1]){
+          $scope.travel.passengersProfile[profileId].beneficiaries[i] = $scope.travel.passengersProfile[profileId].beneficiaries[i+1];
+          $scope.travel.passengersProfile[profileId].beneficiaries[i+1] = {};
+        }
+        else {
+          $scope.travel.passengersProfile[profileId].beneficiaries[i] = {};
+        }
+      };
+      $scope.beneficiaryFormSubmitted = false; 
+    };
+
+    
 
     $scope.isSchengen = function(){
       for (var i = 0; i < $scope.travel.destinations.length; i++) {

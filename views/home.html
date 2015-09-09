@@ -27,7 +27,7 @@
 								</div>
 						</div> -->
 						<div class="row">
-							<div class="col-xs-6">
+							<div class="col-xs-12 col-sm-6">
 								<div class="insurance-details-heading summary-bar-heading">
 									<h5>รายละเอียดการเดินทาง</h5>
 									<a ng-click="editSummarybar(summaryForm.$valid&&(travel.destinations.length));" style="cursor: pointer;" href="">
@@ -126,7 +126,7 @@
 									</ng-form>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-12 col-sm-6">
 								<div class="insurance-plan-heading summary-bar-heading">
 									<h5>ความคุ้มครองที่เลือก</h5>
 									<a href="#plan" offset="330" du-smooth-scroll>
@@ -138,7 +138,7 @@
 										<div class="col-xs-12">
 											<h6>แผนประกันที่เลือก</h6>
 											<p>แผน {{ travel.selectedPlan }} - Travel Care A<span ng-if="travel.flightSecured">, Flight Secure B</span><span ng-if="travel.propertySafe">, Property Safe C</span></p>
-											<span class="sep"></span>
+											<span class="sep hidden-xs"></span>
 											<div class="price-summary">
 												<p>ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
 												<p ng-if="tempData.discountAsBath">
@@ -168,3 +168,6 @@
 		</div>
 	</div>
 </div>
+
+<pre>travel = {{travel}}</pre>
+<pre>tempData = {{tempData}}</pre>

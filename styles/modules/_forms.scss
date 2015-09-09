@@ -81,8 +81,30 @@ textarea,
   &[disabled],
   &.is-disabled {
     cursor: not-allowed;
-    border-color: $disabled-gray;
-    opacity: 0.6;
+    color: $dark-gray;
+    background-color: #f9f9f9;
+
+    &::-webkit-input-placeholder {
+      color: rgba($dark-gray,0.65);
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      color: rgba($dark-gray,0.65);  
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: rgba($dark-gray,0.65);  
+
+    }
+
+    &:-ms-input-placeholder {  
+       color: rgba($dark-gray,0.65);  
+
+    }
+
+    &:hover {
+      color: $dark-gray;
+    }
 
     &:focus,
     &:active {
@@ -143,7 +165,7 @@ select {
 
 .form-group {
   .control-label {
-    font-size: 22px;
+    font-size: 24px;
     margin: 6px 0;
     color: $dark;
     line-height: 32px;
