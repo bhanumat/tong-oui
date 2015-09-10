@@ -70,7 +70,7 @@ TABLET & SMALLER LAPTOPS
 /*********************
 DESKTOP
 *********************/
-@media only screen and (min-width: 1030px) {
+@media only screen and (min-width: 992px) {
 
 	// styles in 1030up.scss
 	@import "breakpoints/1030up";
@@ -80,7 +80,7 @@ DESKTOP
 /*********************
 LARGE VIEWING SIZE
 *********************/
-@media only screen and (min-width: 1240px) {
+@media only screen and (min-width: 1200px) {
 
 	// styles in 1240up.scss
 	@import "breakpoints/1240up";

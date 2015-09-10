@@ -56,6 +56,7 @@
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
     $scope.tempData.passengersProfile[1].isManualAddress = true; 
+    $scope.translatey = 'translatey(12.5%)';
 
     $http.get('/NewTravel.json').
     then(function(response) {
@@ -332,7 +333,18 @@
     };
 
     $scope.selectPlan = function(planId){
+      //plan ID = 3
+      console.log($scope.travelData.quotation.protect.length);
       $scope.travel.selectedPlan = planId;
+      if(planId < 3) {
+        $scope.translatey = 'translatey(12.5%)';
+      }
+      else if((planId > 2) && (planId < $scope.travelData.quotation.protect.length)){
+        $scope.translatey = 'translatey('+ parseFloat(12.5-((planId-2)*25)) +'%)';
+      }
+      else if(planId == $scope.travelData.quotation.protect.length){
+        $scope.translatey = 'translatey('+ parseFloat(12.5-((planId-3)*25)) +'%)';
+      }
       $scope.calculatePrice();
     };
 

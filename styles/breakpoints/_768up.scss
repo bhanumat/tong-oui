@@ -155,6 +155,197 @@ NAVIGATION STYLES
     }
 }
 
+#plan-options {
+    margin-bottom: 40px;
+    .plan-table {
+        margin-bottom: 20px;
+    }
+    .plan-table-heading {
+        .plan-table-top {
+            padding: 10px 20px;
+            span {
+                margin-right: 5px;
+            }
+            h5 {
+                line-height: 30px;
+                font-size: 28px;
+            }
+        }
+    }
+    .plan-table-content {
+        .plan-table-top {
+            h5 {
+                font-size: 40px;
+                margin: 6px 0 4px 0;
+                small {
+                    margin-left: -5px;
+                }
+            }
+        }
+        .plan {
+            &.selected {
+            }
+        }
+    }
+}
+
+.plan-selection {
+    & > .row {
+        margin-bottom: 40px;
+    }
+    padding: 1px 1em;
+    .plan-table {
+        &.one-plan {
+            .plan-table-heading {
+                width: 75%;
+            }
+            .plan-table-content {
+                width: 25%;
+                .plan {
+                    width: -moz-calc(100% - 40px);
+                    width: -webkit-calc(100% - 40px);
+                    width: calc(100% - 40px);
+                }
+            }
+        }
+        &.two-plan {
+            .plan-table-heading {
+                width: 50%;
+            }
+            .plan-table-content {
+                width: 50%;
+                .plan {
+                    width: -moz-calc(50% - 20px);
+                    width: -webkit-calc(50% - 20px);
+                    width: calc(50% - 20px);
+                }
+            }
+        }
+        .plan-table-heading {
+            width: 40%;
+            padding: 0;
+            .plan-table-top {
+                padding: 20px;
+                color: $white;
+                h5 {
+                    font-size: 30px;
+                    line-height: 47px;
+                    margin: 10px 0 ;
+                }
+            }
+            .plan-table-row {
+                font-size: 0;
+                padding-right: 30px;
+            }
+            img {
+                width: 34px;
+                vertical-align: top;
+            }
+            p {
+                display: inline-block;
+                padding-left: 10px;
+                width: -moz-calc(100% - 34px);
+                width: -webkit-calc(100% - 34px);
+                width: calc(100% - 34px);
+            }
+        }
+        .plan-table-row {
+            padding: 10px;
+            &:nth-child(even) {
+            }
+        }
+        .plan-table-content {
+            width: 60%;
+            padding: 0;
+            .plan-navigation {
+                font-size: 20px;
+                padding: 45px 0;
+                top: 0;
+                width: 20px;
+                z-index: 10;
+            }
+            .plan-wrapper {
+                font-size: 0;
+                margin-left: -20px;
+            }
+            .plan {
+                @include opacity(1);
+                width: 30.5%;
+                &:first-child {
+                    margin-left: 20px;
+                    &.hidePlan {
+                        margin-left: -moz-calc(-30.5% + 20px);
+                        margin-left: -webkit-calc(-30.5% + 20px);
+                        margin-left: calc(-30.5% + 20px);
+                    }
+                }
+                &:last-child {
+                    margin-right: 20px;
+                }
+                &.hidePlan {
+                    margin-left: -30.5%;
+                }
+                .radiobox {
+                    &::after {
+                    }
+                }
+                .option-checkbox {
+                    .icon-check {
+                    }
+                    span {
+                    }
+                }  
+                p {
+                }
+                .plan-table-top {
+                    background-color: $primary-color;
+                    padding: 10px 0 1px 0;
+                    h5 {
+                        font-size: 36px;
+                        margin: 0;
+                    }
+                    p {
+                        font-size: 15px;
+                    }
+                    small {
+                        font-size: 0.6em;
+                    }
+                    big {
+                        font-size: 1.25em;
+                    }
+                }
+                background-color: rgba(0,0,0,0);
+                &:nth-child(odd) {
+                    background-color: rgba(0,0,0,0);
+                    .plan-table-top {
+                        background-color: $light-primary-color;
+                    }
+                }
+                &:hover {
+                    .radiobox {
+                        &::after {
+                        }
+                    }
+                }
+                &.selected {
+                    &::after {
+                    }
+                    .radiobox {
+                        &::after {
+                        }
+                    }
+                    .option-checkbox {
+                        span {
+                        }
+                    }
+                }
+                &::after {
+                }
+            }
+        }
+    }
+}
+
 .payment {
     padding: 1em;
     margin: 40px 0;

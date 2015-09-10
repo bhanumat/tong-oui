@@ -14,7 +14,7 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-model="travel.paymant.method" name="method" title="เลือกประเภทบัตร" data-size="5" required>
+										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.method}" ng-model="travel.paymant.method" name="method" title="เลือกประเภทบัตร" data-size="5" required>
 											<li nya-bs-option="method in travelData.formData.paymentMethod | orderBy:'id'">
 												<!-- the text content of anchor element will be used for search -->
 												<a>
@@ -22,6 +22,9 @@
 												</a>
 											</li>
 										</ol>
+										<div class="help-block" ng-messages="insuranceForm.method.$error" ng-if="insuranceForm.method.$invalid && (formStepSubmitted || insuranceForm.method.$touched)">
+							                <p ng-message="required">กรุณาเลือกประเภทบัตรเครดิต</p>
+							            </div>
 									</div>
 								</div>
 							</div>
@@ -31,16 +34,16 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-3">
-										<input type="text" name="cardnumber1" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber1" class="form-control text-center">
+										<input type="text" name="cardnumber1" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber1" class="cardnumber form-control text-center">
 									</div>
 									<div class="col-xs-3">
-										<input type="text" name="cardnumber2" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber2"  class="form-control text-center">
+										<input type="text" name="cardnumber2" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber2"  class="cardnumber form-control text-center">
 									</div>
 									<div class="col-xs-3">
-										<input type="text" name="cardnumber3" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber3"  class="form-control text-center">
+										<input type="text" name="cardnumber3" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber3"  class="cardnumber form-control text-center">
 									</div>
 									<div class="col-xs-3">
-										<input type="text" name="cardnumber4" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber4"  class="form-control text-center">
+										<input type="text" name="cardnumber4" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber4"  class="cardnumber form-control text-center">
 									</div>
 									<input type="hidden" name="cardnumber" ng-model="travel.paymant.cardnumber" ng-pattern="/^\d{16}$/" required>
 									<div class="col-xs-12">
@@ -75,7 +78,7 @@
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="form-group" ng-class="{ 'has-error' : (insuranceForm.expiryMonth.$invalid && (formStepSubmitted || insuranceForm.expiryMonth.$touched)) }">
-											<ol class="nya-bs-select form-control" ng-model="travel.paymant.expiryMonth" name="expiryMonth" title="เดือน" data-size="5" required>
+											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryMonth}" ng-model="travel.paymant.expiryMonth" name="expiryMonth" title="เดือน" data-size="5" required>
 												<li nya-bs-option="expiryMonth in range(1,12)">
 													<!-- the text content of anchor element will be used for search -->
 													<a>
@@ -89,8 +92,8 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										<div class="form-group" ng-class="{ 'has-error' : (insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)) }">
-											<ol class="nya-bs-select form-control" ng-model="travel.paymant.expiryYear" name="expiryYear" title="ปี" data-size="5" required>
+										<div class="form-group" ng-class="{ 'has-error' : (insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)) }"> 
+											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryYear}" ng-model="travel.paymant.expiryYear" name="expiryYear" title="ปี" data-size="5" required>
 												<li nya-bs-option="expiryYear in range(2015,2115)">
 													<!-- the text content of anchor element will be used for search -->
 													<a>
@@ -111,7 +114,11 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-12">
-										<input type="text" name="cardholdername" ng-model="travel.paymant.cardholdername" class="form-control" required>
+										<input type="text" style="text-transform: uppercase;" name="cardholdername" ng-change="travel.paymant.cardholdername = travel.paymant.cardholdername.toUpperCase();" ng-model="travel.paymant.cardholdername" class="form-control"  mask="@?s?" validate="false"  repeat="40" restrict="reject" clean="true"  ng-pattern="/[a-zA-Z]/" required>
+										<div class="help-block" ng-messages="insuranceForm.cardholdername.$error" ng-if="insuranceForm.cardholdername.$invalid && (formStepSubmitted || insuranceForm.cardholdername.$touched)">
+							                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตร</p>
+							                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตรเป็นภาษาอังกฤษ</p>
+							            </div>
 									</div>
 								</div>
 							</div>
@@ -121,7 +128,7 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-model="travel.paymant.bankCountry" name="bankCountry" title="เลือกประเทศของธนาคารผู้ออกบัตร" data-size="3" data-live-search="true" required>
+										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.bankCountry}" ng-model="travel.paymant.bankCountry" name="bankCountry" title="เลือกประเทศของธนาคารผู้ออกบัตร" data-size="3" data-live-search="true" required>
 											<li nya-bs-option="bankCountry in travelData.formData.paymentBankCountry | orderBy:'name'">
 												<!-- the text content of anchor element will be used for search -->
 												<a>
@@ -129,6 +136,9 @@
 												</a>
 											</li>
 										</ol>
+										<div class="help-block" ng-messages="insuranceForm.bankCountry.$error" ng-if="insuranceForm.bankCountry.$invalid && (formStepSubmitted || insuranceForm.bankCountry.$touched)">
+							                <p ng-message="required">กรุณาเลือกประเทศของธนาคารผู้ออกบัตร</p>
+							            </div>
 									</div>
 								</div>
 							</div>
@@ -138,7 +148,7 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-model="travel.paymant.bank" name="bank" title="เลือกธนาคาร" data-size="2" data-live-search="true" required>
+										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.bank}" ng-model="travel.paymant.bank" name="bank" title="เลือกธนาคาร" data-size="2" data-live-search="true" required>
 											<li nya-bs-option="bank in travelData.formData.paymentBank | orderBy:'name'">
 												<!-- the text content of anchor element will be used for search -->
 												<a>
@@ -146,6 +156,9 @@
 												</a>
 											</li>
 										</ol>
+										<div class="help-block" ng-messages="insuranceForm.bank.$error" ng-if="insuranceForm.bank.$invalid && (formStepSubmitted || insuranceForm.bank.$touched)">
+							                <p ng-message="required">กรุณาเลือกธนาคารผู้ออกบัตร</p>
+							            </div>
 									</div>
 								</div>
 							</div>

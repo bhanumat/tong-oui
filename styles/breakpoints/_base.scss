@@ -498,6 +498,26 @@ MAIN PAGE
         background-color: $white;
         position: relative;
         overflow: hidden;
+        .plan-tab {
+            background-color: $dark-gray;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            .plan-tab-inner {
+                @include transition(all 0.5s ease);
+                position: absolute;
+                height: 100%;
+                .plan {
+                    height: 25%;
+                }
+            }
+        }
+        .plan-detail {
+            padding: 0;
+            img {
+                display: none;
+            }
+        }
         &.one-plan {
             .plan-table-heading {
                 width: 75%;
@@ -525,16 +545,20 @@ MAIN PAGE
             }
         }
         .plan-table-heading {
-            width: 40%;
+            width: 100;
             padding: 0;
             background-color: $white;
             .plan-table-top {
-                padding: 20px;
+                padding: 5px;
                 background-color: $secondary-color;
                 color: $white;
                 h5 {
                     font-size: 30px;
-                    line-height: 47px;
+                    line-height: 32px;
+                    margin: 0;
+                }
+                p {
+                    color: $white;
                 }
             }
             .plan-table-row {
@@ -561,20 +585,22 @@ MAIN PAGE
             }
         }
         .plan-table-content {
-            width: 60%;
+            width: 100%;
             background-color: $light-primary-color;
             padding: 0;
             .plan-navigation {
                 cursor: pointer;
                 color: $white;
-                font-size: 20px;
-               
-                padding: 45px 0;
+                font-size: 26px;
                 position: absolute;
                 top: 0;
-                width: 20px;
+                width: 100%;
+                display: block;
                 z-index: 10;
-
+                height: 12.5%;
+                background-color: $primary-color;
+                text-align: center;
+                padding-top: 18px;
             }
             .plan-wrapper {
                 font-size: 0;
@@ -587,7 +613,6 @@ MAIN PAGE
             .plan {
                 @include transition(all 0.5s ease);
                 &:first-child {
-                    margin-left: 20px;
                     &.hidePlan {
                         margin-left: -moz-calc(-30.5% + 20px);
                         margin-left: -webkit-calc(-30.5% + 20px);
@@ -595,7 +620,7 @@ MAIN PAGE
                     }
                 }
                 &:last-child {
-                    margin-right: 20px;
+                    
                 }
                 &.hidePlan {
                     margin-left: -30.5%;
@@ -656,15 +681,15 @@ MAIN PAGE
                 }
                 cursor: pointer;
                 padding: 0;
-                width: 30.5%;
+                width: 100%;
                 display: inline-block;
                 white-space: normal;
                 position: relative;
                 z-index: 0;
                 .plan-table-top {
-                    background-color: $primary-color;
+                    background-color: rgba(0, 0, 0, 0);
                     color: $white;
-                    padding: 10px 0 1px 0;
+                    padding: 10px 0 5px 0;
                     h5 {
                         font-size: 36px;
                         margin: 0;
@@ -682,9 +707,12 @@ MAIN PAGE
                         color: $white;
                     }
                 }
+                @include opacity(0.4);
+                background-color: $primary-color;
                 &:nth-child(odd) {
+                    background-color: $light-primary-color;
                     .plan-table-top {
-                        background-color: $light-primary-color;
+                        background-color: rgba(0, 0, 0, 0);
                     }
                 }
                 &:hover {
@@ -696,6 +724,7 @@ MAIN PAGE
                     }
                 }
                 &.selected {
+                    @include opacity(1);
                     z-index: 1;
                     &::after {
                         @include box-shadow(0px, 0px, 20px, $black);
