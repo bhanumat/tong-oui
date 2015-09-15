@@ -11,22 +11,22 @@
     .module('boilerplate')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state'];
+  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state','$sce'];
 
 
-  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state) {
+  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce) {
 
     // 'controller as' syntax
     var self = this;
 
     ////////////  function definitions
 
-    // $scope.start = true;
-    // if ($scope.start == true) {
-    //   $scope.start = false;
-    //   $location.path('/insurance/destination');
-    //   $location.replace();
-    // }
+    $scope.start = true;
+    if ($scope.start == true) {
+      $scope.start = false;
+      $location.path('/insurance/destination');
+      $location.replace();
+    };
     
     // comment for testing 
 
@@ -89,6 +89,10 @@
           $scope.tempData.totalPrice *= $scope.travel.passengers;
         }
       }
+    };
+
+    $scope.trustAsHtml = function(string) {
+      return $sce.trustAsHtml(string);
     };
 
     $scope.editSummarybar = function(isFormValid){
@@ -283,7 +287,7 @@
       else {
         $scope.tempData.passengersProfile[index].termsAccepted = false;
       }
-      console.log($scope.tempData.passengersProfile[index].termsAccepted);
+      // console.log($scope.tempData.passengersProfile[index].termsAccepted);
     };
 
 
@@ -334,7 +338,7 @@
 
     $scope.selectPlan = function(planId){
       //plan ID = 3
-      console.log($scope.travelData.quotation.protect.length);
+      // console.log($scope.travelData.quotation.protect.length);
       $scope.travel.selectedPlan = planId;
       if(planId < 3) {
         $scope.translatey = 'translatey(12.5%)';

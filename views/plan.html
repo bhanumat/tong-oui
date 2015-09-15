@@ -7,10 +7,10 @@
 
 				<div class="plan-table-heading col-xs-5" equalizer="'table-group'">
 					<div class="plan-table-top" equalizer="'group'">
-						<h5>ผลประโยชน์</h5>
+						<h5>(A) Travel Care<br><small>ผลประโยชน์</small></h5>
 					</div>
 					<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in travelData.quotation.description">
-						<div ng-bind-html="description"></div>
+						<div ng-bind-html="trustAsHtml(description)"></div>
 					</div>
 				</div>
 				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
@@ -26,7 +26,7 @@
 								<p>ความคุ้มครองสูงสุด (บาท)</p>
 							</div>
 							<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in plan.description">
-								<p ng-bind-html="description"></p>
+								<p ng-bind-html="trustAsHtml(description)"></p>
 							</div>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 			<div class="plan-table row visible-xs">
 				<div class="plan-table-heading col-xs-12">
 					<div class="plan-table-top text-center">
-						<h5>ผลประโยชน์</h5>
+						<h5>(A) Travel Care</h5>
 						<p>ความคุ้มครองสูงสุด (บาท)</p>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 						<div class="plan-detail col-xs-9" equalizer="'xs-plan-table'">
 							<div class="plan-table-row row" ng-repeat="description in travelData.quotation.description">
 								<div class="col-xs-8">
-									<div ng-bind-html="description"></div>
+									<div ng-bind-html="trustAsHtml(description)"></div>
 								</div>
 								<div class="col-xs-4 text-right">
 									<p>{{travelData.quotation.protect[travel.selectedPlan-1].description[$index+1]}}</p>
@@ -80,11 +80,11 @@
 						<div class="plan-table-heading col-xs-5" >
 							<div class="plan-table-top" equalizer="'group2'" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
 								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-								<h5>เลือก Flight Secure B เพิ่ม</h5>
+								<h5>(B) เลือก Flight Secure เพิ่ม</h5>
 							</div>
 							<div collapse="tempData.option1IsCollapsed">
 								<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in travelData.flightsecure.description" >
-									<p ng-bind-html="description"></p>
+									<p ng-bind-html="trustAsHtml(description)"></p>
 								</div>
 							</div>
 						</div>
@@ -102,7 +102,7 @@
 									</div>
 									<div collapse="tempData.option1IsCollapsed">
 										<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in plan.description">
-											<p ng-bind="description"></p>
+											<p ng-bind-html="trustAsHtml(description)"></p>
 										</div>
 									</div>
 								</div>
@@ -115,11 +115,11 @@
 						<div class="plan-table-heading col-xs-5" >
 							<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
 								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-								<h5>เลือก Property Safe C เพิ่ม</h5>
+								<h5>(C) เลือก Property Safe เพิ่ม</h5>
 							</div>
 							<div collapse="tempData.option2IsCollapsed">
 								<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in travelData.propertysafe.description">
-									<p ng-bind-html="description"></p>
+									<p ng-bind-html="trustAsHtml(description)"></p>
 								</div>
 							</div>
 						</div>
@@ -137,7 +137,7 @@
 									</div>
 									<div collapse="tempData.option2IsCollapsed">
 										<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in plan.description">
-											<p ng-bind-html="description"></p>
+											<p ng-bind-html="trustAsHtml(description)"></p>
 										</div>
 									</div>
 								</div>
@@ -147,26 +147,30 @@
 				</div>
 				<div class="plan-table row visible-xs">
 					<div class="plan-table-heading col-xs-12">
-						<div class="plan-table-top text-center">
+						<div class="plan-table-top text-center" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
 							<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-							<h5>เลือก Flight Secure B เพิ่ม</h5>
+							<h5>(B) เลือก Flight Secure เพิ่ม</h5>
 							<p>ความคุ้มครองสูงสุด (บาท)</p>
 						</div>
 					</div>
 					<div class="plan-table-content col-xs-12">
 						<div class="row">
-							<div class="plan-tab col-xs-3">
-								<h5>
-									<span class="option-checkbox">
-									<span ng-class="{'icon-check': travel.flightSecured == true}" class=""></span>
-									</span>
-									{{getPriceRate(travelData.flightsecure.protect[travel.selectedPlan-1]) | number}} <small>บาท</small>
-								</h5>
+							<div class="plan-tab" ng-class="{'col-xs-12':tempData.option1IsCollapsed,'col-xs-3':!tempData.option1IsCollapsed}">
+								<div class="plan selected" ng-click="flightSecuredToggle(true);">
+									<div class="plan-table-top text-center">
+										<h5>
+											<span class="option-checkbox">
+											<span ng-class="{'icon-check': travel.flightSecured == true}" class=""></span>
+											</span>
+											{{getPriceRate(travelData.flightsecure.protect[travel.selectedPlan-1]) | number}} <small>บาท</small>
+										</h5>
+									</div>
+								</div>
 							</div>	
-							<div class="plan-detail col-xs-9">
+							<div class="plan-detail" collapse="tempData.option1IsCollapsed" ng-class="{'col-xs-12':tempData.option1IsCollapsed,'col-xs-9':!tempData.option1IsCollapsed}">
 								<div class="plan-table-row row" ng-repeat="description in travelData.flightsecure.description">
 									<div class="col-xs-8">
-										<p ng-bind-html="description"></p>
+										<p ng-bind-html="trustAsHtml(description)"></p>
 									</div>
 									<div class="col-xs-4 text-right">
 										<p>{{travelData.flightsecure.protect[travel.selectedPlan-1].description[$index+1]}}</p>
@@ -178,26 +182,30 @@
 				</div>
 				<div class="plan-table row visible-xs">
 					<div class="plan-table-heading col-xs-12">
-						<div class="plan-table-top text-center">
+						<div class="plan-table-top text-center" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
 							<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-							<h5>เลือก Property Safe C เพิ่ม</h5>
+							<h5>(C) เลือก Property Safe เพิ่ม</h5>
 							<p>ความคุ้มครองสูงสุด (บาท)</p>
 						</div>
 					</div>
 					<div class="plan-table-content col-xs-12">
 						<div class="row">
-							<div class="plan-tab col-xs-3">
-								<h5>
-									<span class="option-checkbox">
-									<span ng-class="{'icon-check': travel.propertySafe == true}" class=""></span>
-									</span>
-									{{getPriceRate(travelData.propertysafe.protect[travel.selectedPlan-1]) | number}} <small>บาท</small>
-								</h5>
+							<div class="plan-tab" ng-class="{'col-xs-12':tempData.option2IsCollapsed,'col-xs-3':!tempData.option2IsCollapsed}">
+								<div class="plan selected" ng-click="propertySafeToggle(true);">
+									<div class="plan-table-top text-center">
+										<h5>
+											<span class="option-checkbox">
+											<span ng-class="{'icon-check': travel.propertySafe == true}" class=""></span>
+											</span>
+											{{getPriceRate(travelData.propertysafe.protect[travel.selectedPlan-1]) | number}} <small>บาท</small>
+										</h5>
+									</div>
+								</div>
 							</div>	
-							<div class="plan-detail col-xs-9">
+							<div class="plan-detail" collapse="tempData.option2IsCollapsed" ng-class="{'col-xs-12':tempData.option2IsCollapsed,'col-xs-9':!tempData.option2IsCollapsed}">
 								<div class="plan-table-row row" ng-repeat="description in travelData.propertysafe.description">
 									<div class="col-xs-8">
-										<div ng-bind-html="description"></div>
+										<div ng-bind-html="trustAsHtml(description)"></div>
 									</div>
 									<div class="col-xs-4 text-right">
 										<p>{{travelData.propertysafe.protect[travel.selectedPlan-1].description[$index+1]}}</p>

@@ -1,17 +1,28 @@
 <div class="row">
-	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">	
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 		<div class="thankyou">
 			<div class="thankyou-header">
 				<h3>
-					<small>ขอบคุณที่สั่งซื้อ</small><br>
-					แผนประกันภัยต่างประเทศ Travel Care +<br>
-					<small>ระบบสั่งซื้อดำเนินการเรียบร้อยแล้ว</small>
+				ขอบคุณที่ไว้วางใจให้ซิกน่าประกันภัยคุ้มครองท่านในการเดินทาง
 				</h3>
 			</div>
 			<div class="thankyou-details">
-				<p class="order-detail">หมายเลขสั่งซื้อของคุณคือ <span class="ordernumber">000001</span></p>
-				<p><img src="images/icon-sms.png" alt="">ทันทีที่คุณได้รับ SMS ยืนยันการสั่งซื้อจากซิกน่าคุณจะได้รับความคุ้มครองตามวันที่ระบุไว้ในกรมธรรม์</p>
-				<p><img src="images/icon-email.png" alt="">รายละเือียดการสั่งซื้อของคุณจะถูกสั่งไปยังอีเมลที่ได้ระบุในข้อมูลส่วนบุคคลและกรมธรรม์จะถูกจัดส่งตามที่อยู่ที่คุณได้ให้ไว้กับเราค่ะ</p>
+				<div class="row">
+					<div class="col-xs-2 text-right">
+						<img src="images/icon-email.png" alt="">
+					</div>
+					<p class="col-xs-10">กรมธรรม์ประกันภัยการเดินทางต่างประเทศของท่านจะถูกส่งเข้าอีเมล์ตามที่ท่านระบุ</p>
+				</div>
+				<div class="row">
+					<div class="col-xs-2 text-right">
+						<img src="images/icon-plan-4.png" alt="">
+					</div>
+					<p class="col-xs-10">
+						ศูนย์บริการลูกค้าซิกน่า โทร: 1758 หรือ 0-2763-0000 (เว้นวันหยุดนักขัตฤกษ์)<br>
+						วันจันทร์-วันศุกร์ เวลาทำการ 08.00-20.00 น. วันเสาร์-วันอาทิตย์ เวลาทำการ 08.30-17.30 น.<br>
+						อีเมล: cigna.customerservice@cigna.com, www.facebook.com/CignaThailand
+					</p>
+				</div>
 			</div>
 			<div class="banner" ng-if="travelData.banner_image_url" >
 				<a ng-if="travelData.banner_link_url" ng-href="{{travelData.banner_link_url}}"><img ng-src="{{travelData.banner_image_url}}"/></a>
@@ -20,5 +31,3 @@
 		</div>
 	</div>
 </div>
-
-<script>dataLayer.push({'ecommerce':{'purchase':{'actionField':{'id':'T12345','affiliation': 'Online Travel','revenue':'35.43','tax':'0','shipping': '0','coupon': 'SUMMER_SALE'},'products': [{'name': 'Plan 1','id': '6969','price': '35.43','brand': 'CIGNA','category': 'Travel Insurance','variant': 'Gray','quantity': 1,'coupon': ''}}}});</script>

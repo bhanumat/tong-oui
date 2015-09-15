@@ -302,8 +302,8 @@
                           <div class="row">
                             <div class="col-xs-12">
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.englishAddress.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishAddress.$touched) }">
-                                <label class="sr-only" for="englishAddress">ที่อยู่ (ภาษาอังกฤษ)</label>
-                                <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษ)" ng-pattern="/[a-z]/" required>
+                                <label class="sr-only" for="englishAddress">ที่อยู่ (ภาษาอังกฤษเพื่อยื่นขอวีซ่า)</label>
+                                <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษเพื่อยื่นขอวีซ่า)" ng-pattern="/[a-z]/" required>
                                 <div class="help-block" ng-messages="profileForm.englishAddress.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishAddress.$touched">
                                   <p ng-message="required">กรุณากรอกที่อยู่ (ภาษาอังกฤษ)</p>
                                   <p ng-message="pattern">กรุณากรอกที่อยู่เป็นภาษาอังกฤษ</p>
@@ -479,7 +479,7 @@
                       <div class="checkbox" ng-class="{ 'checked' : tempData.passengersProfile[profile].termsAccepted == true }">
                         <label for="termsAccepted" ng-click="termsToggle(profile);">
                           <input type="checkbox" name="termsAccepted" ng-model="tempData.passengersProfile[profile].termsAccepted" required>
-                          ยินยอมให้บริษัทฯ ใช้หมายเลขโทรศัพท์มือถือ และ/หรือ ข้อมูลทางอิเลคทรอนิกส์ที่ให้ไว้ข้างต้นนี้ ในการแจ้งผลการอนุมัติ รวมทั้งข่าวสารอื่นๆ
+                          ข้าพเจ้ายินยอมให้บริษัทฯติดต่อแจ้งผลการอนุมัติ การรับประกันภัย ทางหมายเลขโทรศัพท์มือถือ และ/หรือ อีเมล์อิเลคโทรนิคที่ให้ไว้ข้างต้น รวมถึงใช้เพื่อการติดต่อแจ้งข่าวสารและผลประโยชน์ต่างๆ ของบริษัทฯ บริษัทในเครือ และบริษัทคู่ค้าทางธุรกิจ
                         </label>
                       </div>
                     </div>

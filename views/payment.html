@@ -72,12 +72,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<p class="col-xs-12 col-sm-6 control-label">วันหมดอายุ (เดือน/ปี) :</p>
+						<div class="row form-group">
+							<div>
+								<p class="col-xs-12 col-sm-6 control-label">วันหมดอายุ (เดือน/ปี) :</p>
+							</div>
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-6">
-										<div class="form-group" ng-class="{ 'has-error' : (insuranceForm.expiryMonth.$invalid && (formStepSubmitted || insuranceForm.expiryMonth.$touched)) }">
+										<div class="form-group" style="margin-bottom: 0;" ng-class="{ 'has-error' : (insuranceForm.expiryMonth.$invalid && (formStepSubmitted || insuranceForm.expiryMonth.$touched)) }">
 											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryMonth}" ng-model="travel.paymant.expiryMonth" name="expiryMonth" title="เดือน" data-size="5" required>
 												<li nya-bs-option="expiryMonth in range(1,12)">
 													<!-- the text content of anchor element will be used for search -->
@@ -92,7 +94,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										<div class="form-group" ng-class="{ 'has-error' : (insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)) }"> 
+										<div class="form-group" style="margin-bottom: 0;" ng-class="{ 'has-error' : (insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)) }"> 
 											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryYear}" ng-model="travel.paymant.expiryYear" name="expiryYear" title="ปี" data-size="5" required>
 												<li nya-bs-option="expiryYear in range(2015,2115)">
 													<!-- the text content of anchor element will be used for search -->
@@ -123,51 +125,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.bankCountry.$invalid && (formStepSubmitted || insuranceForm.bankCountry.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">ประเทศของธนาคารผู้ออกบัตร :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.bankCountry}" ng-model="travel.paymant.bankCountry" name="bankCountry" title="เลือกประเทศของธนาคารผู้ออกบัตร" data-size="3" data-live-search="true" required>
-											<li nya-bs-option="bankCountry in travelData.formData.paymentBankCountry | orderBy:'name'">
-												<!-- the text content of anchor element will be used for search -->
-												<a>
-													{{ bankCountry.name }}
-												</a>
-											</li>
-										</ol>
-										<div class="help-block" ng-messages="insuranceForm.bankCountry.$error" ng-if="insuranceForm.bankCountry.$invalid && (formStepSubmitted || insuranceForm.bankCountry.$touched)">
-							                <p ng-message="required">กรุณาเลือกประเทศของธนาคารผู้ออกบัตร</p>
-							            </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.bank.$invalid && (formStepSubmitted || insuranceForm.bank.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">ชื่อธนาคารผู้ออกบัตร :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.bank}" ng-model="travel.paymant.bank" name="bank" title="เลือกธนาคาร" data-size="2" data-live-search="true" required>
-											<li nya-bs-option="bank in travelData.formData.paymentBank | orderBy:'name'">
-												<!-- the text content of anchor element will be used for search -->
-												<a>
-													{{ bank.name }}
-												</a>
-											</li>
-										</ol>
-										<div class="help-block" ng-messages="insuranceForm.bank.$error" ng-if="insuranceForm.bank.$invalid && (formStepSubmitted || insuranceForm.bank.$touched)">
-							                <p ng-message="required">กรุณาเลือกธนาคารผู้ออกบัตร</p>
-							            </div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
-			<div class="cvv2-lightbox" ng-show="showCvv2" ng-click="showCvv2 = !showCvv2">
-				<img src="images/cvv2.png" alt="">
+			<div class="cvv2-lightbox"  ng-show="showCvv2" ng-click="showCvv2 = !showCvv2">
+				<img style="padding: 30px;background-color: #fff;" src="images/cvv2.png" alt="">
 			</div>
 		</div>
 		<div class="row">

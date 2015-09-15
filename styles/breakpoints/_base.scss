@@ -286,7 +286,7 @@ MAIN PAGE
 
 .body-sticky {
     #form-views {
-        margin-top: 400px;
+        margin-top: 200px;
     }
 }
 .go-to-top {
@@ -329,6 +329,23 @@ MAIN PAGE
         }
     }
     .summary-bar {
+        .expanded-summary-bar {
+            display: none;
+        }
+        .compressed-summary-bar {
+            display: block;
+        }
+        .compress-summary-bar {
+            display: block;
+        }
+        &.expand {
+            .expanded-summary-bar {
+                display: block;
+            }
+            .compressed-summary-bar {
+                display: none;
+            }
+        }
         p {
             font-size: 18px;
         }
@@ -380,6 +397,31 @@ MAIN PAGE
 }
 
 .summary-bar {
+    .expanded-summary-bar {
+        display: block;
+    }
+    .compressed-summary-bar {
+        display: none;
+        h6 {
+            color: $primary-color;
+            font-size: 22px;
+            img {
+                width: 25px;
+            }
+            &.text-right {
+                color: $secondary-brand-color;
+                .large {
+                    font-size: 1.25em;
+                }
+            }
+        }
+    }
+    .compress-summary-bar {
+        display: none;
+        img {
+            width: 25px;
+        }
+    }
     @include box-shadow(1px, 1px, 3px, $text-color);
     background-color: $white;
     padding: 0.5em 0em;
@@ -765,6 +807,7 @@ MAIN PAGE
 	.thankyou-header {
 		text-align: center;
 		h3 {
+            margin-bottom: 30px;
 			color: $primary-color;
 			@include text-shadow(0px, 0px, 0px, $text-color);
 			small {
@@ -774,7 +817,6 @@ MAIN PAGE
 		}
 	}
 	.thankyou-details {
-		margin-bottom: 40px;
 		.order-detail {
 			padding: 0;
 			margin: 30px 0;
@@ -787,9 +829,8 @@ MAIN PAGE
 			}
 		}
 		p {
-			padding: 0px 60px;
+			margin-bottom: 40px;
 			img {
-				margin-right: 15px;
 			}
 		}
 	}
@@ -1051,7 +1092,7 @@ MAIN PAGE
         }
     }
     &.saved {
-        padding: 1em;
+        padding: 0em;
         cursor: inherit;
         background-color: $white;
         .profile-summary {

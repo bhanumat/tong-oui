@@ -459,6 +459,30 @@ select {
       font-family: $font;
       font-weight: normal;
     }
+    select.ui-datepicker-year {
+      display: inline-block;
+      width: 45%;
+      font-size: 12px;
+      padding: 0 10px;
+      height: 30px;
+      margin: 0px;
+      text-align: right;
+      vertical-align: top;
+      background-size: 10px 6px;
+      background-position: 70% center;
+    }
+    select.ui-datepicker-month {
+      display: inline-block;
+      width: 45%;
+      font-size: 12px;
+      padding: 0 10px;
+      height: 30px;
+      margin: 0px;
+      text-align: right;
+      vertical-align: top;
+      background-size: 10px 6px;
+      background-position: 60% center;
+    }
     .ui-datepicker-calendar {
       margin: 0 auto;
       thead {

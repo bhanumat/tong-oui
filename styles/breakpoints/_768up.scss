@@ -62,7 +62,7 @@ NAVIGATION STYLES
 
 .body-sticky {
     #form-views {
-        margin-top: 200px;
+        margin-top: 100px;
     }
 }
 
@@ -109,6 +109,19 @@ NAVIGATION STYLES
 
 .summary-bar {
 	padding: 1em 0.5em;
+    .compressed-summary-bar {
+        h6 {
+            img {
+                width: auto;
+            }
+            font-size: 30px;
+        }
+    }
+    .compress-summary-bar {
+        img {
+            width: auto;
+        }
+    }
 }
 
 .sticky {
@@ -137,6 +150,7 @@ NAVIGATION STYLES
         }
 	}
 	&.saved {
+        padding: 1em;
         .profile-summary {
             .profile-summary-section {
                 p {
@@ -168,7 +182,7 @@ NAVIGATION STYLES
             }
             h5 {
                 line-height: 30px;
-                font-size: 28px;
+                font-size: 25px;
             }
         }
     }
@@ -229,8 +243,11 @@ NAVIGATION STYLES
                 color: $white;
                 h5 {
                     font-size: 30px;
-                    line-height: 47px;
-                    margin: 10px 0 ;
+                    line-height: 23px;
+                    margin: 11px 0 ;
+                    small {
+                        color: $white;
+                    }
                 }
             }
             .plan-table-row {
