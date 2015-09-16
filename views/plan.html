@@ -66,7 +66,7 @@
 									<div ng-bind-html="trustAsHtml(description)"></div>
 								</div>
 								<div class="col-xs-4 text-right">
-									<p>{{travelData.quotation.protect[travel.selectedPlan-1].description[$index+1]}}</p>
+									<p ng-bind-html="trustAsHtml(travelData.quotation.protect[travel.selectedPlan-1].description[$index+1])"></p>
 								</div>
 							</div>
 						</div>
@@ -173,7 +173,7 @@
 										<p ng-bind-html="trustAsHtml(description)"></p>
 									</div>
 									<div class="col-xs-4 text-right">
-										<p>{{travelData.flightsecure.protect[travel.selectedPlan-1].description[$index+1]}}</p>
+										<p ng-bind-html="trustAsHtml(travelData.flightsecure.protect[travel.selectedPlan-1].description[$index+1])"></p>
 									</div>
 								</div>
 							</div>
@@ -208,7 +208,7 @@
 										<div ng-bind-html="trustAsHtml(description)"></div>
 									</div>
 									<div class="col-xs-4 text-right">
-										<p>{{travelData.propertysafe.protect[travel.selectedPlan-1].description[$index+1]}}</p>
+										<p ng-bind-html="trustAsHtml(travelData.propertysafe.protect[travel.selectedPlan-1].description[$index+1])"></p>
 									</div>
 								</div>
 							</div>

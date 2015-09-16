@@ -404,7 +404,7 @@ MAIN PAGE
         display: none;
         h6 {
             color: $primary-color;
-            font-size: 22px;
+            font-size: 18px;
             img {
                 width: 25px;
             }
@@ -642,7 +642,13 @@ MAIN PAGE
                 height: 12.5%;
                 background-color: $primary-color;
                 text-align: center;
-                padding-top: 18px;
+                &::before {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -13px;
+                    margin-left: -13px;
+                }
             }
             .plan-wrapper {
                 font-size: 0;

@@ -276,10 +276,13 @@ NAVIGATION STYLES
             padding: 0;
             .plan-navigation {
                 font-size: 20px;
-                padding: 45px 0;
                 top: 0;
                 width: 20px;
                 z-index: 10;
+                &::before {
+                    margin-top: -10px;
+                    margin-left: -10px;
+                }
             }
             .plan-wrapper {
                 font-size: 0;

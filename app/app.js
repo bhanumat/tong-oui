@@ -18,13 +18,13 @@
 
   angular
     .module('boilerplate', [
-      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages','ngEqualizer','ngSanitize','ngMask'
+      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages','ngEqualizer','ngSanitize','ngMask','angulartics','angulartics.google.tagmanager'
     ])
     .config(config);
 
   // safe dependency injection
   // this prevents minification issues
-  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$compileProvider'];
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$compileProvider', '$analyticsProvider'];
   /**
    * App routing
    *
@@ -32,7 +32,7 @@
    * into separate file
    * 
    */
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider) {
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider, $analyticsProvider) {
     
     $locationProvider.html5Mode(false);
 
