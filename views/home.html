@@ -5,7 +5,7 @@
 				<div ng-if="tempData.currentState == '/insurance/destination'" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h2>แผนประกันภัยการเดินทางต่างประเทศ</h2>
 				</div>
-				<div ng-if="tempData.currentState != '/insurance/destination' && tempData.currentState != '/insurance/thankyou' " class="col-xs-12 col-sm-10 col-sm-offset-1">
+				<div ng-if="tempData.currentState != '/insurance/destination'" class="col-xs-12 col-sm-10 col-sm-offset-1">
 					<h2>แผนประกันภัยการเดินทางต่างประเทศ</h2>
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 													<h6>จุดหมายปลายทาง</h6>
 													<p ng-hide="editingSummarybar" class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
 													<div ng-show="editingSummarybar" class="form-group" style="margin-bottom: 10px;" ng-class="{ 'has-error' : !travel.destinations.length && summaryBarSubmitted }">
-														<ol class="nya-bs-select form-control text-center" id="destination" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
+														<ol class="nya-bs-select form-control text-center" id="destination" disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
 														    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
 														      	<!-- the text content of anchor element will be used for search -->
 														      	<a>
@@ -67,7 +67,7 @@
 														</div>
 													</div>
 													<div class="row" style="margin-right: -6px;margin-left: -6px;">
-														<div ng-show="editingSummarybar" ng-repeat="destination in travel.destinations | limitTo: 10" class="col-xs-12 col-sm-6">
+														<div ng-show="editingSummarybar" ng-repeat="destination in travel.destinations | limitTo: 10" class="col-sm-6" ng-class="{'col-xs-12':travel.destinations.length < 4,'col-xs-6':travel.destinations.length > 3 }">
 															<div class="travel-destination">
 																<span ng-bind="destination.country"></span>
 																<button class="btn btn-tag" ng-click="removeDestination($index)"><img src="images/icon-delete.png" alt="" style="margin-top: -4px;"></button>

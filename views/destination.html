@@ -14,7 +14,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group" ng-class="{ 'has-error' : !travel.destinations.length && formStepSubmitted  }">
-							<ol class="nya-bs-select form-control text-center" id="destination" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
+							<ol class="nya-bs-select form-control text-center" id="destination" disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
 								<li nya-bs-option="item in travelData.destination | orderBy:'country'">
 									<a>
 										{{ item.country }}

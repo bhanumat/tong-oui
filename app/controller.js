@@ -66,7 +66,8 @@
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
         propertySafe: $scope.travelData.propertysafe.defaultTick,
-        destinations: []
+        destinations: [],
+        passengers:  1
       };
 
       $scope.calculatePrice();

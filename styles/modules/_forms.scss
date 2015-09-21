@@ -460,28 +460,32 @@ select {
       font-weight: normal;
     }
     select.ui-datepicker-year {
+      background-color: $light-gray;
+      background-position: right 10px center;
+      background-size: 10px auto;
       display: inline-block;
-      width: 45%;
       font-size: 12px;
-      padding: 0 10px;
       height: 30px;
-      margin: 0px;
-      text-align: right;
+      line-height: 30px;
+      margin: 0 0 0 2%;
+      padding: 0 10px;
       vertical-align: top;
-      background-size: 10px 6px;
-      background-position: 70% center;
+      width: 45%;
+      cursor: pointer;
     }
     select.ui-datepicker-month {
+      background-color: $light-gray;
+      background-position: right 10px center;
+      background-size: 10px auto;
       display: inline-block;
-      width: 45%;
       font-size: 12px;
-      padding: 0 10px;
       height: 30px;
-      margin: 0px;
-      text-align: right;
+      line-height: 30px;
+      margin: 0 2% 0 0;
+      padding: 0 10px 4px;
       vertical-align: top;
-      background-size: 10px 6px;
-      background-position: 60% center;
+      width: 45%;
+      cursor: pointer;
     }
     .ui-datepicker-calendar {
       margin: 0 auto;

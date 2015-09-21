@@ -68,6 +68,9 @@ NAVIGATION STYLES
 
 .content-wrapper {
     padding-top: 60px;
+    h2 {
+        text-align: center;
+    }
 }
 
 .content-section {
@@ -112,6 +115,7 @@ NAVIGATION STYLES
     .compressed-summary-bar {
         h6 {
             img {
+                margin-top: -8px;
                 width: auto;
             }
             font-size: 30px;

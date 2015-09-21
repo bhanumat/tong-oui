@@ -24,11 +24,14 @@
         $scope.$watch("travel.endDate", (function(newValue, oldValue) {
           
         }), true);
-          
+          var min = $scope.addDays(new Date(),1);
+          var max = $scope.addDays(new Date(),1);
+          max.setFullYear(min.getFullYear()+2);
           return element.datepicker({
             dateFormat: 'dd MM yy',
             numberOfMonths: parseInt(attrs["startDateCalendar"]),
-            minDate: new Date(),
+            minDate: min,
+            maxDate: max,
             onSelect: function(date) {
               $scope.travel.endDate = '';
               $scope.travel.endDateForCal = '';
