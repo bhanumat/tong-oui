@@ -116,10 +116,12 @@
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
 								<div class="row">
 									<div class="col-xs-12">
-										<input type="text" style="text-transform: uppercase;" name="cardholdername" ng-change="travel.paymant.cardholdername = travel.paymant.cardholdername.toUpperCase();" ng-model="travel.paymant.cardholdername" class="form-control"  mask="@?s?" validate="false"  repeat="40" restrict="reject" clean="true"  ng-pattern="/[a-zA-Z]/" required>
+										<input type="text" style="text-transform: uppercase;" name="cardholdername" ng-change="travel.paymant.cardholdername = travel.paymant.cardholdername.toUpperCase();" ng-model="travel.paymant.cardholdername" class="form-control" ng-minlength="3" ng-maxlength="40"  mask="@?s?" validate="false"  repeat="40" restrict="reject" clean="true" ng-pattern="/^[a-zA-Z]+[ ]?[a-zA-Z]*$/" required>
 										<div class="help-block" ng-messages="insuranceForm.cardholdername.$error" ng-if="insuranceForm.cardholdername.$invalid && (formStepSubmitted || insuranceForm.cardholdername.$touched)">
 							                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตร</p>
-							                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตรเป็นภาษาอังกฤษ</p>
+							                <p ng-message="pattern">กรุณากรอกชื่อผู้ถือบัตรที่ถูกต้อง</p>
+							                <p ng-message="minlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
+                              				<p ng-message="maxlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
 							            </div>
 									</div>
 								</div>
