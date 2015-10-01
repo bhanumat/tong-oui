@@ -153,9 +153,14 @@
 												<p>แผน {{ travel.selectedPlan }} - Travel Care A<span ng-if="travel.flightSecured">, Flight Secure B</span><span ng-if="travel.propertySafe">, Property Safe C</span></p>
 												<span class="sep hidden-xs"></span>
 												<div class="price-summary">
-													<p>ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
-													<p ng-if="tempData.discountAsBath">
-														ส่วนลด <span ng-if="tempData.discountType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsBath | number}} บาท</span>
+													<p ng-if="tempData.isShowingDiscount">ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
+													<p ng-if="tempData.discountAsAmount && tempData.isShowingDiscount">
+														ส่วนลด <span ng-if="tempData.promotionType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsAmount | number}} บาท</span>
+													</p>
+													<p ng-if="!tempData.isShowingDiscount"><br></p>
+													<p ng-if="!(tempData.discountAsAmount && tempData.isShowingDiscount)"><br></p>
+													<p ng-if="tempData.promotionType == 'gift'">
+														{{tempData.promotionValue}}
 													</p>
 													<h6>เบี้ยประกันรวม <span class="right"><span class="large">{{ tempData.price | number }}</span> บาท</span></h6>
 												</div>

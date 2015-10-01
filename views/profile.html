@@ -82,7 +82,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.englishFirstname.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishFirstname.$touched) }">
                           <label class="sr-only" for="englishFirstname">ชื่อ (ภาษาอังกฤษ)</label>
-                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishFirstname" ng-minlength="3" ng-maxlength="40" type="text" name="englishFirstname" placeholder="ชื่อ (ภาษาอังกฤษ)" ng-pattern="/^[a-z]+[ ]?[a-z]*$/" required>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishFirstname" ng-minlength="3" ng-maxlength="40" type="text" name="englishFirstname" placeholder="ชื่อ (ภาษาอังกฤษ)" ng-pattern="/^[a-zA-Z]+[ ]?[a-zA-Z]*$/" required>
                           <div class="help-block" ng-messages="profileForm.englishFirstname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishFirstname.$touched">
                             <p ng-message="required">กรุณากรอกชื่อ (ภาษาอังกฤษ)</p>
                             <p ng-message="pattern">กรุณากรอกชื่อเป็นภาษาอังกฤษ</p>
@@ -94,7 +94,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.englishLastname.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishLastname.$touched) }">
                           <label class="sr-only" for="englishLastname">นามสกุล (ภาษาอังกฤษ)</label>
-                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishLastname" ng-minlength="3" ng-maxlength="40" type="text" name="englishLastname" placeholder="นามสกุล (ภาษาอังกฤษ)" ng-pattern="/^[a-z]+[ ]?[a-z]*$/" required>
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].englishLastname" ng-minlength="3" ng-maxlength="40" type="text" name="englishLastname" placeholder="นามสกุล (ภาษาอังกฤษ)" ng-pattern="/^[a-zA-Z]+[ ]?[a-zA-Z]*$/" required>
                           <div class="help-block" ng-messages="profileForm.englishLastname.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishLastname.$touched">
                             <p ng-message="required">กรุณากรอกนามสกุล (ภาษาอังกฤษ)</p>
                             <p ng-message="pattern">กรุณากรอกนามสกุลเป็นภาษาอังกฤษ</p>
@@ -118,7 +118,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.passportId.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.passportId.$touched) }">
                           <label class="sr-only" for="passportId">เลขที่หนังสือเดินทาง</label>
-                          <input class="form-control" ng-model="travel.passengersProfile[profile].passportId" ng-maxlength="10" type="text" name="passportId" placeholder="เลขที่หนังสือเดินทาง" required ng-pattern="/^([a-z]|[0-9]){7,10}$/" >
+                          <input class="form-control" ng-model="travel.passengersProfile[profile].passportId" ng-maxlength="10" type="text" name="passportId" placeholder="เลขที่หนังสือเดินทาง" required ng-pattern="/^([a-zA-Z]|[0-9]){7,10}$/" >
                           <div class="help-block" ng-messages="profileForm.passportId.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.passportId.$touched">
                             <p ng-message="required">กรุณากรอกเลขที่หนังสือเดินทาง</p>
                             <p ng-message="pattern">กรุณากรอกเลขที่หนังสือเดินทาง 7 - 10 ตัวอักษร</p>
@@ -238,7 +238,7 @@
                         <div class="col-xs-12">
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.address.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.address.$touched) }">
                             <label class="sr-only" for="address">ที่อยู่</label>
-                            <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" ng-minlength="3" ng-maxlength="80" type="text" name="address" placeholder="ที่อยู่" ng-pattern="/^[^a-z]+$/" required>
+                            <input ng-model="travel.passengersProfile[profile].addressData.address" class="form-control" ng-minlength="3" ng-maxlength="80" type="text" name="address" placeholder="ที่อยู่" ng-pattern="/^[^a-zA-Z]+$/" required>
                             <div class="help-block" ng-messages="profileForm.address.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.address.$touched">
                               <p ng-message="required">กรุณากรอกที่อยู่</p>
                               <p ng-message="pattern">กรุณากรอกที่อยู่เป็นภาษาไทย</p>

@@ -9,26 +9,6 @@
 			<div class="payment-details">
 				<div class="row">
 					<div class="col-xs-12 col-sm-10 col-sm-offset-1" >
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.method.$invalid && (formStepSubmitted || insuranceForm.method.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">ประเภทบัตรเครดิต :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-12">
-										<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.method}" ng-model="travel.paymant.method" name="method" title="เลือกประเภทบัตร" data-size="5" required>
-											<li nya-bs-option="method in travelData.formData.paymentMethod | orderBy:'id'">
-												<!-- the text content of anchor element will be used for search -->
-												<a>
-													{{ method.name }}
-												</a>
-											</li>
-										</ol>
-										<div class="help-block" ng-messages="insuranceForm.method.$error" ng-if="insuranceForm.method.$invalid && (formStepSubmitted || insuranceForm.method.$touched)">
-							                <p ng-message="required">กรุณาเลือกประเภทบัตรเครดิต</p>
-							            </div>
-									</div>
-								</div>
-							</div>
-						</div>
 						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cardnumber.$invalid && (formStepSubmitted || insuranceForm.cardnumber1.$touched || insuranceForm.cardnumber2.$touched || insuranceForm.cardnumber3.$touched || insuranceForm.cardnumber4.$touched) }">
 							<p class="col-xs-12 col-sm-6 control-label">หมายเลขบัตรเครดิต :</p>
 							<div class="col-xs-12 col-sm-6" style="padding:0;">
@@ -123,6 +103,57 @@
 							                <p ng-message="minlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
                               				<p ng-message="maxlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
 							            </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cardholderPhoneNumber.$invalid && (formStepSubmitted || insuranceForm.cardholderPhoneNumber.$touched) }">
+							<p class="col-xs-12 col-sm-6 control-label">เบอร์โทรศัพท์ :</p>
+							<div class="col-xs-12 col-sm-6" style="padding:0;">
+								<div class="row">
+									<div class="col-xs-12">
+										<input class="form-control" ng-model="travel.paymant.cardholderPhoneNumber" mask="(099) 999-9999" restrict="reject" clean="true" type="text" name="cardholderPhoneNumber" placeholder="เบอร์โทรศัพท์" required ng-pattern="/^\d{10}$/">
+										<div class="help-block" ng-messages="insuranceForm.cardholderPhoneNumber.$error" ng-if="insuranceForm.cardholderPhoneNumber.$invalid && (formStepSubmitted || insuranceForm.cardholderPhoneNumber.$touched)">
+							                <p ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
+                            				<p ng-message="pattern">กรุณากรอกเบอร์โทรศัพท์เป็นตัวเลข 10 หลัก</p>
+							            </div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+								<div class="row">
+									<div class="col-xs-4 text-center" style="padding:0;">
+										<div class="row">
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-visa.png" alt="" style="margin-top: 10px;">
+											</div>
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-verifled-visa.png" alt="" style="margin-top: 10px;">
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-4 text-center" style="padding:0;">
+										<div class="row">
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-mastercard.png" alt="" style="margin-top: 10px;">
+											</div>
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-verifled-mastercard.png" alt="" style="margin-top: 10px;">
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-4 text-center" style="padding:0;">
+										<div class="row">
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-jcb.png" alt="" style="margin-top: 10px;">
+											</div>
+											<div class="col-xs-10 col-sm-6" style="padding:0;">
+												<img src="../images/icon-verifled-jcb.png" alt="" style="margin-top: 10px;">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -43,19 +43,22 @@
         $scope.tempData.currentState = $location.path();
       }
     });
+
+
     
     $scope.tempData = {};
     $scope.tempData.destination = [];
     $scope.tempData.option1IsCollapsed = false;
     $scope.tempData.option2IsCollapsed = false;
-    $scope.tempData.discount = 50;
-    $scope.tempData.discountType = "percent";
+    $scope.tempData.promotionValue = 50;
+    $scope.tempData.promotionType = "discountPercent";
     $scope.formStepSubmitted = false;
     $scope.tempData.currentState = $location.path();
     $scope.tempData.passengersProfile = [];
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
     $scope.tempData.passengersProfile[1].isManualAddress = true; 
+    $scope.tempData.isShowingDiscount = false;
     $scope.translatey = 'translatey(12.5%)';
 
     $http.get('/NewTravel.json').
@@ -67,7 +70,7 @@
         flightSecured: $scope.travelData.flightsecure.defaultTick,
         propertySafe: $scope.travelData.propertysafe.defaultTick,
         destinations: [],
-        passengers:  1
+        passengers: 1
       };
 
       $scope.calculatePrice();
@@ -75,6 +78,20 @@
 
     }, function(response) {
       
+    });
+
+    $scope.$watch('travel.days', function() {
+        if($location.path() == '/insurance/profile' || $location.path() == '/insurance/payment'){
+          $location.path('/insurance/plan');
+          $location.replace();
+        }
+    });
+
+    $scope.$watch('travel.passengers', function() {
+      if($location.path() == '/insurance/payment'){
+        $location.path('/insurance/profile');
+        $location.replace();
+      }
     });
 
     $scope.calculateTotalPrice = function(){
@@ -112,20 +129,23 @@
 
     $scope.calculatePrice = function(){
       $scope.calculateTotalPrice();
-      if($scope.tempData.discount){
-        if ($scope.tempData.discountType == "percent") {
-          if($scope.tempData.totalPrice * ((100-$scope.tempData.discount)/100) < 0 ){
+      if($scope.tempData.promotionValue){
+        if ($scope.tempData.promotionType == "discountPercent") {
+          if($scope.tempData.totalPrice * ((100-$scope.tempData.promotionValue)/100) < 0 ){
             $scope.tempData.price = 0;
           }
-          $scope.tempData.price = $scope.tempData.totalPrice * ((100-$scope.tempData.discount)/100);
+          $scope.tempData.price = $scope.tempData.totalPrice * ((100-$scope.tempData.promotionValue)/100);
         }
-        else if ($scope.tempData.discountType == "direct") {
-          if(($scope.tempData.totalPrice - $scope.tempData.discount) < 0 ){
+        else if ($scope.tempData.promotionType == "discountAmount") {
+          if(($scope.tempData.totalPrice - $scope.tempData.promotionValue) < 0 ){
             $scope.tempData.price = 0;
           }
-          $scope.tempData.price = $scope.tempData.totalPrice - $scope.tempData.discount;
+          $scope.tempData.price = $scope.tempData.totalPrice - $scope.tempData.promotionValue;
         }
-        $scope.tempData.discountAsBath = $scope.tempData.totalPrice - $scope.tempData.price;
+        else if ($scope.tempData.promotionType == "gift"){
+          $scope.tempData.price = $scope.tempData.totalPrice;
+        }
+        $scope.tempData.discountAsAmount = $scope.tempData.totalPrice - $scope.tempData.price;
       }
       else {
         $scope.tempData.price = $scope.tempData.totalPrice;
