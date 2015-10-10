@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-csp="" ng-app="boilerplate"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-csp="" ng-app="cignaApp"> <!--<![endif]-->
 
 	<head>
 
@@ -11,7 +11,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title>AngularJS Boilerplate</title>
 		<meta name="description" content="Simple AngularJS Boilerplate to kick start your new project with SASS support and Gulp watch/build tasks">
-		
+
 		<!-- mobile meta -->
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
@@ -38,8 +38,8 @@
 		<![endif]-->
 		<base href="/">
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
 		<!-- build:css css/style.min.css -->
+		<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
 		<link rel="stylesheet" type="text/css" href="bower_components/angular/angular-csp.css">
 		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css">
@@ -51,7 +51,7 @@
 
 	<body class="main-wrapper">
 		<!-- Google Tag Manager -->
-			<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NTJ435" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NTJ435');</script>
+		<!-- <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NTJ435" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NTJ435');</script> -->
 		<!-- End Google Tag Manager -->
 		<!--[if lt IE 8]>
 		    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -62,13 +62,13 @@
 		</header>
 		<!-- Main view for templates -->
 		<div ui-view="" class="container content-section"></div>
-		
+
 		<footer>
 			<main-footer></main-footer>
 		</footer>
 	</body>
 
-	
+
 
 	<!-- Vendors -->
 	<!-- build:nonangularlibs js/nonangularlibs.js -->
@@ -89,12 +89,22 @@
 	<!-- build:angularlibs js/angularlibs.js -->
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="js/angular/angular-locale_th-th.js"></script>
-	
-	
+	<script type="text/javascript" src="js/angular/angular-equalizer.js"></script>
+	<script type="text/javascript" src="js/angular/angulartics.js"></script>
+	<script type="text/javascript" src="js/angular/angulartics-gtm.js"></script>
+
 	<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script type="text/javascript" src='bower_components/ngMask/dist/ngMask.min.js'></script>
+	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/ngSticky/dist/sticky.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-scroll/angular-scroll.min.js"></script>
+	<script type="text/javascript" src="bower_components/ng-parallax/angular-parallax.min.js"></script>
+	<script type="text/javascript" src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+
 	<!-- endbuild -->
 
 	<!-- Angular components -->
@@ -109,17 +119,6 @@
 	<script type="text/javascript" src="components/directives/endDate.calendar.directive.js"></script>
 	<script type="text/javascript" src="components/directives/birthDate.calendar.directive.js"></script>
 	<script type="text/javascript" src="components/directives/main.footer.directive.js"></script>
-
-	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-	<script type="text/javascript" src="bower_components/ngSticky/dist/sticky.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-scroll/angular-scroll.min.js"></script>
-	<script type="text/javascript" src="bower_components/ng-parallax/angular-parallax.min.js"></script>
-	<script type="text/javascript" src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
-	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
-	<script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
-	<script type="text/javascript" src="js/angular/angular-equalizer.js"></script>
-	<script type="text/javascript" src="js/angular/angulartics.js"></script>
-	<script type="text/javascript" src="js/angular/angulartics-gtm.js"></script>
 	<!-- endbuild -->
 
 	<!-- Application sections -->
@@ -131,7 +130,7 @@
 	<!-- templates from $templateCache -->
 	<!-- build:templates -->
 	<!-- endbuild -->
-	
+
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 	<script>
 	    // (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

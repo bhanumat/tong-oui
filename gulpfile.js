@@ -15,13 +15,15 @@
  * 6. minify and copy all JS files
  * 7. copy fonts
  * 8. show build folder size
- * 
+ *
  */
 var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     reload          = browserSync.reload,
     $               = require('gulp-load-plugins')(),
     del             = require('del'),
+    cdnizer         = require("gulp-cdnizer");
+    inject         = require("gulp-inject");
     runSequence     = require('run-sequence');
 
 
@@ -60,6 +62,21 @@ gulp.task('minify-css', function() {
     .pipe($.minifyCss({keepBreaks:true}))
     .pipe(gulp.dest('./styles/'))
     .pipe(gulp.dest('./_build/css/'));
+});
+
+//cdn
+gulp.task('cdnizer', function () {
+   return gulp.src("./index.html")
+       .pipe(cdnizer({
+         allowRev: true,
+         allowMin: true,
+         files:[
+           {
+               package: 'jquery-ui',
+               file: 'bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
+               cdn: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/${version}/jquery-ui.min.css'
+           }
+       ]})).pipe(gulp.dest("./_build"));
 });
 
 // minify HTML
@@ -195,7 +212,7 @@ gulp.task('templates', function() {
     ])
     .pipe($.minifyHtml())
     .pipe($.angularTemplatecache({
-      module: 'boilerplate'
+      module: 'cignaApp'
     }))
     .pipe(gulp.dest('_build/js'));
 });
@@ -245,13 +262,14 @@ gulp.task('default', ['browser-sync', 'sass', 'minify-css'], function() {
  * 6. minify and copy all JS files
  * 7. copy fonts
  * 8. show build folder size
- * 
+ *
  */
 gulp.task('build', function(callback) {
   runSequence(
-    'clean:build',
+    // 'clean:build',
     'sass:build',
     'images',
+    'cdnizer',
     'templates',
     'usemin',
     'fonts',
