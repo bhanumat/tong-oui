@@ -24,7 +24,7 @@
      *
      */
     angular
-      .module('boilerplate')
+      .module('cignaApp')
       .factory('LocalStorage', [
         '$window', '$rootScope', LocalStorageService
       ]);

@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .directive('birthDateCalendar', initBirthDateCalendar);
 
   function initBirthDateCalendar() {

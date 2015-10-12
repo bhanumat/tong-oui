@@ -12,7 +12,7 @@
    *
    */
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .directive('mainNav', tinMainNav);
 
   function tinMainNav() {

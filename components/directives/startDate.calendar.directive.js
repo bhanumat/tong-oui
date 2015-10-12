@@ -12,7 +12,7 @@
    *
    */
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .directive('startDateCalendar', initStartDateCalendar);
 
   function initStartDateCalendar() {
@@ -22,7 +22,7 @@
       restrict: 'EA',
       link: function($scope, element, attrs) {
         $scope.$watch("travel.endDate", (function(newValue, oldValue) {
-          
+
         }), true);
           var min = $scope.addDays(new Date(),1);
           var max = $scope.addDays(new Date(),1);
@@ -39,7 +39,7 @@
               $scope.travel.days = '';
               $scope.travel.startDate = date;
               $scope.tempData.startDateForCal = element.datepicker('getDate');
-              $scope.tempData.maxDate = $scope.addDays(element.datepicker('getDate'),$scope.travelData.maxdays);
+              $scope.tempData.maxDate = $scope.addDays(element.datepicker('getDate'),$scope.travelData.maxDays);
               $scope.tempData.minDate = $scope.addDays(element.datepicker('getDate'),1);
               var monthname=new Array("ม.ค.","ก.พ.","มี.ค","ม.ย","พ.ค","มิ.ย","ก.ค","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
               var monName = monthname[$scope.tempData.startDateForCal.getMonth()];

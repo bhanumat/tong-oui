@@ -7,7 +7,7 @@
    */
    
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .directive('mainFooter', tinMainFooter);
 
   function tinMainFooter() {

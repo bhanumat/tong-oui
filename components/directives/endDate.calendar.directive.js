@@ -12,7 +12,7 @@
    *
    */
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .directive('endDateCalendar', initEndDateCalendar);
 
   function initEndDateCalendar() {
@@ -26,7 +26,7 @@
           element.datepicker("option", "minDate", $scope.tempData.minDate);
           element.datepicker("option", "maxDate", $scope.tempData.maxDate);
         }), true);
-          
+
           return element.datepicker({
             dateFormat: 'dd MM yy',
             numberOfMonths: parseInt(attrs["endDateCalendar"]),
