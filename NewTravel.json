@@ -1,1393 +1,1172 @@
 {
-    "cignatravel": {
-        "banner_link_url": "http://placehold.it/960x150",
-        "banner_image_url": "http://placehold.it/960x150",
-        "maxdays": 90,
-        "maxtraveller": 5,
-        "maxage": 80,
-        "hasPromotion": true,
-        "destination": [
-            {
-                "country": "Argentina",
-                "code": "AR",
-                "id": 1,
-                "type": "schengen"
-            },
-            {
-                "country": "Australia",
-                "code": "AU",
-                "id": 2,
-                "type": "schengen"
-            },
-            {
-                "country": "Austria",
-                "code": "AT",
-                "id": 3,
-                "type": "schengen"
-            },
-            {
-                "country": "Belgium",
-                "code": "BE",
-                "id": 4,
-                "type": "schengen"
-            },
-            {
-                "country": "Brazil",
-                "code": "BR",
-                "id": 5,
-                "type": "schengen"
-            },
-            {
-                "country": "France",
-                "code": "FR",
-                "id": 6,
-                "type": "schengen"
-            },
-            {
-                "country": "French Guiana",
-                "code": "GF",
-                "id": 7,
-                "type": "schengen"
-            },
-            {
-                "country": "French Polynesia",
-                "code": "PF",
-                "id": 8,
-                "type": "schengen"
-            },
-            {
-                "country": "French Southern Territories",
-                "code": "TF",
-                "id": 9,
-                "type": "schengen"
-            },
-            {
-                "country": "Germany",
-                "code": "DE",
-                "id": 10,
-                "type": "schengen"
-            },
-            {
-                "country": "Hong Kong",
-                "code": "HK",
-                "id": 11,
-                "type": "asia"
-            },
-            {
-                "country": "Japan",
-                "code": "JP",
-                "id": 12,
-                "type": "asia"
-            },
-            {
-                "country": "Korea, Republic",
-                "code": "KR",
-                "id": 13,
-                "type": "asia"
-            },
-            {
-                "country": "Macao",
-                "code": "MO",
-                "id": 14,
-                "type": "asia"
-            },
-            {
-                "country": "Malaysia",
-                "code": "MY",
-                "id": 15,
-                "type": "asia"
-            },
-            {
-                "country": "Maldives",
-                "code": "MV",
-                "id": 16,
-                "type": "asia"
-            },
-            {
-                "country": "Netherlands",
-                "code": "NL",
-                "id": 17,
-                "type": "schengen"
-            },
-            {
-                "country": "Norway",
-                "code": "NO",
-                "id": 18,
-                "type": "schengen"
-            },
-            {
-                "country": "Poland",
-                "code": "PL",
-                "id": 19,
-                "type": "schengen"
-            },
-            {
-                "country": "Portugal",
-                "code": "PT",
-                "id": 20,
-                "type": "schengen"
-            },
-            {
-                "country": "Romania",
-                "code": "RO",
-                "id": 21,
-                "type": "schengen"
-            },
-            {
-                "country": "Russian Federation",
-                "code": "RU",
-                "id": 22,
-                "type": "schengen"
-            },
-            {
-                "country": "Serbia and Montenegro",
-                "code": "CS",
-                "id": 23,
-                "type": "schengen"
-            },
-            {
-                "country": "Spain",
-                "code": "ES",
-                "id": 24,
-                "type": "schengen"
-            },
-            {
-                "country": "Sweden",
-                "code": "SE",
-                "id": 25,
-                "type": "schengen"
-            },
-            {
-                "country": "Switzerland",
-                "code": "CH",
-                "id": 26,
-                "type": "schengen"
-            },
-            {
-                "country": "Syrian Arab Republic",
-                "code": "SY",
-                "id": 27,
-                "type": "schengen"
-            },
-            {
-                "country": "Taiwan, Province of China",
-                "code": "TW",
-                "id": 28,
-                "type": "asia"
-            },
-            {
-                "country": "Ukraine",
-                "code": "UA",
-                "id": 29,
-                "type": "schengen"
-            },
-            {
-                "country": "United Arab Emirates",
-                "code": "AE",
-                "id": 30,
-                "type": "schengen"
-            },
-            {
-                "country": "United Kingdom",
-                "code": "GB",
-                "id": 31,
-                "type": "schengen"
-            },
-            {
-                "country": "United States",
-                "code": "US",
-                "id": 32,
-                "type": "schengen"
-            }
-        ],
-        "quotation": {
-            "description": {
-                "1": "<img src='images/icon-plan-1.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>",
-                "2": "<img src='images/icon-plan-2.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล</p>",
-                "3": "<img src='images/icon-plan-3.png'><p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด</p>",
-                "4": "<img src='images/icon-plan-4.png'><p>บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง</p>",
-                "5": "<img src='images/icon-plan-4.png'><p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษาพยาบาลฉุกเฉิน</p>"
-            },
-            "protect": [
-                {
-                    "planid": 1,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 2,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "600,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 3,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "700,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 4,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "800,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 5,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "900,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                }
-            ],
-            "defaultPlanid":2
-        },
-        "flightsecure": {
-            "description": {
-                "1": "การเลื่อนหรือการบอกเลิกการเดินทางสูงสุด",
-                "2": "ค่าใช้จ่ายในการลดจำนวนการเดินทาง",
-                "3": "การพลาดการต่อเที่ยวบิน สูงสุด",
-                "4": "การชดเชยความล่าช้าในการเดินทาง ทุกๆ 6 ชั่วโมง",
-                "5": "ความรับผิดชอบต่อบุคคลภายนอกสูงสุด"
-            },
-            "protect": [
-                {
-                    "planid": 1,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 2,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 3,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 4,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                },
-                {
-                    "planid": 5,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "500,000",
-                        "2": "500,000",
-                        "3": "1,000,000",
-                        "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
-                        "5": "3,000,000"
-                    }
-                }
-            ],
-            "defaultTick":true
-        },
-        "propertysafe": {
-            "description": {
-                "1": "การสูญเสียหรือเสียหายของกระเป๋าเดินทางและทรัพย์สินส่วนตัวสูงสุดถึง",
-                "2": "การล่าช้าของกระเป๋าเดินทาง",
-                "3": "การสูญหายของกระเป๋าเดินทาง / การสูญหายของเอกสารการเดินทาง"
-            },
-            "protect": [
-                {
-                    "planid": 1,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "8,000",
-                        "2": "Max<br />8,000",
-                        "3": "1,000/2,500"
-                    }
-                },
-                {
-                    "planid": 2,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "8,000",
-                        "2": "Max<br />8,000",
-                        "3": "1,000/2,500"
-                    }
-                },
-                {
-                    "planid": 3,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "8,000",
-                        "2": "Max<br />8,000",
-                        "3": "1,000/2,500"
-                    }
-                },
-                {
-                    "planid": 4,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "8,000",
-                        "2": "Max<br />8,000",
-                        "3": "1,000/2,500"
-                    }
-                },
-                {
-                    "planid": 5,
-                    "price": {
-                        "asia": [
-                            {
-                                "day": 1,
-                                "fee": 200 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 210 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 220 
-                                
-                            }
-                        ],
-                        "schengen": [
-                            {
-                                "day": 1,
-                                "fee": 300 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 310 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 320 
-                                
-                            }
-                        ],
-                        "world": [
-                            {
-                                "day": 1,
-                                "fee": 400 
-                                
-                            },
-                            {
-                                "day": 2,
-                                "fee": 410 
-                                
-                            },
-                            {
-                                "day": 3,
-                                "fee": 420 
-                                
-                            }
-                        ]
-                    },
-                    "description": {
-                        "1": "8,000",
-                        "2": "Max<br />8,000",
-                        "3": "1,000/2,500"
-                    }
-                }
-            ],
-            "defaultTick":true
-        },
-        "formData": {
-            "paymentMethod": [
-                {
-                    "id": 1,
-                    "name": "Mastercard"
-                },
-                {
-                    "id": 2,
-                    "name": "Visa"
-                }
-            ],
-            "paymentBankCountry": [
-                {
-                    "id": 1,
-                    "name": "ประเทศไทย"
-                },
-                {
-                    "id": 2,
-                    "name": "สาธารณรัฐประชาชนจีน"
-                },
-                {
-                    "id": 3,
-                    "name": "สาธารณรัฐไซปรัส"
-                },
-                {
-                    "id": 4,
-                    "name": "สาธารณรัฐประชาธิปไตยติมอร์-เลสเต"
-                },
-                {
-                    "id": 5,
-                    "name": "สาธารณรัฐจอร์เจีย"
-                },
-                {
-                    "id": 6,
-                    "name": "สาธารณรัฐอินเดีย"
-                },
-                {
-                    "id": 7,
-                    "name": "สาธารณรัฐอินโดนีเซีย"
-                },
-                {
-                    "id": 8,
-                    "name": "สาธารณรัฐอิสลามอิหร่าน"
-                },
-                {
-                    "id": 9,
-                    "name": "สาธารณรัฐอิรัก"
-                },
-                {
-                    "id": 10,
-                    "name": "รัฐอิสราเอล"
-                },
-                {
-                    "id": 11,
-                    "name": "ญี่ปุ่น"
-                }
-            ],
-            "paymentBank": [
-                {
-                    "id": 1,
-                    "name": "ธนาคารกสิกรไทย"
-                },
-                {
-                    "id": 2,
-                    "name": "ธนาคารไทยพาณิชย์"
-                },
-                {
-                    "id": 3,
-                    "name": "ธนาคารกรุงไทย"
-                },
-                {
-                    "id": 4,
-                    "name": "ธนาคารทหารไทย"
-                }
-            ],
-            "province": [
-                {
-                    "id": 1,
-                    "name": "กรุงเทพฯ",
-                    "engname": "Bangkok",
-                    "district": [
-                        {
-                            "id": 1,
-                            "name": "ดุสิต",
-                            "engname": "Dusit",
-                            "subdistrict": [
-                                {
-                                    "id": 1,
-                                    "name": "สวนจิตรลดา",
-                                    "engname": "Suan Chitlada",
-                                    "postcode": "10300"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "title": [
-                {
-                    "id": 1,
-                    "name": "นาย",
-                    "engname": "Mr.",
-                    "relationship": [
-                        {
-                            "id": 1,
-                            "name": "บิดา",
-                            "engname": "Father"
-                        },
-                        {
-                            "id": 3,
-                            "name": "คู่สมรส",
-                            "engname": "Spouse"
-                        },
-                        {
-                            "id": 4,
-                            "name": "พี่น้อง",
-                            "engname": "Sibling"
-                        },
-                        {
-                            "id": 5,
-                            "name": "บุตร",
-                            "engname": "Child"
-                        }
-                    ]
-                },
-                {
-                    "id": 2,
-                    "name": "นาง",
-                    "engname": "Mrs.",
-                    "relationship": [
-                        {
-                            "id": 2,
-                            "name": "มารดา",
-                            "engname": "Mother"
-                        },
-                        {
-                            "id": 3,
-                            "name": "คู่สมรส",
-                            "engname": "Spouse"
-                        },
-                        {
-                            "id": 4,
-                            "name": "พี่น้อง",
-                            "engname": "Sibling"
-                        },
-                        {
-                            "id": 5,
-                            "name": "บุตร",
-                            "engname": "Child"
-                        }
-                    ]
-                },
-                {
-                    "id": 3,
-                    "name": "นางสาว",
-                    "engname": "Ms.",
-                    "relationship": [
-                        {
-                            "id": 2,
-                            "name": "มารดา",
-                            "engname": "Mother"
-                        },
-                        {
-                            "id": 3,
-                            "name": "คู่สมรส",
-                            "engname": "Spouse"
-                        },
-                        {
-                            "id": 4,
-                            "name": "พี่น้อง",
-                            "engname": "Sibling"
-                        },
-                        {
-                            "id": 5,
-                            "name": "บุตร",
-                            "engname": "Child"
-                        }
-                    ]
-                }
-            ],
-            "gender": [
-                {
-                    "id": 1,
-                    "name": "ชาย",
-                    "engname": "Male"
-                },
-                {
-                    "id": 2,
-                    "name": "หญิง",
-                    "engname": "Female"
-                }
-            ],
-            "occupation": [
-                {
-                    "id": 1,
-                    "name": "อาชีพ 1",
-                    "engname": "Occupation 1"
-                },
-                {
-                    "id": 2,
-                    "name": "อาชีพ 2",
-                    "engname": "Occupation 2"
-                },
-                {
-                    "id": 3,
-                    "name": "อาชีพ 3",
-                    "engname": "Occupation 3"
-                },
-                {
-                    "id": 4,
-                    "name": "อาชีพ 4",
-                    "engname": "Occupation 4"
-                },
-                {
-                    "id": 5,
-                    "name": "อาชีพ 5",
-                    "engname": "Occupation 5"
-                }
-            ]
-        }
+  "banner_link_url": "http://placehold.it/960x150",
+  "banner_image_url": "http://placehold.it/960x150",
+  "maxDays": 90,
+  "maxTraveller": 5,
+  "maxAge": 80,
+  "hasPromotion": true,
+  "destinationList": [
+    {
+      "country": "Argentina",
+      "code": "AR",
+      "id": 1,
+      "type": "schengen"
+    },
+    {
+      "country": "Australia",
+      "code": "AU",
+      "id": 2,
+      "type": "schengen"
+    },
+    {
+      "country": "Austria",
+      "code": "AT",
+      "id": 3,
+      "type": "schengen"
+    },
+    {
+      "country": "Belgium",
+      "code": "BE",
+      "id": 4,
+      "type": "schengen"
+    },
+    {
+      "country": "Brazil",
+      "code": "BR",
+      "id": 5,
+      "type": "schengen"
+    },
+    {
+      "country": "France",
+      "code": "FR",
+      "id": 6,
+      "type": "schengen"
+    },
+    {
+      "country": "French Guiana",
+      "code": "GF",
+      "id": 7,
+      "type": "schengen"
+    },
+    {
+      "country": "French Polynesia",
+      "code": "PF",
+      "id": 8,
+      "type": "schengen"
+    },
+    {
+      "country": "French Southern Territories",
+      "code": "TF",
+      "id": 9,
+      "type": "schengen"
+    },
+    {
+      "country": "Germany",
+      "code": "DE",
+      "id": 10,
+      "type": "schengen"
+    },
+    {
+      "country": "Hong Kong",
+      "code": "HK",
+      "id": 11,
+      "type": "asia"
+    },
+    {
+      "country": "Japan",
+      "code": "JP",
+      "id": 12,
+      "type": "asia"
+    },
+    {
+      "country": "Korea, Republic",
+      "code": "KR",
+      "id": 13,
+      "type": "asia"
+    },
+    {
+      "country": "Macao",
+      "code": "MO",
+      "id": 14,
+      "type": "asia"
+    },
+    {
+      "country": "Malaysia",
+      "code": "MY",
+      "id": 15,
+      "type": "asia"
+    },
+    {
+      "country": "Maldives",
+      "code": "MV",
+      "id": 16,
+      "type": "asia"
+    },
+    {
+      "country": "Netherlands",
+      "code": "NL",
+      "id": 17,
+      "type": "schengen"
+    },
+    {
+      "country": "Norway",
+      "code": "NO",
+      "id": 18,
+      "type": "schengen"
+    },
+    {
+      "country": "Poland",
+      "code": "PL",
+      "id": 19,
+      "type": "schengen"
+    },
+    {
+      "country": "Portugal",
+      "code": "PT",
+      "id": 20,
+      "type": "schengen"
+    },
+    {
+      "country": "Romania",
+      "code": "RO",
+      "id": 21,
+      "type": "schengen"
+    },
+    {
+      "country": "Russian Federation",
+      "code": "RU",
+      "id": 22,
+      "type": "schengen"
+    },
+    {
+      "country": "Serbia and Montenegro",
+      "code": "CS",
+      "id": 23,
+      "type": "schengen"
+    },
+    {
+      "country": "Spain",
+      "code": "ES",
+      "id": 24,
+      "type": "schengen"
+    },
+    {
+      "country": "Sweden",
+      "code": "SE",
+      "id": 25,
+      "type": "schengen"
+    },
+    {
+      "country": "Switzerland",
+      "code": "CH",
+      "id": 26,
+      "type": "schengen"
+    },
+    {
+      "country": "Syrian Arab Republic",
+      "code": "SY",
+      "id": 27,
+      "type": "schengen"
+    },
+    {
+      "country": "Taiwan, Province of China",
+      "code": "TW",
+      "id": 28,
+      "type": "asia"
+    },
+    {
+      "country": "Ukraine",
+      "code": "UA",
+      "id": 29,
+      "type": "schengen"
+    },
+    {
+      "country": "United Arab Emirates",
+      "code": "AE",
+      "id": 30,
+      "type": "schengen"
+    },
+    {
+      "country": "United Kingdom",
+      "code": "GB",
+      "id": 31,
+      "type": "schengen"
+    },
+    {
+      "country": "United States",
+      "code": "US",
+      "id": 32,
+      "type": "schengen"
     }
+  ],
+  "quotation": {
+    "description": {
+      "1": "<img src='images/icon-plan-1.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>",
+      "2": "<img src='images/icon-plan-2.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล</p>",
+      "3": "<img src='images/icon-plan-3.png'><p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด</p>",
+      "4": "<img src='images/icon-plan-4.png'><p>บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง</p>",
+      "5": "<img src='images/icon-plan-4.png'><p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษาพยาบาลฉุกเฉิน</p>"
+    },
+    "protections": [
+      {
+        "planid": 1,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 2,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "600,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 3,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "700,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 4,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "800,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 5,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "900,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      }
+    ],
+    "defaultPlanid":2
+  },
+  "flightsecure": {
+    "description": {
+      "1": "การเลื่อนหรือการบอกเลิกการเดินทางสูงสุด",
+      "2": "ค่าใช้จ่ายในการลดจำนวนการเดินทาง",
+      "3": "การพลาดการต่อเที่ยวบิน สูงสุด",
+      "4": "การชดเชยความล่าช้าในการเดินทาง ทุกๆ 6 ชั่วโมง",
+      "5": "ความรับผิดชอบต่อบุคคลภายนอกสูงสุด"
+    },
+    "protections": [
+      {
+        "planid": 1,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 2,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 3,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 4,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      },
+      {
+        "planid": 5,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "500,000",
+          "2": "500,000",
+          "3": "1,000,000",
+          "4": "<span class='glyphicon glyphicon-ok' style='font-size: 18px'></span>",
+          "5": "3,000,000"
+        }
+      }
+    ],
+    "defaultTick":true
+  },
+  "propertysafe": {
+    "description": {
+      "1": "การสูญเสียหรือเสียหายของกระเป๋าเดินทางและทรัพย์สินส่วนตัวสูงสุดถึง",
+      "2": "การล่าช้าของกระเป๋าเดินทาง",
+      "3": "การสูญหายของกระเป๋าเดินทาง / การสูญหายของเอกสารการเดินทาง"
+    },
+    "protections": [
+      {
+        "planid": 1,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "8,000",
+          "2": "Max<br />8,000",
+          "3": "1,000/2,500"
+        }
+      },
+      {
+        "planid": 2,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "8,000",
+          "2": "Max<br />8,000",
+          "3": "1,000/2,500"
+        }
+      },
+      {
+        "planid": 3,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "8,000",
+          "2": "Max<br />8,000",
+          "3": "1,000/2,500"
+        }
+      },
+      {
+        "planid": 4,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "8,000",
+          "2": "Max<br />8,000",
+          "3": "1,000/2,500"
+        }
+      },
+      {
+        "planid": 5,
+        "price": {
+          "asia": [
+            {
+              "day": 1,
+              "fee": 200
+
+            },
+            {
+              "day": 2,
+              "fee": 210
+
+            },
+            {
+              "day": 3,
+              "fee": 220
+
+            }
+          ],
+          "schengen": [
+            {
+              "day": 1,
+              "fee": 300
+
+            },
+            {
+              "day": 2,
+              "fee": 310
+
+            },
+            {
+              "day": 3,
+              "fee": 320
+
+            }
+          ],
+          "world": [
+            {
+              "day": 1,
+              "fee": 400
+
+            },
+            {
+              "day": 2,
+              "fee": 410
+
+            },
+            {
+              "day": 3,
+              "fee": 420
+
+            }
+          ]
+        },
+        "description": {
+          "1": "8,000",
+          "2": "Max<br />8,000",
+          "3": "1,000/2,500"
+        }
+      }
+    ],
+    "defaultTick":true
+  },
+  "remark": "• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการเดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย • ผู้ซื้อควรทำความเข้าใจในรายละเอียดความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง"
 }
