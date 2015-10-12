@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * AngularJS Boilerplate
  * @description           Description
  * @author                Jozef Butko // www.jozefbutko.com/resume
@@ -7,7 +7,7 @@
  * @version               1.1.7
  * @date                  March 2015
  * @license               MIT
- * 
+ *
  */
 ;(function() {
 
@@ -17,7 +17,7 @@
    */
 
   angular
-    .module('boilerplate', [
+    .module('cignaApp', [
       'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages','ngEqualizer','ngSanitize','ngMask','angulartics','angulartics.google.tagmanager'
     ])
     .config(config);
@@ -30,12 +30,11 @@
    *
    * You can leave it here in the config section or take it out
    * into separate file
-   * 
+   *
    */
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider, $analyticsProvider) {
-    
-    $locationProvider.html5Mode(false);
 
+    $locationProvider.html5Mode(false);
     // routes
     $stateProvider
       .state('insurance', {
@@ -74,15 +73,15 @@
   /**
    * You can intercept any request or response inside authInterceptor
    * or handle what should happend on 40x, 50x errors
-   * 
+   *
    */
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .factory('authInterceptor', authInterceptor);
 
-  authInterceptor.$inject = ['$rootScope', '$q', 'LocalStorage', '$location'];
+  authInterceptor.$inject = ['$rootScope', '$q', 'SessionStorage', '$location'];
 
-  function authInterceptor($rootScope, $q, LocalStorage, $location) {
+  function authInterceptor($rootScope, $q, SessionStorage, $location) {
 
     return {
 
@@ -109,7 +108,7 @@
    * Run block
    */
   angular
-    .module('boilerplate')
+    .module('cignaApp')
     .run(run);
 
   run.$inject = ['$rootScope', '$location'];

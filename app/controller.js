@@ -1,20 +1,20 @@
 /**
- * Main application controller
- *
- * You can use this controller for your whole app if it is small
- * or you can have separate controllers for each logical section
- * 
- */
+* Main application controller
+*
+* You can use this controller for your whole app if it is small
+* or you can have separate controllers for each logical section
+*
+*/
 ;(function() {
 
   angular
-    .module('boilerplate')
-    .controller('MainController', MainController);
+  .module('cignaApp')
+  .controller('MainController', MainController);
 
-  MainController.$inject = ['LocalStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state','$sce'];
+  MainController.$inject = ['SessionStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state','$sce'];
 
 
-  function MainController(LocalStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce) {
+  function MainController(SessionStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce) {
 
     // 'controller as' syntax
     var self = this;
@@ -27,10 +27,10 @@
       $location.path('/insurance/destination');
       $location.replace();
     };
-    
-    // comment for testing 
 
-    $scope.$on('$locationChangeStart', function(next, current) { 
+    // comment for testing
+
+    $scope.$on('$locationChangeStart', function(next, current) {
       if ($location.path() == '/insurance') {
         $location.path('/insurance/destination');
         $location.replace();
@@ -44,8 +44,15 @@
       }
     });
 
+    //Travel Model to post back to API
+    $scope.travel = {
+      // selectedPlan: $scope.travelData.quotation.defaultPlanid,
+      // flightSecured: $scope.travelData.flightsecure.defaultTick,
+      // propertySafe: $scope.travelData.propertysafe.defaultTick,
+      destinations: [],
+      passengers: 1
+    };
 
-    
     $scope.tempData = {};
     $scope.tempData.destination = [];
     $scope.tempData.option1IsCollapsed = false;
@@ -57,14 +64,13 @@
     $scope.tempData.passengersProfile = [];
     $scope.tempData.passengersProfile[1] = {};
     $scope.tempData.passengersProfile[1].stage = "edit";
-    $scope.tempData.passengersProfile[1].isManualAddress = true; 
+    $scope.tempData.passengersProfile[1].isManualAddress = true;
     $scope.tempData.isShowingDiscount = false;
     $scope.translatey = 'translatey(12.5%)';
 
-    $http.get('/NewTravel.json').
-    then(function(response) {
-      $scope.travelData = response.data.cignatravel;
-      $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxtraveller);
+    QueryService.query('GET', 'NewTravel').then(function(response) {
+      $scope.travelData = response.data;
+      $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxTraveller);
       $scope.travel = {
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
@@ -73,18 +79,20 @@
         passengers: 1
       };
 
-      $scope.calculatePrice();
+      // $scope.calculatePrice();
       $scope.isSchengen();
 
-    }, function(response) {
-      
+    }, function(response) {});
+
+    QueryService.query('GET', 'getToken').then(function(response){
+      $scope.travel.tokenCode = response.data.tokenCode;
     });
 
     $scope.$watch('travel.days', function() {
-        if($location.path() == '/insurance/profile' || $location.path() == '/insurance/payment'){
-          $location.path('/insurance/plan');
-          $location.replace();
-        }
+      if($location.path() == '/insurance/profile' || $location.path() == '/insurance/payment'){
+        $location.path('/insurance/plan');
+        $location.replace();
+      }
     });
 
     $scope.$watch('travel.passengers', function() {
@@ -95,16 +103,18 @@
     });
 
     $scope.calculateTotalPrice = function(){
-      for (var i=0;i<$scope.travelData.quotation.protect.length;i++) {
-        if($scope.travelData.quotation.protect[i].planid == $scope.travel.selectedPlan){
-          $scope.tempData.totalPrice = $scope.getPriceRate($scope.travelData.quotation.protect[i]);
-          if($scope.travel.flightSecured) {
-            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.flightsecure.protect[i]);
+      if( $scope.travelData.quotation.protections) {
+        for (var i=0;i<$scope.travelData.quotation.protections.length;i++) {
+          if($scope.travelData.quotation.protections[i].planid == $scope.travel.selectedPlan){
+            $scope.tempData.totalPrice = $scope.getPriceRate($scope.travelData.quotation.protections[i]);
+            if($scope.travel.flightSecured) {
+              $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.flightsecure.protections[i]);
+            }
+            if($scope.travel.propertySafe) {
+              $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.propertysafe.protections[i]);
+            }
+            $scope.tempData.totalPrice *= $scope.travel.passengers;
           }
-          if($scope.travel.propertySafe) {
-            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.propertysafe.protect[i]);
-          }
-          $scope.tempData.totalPrice *= $scope.travel.passengers;
         }
       }
     };
@@ -164,7 +174,7 @@
         $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
         $scope.tempData.passengersProfile[index].stage = stage;
         $scope.tempData.passengersProfile[index].profileForm = null;
-      } 
+      }
       if(stage == 'saved') {
         $scope.tempData.passengersProfile[index].profileFormSubmitted = true;
         if(validate){
@@ -172,7 +182,7 @@
           $scope.tempData.passengersProfile[index].profileForm = true;
           $scope.tempData.passengersProfile[index].stage = stage;
         }
-      } 
+      }
       if(stage == 'reset') {
         $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
         $scope.travel.passengersProfile[index] = {};
@@ -180,7 +190,7 @@
         $scope.tempData.passengersProfile[index].stage = "";
         $scope.tempData.passengersProfile[index].profileForm = null;
       }
-      
+
     }
 
     $scope.copyPassengerAddress = function(templateIndex,targetIndex){
@@ -189,12 +199,12 @@
       }
       $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
       $scope.travel.passengersProfile[targetIndex].addressData = {};
-      $scope.travel.passengersProfile[targetIndex].addressData = $scope.travel.passengersProfile[templateIndex].addressData;   
+      $scope.travel.passengersProfile[targetIndex].addressData = $scope.travel.passengersProfile[templateIndex].addressData;
     };
 
     $scope.addAddress = function(index) {
-        $scope.tempData.passengersProfile[index].isManualAddress = true;
-        $scope.travel.passengersProfile[index].addressData = {};
+      $scope.tempData.passengersProfile[index].isManualAddress = true;
+      $scope.travel.passengersProfile[index].addressData = {};
     };
 
     $scope.addBeneficiary = function(index,validate) {
@@ -225,10 +235,10 @@
           $scope.travel.passengersProfile[profileId].beneficiaries[i] = {};
         }
       };
-      $scope.beneficiaryFormSubmitted = false; 
+      $scope.beneficiaryFormSubmitted = false;
     };
 
-    
+
 
     $scope.isSchengen = function(){
       for (var i = 0; i < $scope.travel.destinations.length; i++) {
@@ -285,11 +295,11 @@
         else if(plan.price[$scope.getProtectionArea()][i].day == $scope.travel.days){
           price = plan.price[$scope.getProtectionArea()][i].fee;
           return price;
-          
+
         }
       }
       return price;
-      
+
     };
 
 
@@ -332,6 +342,16 @@
       // set to true to show all error messages (if there are any)
       $scope.formStepSubmitted = true;
       if(isFormValid) {
+        var area = $scope.getProtectionArea();
+        this.params = {
+          tokenCode: $scope.travel.tokenCode,
+          area : area,
+          days : $scope.travel.days
+        };
+        QueryService.query('GET', 'inquiryPremiumTable', this.params).then(function(response){
+          console.log('###'+response.data);
+        });
+
         $scope.calculatePrice();
         $scope.formStepSubmitted = false;
         $state.go('^.plan');
@@ -359,15 +379,15 @@
 
     $scope.selectPlan = function(planId){
       //plan ID = 3
-      // console.log($scope.travelData.quotation.protect.length);
+      // console.log($scope.travelData.quotation.protections.length);
       $scope.travel.selectedPlan = planId;
       if(planId < 3) {
         $scope.translatey = 'translatey(12.5%)';
       }
-      else if((planId > 2) && (planId < $scope.travelData.quotation.protect.length)){
+      else if((planId > 2) && (planId < $scope.travelData.quotation.protections.length)){
         $scope.translatey = 'translatey('+ parseFloat(12.5-((planId-2)*25)) +'%)';
       }
-      else if(planId == $scope.travelData.quotation.protect.length){
+      else if(planId == $scope.travelData.quotation.protections.length){
         $scope.translatey = 'translatey('+ parseFloat(12.5-((planId-3)*25)) +'%)';
       }
       $scope.calculatePrice();
@@ -384,7 +404,7 @@
       if($scope.tempData.destination){
         if($scope.travel.destinations.length < 10){
           $scope.travel.destinations.push($scope.tempData.destination);
-          $scope.travelData.destination = $filter('filter')($scope.travelData.destination, {country: "!"+$scope.tempData.destination.country}, true);
+          $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!"+$scope.tempData.destination.country}, true);
           $scope.tempData.destination = "";
           $scope.isSchengen();
         }
@@ -392,7 +412,7 @@
     }
 
     $scope.removeDestination = function(index) {
-      $scope.travelData.destination.push($scope.travel.destinations[index]);
+      $scope.travelData.destinationList.push($scope.travel.destinations[index]);
       $scope.travel.destinations = $filter('filter')($scope.travel.destinations, {country: "!"+$scope.travel.destinations[index].country}, true);
       $scope.isSchengen();
     }
@@ -408,10 +428,10 @@
 
     $scope.calcTravelDays = function() {
       var oneDay = 24*60*60*1000;
-      $scope.travel.days = (Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay));
-      $scope.tempData.daysAsText = "รวม "+(Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay))+" วัน";
+      $scope.travel.days = Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay);
+      $scope.tempData.daysAsText = "รวม "+$scope.travel.days+" วัน";
     }
-   
+
     $scope.today = new Date();
     $scope.tempData.maxDate = $scope.addDays($scope.today,90);
     $scope.tempData.minDate = $scope.addDays($scope.today,1);
