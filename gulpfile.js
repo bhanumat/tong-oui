@@ -22,14 +22,14 @@ var gulp            = require('gulp'),
     reload          = browserSync.reload,
     $               = require('gulp-load-plugins')(),
     del             = require('del'),
-    cdnizer         = require("gulp-cdnizer");
+    // cdnizer         = require("gulp-cdnizer");
     inject         = require("gulp-inject");
     runSequence     = require('run-sequence');
 
 
 // optimize images
 gulp.task('images', function() {
-  return gulp.src('./images/*')
+  return gulp.src(['./images/*', './bower_components/jquery-ui/themes/smoothness/images/*'])
     .pipe($.changed('./_build/images'))
     .pipe($.imagemin({
       optimizationLevel: 3,
@@ -37,6 +37,17 @@ gulp.task('images', function() {
       interlaced: true
     }))
     .pipe(gulp.dest('./_build/images'));
+});
+
+gulp.task('jquery-ui-images', function() {
+  return gulp.src(['./bower_components/jquery-ui/themes/smoothness/images/*'])
+    .pipe($.changed('./_build/css/images'))
+    .pipe($.imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
+    }))
+    .pipe(gulp.dest('./_build/css/images'));
 });
 
 // browser-sync task, only cares about compiled CSS
@@ -65,19 +76,19 @@ gulp.task('minify-css', function() {
 });
 
 //cdn
-gulp.task('cdnizer', function () {
-   return gulp.src("./index.html")
-       .pipe(cdnizer({
-         allowRev: true,
-         allowMin: true,
-         files:[
-           {
-               package: 'jquery-ui',
-               file: 'bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
-               cdn: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/${version}/jquery-ui.min.css'
-           }
-       ]})).pipe(gulp.dest("./_build"));
-});
+// gulp.task('cdnizer', function () {
+//    return gulp.src("./index.html")
+//        .pipe(cdnizer({
+//          allowRev: true,
+//          allowMin: true,
+//          files:[
+//            {
+//                package: 'jquery-ui',
+//                file: 'bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
+//                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/${version}/jquery-ui.min.css'
+//            }
+//        ]})).pipe(gulp.dest("./_build"));
+// });
 
 // minify HTML
 gulp.task('minify-html', function() {
@@ -94,7 +105,10 @@ gulp.task('minify-html', function() {
 
 // copy fonts from a module outside of our project (like Bower)
 gulp.task('fonts', function() {
-  gulp.src('./fonts/**/*.{ttf,woff,eof,eot,svg}')
+  gulp.src([
+    './fonts/**/*.{ttf,woff,woff2,eof,eot,svg}',
+    './bower_components/bootstrap-css/fonts/glyphicons-halflings-regular.{woff2,woff,ttf}'
+  ])
     .pipe($.changed('./_build/fonts'))
     .pipe(gulp.dest('./_build/fonts'));
 });
@@ -269,7 +283,8 @@ gulp.task('build', function(callback) {
     // 'clean:build',
     'sass:build',
     'images',
-    'cdnizer',
+    'jquery-ui-images',
+    // 'cdnizer',
     'templates',
     'usemin',
     'fonts',
