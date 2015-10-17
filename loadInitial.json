@@ -1,24 +1,30 @@
 {
    "resultCode":0,
-   "resultDesc":"Load codebook ,success",
-   "bannerLinkUrl": "",
-   "bannerImageUrl": "",
-   "maxDays": 90,
+   "resultDesc":"Success",
+   "bannerThankYouUrl":"http://www.yourdomain.com/img/ban1.png",
+   "bannerUrl": "",
+   "backgroundUrl":"http://www.yourdomain.com/img/bg.png",
+   "contactInfo":"xxxx",
+   "emailInfo":"xxx@test.com",
+   "remark": "• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง ู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการเดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย • ผู้ซื้อควรทำความเข้าใจในรายละเอียดความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง",
    "maxTraveller": 5,
-   "maxAge": 80,
+   "maxDays": 90,
+   "termCondition":"",
    "hasPromotion": true,
    "destinationList":    [
             {
                 "country": "Argentina",
                 "code": "AR",
                 "id": 1,
-                "type": "schengen"
+                "type": "schengen",
+                "requiredEng":false
             },
             {
                 "country": "Australia",
                 "code": "AU",
                 "id": 2,
-                "type": "schengen"
+                "type": "schengen",
+                "requiredEng":false
             },
             {
                 "country": "Austria",
@@ -201,41 +207,6 @@
                 "type": "schengen"
             }
    ],
-   "quotation":    {
-      "coverageCode": "quotation",
-      "description":       [
-         "<img src='images/icon-plan-1.png'><p>1. การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)<\/p>",
-         "<img src='images/icon-plan-2.png'><p>2. การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล<\/p>",
-         "<img src='images/icon-plan-3.png'><p>3. ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด<\/p>",
-         "<img src='images/icon-plan-4.png'><p>4.1 บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง<\/p>"
-      ]
-   },
-   "paymentForm":    {
-      "paymentMethod":       [
-                  {
-            "id": "1",
-            "name": "Mastercard"
-         },
-                  {
-            "id": "2",
-            "name": "Visa"
-         }
-      ],
-      "paymentBankCountry": [      {
-         "id": "1",
-         "name": "ประเทศไทย"
-      }],
-      "paymentBank":       [
-                  {
-            "id": "1",
-            "name": "ธนาคารกสิกรไทย"
-         },
-                  {
-            "id": "1",
-            "name": "ธนาคารไทยพาณิชย์"
-         }
-      ]
-   },
    "provinceList": [   {
       "code": "1",
       "thaiName": "กรุงเทพฯ",
@@ -266,6 +237,5 @@
       "code": "1",
       "thaiName": "บิดา",
       "engName": "Farther"
-   }],
-   "remark": "• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง ู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการเดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย • ผู้ซื้อควรทำความเข้าใจในรายละเอียดความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง"
+   }]
 }

@@ -16,7 +16,9 @@
 				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
 					<span ng-show="travel.selectedPlan > 2 && travelData.quotation.protections.length > 3" class="glyphicon glyphicon-menu-left plan-navigation" style="left:-20px;" equalizer="'group'" ng-click="selectPlan(travel.selectedPlan-1)"></span>
 					<div class="row plan-wrapper text-center" id="plan-main-scroll">
-						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protections.length - 1) }" ng-repeat="plan in travelData.quotation.protections" ng-click="selectPlan(plan.planid)">
+						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan}"
+								ng-repeat="plan in travelData.quotation.protections"
+								ng-click="selectPlan(plan.planid)">
 							<div class="plan-table-top" equalizer="'group'">
 								<span class="radiobox"></span>
 								<h5>

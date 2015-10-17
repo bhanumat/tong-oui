@@ -1,0 +1,61 @@
+{
+   "resultCode":"0",
+   "resultDesc":"",
+   "campaignList":[
+      {
+         "campaignCode":"CGINGPSTTV",
+         "defaultFlag":true,
+         "mandatory":{
+            "coverageList":[
+               {
+                  "code":"T1",
+                  "description":"<img src='images/icon-plan-1.png'><p> การเสียชีวิต"
+               },
+               {
+                  "code":"T2",
+                  "description":"<img src='images/icon-plan-1.png'><p> การสูญเสียอวัยวะ"
+               }
+            ],
+            "rateScaleList":[
+               {
+                  "defaultFlag":false,
+                  "code":"1",
+                  "description":"XXX",
+                  "minAge":8,
+                  "maxAge":80,
+                  "calculateMethod":null,
+                  "price":123,
+                  "rateScaleValue":{
+                     "minAge":0,
+                     "maxAge":0,
+                     "sumInsure":[
+                        "100",
+                        "20"
+                     ]
+                  }
+               },
+               {
+                  "defaultFlag":true,
+                  "code":"2",
+                  "description":"YYY",
+                  "minAge":8,
+                  "maxAge":80,
+                  "calculateMethod":null,
+                  "price":234,
+                  "rateScaleValue":{
+                     "minAge":0,
+                     "maxAge":0,
+                     "sumInsure":[
+                        "200",
+                        "30"
+                     ]
+                  }
+               }
+            ]
+         },
+         "voluntaryList":[
+
+         ]
+      }
+   ]
+}

@@ -45,13 +45,10 @@
     });
 
     //Travel Model to post back to API
-    $scope.travel = {
-      // selectedPlan: $scope.travelData.quotation.defaultPlanid,
-      // flightSecured: $scope.travelData.flightsecure.defaultTick,
-      // propertySafe: $scope.travelData.propertysafe.defaultTick,
-      destinations: [],
-      passengers: 1
-    };
+    // $scope.travel = {
+    //   destinations: [],
+    //   passengers: 1
+    // };
 
     $scope.tempData = {};
     $scope.tempData.destination = [];
@@ -70,7 +67,6 @@
 
     QueryService.query('GET', 'NewTravel').then(function(response) {
       $scope.travelData = response.data;
-      $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxTraveller);
       $scope.travel = {
         selectedPlan: $scope.travelData.quotation.defaultPlanid,
         flightSecured: $scope.travelData.flightsecure.defaultTick,
@@ -79,12 +75,18 @@
         passengers: 1
       };
 
-      // $scope.calculatePrice();
+      $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxTraveller);
       $scope.isSchengen();
-
     }, function(response) {});
 
-    QueryService.query('GET', 'getToken').then(function(response){
+    //TODO: temporary commented, will be uncomment later
+    // QueryService.query('POST', 'loadInitial').then(function(response) {
+    //   $scope.travelData = response.data;
+    //   $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxTraveller);
+    //   $scope.isSchengen();
+    // }, function(response) {});
+
+    QueryService.query('POST', 'getToken').then(function(response){
       $scope.travel.tokenCode = response.data.tokenCode;
     });
 
@@ -103,7 +105,8 @@
     });
 
     $scope.calculateTotalPrice = function(){
-      if( $scope.travelData.quotation.protections) {
+      console.log('calculateTotalPrice');
+      if( $scope.travelData.quotation) {
         for (var i=0;i<$scope.travelData.quotation.protections.length;i++) {
           if($scope.travelData.quotation.protections[i].planid == $scope.travel.selectedPlan){
             $scope.tempData.totalPrice = $scope.getPriceRate($scope.travelData.quotation.protections[i]);
@@ -287,6 +290,7 @@
     };
 
     $scope.getPriceRate = function(plan){
+      console.log('getPriceRate')
       var price = 0;
       for(var i = 0; i < plan.price[$scope.getProtectionArea()].length - 1; i++) {
         if(plan.price[$scope.getProtectionArea()][i].day < $scope.travel.days){
@@ -348,9 +352,10 @@
           area : area,
           days : $scope.travel.days
         };
-        QueryService.query('GET', 'inquiryPremiumTable', this.params).then(function(response){
-          console.log('###'+response.data);
-        });
+        //TODO: temporary commented, will be uncomment later
+        // QueryService.query('POST', 'getCoverageTable', this.params, this.params).then(function(response){
+        //   $scope.travelData.quotation['protections'] = response.data.premium;
+        // });
 
         $scope.calculatePrice();
         $scope.formStepSubmitted = false;

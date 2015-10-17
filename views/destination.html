@@ -18,7 +18,7 @@
 									disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}"
 									ng-change="addDestination();" ng-model="tempData.destination" name="destinations"
 									title="เลือกประเทศ" data-size="5" data-live-search="true">
-								<li nya-bs-option="item in travelData.destinationList | orderBy:'country'">
+								<li nya-bs-option="item in travelData.destinationList">
 									<a>
 										{{ item.country }}
 									</a>
@@ -161,7 +161,7 @@
 			<div class="col-xs-12">
 				<div class="caution">
 					<h4><img src="images/icon-caution.png" alt=""> หมายเหตุ</h4>
-					<p>#{{travelData.remark}}# <a href="#">คลิ๊กที่นี่</a></p>
+					<p>{{travelData.remark}} <a href="#">คลิ๊กที่นี่</a></p>
 				</div>
 			</div>
 		</div>

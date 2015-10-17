@@ -685,24 +685,24 @@ fieldset.collapsible legend {
     font-family: "kittithada_roman_55regular";
     font-style: normal;
     font-weight: normal;
-    src:    url("../fonts/psl242pro-webfont.eot?#iefix") format("embedded-opentype"), 
+    src:    url("../fonts/psl242pro-webfont.eot?#iefix") format("embedded-opentype"),
             url("../fonts/psl242pro-webfont.ttf") format("truetype");
 }
 @font-face {
     font-family: "kittithada_bold_75regular";
     font-style: normal;
     font-weight: normal;
-    src:    url("../fonts/psl245pro-webfont-webfont.eot?#iefix") format("embedded-opentype"), 
-            url("../fonts/psl245pro-webfont-webfont.ttf") format("truetype"), 
+    src:    url("../fonts/psl245pro-webfont-webfont.eot?#iefix") format("embedded-opentype"),
+            url("../fonts/psl245pro-webfont-webfont.ttf") format("truetype"),
             url("../fonts/psl245pro-webfont-webfont.svg#kittithada_bold_75regular") format("svg");
 }
 @font-face {
     font-family: "proximaNovaBlack";
     font-style: normal;
     font-weight: normal;
-    src:    url("../fonts/ProximaNova-Black-webfont.eot?#iefix") format("embedded-opentype"), 
-            url("../fonts/ProximaNova-Black-webfont.woff") format("woff"), 
-            url("../fonts/ProximaNova-Black-webfont.ttf") format("truetype"), 
+    src:    url("../fonts/ProximaNova-Black-webfont.eot?#iefix") format("embedded-opentype"),
+            url("../fonts/ProximaNova-Black-webfont.woff") format("woff"),
+            url("../fonts/ProximaNova-Black-webfont.ttf") format("truetype"),
             url("../fonts/ProximaNova-Black-webfont.svg#ProximaNovaBlBlack") format("svg");
 }
 html {
@@ -8681,3 +8681,11 @@ div.easy_social_box.vertical {
     width: 50px;
 }
 
+.dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 24px;
+  line-height: 1.42857143;
+  color: #777777;
+  white-space: nowrap;
+}

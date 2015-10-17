@@ -26,9 +26,9 @@
 					</p>
 				</div>
 			</div>
-			<div class="banner" ng-if="travelData.banner_image_url" >
-				<a ng-if="travelData.banner_link_url" ng-href="{{travelData.banner_link_url}}"><img ng-src="{{travelData.banner_image_url}}"/></a>
-				<img ng-if="!travelData.banner_link_url" ng-src="{{travelData.banner_image_url}}"/>
+			<div class="banner" ng-if="travelData.bannerUrl" >
+				<a ng-if="travelData.bannerThankYouUrl" ng-href="{{travelData.bannerThankYouUrl}}"><img ng-src="{{travelData.bannerThankYouUrl}}"/></a>
+				<img ng-if="!travelData.bannerThankYouUrl" ng-src="{{travelData.bannerThankYouUrl}}"/>
 			</div>
 		</div>
 	</div>
