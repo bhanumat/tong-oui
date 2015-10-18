@@ -648,6 +648,7 @@ fieldset.collapsible legend {
     font: 18px/130% kittithada_bold_75regular;
     padding: 8px 10px 8px 30px;
 }
+
 .submenu-left .nav li a:hover, .submenu-left .nav li a.active {
     border-left: 6px solid #62136d;
     color: #62136d;
@@ -8688,4 +8689,11 @@ div.easy_social_box.vertical {
   line-height: 1.42857143;
   color: #777777;
   white-space: nowrap;
+}
+
+.modal-body a {
+    border-left: 0px solid #fff;
+    color: #00aeef;
+    font: 18px/130% kittithada_bold_75regular;
+    padding: 8px 5px 8px 5px;
 }

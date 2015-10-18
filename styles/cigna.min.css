@@ -1856,6 +1856,7 @@ form .field-add-more-submit{margin:.5em 0 0}
 #autocomplete{border:1px solid;overflow:hidden;position:absolute;z-index:100}
 #autocomplete ul{list-style:none;margin:0;padding:0}
 #autocomplete li{background:#fff;color:#000;cursor:default;white-space:pre}
+.dropdown-header,.nowrap{white-space:nowrap}
 html.js input.form-autocomplete{background-image:url(http://www.cigna.co.th/misc/throbber-inactive.png);background-position:100% center;background-repeat:no-repeat}
 html.js input.throbbing{background-image:url(http://www.cigna.co.th/misc/throbber-active.gif);background-position:100% center}
 html.js fieldset.collapsed{border-bottom-width:0;border-left-width:0;border-right-width:0;height:1em}
@@ -1883,7 +1884,6 @@ tr .ajax-progress .throbber{margin:0 2px}
 .ajax-progress-bar{width:16em}
 .container-inline div,.container-inline label{display:inline}
 .container-inline .fieldset-wrapper{display:block}
-.nowrap{white-space:nowrap}
 .element-hidden,html.js .js-hide{display:none}
 .element-invisible{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute!important}
 .element-invisible.element-focusable:active,.element-invisible.element-focusable:focus{clip:auto;height:auto;overflow:visible;position:static!important}
@@ -2001,3 +2001,5 @@ div.easy_social_box.vertical{height:68px}
 .easy_social_box.vertical div.easy_social-widget{height:62px;width:58px}
 .easy_social_box.vertical div.easy_social-widget.easy_social-widget-googleplus{width:52px}
 .easy_social_box.vertical div.easy_social-widget.easy_social-widget-facebook{width:50px}
+.dropdown-header{display:block;padding:3px 20px;font-size:24px;line-height:1.42857143;color:#777}
+.modal-body a{border-left:0 solid #fff;color:#00aeef;font:18px/130% kittithada_bold_75regular;padding:8px 5px}

@@ -18,7 +18,7 @@
 
   angular
     .module('cignaApp', [
-      'ngRoute','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ngAnimate','ui.router','ngMessages','ngEqualizer','ngSanitize','ngMask','angulartics','angulartics.google.tagmanager'
+      'ngRoute','ngAnimate','ui.bootstrap','sticky','duParallax','duScroll','nya.bootstrap.select','ui.router','ngMessages','ngEqualizer','ngSanitize','ngMask','angulartics','angulartics.google.tagmanager'
     ])
     .config(config);
 
@@ -79,9 +79,9 @@
     .module('cignaApp')
     .factory('authInterceptor', authInterceptor);
 
-  authInterceptor.$inject = ['$rootScope', '$q', 'SessionStorage', '$location'];
+  authInterceptor.$inject = ['$rootScope', '$q', 'SessionStorage', '$location','MESSAGES','$injector'];
 
-  function authInterceptor($rootScope, $q, SessionStorage, $location) {
+  function authInterceptor($rootScope, $q, SessionStorage, $location, MESSAGES, $injector) {
 
     return {
 
@@ -91,9 +91,12 @@
         return config;
       },
 
-      // Catch 404 errors
+      // Catch errors
       responseError: function(response) {
-        if (response.status === 404) {
+        if(response.data && response.data.responseCode) {
+          var modalService = $injector.get('ModalService');
+          modalService.showError({message:MESSAGES[response.data.responseCode]});
+        }else if (response.status === 404) {
           $location.path('/');
           return $q.reject(response);
         } else {

@@ -11,10 +11,13 @@
   .module('cignaApp')
   .controller('MainController', MainController);
 
-  MainController.$inject = ['SessionStorage', 'QueryService', '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state','$sce'];
+  MainController.$inject = [
+    '$scope','$http', '$parse','parallaxHelper', '$filter', '$timeout', '$location', '$state','$sce', '$q',
+    'CONSTANTS', 'MESSAGES', 'SessionStorage', 'QueryService', 'ModalService'
+  ];
 
 
-  function MainController(SessionStorage, QueryService, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce) {
+  function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, SessionStorage, QueryService, ModalService) {
 
     // 'controller as' syntax
     var self = this;
@@ -133,11 +136,20 @@
       }
       else {
         if(isFormValid) {
-          $scope.calculatePrice();
-          $scope.summaryBarSubmitted = false;
+          if($scope.tempData.promoCodeChanged) {
+            $scope.goToPlanSelection(isFormValid);
+          } else {
+            $scope.calculatePrice();
+            $scope.summaryBarSubmitted = false;
+          }
+
           $scope.editingSummarybar = false;
         }
       }
+    };
+
+    $scope.checkPromotionCodeChange = function() {
+        $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode
     };
 
     $scope.calculatePrice = function(){
@@ -290,7 +302,6 @@
     };
 
     $scope.getPriceRate = function(plan){
-      console.log('getPriceRate')
       var price = 0;
       for(var i = 0; i < plan.price[$scope.getProtectionArea()].length - 1; i++) {
         if(plan.price[$scope.getProtectionArea()][i].day < $scope.travel.days){
@@ -303,10 +314,7 @@
         }
       }
       return price;
-
     };
-
-
 
     $scope.propertySafeToggle = function(selected){
       if(selected){
@@ -333,6 +341,9 @@
       };
     };
 
+    $scope.processForm = function() {
+    }
+
     $scope.goToOrder = function(isFormValid) {
       // set to true to show all error messages (if there are any)
       $scope.formStepSubmitted = true;
@@ -345,21 +356,55 @@
     $scope.goToPlanSelection = function(isFormValid) {
       // set to true to show all error messages (if there are any)
       $scope.formStepSubmitted = true;
-      if(isFormValid) {
-        var area = $scope.getProtectionArea();
-        this.params = {
-          tokenCode: $scope.travel.tokenCode,
-          area : area,
-          days : $scope.travel.days
-        };
-        //TODO: temporary commented, will be uncomment later
-        // QueryService.query('POST', 'getCoverageTable', this.params, this.params).then(function(response){
-        //   $scope.travelData.quotation['protections'] = response.data.premium;
-        // });
 
-        $scope.calculatePrice();
-        $scope.formStepSubmitted = false;
-        $state.go('^.plan');
+      if(isFormValid) {
+        if($scope.tempData.promoCode) {
+           $scope.travel.promoCode = $scope.tempData.promoCode;
+           var validatePromoCodeParams = {
+              tokenCode: $scope.travel.tokenCode,
+              promoCode: $scope.travel.promoCode
+           };
+          //validate promotion code if any
+          QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams,validatePromoCodeParams).then(function(response){
+            $scope.tempData.promotion = response.data.promotion;
+            if( $scope.tempData.promotion.promoFull==='Y') {
+              $scope.travel.promoCode=null;
+              var modalServiceOptions = {
+                  message : MESSAGES['promotion_reached_max_usage']
+              };
+              ModalService.showWarning(modalServiceOptions);
+            } else {
+              self.getCoverageTable().then(function(response){
+                $scope.calculatePrice();
+                $scope.formStepSubmitted = false;
+
+                //Store travel data to session
+                SessionStorage.update('travel', $scope.travel);
+                SessionStorage.update('travelData', $scope.travelData);
+                SessionStorage.update('tempData', $scope.tempData);
+                if( $scope.tempData.currentState === '/insurance/destination') {
+                  $state.go('^.plan');
+                }
+              });
+            }
+          }, function(response) {
+            $scope.travel.promoCode=null;
+          });
+        } else {
+          self.getCoverageTable().then(function(response){
+            $scope.calculatePrice();
+            $scope.formStepSubmitted = false;
+
+            //Store travel data to session
+            SessionStorage.update('travel', $scope.travel);
+            SessionStorage.update('travelData', $scope.travelData);
+            SessionStorage.update('tempData', $scope.tempData);
+
+            if( $scope.tempData.currentState === '/insurance/destination') {
+              $state.go('^.plan');
+            }
+          });
+        }
       }
     };
 
@@ -444,6 +489,38 @@
     //datepicker
 
     $scope.background = parallaxHelper.createAnimator(-0.05);
+
+    /**
+    * Load data from session if any
+    */
+    if( SessionStorage.get('travel')) {
+      $scope.travel = SessionStorage.get('travel');
+      $scope.travelData = SessionStorage.get('travelData');
+      $scope.tempData = SessionStorage.get('tempData');
+//      $scope.calculatePrice();
+    }
+
+    self.getCoverageTable = function() {
+      var deferred = $q.defer();
+      var area = $scope.getProtectionArea();
+      var getCoverageTableParams = {
+        tokenCode: $scope.travel.tokenCode,
+        area : area,
+        days : $scope.travel.days,
+        promoCode: $scope.travel.promoCode
+      };
+
+      QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
+      .then(function(response) {
+  //        TODO: Uncomment below when API is ready.
+  //        $scope.travelData.quotation['protections'] = response.data.premium;
+        deferred.resolve(response);
+      }, function (response){
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    };
 
   }
 

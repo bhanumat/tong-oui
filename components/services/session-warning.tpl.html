@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="modalOptions.close()" aria-hidden="true">&times;</button>
+  <h3 ng-show="modalOptions.title">{{modalOptions.title}}</h3>
+</div>
+<div class="modal-body" ng-class="{confirm:'', warning:'alert', error:'alert alert-error', info:'alert alert-info', success:'alert alert-success'}[modalOptions.class]">
+  <p ng-show="modalOptions.message">{{modalOptions.message}}</p>
+</div>
+<div class="modal-footer">
+  <button ng-show="modalOptions.btnClose" type="button"
+          class="btn" data-ng-click="modalOptions.close()">
+    {{modalOptions.btnClose}}</button>
+  <button ng-show="modalOptions.btnPrimary" class="btn btn-primary"
+          data-ng-click="modalOptions.ok();">
+    {{modalOptions.btnPrimary}}</button>
+</div>

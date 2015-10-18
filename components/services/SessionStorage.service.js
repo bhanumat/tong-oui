@@ -80,7 +80,7 @@
            if (window.sessionStorage.getItem(name) !== null) {
              console.warn('sessionStorage with the name ' + name + ' already exists. Please pick another name.');
            } else {
-             return $window.locasessionStoragelStorage && $window.sessionStorage.setItem(name, angular.toJson(val));
+             return $window.sessionStorage && $window.sessionStorage.setItem(name, angular.toJson(val));
            }
          }
 
@@ -96,7 +96,7 @@
                console.log('sessionStorage not supported, make sure you have the $cookies supported.');
              }
 
-           return $window.localStorsessionStorageage && angular.fromJson($window.sessionStorage.getItem(name));
+           return $window.sessionStorage && angular.fromJson($window.sessionStorage.getItem(name));
          }
 
 

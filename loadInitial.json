@@ -1,241 +1,254 @@
 {
-   "resultCode":0,
-   "resultDesc":"Success",
-   "bannerThankYouUrl":"http://www.yourdomain.com/img/ban1.png",
-   "bannerUrl": "",
-   "backgroundUrl":"http://www.yourdomain.com/img/bg.png",
-   "contactInfo":"xxxx",
-   "emailInfo":"xxx@test.com",
-   "remark": "• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง ู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการเดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย • ผู้ซื้อควรทำความเข้าใจในรายละเอียดความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง",
-   "maxTraveller": 5,
-   "maxDays": 90,
-   "termCondition":"",
-   "hasPromotion": true,
-   "destinationList":    [
-            {
-                "country": "Argentina",
-                "code": "AR",
-                "id": 1,
-                "type": "schengen",
-                "requiredEng":false
-            },
-            {
-                "country": "Australia",
-                "code": "AU",
-                "id": 2,
-                "type": "schengen",
-                "requiredEng":false
-            },
-            {
-                "country": "Austria",
-                "code": "AT",
-                "id": 3,
-                "type": "schengen"
-            },
-            {
-                "country": "Belgium",
-                "code": "BE",
-                "id": 4,
-                "type": "schengen"
-            },
-            {
-                "country": "Brazil",
-                "code": "BR",
-                "id": 5,
-                "type": "schengen"
-            },
-            {
-                "country": "France",
-                "code": "FR",
-                "id": 6,
-                "type": "schengen"
-            },
-            {
-                "country": "French Guiana",
-                "code": "GF",
-                "id": 7,
-                "type": "schengen"
-            },
-            {
-                "country": "French Polynesia",
-                "code": "PF",
-                "id": 8,
-                "type": "schengen"
-            },
-            {
-                "country": "French Southern Territories",
-                "code": "TF",
-                "id": 9,
-                "type": "schengen"
-            },
-            {
-                "country": "Germany",
-                "code": "DE",
-                "id": 10,
-                "type": "schengen"
-            },
-            {
-                "country": "Hong Kong",
-                "code": "HK",
-                "id": 11,
-                "type": "asia"
-            },
-            {
-                "country": "Japan",
-                "code": "JP",
-                "id": 12,
-                "type": "asia"
-            },
-            {
-                "country": "Korea, Republic",
-                "code": "KR",
-                "id": 13,
-                "type": "asia"
-            },
-            {
-                "country": "Macao",
-                "code": "MO",
-                "id": 14,
-                "type": "asia"
-            },
-            {
-                "country": "Malaysia",
-                "code": "MY",
-                "id": 15,
-                "type": "asia"
-            },
-            {
-                "country": "Maldives",
-                "code": "MV",
-                "id": 16,
-                "type": "asia"
-            },
-            {
-                "country": "Netherlands",
-                "code": "NL",
-                "id": 17,
-                "type": "schengen"
-            },
-            {
-                "country": "Norway",
-                "code": "NO",
-                "id": 18,
-                "type": "schengen"
-            },
-            {
-                "country": "Poland",
-                "code": "PL",
-                "id": 19,
-                "type": "schengen"
-            },
-            {
-                "country": "Portugal",
-                "code": "PT",
-                "id": 20,
-                "type": "schengen"
-            },
-            {
-                "country": "Romania",
-                "code": "RO",
-                "id": 21,
-                "type": "schengen"
-            },
-            {
-                "country": "Russian Federation",
-                "code": "RU",
-                "id": 22,
-                "type": "schengen"
-            },
-            {
-                "country": "Serbia and Montenegro",
-                "code": "CS",
-                "id": 23,
-                "type": "schengen"
-            },
-            {
-                "country": "Spain",
-                "code": "ES",
-                "id": 24,
-                "type": "schengen"
-            },
-            {
-                "country": "Sweden",
-                "code": "SE",
-                "id": 25,
-                "type": "schengen"
-            },
-            {
-                "country": "Switzerland",
-                "code": "CH",
-                "id": 26,
-                "type": "schengen"
-            },
-            {
-                "country": "Syrian Arab Republic",
-                "code": "SY",
-                "id": 27,
-                "type": "schengen"
-            },
-            {
-                "country": "Taiwan, Province of China",
-                "code": "TW",
-                "id": 28,
-                "type": "asia"
-            },
-            {
-                "country": "Ukraine",
-                "code": "UA",
-                "id": 29,
-                "type": "schengen"
-            },
-            {
-                "country": "United Arab Emirates",
-                "code": "AE",
-                "id": 30,
-                "type": "schengen"
-            },
-            {
-                "country": "United Kingdom",
-                "code": "GB",
-                "id": 31,
-                "type": "schengen"
-            },
-            {
-                "country": "United States",
-                "code": "US",
-                "id": 32,
-                "type": "schengen"
-            }
-   ],
-   "provinceList": [   {
+  "resultCode": 0,
+  "resultDesc": "Success",
+  "bannerThankYouUrl": "http://www.yourdomain.com/img/ban1.png",
+  "bannerUrl": "",
+  "backgroundUrl": "images/bg.png",
+  "contactInfo": "xxxx",
+  "emailInfo": "xxx@test.com",
+  "remark": "• จํานวนผู้เอาประกันภัยสูงสุด 5 ท่านต่อครั้ง ผู้ขอเอาประกันภัยต้องมีอายุระหว่าง 5-80 ปี นับตั้งแต่วันที่เริ่มเอาประกันภัย • บริษัทฯ ให้ความคุ้มครองสูงสุด 90 วัน ต่อการเดินทางแต่ละครั้ง • รายละเอียดของเงื่อนไข ข้อตกลงคุ้มครอง และข้อยกเว้น เป็นไปตามที่ระบุในกรมธรรม์ • วันเริ่ม - สิ้นสุดการเดินทางอ้างอิงตามวันเวลาในประเทศไทย • ผู้ซื้อควรทำความเข้าใจในรายละเอียดความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง <a href=\"#\">คลิ๊กที่นี่</a>",
+  "maxTraveller": 5,
+  "maxDays": 90,
+  "termCondition": "",
+  "hasPromotion": true,
+  "timeOut": "20",
+  "destinationList": [
+    {
+      "country": "Argentina",
+      "code": "AR",
+      "id": 1,
+      "type": "schengen",
+      "requiredEng": false
+    },
+    {
+      "country": "Australia",
+      "code": "AU",
+      "id": 2,
+      "type": "schengen",
+      "requiredEng": false
+    },
+    {
+      "country": "Austria",
+      "code": "AT",
+      "id": 3,
+      "type": "schengen"
+    },
+    {
+      "country": "Belgium",
+      "code": "BE",
+      "id": 4,
+      "type": "schengen"
+    },
+    {
+      "country": "Brazil",
+      "code": "BR",
+      "id": 5,
+      "type": "schengen"
+    },
+    {
+      "country": "France",
+      "code": "FR",
+      "id": 6,
+      "type": "schengen"
+    },
+    {
+      "country": "French Guiana",
+      "code": "GF",
+      "id": 7,
+      "type": "schengen"
+    },
+    {
+      "country": "French Polynesia",
+      "code": "PF",
+      "id": 8,
+      "type": "schengen"
+    },
+    {
+      "country": "French Southern Territories",
+      "code": "TF",
+      "id": 9,
+      "type": "schengen"
+    },
+    {
+      "country": "Germany",
+      "code": "DE",
+      "id": 10,
+      "type": "schengen"
+    },
+    {
+      "country": "Hong Kong",
+      "code": "HK",
+      "id": 11,
+      "type": "asia"
+    },
+    {
+      "country": "Japan",
+      "code": "JP",
+      "id": 12,
+      "type": "asia"
+    },
+    {
+      "country": "Korea, Republic",
+      "code": "KR",
+      "id": 13,
+      "type": "asia"
+    },
+    {
+      "country": "Macao",
+      "code": "MO",
+      "id": 14,
+      "type": "asia"
+    },
+    {
+      "country": "Malaysia",
+      "code": "MY",
+      "id": 15,
+      "type": "asia"
+    },
+    {
+      "country": "Maldives",
+      "code": "MV",
+      "id": 16,
+      "type": "asia"
+    },
+    {
+      "country": "Netherlands",
+      "code": "NL",
+      "id": 17,
+      "type": "schengen"
+    },
+    {
+      "country": "Norway",
+      "code": "NO",
+      "id": 18,
+      "type": "schengen"
+    },
+    {
+      "country": "Poland",
+      "code": "PL",
+      "id": 19,
+      "type": "schengen"
+    },
+    {
+      "country": "Portugal",
+      "code": "PT",
+      "id": 20,
+      "type": "schengen"
+    },
+    {
+      "country": "Romania",
+      "code": "RO",
+      "id": 21,
+      "type": "schengen"
+    },
+    {
+      "country": "Russian Federation",
+      "code": "RU",
+      "id": 22,
+      "type": "schengen"
+    },
+    {
+      "country": "Serbia and Montenegro",
+      "code": "CS",
+      "id": 23,
+      "type": "schengen"
+    },
+    {
+      "country": "Spain",
+      "code": "ES",
+      "id": 24,
+      "type": "schengen"
+    },
+    {
+      "country": "Sweden",
+      "code": "SE",
+      "id": 25,
+      "type": "schengen"
+    },
+    {
+      "country": "Switzerland",
+      "code": "CH",
+      "id": 26,
+      "type": "schengen"
+    },
+    {
+      "country": "Syrian Arab Republic",
+      "code": "SY",
+      "id": 27,
+      "type": "schengen"
+    },
+    {
+      "country": "Taiwan, Province of China",
+      "code": "TW",
+      "id": 28,
+      "type": "asia"
+    },
+    {
+      "country": "Ukraine",
+      "code": "UA",
+      "id": 29,
+      "type": "schengen"
+    },
+    {
+      "country": "United Arab Emirates",
+      "code": "AE",
+      "id": 30,
+      "type": "schengen"
+    },
+    {
+      "country": "United Kingdom",
+      "code": "GB",
+      "id": 31,
+      "type": "schengen"
+    },
+    {
+      "country": "United States",
+      "code": "US",
+      "id": 32,
+      "type": "schengen"
+    }
+  ],
+  "provinceList": [
+    {
       "code": "1",
       "thaiName": "กรุงเทพฯ",
       "engName": "Bangkok",
-      "districtList": [      {
-         "code": "1",
-         "thaiName": "ดุสิต",
-         "engName": "Dusit",
-         "subDistrict": [         {
-            "code": "1",
-            "thaiName": "สวนจิตรลดา",
-            "engName": "Suan Chitlada",
-            "postelCode": "10900"
-         }]
-      }]
-   }],
-   "titleList": [   {
+      "districtList": [
+        {
+          "code": "1",
+          "thaiName": "ดุสิต",
+          "engName": "Dusit",
+          "subDistrict": [
+            {
+              "code": "1",
+              "thaiName": "สวนจิตรลดา",
+              "engName": "Suan Chitlada",
+              "postelCode": "10900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "titleList": [
+    {
       "code": "1",
       "thaiName": "นาย",
       "engName": "Mr."
-   }],
-   "genderList": [   {
+    }
+  ],
+  "genderList": [
+    {
       "code": "1",
       "thaiName": "ชาย",
       "engName": "Male"
-   }],
-   "relationship": [   {
+    }
+  ],
+  "relationship": [
+    {
       "code": "1",
       "thaiName": "บิดา",
       "engName": "Farther"
-   }]
+    }
+  ]
 }

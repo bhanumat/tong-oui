@@ -50,17 +50,25 @@
 									<div class="insurance-details summary-bar-details">
 										<ng-form name="summaryForm" novalidate>
 											<div class="row">
+												<div class="col-xs-12" ng-hide="editingSummarybar">
+													<div>
+														<h6>Area</h6>
+														<p><span>{{getProtectionArea()}}</span></p>
+													</div>
+												</div>
+											</div>
+											<div class="row">
 												<div class="col-xs-12">
 													<h6>จุดหมายปลายทาง</h6>
 													<p ng-hide="editingSummarybar" class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
 													<div ng-show="editingSummarybar" class="form-group" style="margin-bottom: 10px;" ng-class="{ 'has-error' : !travel.destinations.length && summaryBarSubmitted }">
 														<ol class="nya-bs-select form-control text-center" id="destination" disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
-														    <li nya-bs-option="item in travelData.destination | orderBy:'country'">
-														      	<!-- the text content of anchor element will be used for search -->
-														      	<a>
-														        	{{ item.country }}
-														      	</a>
-														    </li>
+															<li nya-bs-option="item in travelData.destinationList group by item.type">
+																<span class="dropdown-header">{{$group|capitalize}}</span>
+																<a>
+																	{{ item.country }}
+																</a>
+															</li>
 														</ol>
 														<div class="help-block" ng-messages="{hasDestination:!travel.destinations.length}" ng-if="summaryBarSubmitted">
 															<p ng-message="hasDestination">กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p>
@@ -128,12 +136,12 @@
 													</div>
 												</div>
 												<div ng-class="{'col-xs-8':!editingSummarybar,'col-xs-6':editingSummarybar}" ng-if="travelData.hasPromotion">
-													<h6 ng-show="travel.promotionCode || editingSummarybar">รหัสโปรโมชั่น</h6>
+													<h6 ng-show="travel.promoCode || editingSummarybar">รหัสโปรโมชั่น</h6>
 													<div ng-show="editingSummarybar" class="form-group">
 														<label class="sr-only" for="promotionCode">Promotion Code</label>
-														<input type="text" ng-model="travel.promotionCode" name="promotionCode" class="form-control" id="promotion-code">
+														<input type="text" ng-model="tempData.promoCode" name="promotionCode" class="form-control" id="promotionCode" ng-blur="checkPromotionCodeChange()">
 													</div>
-													<p ng-show="travel.promotionCode && !editingSummarybar" ng-bind="travel.promotionCode"></p>
+													<p ng-show="travel.promoCode && !editingSummarybar" ng-bind="travel.promoCode"></p>
 												</div>
 											</div>
 										</ng-form>
@@ -155,13 +163,10 @@
 												<div class="price-summary">
 													<p ng-if="tempData.isShowingDiscount">ราคา <span class="right">{{tempData.totalPrice | number}} บาท</span></p>
 													<p ng-if="tempData.discountAsAmount && tempData.isShowingDiscount">
-														ส่วนลด <span ng-if="tempData.promotionType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsAmount | number}} บาท</span>
+														ส่วนลด <span ng-if="tempData.promotion.promoType == 'percent'">{{tempData.discount}}%</span><span class="right">{{tempData.discountAsAmount | number}} บาท</span>
 													</p>
-													<p ng-if="!tempData.isShowingDiscount"><br></p>
-													<p ng-if="!(tempData.discountAsAmount && tempData.isShowingDiscount)"><br></p>
-													<p ng-if="tempData.promotionType == 'gift'">
-														{{tempData.promotionValue}}
-													</p>
+													<p ng-if="tempData.promotion.promoType == 'gift'" ng-bind-html="trustAsHtml(tempData.promotion.promoValue)"></p>
+													<p><br></p>
 													<h6>เบี้ยประกันรวม <span class="right"><span class="large">{{ tempData.price | number }}</span> บาท</span></h6>
 												</div>
 											</div>
@@ -184,7 +189,7 @@
 			</div>
 			<div class="bg">
 				<div class="bg-inner">
-					<img src="images/bg.png"/>
+					<img ng-src="{{travelData.backgroundUrl}}"/>
 				</div>
 			</div>
 		</div>
