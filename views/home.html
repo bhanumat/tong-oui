@@ -50,14 +50,6 @@
 									<div class="insurance-details summary-bar-details">
 										<ng-form name="summaryForm" novalidate>
 											<div class="row">
-												<div class="col-xs-12" ng-hide="editingSummarybar">
-													<div>
-														<h6>Area</h6>
-														<p><span>{{getProtectionArea()}}</span></p>
-													</div>
-												</div>
-											</div>
-											<div class="row">
 												<div class="col-xs-12">
 													<h6>จุดหมายปลายทาง</h6>
 													<p ng-hide="editingSummarybar" class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
@@ -81,6 +73,14 @@
 																<button class="btn btn-tag" ng-click="removeDestination($index)"><img src="images/icon-delete.png" alt="" style="margin-top: -4px;"></button>
 															</div>
 														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12" ng-hide="editingSummarybar">
+													<div>
+														<h6>กลุ่มประเทศจุดหมายปลายทาง</h6>
+														<p><span>{{getProtectionArea()|capitalize}}</span></p>
 													</div>
 												</div>
 											</div>

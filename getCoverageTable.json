@@ -1,61 +1,72 @@
 {
-   "resultCode":"0",
-   "resultDesc":"",
-   "campaignList":[
-      {
-         "campaignCode":"CGINGPSTTV",
-         "defaultFlag":true,
-         "mandatory":{
-            "coverageList":[
-               {
-                  "code":"T1",
-                  "description":"<img src='images/icon-plan-1.png'><p> การเสียชีวิต"
-               },
-               {
-                  "code":"T2",
-                  "description":"<img src='images/icon-plan-1.png'><p> การสูญเสียอวัยวะ"
-               }
-            ],
-            "rateScaleList":[
-               {
-                  "defaultFlag":false,
-                  "code":"1",
-                  "description":"XXX",
-                  "minAge":8,
-                  "maxAge":80,
-                  "calculateMethod":null,
-                  "price":123,
-                  "rateScaleValue":{
-                     "minAge":0,
-                     "maxAge":0,
-                     "sumInsure":[
-                        "100",
-                        "20"
-                     ]
-                  }
-               },
-               {
-                  "defaultFlag":true,
-                  "code":"2",
-                  "description":"YYY",
-                  "minAge":8,
-                  "maxAge":80,
-                  "calculateMethod":null,
-                  "price":234,
-                  "rateScaleValue":{
-                     "minAge":0,
-                     "maxAge":0,
-                     "sumInsure":[
-                        "200",
-                        "30"
-                     ]
-                  }
-               }
+  "resultCode": "0",
+  "resultDesc": "",
+  "campaignList": [
+    {
+      "campaignCode": "CGINGPSTTV",
+      "defaultFlag": true,
+      "mandatory": {
+        "coverageList": [
+          {
+            "code": "T1",
+            "description": "<img src='images/icon-plan-1.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>"
+          },
+          {
+            "code": "T2",
+            "description": "<img src='images/icon-plan-2.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล</p>"
+          },
+          {
+            "code": "T3",
+            "description": "<img src='images/icon-plan-3.png'><p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด</p>"
+          },
+          {
+            "code": "T4",
+            "description": "<img src='images/icon-plan-4.png'><p>บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง</p>"
+          },
+          {
+            "code": "T5",
+            "description": "<img src='images/icon-plan-4.png'><p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษาพยาบาลฉุกเฉิน</p>"
+          }
+        ],
+        "rateScaleList": [
+          {
+            "defaultFlag": false,
+            "code": "1",
+            "description": "XXX",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": null,
+            "price": 123,
+            "rateScaleValue": "",
+            "sumInsure": [
+              "500,000",
+              "500,000",
+              "1,000,000",
+              "1",
+              "3,000,000"
             ]
-         },
-         "voluntaryList":[
-
-         ]
-      }
-   ]
+          },
+          {
+            "defaultFlag": true,
+            "code": "2",
+            "description": "YYY",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": null,
+            "price": 234,
+            "rateScaleValue": "",
+            "sumInsure": [
+              "500,000",
+              "500,000",
+              "1,000,000",
+              "1",
+              "3,000,000"
+            ]
+          }
+        ]
+      },
+      "voluntaryList": [
+      ]
+    }
+  ]
 }

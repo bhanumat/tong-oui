@@ -8697,3 +8697,7 @@ div.easy_social_box.vertical {
     font: 18px/130% kittithada_bold_75regular;
     padding: 8px 5px 8px 5px;
 }
+
+.section-heading h6 {
+    color: #FFFFFF;
+}
