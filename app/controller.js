@@ -25,12 +25,11 @@
         ////////////  function definitions
 
         $scope.start = true;
-        if ($scope.start == true) {
-            $scope.start = false;
-            $location.path('/insurance/destination');
-            $location.replace();
-        }
-        ;
+        //if ($scope.start == true) {
+        //    $scope.start = false;
+        //    $location.path('/insurance/destination');
+        //    $location.replace();
+        //}
 
         // comment for testing
 
@@ -58,8 +57,11 @@
         $scope.tempData.destination = [];
         $scope.tempData.option1IsCollapsed = false;
         $scope.tempData.option2IsCollapsed = false;
-        $scope.tempData.promotionValue = 50;
-        $scope.tempData.promotionType = "discountPercent";
+        $scope.tempData.promotion = {
+            "promoType": null,
+            "promoValue": null,
+            "promoFull": null
+        };
         $scope.formStepSubmitted = false;
         $scope.tempData.currentState = $location.path();
         $scope.tempData.passengersProfile = [];
@@ -69,27 +71,28 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
-        QueryService.query('GET', 'NewTravel').then(function (response) {
-            $scope.travelData = response.data;
-            $scope.travel = {
-                selectedPlan: $scope.travelData.quotation.defaultPlanid,
-                flightSecured: $scope.travelData.flightsecure.defaultTick,
-                propertySafe: $scope.travelData.propertysafe.defaultTick,
-                destinations: [],
-                passengers: 1
-            };
+        //QueryService.query('GET', 'NewTravel').then(function (response) {
+        //    $scope.travelData = response.data;
+        //    $scope.travel = {
+        //        selectedPlan: $scope.travelData.quotation.defaultPlanid,
+        //        flightSecured: $scope.travelData.flightsecure.defaultTick,
+        //        propertySafe: $scope.travelData.propertysafe.defaultTick,
+        //        destinations: [],
+        //        passengers: 1
+        //    };
+        //
+        //    $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
+        //    $scope.isSchengen();
+        //}, function (response) {
+        //});
 
+        //TODO: temporary commented, will be uncomment later
+        QueryService.query('POST', 'loadInitial').then(function (response) {
+            $scope.travelData = response.data;
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
             $scope.isSchengen();
         }, function (response) {
         });
-
-        //TODO: temporary commented, will be uncomment later
-        // QueryService.query('POST', 'loadInitial').then(function(response) {
-        //   $scope.travelData = response.data;
-        //   $scope.tempData.passengers = $scope.range(1,$scope.travelData.maxTraveller);
-        //   $scope.isSchengen();
-        // }, function(response) {});
 
         QueryService.query('POST', 'getToken').then(function (response) {
             $scope.travel.tokenCode = response.data.tokenCode;
@@ -108,24 +111,6 @@
                 $location.replace();
             }
         });
-
-        $scope.calculateTotalPrice = function () {
-            console.log('calculateTotalPrice');
-            if ($scope.travelData.quotation) {
-                for (var i = 0; i < $scope.travelData.quotation.protections.length; i++) {
-                    if ($scope.travelData.quotation.protections[i].planid == $scope.travel.selectedPlan) {
-                        $scope.tempData.totalPrice = $scope.getPriceRate($scope.travelData.quotation.protections[i]);
-                        if ($scope.travel.flightSecured) {
-                            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.flightsecure.protections[i]);
-                        }
-                        if ($scope.travel.propertySafe) {
-                            $scope.tempData.totalPrice += $scope.getPriceRate($scope.travelData.propertysafe.protections[i]);
-                        }
-                        $scope.tempData.totalPrice *= $scope.travel.passengers;
-                    }
-                }
-            }
-        };
 
         $scope.trustAsHtml = function (string) {
             return $sce.trustAsHtml(string);
@@ -154,24 +139,76 @@
             $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode
         };
 
+        $scope.getPriceRate = function (plan) {
+            var price = 0;
+            if (plan) {
+                price = plan.rateScale.price;
+            }
+            return price;
+        };
+
+        $scope.calculateTotalPrice = function () {
+            if ($scope.travelData.campaigns) {
+                var campaigns = $scope.travelData.campaigns;
+                if (!$scope.travel.campaign) {
+                    angular.forEach(campaigns, function (campaign) {
+                        if (campaign.defaultFlag) {
+                            $scope.travel.campaign = {
+                                campaignCode: campaign.campaignCode
+                            };
+
+                            //Mandatory
+                            angular.forEach(campaign.mandatory.rateScaleList, function (rateScale) {
+                                if (rateScale.defaultFlag) {
+                                    $scope.travel.campaign.mandatory = {
+                                        name: campaign.mandatory.name,
+                                        coverageList: campaign.mandatory.coverageList,
+                                        rateScale: rateScale
+                                    }
+                                }
+                            });
+
+
+                            //Voluntary if any
+                            $scope.travel.campaign.voluntaryList = [];
+                            angular.forEach(campaign.voluntaryList, function (voluntary) {
+                                angular.forEach(voluntary.rateScaleList, function (rateScale) {
+                                    if (rateScale.defaultFlag) {
+                                        $scope.travel.campaign.voluntaryList.push({
+                                            name: voluntary.name,
+                                            coverageList: voluntary.coverageList,
+                                            rateScale: rateScale
+                                        });
+                                    }
+                                });
+
+                            });
+                        }
+                    });
+                }
+
+
+                $scope.tempData.totalPrice = $scope.getPriceRate($scope.travel.campaign.mandatory);
+                angular.forEach($scope.travel.campaign.voluntaryList, function (voluntary) {
+                    $scope.tempData.totalPrice += $scope.getPriceRate(voluntary);
+                });
+                $scope.tempData.totalPrice *= $scope.travel.passengers;
+            }
+        };
+
         $scope.calculatePrice = function () {
             $scope.calculateTotalPrice();
-            if ($scope.tempData.promotionValue) {
-                if ($scope.tempData.promotionType == "discountPercent") {
-                    if ($scope.tempData.totalPrice * ((100 - $scope.tempData.promotionValue) / 100) < 0) {
-                        $scope.tempData.price = 0;
-                    }
-                    $scope.tempData.price = $scope.tempData.totalPrice * ((100 - $scope.tempData.promotionValue) / 100);
+            if ($scope.tempData.promotion.promoValue) {
+                var netPrice = 0;
+                if ($scope.tempData.promotion.promoType == "discountPercent") {
+                    netPrice = $scope.tempData.totalPrice * ((100 - $scope.tempData.promotion.promoValue) / 100);
+                } else if ($scope.tempData.promotion.promoType == "discountAmount") {
+                    netPrice = $scope.tempData.totalPrice - $scope.tempData.promotion.promoValue;
+                } else if ($scope.tempData.promotionType == "gift") {
+                    netPrice = $scope.tempData.totalPrice;
                 }
-                else if ($scope.tempData.promotionType == "discountAmount") {
-                    if (($scope.tempData.totalPrice - $scope.tempData.promotionValue) < 0) {
-                        $scope.tempData.price = 0;
-                    }
-                    $scope.tempData.price = $scope.tempData.totalPrice - $scope.tempData.promotionValue;
-                }
-                else if ($scope.tempData.promotionType == "gift") {
-                    $scope.tempData.price = $scope.tempData.totalPrice;
-                }
+
+                $scope.tempData.price = netPrice < 0 ? 0 : netPrice;
                 $scope.tempData.discountAsAmount = $scope.tempData.totalPrice - $scope.tempData.price;
             }
             else {
@@ -315,21 +352,6 @@
             return false;
         };
 
-        $scope.getPriceRate = function (plan) {
-            var price = 0;
-            for (var i = 0; i < plan.price[$scope.getProtectionArea()].length - 1; i++) {
-                if (plan.price[$scope.getProtectionArea()][i].day < $scope.travel.days) {
-                    price = plan.price[$scope.getProtectionArea()][i + 1].fee;
-                }
-                else if (plan.price[$scope.getProtectionArea()][i].day == $scope.travel.days) {
-                    price = plan.price[$scope.getProtectionArea()][i].fee;
-                    return price;
-
-                }
-            }
-            return price;
-        };
-
         $scope.propertySafeToggle = function (selected) {
             if (selected) {
                 $scope.travel.propertySafe = !$scope.travel.propertySafe;
@@ -395,9 +417,9 @@
                                 $scope.formStepSubmitted = false;
 
                                 //Store travel data to session
-                                SessionStorage.update('travel', $scope.travel);
-                                SessionStorage.update('travelData', $scope.travelData);
-                                SessionStorage.update('tempData', $scope.tempData);
+                                //SessionStorage.update('travel', $scope.travel);
+                                //SessionStorage.update('travelData', $scope.travelData);
+                                //SessionStorage.update('tempData', $scope.tempData);
                                 if ($scope.tempData.currentState === '/insurance/destination') {
                                     $state.go('^.plan');
                                 }
@@ -412,9 +434,9 @@
                         $scope.formStepSubmitted = false;
 
                         //Store travel data to session
-                        SessionStorage.update('travel', $scope.travel);
-                        SessionStorage.update('travelData', $scope.travelData);
-                        SessionStorage.update('tempData', $scope.tempData);
+                        //SessionStorage.update('travel', $scope.travel);
+                        //SessionStorage.update('travelData', $scope.travelData);
+                        //SessionStorage.update('tempData', $scope.tempData);
 
                         if ($scope.tempData.currentState === '/insurance/destination') {
                             $state.go('^.plan');
@@ -513,7 +535,6 @@
             $scope.travel = SessionStorage.get('travel');
             $scope.travelData = SessionStorage.get('travelData');
             $scope.tempData = SessionStorage.get('tempData');
-//      $scope.calculatePrice();
         }
 
         self.getCoverageTable = function () {
@@ -528,8 +549,8 @@
             console.log(getCoverageTableParams)
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
-                    //        TODO: Uncomment below when API is ready.
-                    //        $scope.travelData.quotation['protections'] = response.data.premium;
+                    //TODO: Uncomment below when API is ready.
+                    $scope.travelData.campaigns = response.data.campaignList;
                     deferred.resolve(response);
                 }, function (response) {
                     deferred.reject(response);

@@ -55,8 +55,8 @@
 													<p ng-hide="editingSummarybar" class="destination-list"><span ng-repeat="destination in travel.destinations">{{destination.country}}</span></p>
 													<div ng-show="editingSummarybar" class="form-group" style="margin-bottom: 10px;" ng-class="{ 'has-error' : !travel.destinations.length && summaryBarSubmitted }">
 														<ol class="nya-bs-select form-control text-center" id="destination" disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}" ng-change="addDestination();" ng-model="tempData.destination" name="destinations" title="เลือกประเทศ" data-size="5" data-live-search="true">
-															<li nya-bs-option="item in travelData.destinationList group by item.type">
-																<span class="dropdown-header">{{$group|capitalize}}</span>
+															<li nya-bs-option="item in travelData.destinationList">
+																<!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
 																<a>
 																	{{ item.country }}
 																</a>
