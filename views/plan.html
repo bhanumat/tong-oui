@@ -107,7 +107,7 @@
 										</h5>
 										<p>ความคุ้มครองสูงสุด (บาท)</p>
 									</div>
-									<div collapse="tempData.option1IsCollapsed">
+									<div collapse="isCollapsed($parent.$index)">
 										<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="item in rateScale.sumInsure track by $index">
                                             <p ng-hide="item!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
                                             <p ng-show="item!=='1'" ng-bind-html="trustAsHtml(item)"></p>
