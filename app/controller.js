@@ -149,7 +149,7 @@
         };
 
         $scope.calculateTotalPrice = function () {
-            if ($scope.travelData.campaigns) {
+            if ($scope.travelData.campaignList) {
                 $scope.tempData.totalPrice = $scope.getPriceRate($scope.travel.campaign.mandatory);
                 angular.forEach($scope.travel.campaign.voluntaryList, function (voluntary) {
                     $scope.tempData.totalPrice += $scope.getPriceRate(voluntary);
