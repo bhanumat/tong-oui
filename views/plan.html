@@ -3,35 +3,35 @@
 		<h3>ผลประโยชน์ความคุ้มครอง</h3>
 		<div class="plan-selection">
 			<h4>เลือกความคุ้มครองหลัก</h4>
-			<div class="plan-table row hidden-xs" id="plan" ng-class="{'one-plan':travelData.quotation.protections.length == 1,'two-plan':travelData.quotation.protections.length == 2}">
+			<div class="plan-table row hidden-xs" id="plan" ng-class="{'one-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 1,'two-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 2}">
 
 				<div class="plan-table-heading col-xs-5" equalizer="'table-group'">
 					<div class="plan-table-top" equalizer="'group'">
-						<h5>(A) Travel Care<br><small>ผลประโยชน์</small></h5>
+						<h5><span>{{travelData.campaignList[0].mandatory.name}}</span><br><small>ผลประโยชน์</small></h5>
 					</div>
-					<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in travelData.quotation.description">
-						<div ng-bind-html="trustAsHtml(description)"></div>
+					<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="coverage in travelData.campaignList[0].mandatory.coverageList">
+						<div ng-bind-html="trustAsHtml(coverage.description)"></div>
 					</div>
 				</div>
 				<div class="plan-table-content col-xs-7" equalizer="'table-group'">
-					<span ng-show="travel.selectedPlan > 2 && travelData.quotation.protections.length > 3" class="glyphicon glyphicon-menu-left plan-navigation" style="left:-20px;" equalizer="'group'" ng-click="selectPlan(travel.selectedPlan-1)"></span>
+					<span ng-show="showLeftPlanNavigator()" class="glyphicon glyphicon-menu-left plan-navigation" style="left:-20px;" equalizer="'group'" ng-click="selectPlan(tempData.selectedPlanIndex-1)"></span>
 					<div class="row plan-wrapper text-center" id="plan-main-scroll">
-						<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protections.length - 1)}" ng-repeat="plan in travelData.quotation.protections" ng-click="selectPlan(plan.planid)">
+						<div class="plan" ng-class="{'selected':isRateScaleSameAsSelected(rateScale),'hidePlan':hideRateScale($index)}" ng-repeat="rateScale in travelData.campaignList[0].mandatory.rateScaleList" ng-click="selectPlan($index, rateScale)">
 							<div class="plan-table-top" equalizer="'group'">
 								<span class="radiobox"></span>
 								<h5>
-									<small>แผน {{plan.planid}}</small><br>
-									<big>{{getPriceRate(plan) | number}}</big> บาท
+									<small>{{rateScale.description}}</small><br>
+									<big>{{rateScale.price | number}}</big> บาท
 								</h5>
-								<p>ความคุ้มครองสูงสุด (บาท)</p>
+								<p>{{rateScale.rateScaleValue}}</p>
 							</div>
-							<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="description in plan.description">
-								<p ng-hide="description!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
-								<p ng-show="description!=='1'">{{description}}</p>
+							<div class="plan-table-row" equalizer="'row{{$index}}'" ng-repeat="item in rateScale.sumInsure track by $index">
+								<p ng-hide="item!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
+								<p ng-show="item!=='1'" ng-bind-html="trustAsHtml(item)"></p>
 							</div>
 						</div>
 					</div>
-					<span ng-show="travel.selectedPlan < travelData.quotation.protections.length - 1" class="glyphicon glyphicon-menu-right plan-navigation" style="right:-0px;" equalizer="'group'" ng-click="selectPlan(travel.selectedPlan+1)"></span>
+					<span ng-show="showRightPlanNavigator()" class="glyphicon glyphicon-menu-right plan-navigation" style="right:-0px;" equalizer="'group'" ng-click="selectPlan(tempData.selectedPlanIndex+1)"></span>
 				</div>
 			</div>
 			<div class="plan-table row visible-xs">
@@ -77,16 +77,16 @@
 			</div>
 			<h4>เลือกความคุ้มครองเสริม</h4>
 			<div id="plan-options">
-				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.quotation.protections.length == 1,'two-plan':travelData.quotation.protections.length == 2}">
+				<div ng-repeat="voluntary in travelData.campaignList[0].voluntaryList" class="plan-table row hidden-xs" ng-class="{'one-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 1,'two-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 2}">
 					<div class="clearfix">
 						<div class="plan-table-heading col-xs-5" >
-							<div class="plan-table-top" equalizer="'group2'" ng-click="tempData.option1IsCollapsed = !tempData.option1IsCollapsed">
-								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-								<h5>(B) เลือก Flight Secure เพิ่ม</h5>
+							<div class="plan-table-top" equalizer="'group2'" ng-click="toggleCollapse($index)">
+								<img src="../images/icon-caret-down.png" style="width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
+								<h5>{{voluntary.name}}</h5>
 							</div>
-							<div collapse="tempData.option1IsCollapsed">
-								<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in travelData.flightsecure.description" >
-									<p ng-bind-html="trustAsHtml(description)"></p>
+							<div collapse="isCollapsed($index)">
+								<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="coverage in voluntary.coverageList" >
+									<p ng-bind-html="trustAsHtml(coverage.description)"></p>
 								</div>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.quotation.protections.length == 1,'two-plan':travelData.quotation.protections.length == 2}">
+				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 1,'two-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 2}">
 					<div class="clearfix">
 						<div class="plan-table-heading col-xs-5" >
 							<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
