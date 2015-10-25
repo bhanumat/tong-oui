@@ -96,59 +96,22 @@
 						</div>
 						<div class="plan-table-content col-xs-7" >
 							<div class="row plan-wrapper text-center" id="plan-options1-scroll">
-								<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protections.length - 1) }"
-									 ng-repeat="plan in travelData.flightsecure.protections" ng-click="flightSecuredToggle(plan.planid == travel.selectedPlan);">
-									<div class="plan-table-top" equalizer="'group2'" >
+								<div class="plan" ng-class="{'selected':isRateScaleSameAsSelected(rateScale),'hidePlan': hideRateScale($index)}"
+									 ng-repeat="rateScale in voluntary.rateScaleList" ng-click="voluntaryToggle($parent.$index, $index);">
+									<div class="plan-table-top" equalizer="'group2'" >#{{$parent.$index}}#
 										<h5>
 											<span class="option-checkbox">
-												<span ng-class="{'icon-check': travel.flightSecured == true}" class=""></span>
+												<span ng-class="{'icon-check': travel.campaign.voluntaryList[$parent.$index].rateScale.code===rateScale.code}" class=""></span>
 											</span>
-											{{getPriceRate(plan) | number}} <small>บาท</small>
+											{{rateScale.price | number}} <small>บาท</small>
 										</h5>
 										<p>ความคุ้มครองสูงสุด (บาท)</p>
 									</div>
 									<div collapse="tempData.option1IsCollapsed">
-										<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="description in plan.description">
-                                            <p ng-hide="description!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
-                                            <p ng-show="description!=='1'" ng-bind-html="trustAsHtml(description)"></p>
+										<div class="plan-table-row" equalizer="'options1-row{{$index}}'" ng-repeat="item in rateScale.sumInsure track by $index">
+                                            <p ng-hide="item!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
+                                            <p ng-show="item!=='1'" ng-bind-html="trustAsHtml(item)"></p>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="plan-table row hidden-xs"  ng-class="{'one-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 1,'two-plan':travelData.campaignList[0].mandatory.rateScaleList.length == 2}">
-					<div class="clearfix">
-						<div class="plan-table-heading col-xs-5" >
-							<div class="plan-table-top" equalizer="'group3'" ng-click="tempData.option2IsCollapsed = !tempData.option2IsCollapsed">
-								<img src="../images/icon-caret-down.png" style="  width: auto; vertical-align: middle; margin-top: -4px; padding-right: 10px;" alt="">
-								<h5>(C) เลือก Property Safe เพิ่ม</h5>
-							</div>
-							<div collapse="tempData.option2IsCollapsed">
-								<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in travelData.propertysafe.description">
-									<p ng-bind-html="trustAsHtml(description)"></p>
-								</div>
-							</div>
-						</div>
-						<div class="plan-table-content col-xs-7">
-							<div class="row plan-wrapper text-center" id="plan-options2-scroll">
-								<div class="plan" ng-class="{'selected':plan.planid == travel.selectedPlan,'hidePlan':(plan.planid + 1) < travel.selectedPlan && (plan.planid + 1) != (travelData.quotation.protections.length - 1) }"
-									 ng-repeat="plan in travelData.propertysafe.protections" ng-click="propertySafeToggle(plan.planid == travel.selectedPlan);">
-									<div class="plan-table-top" equalizer="'group3'" >
-										<h5>
-											<span class="option-checkbox">
-												<span ng-class="{'icon-check': travel.propertySafe == true}" class=""></span>
-											</span>
-											{{getPriceRate(plan) | number}} <small>บาท</small>
-										</h5>
-										<p>ความคุ้มครองสูงสุด (บาท)</p>
-									</div>
-									<div collapse="tempData.option2IsCollapsed">
-										<div class="plan-table-row" equalizer="'options2-row{{$index}}'" ng-repeat="description in plan.description">
-                                            <p ng-hide="description!=='1'"><span class='glyphicon glyphicon-ok' style='font-size: 18px'></span></p>
-                                            <p ng-show="description!=='1'" ng-bind-html="trustAsHtml(description)"></p>
-                                        </div>
 									</div>
 								</div>
 							</div>

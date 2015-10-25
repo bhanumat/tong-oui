@@ -192,7 +192,6 @@
                                     });
                                 }
                             });
-
                         });
                     }
                 });
@@ -354,14 +353,6 @@
             return false;
         };
 
-        $scope.propertySafeToggle = function (selected) {
-            if (selected) {
-                $scope.travel.propertySafe = !$scope.travel.propertySafe;
-                $scope.calculatePrice();
-            }
-            ;
-        };
-
         $scope.termsToggle = function (index) {
             if (!$scope.tempData.passengersProfile[index].termsAccepted) {
                 $scope.tempData.passengersProfile[index].termsAccepted = true;
@@ -372,12 +363,22 @@
             // console.log($scope.tempData.passengersProfile[index].termsAccepted);
         };
 
-        $scope.flightSecuredToggle = function (selected) {
-            if (selected) {
-                $scope.travel.flightSecured = !$scope.travel.flightSecured;
+        $scope.voluntaryToggle = function (parentIndex, index) {
+            if (index == $scope.tempData.selectedPlanIndex) {
+                if($scope.travel.campaign.voluntaryList[parentIndex].rateScale) {//existing
+                    //Currently, no id for voluntary. So, cannot remove item it will cause index invalid.
+                    $scope.travel.campaign.voluntaryList[parentIndex]={};
+                } else {
+                    var voluntary=$scope.travelData.campaignList[0].voluntaryList[parentIndex];
+                    $scope.travel.campaign.voluntaryList[parentIndex]={
+                        name: voluntary.name,
+                        coverageList: voluntary.coverageList,
+                        rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                    };//Restore
+                }
+
                 $scope.calculatePrice();
             }
-            ;
         };
 
         $scope.processForm = function () {
@@ -578,7 +579,6 @@
                 days: $scope.travel.days,
                 promoCode: $scope.travel.promoCode
             };
-            console.log(getCoverageTableParams)
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
                     //TODO: Uncomment below when API is ready.
