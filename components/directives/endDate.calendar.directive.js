@@ -40,7 +40,7 @@
               $scope.tempData.shortEndDate = "" + $scope.tempData.endDateForCal.getDate() + " " + monName + " " + $scope.tempData.endDateForCal.getFullYear() + "";
               if ($scope.tempData.startDateForCal) {
                 $scope.calcTravelDays();
-                $scope.calculatePrice();
+                //$scope.calculatePrice();
               }
               $scope.$apply();
             }

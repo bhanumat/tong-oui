@@ -6,6 +6,7 @@
       "campaignCode": "CGINGPSTTV",
       "defaultFlag": true,
       "mandatory": {
+        "name": "(A) Travel Care",
         "coverageList": [
           {
             "code": "T1",
@@ -32,12 +33,12 @@
           {
             "defaultFlag": false,
             "code": "1",
-            "description": "XXX",
+            "description": "แผน 1",
             "minAge": 8,
             "maxAge": 80,
-            "calculateMethod": null,
-            "price": 123,
-            "rateScaleValue": "",
+            "calculateMethod": "Next",
+            "price": 100,
+            "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
             "sumInsure": [
               "500,000",
               "500,000",
@@ -49,14 +50,65 @@
           {
             "defaultFlag": true,
             "code": "2",
-            "description": "YYY",
+            "description": "แผน 2",
             "minAge": 8,
             "maxAge": 80,
-            "calculateMethod": null,
-            "price": 234,
-            "rateScaleValue": "",
+            "calculateMethod": "Next",
+            "price": 150,
+            "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
             "sumInsure": [
+              "600,000",
               "500,000",
+              "1,000,000",
+              "1",
+              "3,000,000"
+            ]
+          },
+          {
+            "defaultFlag": false,
+            "code": "3",
+            "description": "แผน 3",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 200,
+            "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+            "sumInsure": [
+              "700,000",
+              "500,000",
+              "1,000,000",
+              "1",
+              "3,000,000"
+            ]
+          },
+          {
+            "defaultFlag": false,
+            "code": "4",
+            "description": "แผน 4",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 250,
+            "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+            "sumInsure": [
+              "800,000",
+              "500,000",
+              "1,000,000",
+              "1",
+              "3,000,000"
+            ]
+          },
+          {
+            "defaultFlag": false,
+            "code": "5",
+            "description": "แผน 5",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 250,
+            "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+            "sumInsure": [
+              "900,000",
               "500,000",
               "1,000,000",
               "1",
@@ -66,6 +118,212 @@
         ]
       },
       "voluntaryList": [
+        {
+          "name": "(B) เลือก Flight Secure เพิ่ม",
+          "coverageList": [
+            {
+              "code": "B1",
+              "description": "การเลื่อนหรือการบอกเลิกการเดินทางสูงสุด"
+            },
+            {
+              "code": "B2",
+              "description": "ค่าใช้จ่ายในการลดจำนวนการเดินทาง"
+            },
+            {
+              "code": "B3",
+              "description": "การพลาดการต่อเที่ยวบิน สูงสุด"
+            },
+            {
+              "code": "B4",
+              "description": "การชดเชยความล่าช้าในการเดินทาง ทุกๆ 6 ชั่วโมง"
+            },
+            {
+              "code": "B5",
+              "description": "ความรับผิดชอบต่อบุคคลภายนอกสูงสุด"
+            }
+          ],
+          "rateScaleList": [
+            {
+              "defaultFlag": false,
+              "code": "1",
+              "description": "แผน 1",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 100,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "500,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            },
+            {
+              "defaultFlag": true,
+              "code": "2",
+              "description": "แผน 2",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 150,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "600,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "3",
+              "description": "แผน 3",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 200,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "700,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "4",
+              "description": "แผน 4",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 250,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "800,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "5",
+              "description": "แผน 5",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 250,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "900,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "(C) เลือก Property Safe เพิ่ม",
+          "coverageList": [
+            {
+              "code": "C1",
+              "description": "การสูญเสียหรือเสียหายของกระเป๋าเดินทางและทรัพย์สินส่วนตัวสูงสุดถึง"
+            },
+            {
+              "code": "C2",
+              "description": "การล่าช้าของกระเป๋าเดินทาง"
+            },
+            {
+              "code": "C3",
+              "description": "การสูญหายของกระเป๋าเดินทาง / การสูญหายของเอกสารการเดินทาง"
+            }
+          ],
+          "rateScaleList": [
+            {
+              "defaultFlag": false,
+              "code": "1",
+              "description": "แผน 1",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 100,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "8,000",
+                "Max<br />8,000",
+                "1,000/2,500"
+              ]
+            },
+            {
+              "defaultFlag": true,
+              "code": "2",
+              "description": "แผน 2",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 150,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "8,000",
+                "Max<br />8,000",
+                "1,000/2,500"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "3",
+              "description": "แผน 3",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 200,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "8,000",
+                "Max<br />8,000",
+                "1,000/2,500"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "4",
+              "description": "แผน 4",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 250,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "8,000",
+                "Max<br />8,000",
+                "1,000/2,500"
+              ]
+            },
+            {
+              "defaultFlag": false,
+              "code": "5",
+              "description": "แผน 5",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 250,
+              "rateScaleValue": "ความคุ้มครองสูงสุด (บาท)",
+              "sumInsure": [
+                "8,000",
+                "Max<br />8,000",
+                "1,000/2,500"
+              ]
+            }
+          ]
+        }
       ]
     }
   ]
