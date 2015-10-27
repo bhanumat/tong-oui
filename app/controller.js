@@ -142,7 +142,7 @@
 
         $scope.getPriceRate = function (plan) {
             var price = 0;
-            if (plan) {
+            if (plan && plan.rateScale) {//if any
                 price = plan.rateScale.price;
             }
             return price;
@@ -172,7 +172,7 @@
                             if (rateScale.defaultFlag) {
                                 $scope.tempData.selectedPlanIndex = index;
                                 $scope.travel.campaign.mandatory = {
-                                    name: campaign.mandatory.name,
+                                    topicDetail: campaign.mandatory.topicDetail,
                                     coverageList: campaign.mandatory.coverageList,
                                     rateScale: rateScale
                                 }
@@ -186,7 +186,7 @@
                             angular.forEach(voluntary.rateScaleList, function (rateScale) {
                                 if (rateScale.defaultFlag) {
                                     $scope.travel.campaign.voluntaryList.push({
-                                        name: voluntary.name,
+                                        topicDetail: voluntary.topicDetail,
                                         coverageList: voluntary.coverageList,
                                         rateScale: rateScale
                                     });
@@ -365,15 +365,15 @@
 
         $scope.voluntaryToggle = function (parentIndex, index) {
             if (index == $scope.tempData.selectedPlanIndex) {
-                if($scope.travel.campaign.voluntaryList[parentIndex].rateScale) {//existing
+                if ($scope.travel.campaign.voluntaryList[parentIndex].rateScale) {//existing
                     //Currently, no id for voluntary. So, cannot remove item it will cause index invalid.
-                    $scope.travel.campaign.voluntaryList[parentIndex]={};
+                    $scope.travel.campaign.voluntaryList[parentIndex] = {};
                 } else {
-                    var voluntary=$scope.travelData.campaignList[0].voluntaryList[parentIndex];
-                    $scope.travel.campaign.voluntaryList[parentIndex]={
-                        name: voluntary.name,
+                    var voluntary = $scope.travelData.campaignList[0].voluntaryList[parentIndex];
+                    $scope.travel.campaign.voluntaryList[parentIndex] = {
+                        topicDetail: voluntary.topicDetail,
                         coverageList: voluntary.coverageList,
-                        rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                        rateScale: voluntary.rateScaleList[index]
                     };//Restore
                 }
 
@@ -475,7 +475,9 @@
         };
 
         $scope.hideRateScale = function (index) {
-            return (index + 1) < $scope.tempData.selectedPlanIndex && (index + 1) != ($scope.travelData.campaignList[0].mandatory.rateScaleList.length - 1);
+            var hideRateScaleRightSide = index < $scope.tempData.selectedPlanIndex - 1;
+            var hideRateScaleLeftSide = index < $scope.travelData.campaignList[0].mandatory.rateScaleList.length - 3;
+            return  hideRateScaleRightSide && hideRateScaleLeftSide;
         };
 
         $scope.showLeftPlanNavigator = function () {
@@ -487,21 +489,30 @@
         };
 
         $scope.selectPlan = function (index, rateScale) {
-            if( index < $scope.travelData.campaignList[0].mandatory.rateScaleList.length-1) {
-                $scope.tempData.selectedPlanIndex = index;
-            }
+            $scope.tempData.selectedPlanIndex = index;
+            //Set mandatory selected
             if (rateScale) {
                 $scope.travel.campaign.mandatory.rateScale = rateScale;
             } else {
                 $scope.travel.campaign.mandatory.rateScale = $scope.travelData.campaignList[0].mandatory.rateScaleList[index];
             }
-            if (index < 2 ) {
+
+            //Set voluntaries selected
+            angular.forEach($scope.travelData.campaignList[0].voluntaryList, function (voluntary, key) {
+                $scope.travel.campaign.voluntaryList[key] = {
+                    topicDetail: voluntary.topicDetail,
+                    coverageList: voluntary.coverageList,
+                    rateScale: voluntary.rateScaleList[index]
+                }
+            });
+
+            if (index < 2) {
                 $scope.translatey = 'translatey(12.5%)';
             }
-            else if ((index > 1) && (index < $scope.travelData.campaignList[0].mandatory.rateScaleList.length-1)) {
+            else if ((index > 1) && (index < $scope.travelData.campaignList[0].mandatory.rateScaleList.length - 1)) {
                 $scope.translatey = 'translatey(' + parseFloat(12.5 - ((index - 1) * 25)) + '%)';
             }
-            else if (index == $scope.travelData.campaignList[0].mandatory.rateScaleList.length-1) {
+            else if (index == $scope.travelData.campaignList[0].mandatory.rateScaleList.length - 1) {
                 $scope.translatey = 'translatey(' + parseFloat(12.5 - ((index - 2) * 25)) + '%)';
             }
             $scope.calculatePrice();
