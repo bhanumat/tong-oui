@@ -269,7 +269,7 @@
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.district.$touched) }">
                             <label class="sr-only" for="district">เขต/อำเภอ</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].addressData.district}" ng-model="travel.passengersProfile[profile].addressData.district" name="district" title="เขต/อำเภอ" data-size="5" required>
-                              <li nya-bs-option="district in travelData.provinceList[travel.passengersProfile[profile].addressData.province.id - 1].district | orderBy:'thaiName'">
+                              <li nya-bs-option="district in travelData.provinceList[travel.passengersProfile[profile].addressData.province.code - 1].district | orderBy:'thaiName'">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
                                   {{ district.thaiName}}
@@ -287,7 +287,7 @@
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.subdistrict.$touched) }">
                             <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].addressData.subdistrict}" ng-model="travel.passengersProfile[profile].addressData.subdistrict" name="subdistrict" title="แขวง/ตำบล" data-size="5" required>
-                              <li nya-bs-option="subdistrict in travelData.provinceList[travel.passengersProfile[profile].addressData.province.id - 1].district[travel.passengersProfile[profile].addressData.district.id - 1].subdistrict | orderBy:'thaiName'" ng-click="travel.passengersProfile[profile].addressData.postcode = subdistrict.postcode">
+                              <li nya-bs-option="subdistrict in travelData.provinceList[travel.passengersProfile[profile].addressData.province.code - 1].district[travel.passengersProfile[profile].addressData.district.code - 1].subdistrict | orderBy:'thaiName'" ng-click="travel.passengersProfile[profile].addressData.postcode = subdistrict.postcode">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
                                   {{ subdistrict.thaiName }}
@@ -345,7 +345,7 @@
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.district.$touched) }">
                                 <label class="sr-only" for="district">เขต/อำเภอ</label>
                                 <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].addressData.district}" disabled="true" ng-model="travel.passengersProfile[profile].addressData.district" title="เขต/อำเภอ" data-size="5" required>
-                                  <li nya-bs-option="district in travelData.provinceList[travel.passengersProfile[profile].addressData.province.id - 1].district | orderBy:'engName'">
+                                  <li nya-bs-option="district in travelData.provinceList[travel.passengersProfile[profile].addressData.province.code - 1].district | orderBy:'engName'">
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
                                       {{ district.engName }}
@@ -363,7 +363,7 @@
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.subdistrict.$touched) }">
                                 <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
                                 <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].addressData.subdistrict}" disabled="true" ng-model="travel.passengersProfile[profile].addressData.subdistrict" title="แขวง/ตำบล" data-size="5" required>
-                                  <li nya-bs-option="subdistrict in travelData.provinceList[travel.passengersProfile[profile].addressData.province.id - 1].district[travel.passengersProfile[profile].addressData.district.id - 1].subdistrict | orderBy:'engName'" ng-click="travel.passengersProfile[profile].addressData.postcode = subdistrict.postcode">
+                                  <li nya-bs-option="subdistrict in travelData.provinceList[travel.passengersProfile[profile].addressData.province.code - 1].district[travel.passengersProfile[profile].addressData.district.code - 1].subdistrict | orderBy:'engName'" ng-click="travel.passengersProfile[profile].addressData.postcode = subdistrict.postcode">
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
                                       {{ subdistrict.engName }}
@@ -425,10 +425,10 @@
                           <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.title.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.title.$touched) }">
                             <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].beneficiaries[beneficiary].title}" ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].title" name="title" title="คำนำหน้าชื่อ" data-size="5" required>
-                              <li nya-bs-option="title in travelData.formData.title | orderBy:'id'">
+                              <li nya-bs-option="title in travelData.titleList | orderBy:'thaiName'">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
-                                  {{ title.name }}
+                                  {{ title.thaiName }}
                                 </a>
                               </li>
                             </ol>
@@ -441,10 +441,10 @@
                           <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.relationship.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[profile].profileFormSubmitted || beneficiaryForm.relationship.$touched) }">
                             <label class="sr-only" for="relationship">ความสัมพันธ์</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].beneficiaries[beneficiary].relationship}" ng-model="travel.passengersProfile[profile].beneficiaries[beneficiary].relationship" name="relationship" title="ความสัมพันธ์" data-size="5" required>
-                              <li nya-bs-option="relationship in travelData.formData.title[travel.passengersProfile[profile].beneficiaries[beneficiary].title.id - 1].relationship | orderBy:'name'">
+                              <li nya-bs-option="relationship in travelData.relationship | orderBy:'thaiName'">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
-                                  {{ relationship.name }}
+                                  {{ relationship.thaiName }}
                                 </a>
                               </li>
                             </ol>
