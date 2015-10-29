@@ -564,6 +564,10 @@
             return $scope.tempData.voluntaryCollapse[index];
         };
 
+        $scope.showAsMarked = function(sumInsureValue) {
+            return sumInsureValue === '1';
+        };
+
         $scope.today = new Date();
         $scope.tempData.maxDate = $scope.addDays($scope.today, 90);
         $scope.tempData.minDate = $scope.addDays($scope.today, 1);
