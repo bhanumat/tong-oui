@@ -202,11 +202,11 @@
             $scope.calculateTotalPrice();
             if ($scope.tempData.promotion.promoValue) {
                 var netPrice = 0;
-                if ($scope.tempData.promotion.promoType == "discountPercent") {
+                if ($scope.tempData.promotion.promoType == "percent") {
                     netPrice = $scope.tempData.totalPrice * ((100 - $scope.tempData.promotion.promoValue) / 100);
-                } else if ($scope.tempData.promotion.promoType == "discountAmount") {
+                } else if ($scope.tempData.promotion.promoType == "amount") {
                     netPrice = $scope.tempData.totalPrice - $scope.tempData.promotion.promoValue;
-                } else if ($scope.tempData.promotionType == "gift") {
+                } else if ($scope.tempData.promotion.promoType == "gift") {
                     netPrice = $scope.tempData.totalPrice;
                 }
 
@@ -477,7 +477,7 @@
         $scope.hideRateScale = function (index) {
             var hideRateScaleRightSide = index < $scope.tempData.selectedPlanIndex - 1;
             var hideRateScaleLeftSide = index < $scope.travelData.campaignList[0].mandatory.rateScaleList.length - 3;
-            return  hideRateScaleRightSide && hideRateScaleLeftSide;
+            return hideRateScaleRightSide && hideRateScaleLeftSide;
         };
 
         $scope.showLeftPlanNavigator = function () {
@@ -588,7 +588,8 @@
                 tokenCode: $scope.travel.tokenCode,
                 area: area,
                 days: $scope.travel.days,
-                promoCode: $scope.travel.promoCode
+                promoCode: $scope.travel.promoCode,
+                loginFlag: 'N'
             };
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
