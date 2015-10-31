@@ -250,5 +250,12 @@
       "thaiName": "บิดา",
       "engName": "Farther"
     }
+  ],
+  "occupationList": [
+    {
+      "code": "1",
+      "thaiName": "พนักงานบริษัท",
+      "engName": "Officer"
+    }
   ]
 }
