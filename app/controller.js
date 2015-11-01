@@ -219,8 +219,6 @@
                 }
             }
 
-
-            console.log($scope.travel.campaign.voluntaryList);
         };
 
         self.initDefaultCampaign = function () {
@@ -504,11 +502,37 @@
         $scope.goToProfile = function (isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
+
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
             }
         };
+
+        $scope.confirmPlanSelected = function(isFormValid) {
+            $scope.formStepSubmitted = true;
+            if( isFormValid) {
+                var hasVoluntary = false;
+                for( var i= 0, len=$scope.travel.campaign.voluntaryList.length; i< len;++i) {
+                    var voluntary = $scope.travel.campaign.voluntaryList[i];
+                    hasVoluntary = hasVoluntary || voluntary.topicDetail;
+                }
+                if( $scope.travel.campaign.voluntaryList.length>1 &&  hasVoluntary ) {
+                    $scope.goToProfile(isFormValid);
+                } else {
+                    var modalServiceOptions = {
+                        btnClose : 'ใช่.. ข้าพเจ้าต้องการเพิ่มความคุ้มครองเสริม ',
+                        btnPrimary : 'ไม่.. ดำเนินการต่อโดยไม่เพิ่มความคุ้มครอง ',
+                        title : 'Confirmation',
+                        message: MESSAGES['privilege_voluntary']
+                    };
+                    var modalPromise = ModalService.showConfirm(modalServiceOptions);
+                    modalPromise.then(function() {// yes
+                        $scope.goToProfile(isFormValid);
+                    });
+                }
+            }
+        }
 
         $scope.isRateScaleSameAsSelected = function (rateScale) {
             if (rateScale)
