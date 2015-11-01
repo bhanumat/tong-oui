@@ -484,7 +484,7 @@ body{font-family:psl_kandamodern_extra_proRg,Helvetica,Arial,sans-serif}
 .plan-selection .plan-table .plan-table-content{width:60%;padding:0}
 .plan-selection .plan-table .plan-table-content .plan-navigation{font-size:20px;top:0;width:20px;z-index:10}
 .plan-selection .plan-table .plan-table-content .plan-navigation::before{margin-top:-10px;margin-left:-10px}
-.plan-selection .plan-table .plan-table-content .plan-wrapper{font-size:0;margin-left:-21px}
+.plan-selection .plan-table .plan-table-content .plan-wrapper{font-size:0;margin-left:-20px}
 .plan-selection .plan-table .plan-table-content .plan{filter:alpha(opacity=100);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";-webkit-opacity:1;-khtml-opacity:1;-moz-opacity:1;-ms-opacity:1;-o-opacity:1;opacity:1;width:30.5%;background-color:transparent}
 .plan-selection .plan-table .plan-table-content .plan:first-child{margin-left:20px}
 .plan-selection .plan-table .plan-table-content .plan:first-child.hidePlan{margin-left:-moz-calc(-30.5% + 20px);margin-left:-webkit-calc(-30.5% + 20px);margin-left:calc(-30.5% + 20px)}
