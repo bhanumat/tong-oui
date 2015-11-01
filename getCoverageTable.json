@@ -65,54 +65,18 @@
                 "3,000,000"
               ]
             }
-          },
-          {
+		  },
+			{
             "defaultFlag": false,
-            "code": "3",
-            "description": "แผน 3",
+            "code": "21",
+            "description": "แผน 2.1",
             "minAge": 8,
             "maxAge": 80,
             "calculateMethod": "Next",
-            "price": 200,
+            "price": 170,
             "rateScaleValue": {
               "sumInsure": [
-                "700,000",
-                "500,000",
-                "1,000,000",
-                "1",
-                "3,000,000"
-              ]
-            }
-          },
-          {
-            "defaultFlag": false,
-            "code": "4",
-            "description": "แผน 4",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
-            "price": 250,
-            "rateScaleValue": {
-              "sumInsure": [
-                "800,000",
-                "500,000",
-                "1,000,000",
-                "1",
-                "3,000,000"
-              ]
-            }
-          },
-          {
-            "defaultFlag": false,
-            "code": "5",
-            "description": "แผน 5",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
-            "price": 300,
-            "rateScaleValue": {
-              "sumInsure": [
-                "900,000",
+                "605,000",
                 "500,000",
                 "1,000,000",
                 "1",
@@ -185,52 +149,16 @@
               }
             },
             {
-              "defaultFlag": false,
-              "code": "3",
-              "description": "แผน 3",
+              "defaultFlag": true,
+              "code": "21",
+              "description": "แผน 2.1",
               "minAge": 8,
               "maxAge": 80,
               "calculateMethod": "Next",
-              "price": 200,
+              "price": 170,
               "rateScaleValue": {
                 "sumInsure": [
-                  "700,000",
-                  "500,000",
-                  "1,000,000",
-                  "1",
-                  "3,000,000"
-                ]
-              }
-            },
-            {
-              "defaultFlag": false,
-              "code": "4",
-              "description": "แผน 4",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
-              "price": 250,
-              "rateScaleValue": {
-                "sumInsure": [
-                  "800,000",
-                  "500,000",
-                  "1,000,000",
-                  "1",
-                  "3,000,000"
-                ]
-              }
-            },
-            {
-              "defaultFlag": false,
-              "code": "5",
-              "description": "แผน 5",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
-              "price": 300,
-              "rateScaleValue": {
-                "sumInsure": [
-                  "900,000",
+                  "600,000",
                   "500,000",
                   "1,000,000",
                   "1",
@@ -289,6 +217,209 @@
                 ]
               }
             },
+            {
+              "defaultFlag": true,
+              "code": "21",
+              "description": "แผน 21",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 170,
+              "rateScaleValue": {
+                "sumInsure": [
+                  "8,000",
+                  "Max<br />8,000",
+                  "1,000/2,500"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+	{
+      "campaignCode": "CGINGPSTTT",
+      "defaultFlag": false,
+      "mandatory": {
+        "topicDetail": "(A2) Travel Care",
+        "coverageList": [
+          {
+            "code": "T1",
+            "description": "<img src='images/icon-plan-1.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>"
+          },
+          {
+            "code": "T2",
+            "description": "<img src='images/icon-plan-2.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล</p>"
+          },
+          {
+            "code": "T3",
+            "description": "<img src='images/icon-plan-3.png'><p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด</p>"
+          },
+          {
+            "code": "T4",
+            "description": "<img src='images/icon-plan-4.png'><p>บริการข้อมูลก่อนการเดินทาง และบริการความชวยเหลือระหว่างการเดินทาง</p>"
+          },
+          {
+            "code": "T5",
+            "description": "<img src='images/icon-plan-4.png'><p>บริการเคลื่อนย้ายทางการแพทย์เพื่อการรักษาพยาบาลฉุกเฉิน</p>"
+          }
+        ],
+        "rateScaleList": [
+          {
+            "defaultFlag": false,
+            "code": "3",
+            "description": "แผน 3",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 200,
+            "rateScaleValue": {
+              "sumInsure": [
+                "700,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            }
+          },
+          {
+            "defaultFlag": false,
+            "code": "4",
+            "description": "แผน 4",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 250,
+            "rateScaleValue": {
+              "sumInsure": [
+                "800,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            }
+          },
+          {
+            "defaultFlag": true,
+            "code": "5",
+            "description": "แผน 5",
+            "minAge": 8,
+            "maxAge": 80,
+            "calculateMethod": "Next",
+            "price": 300,
+            "rateScaleValue": {
+              "sumInsure": [
+                "900,000",
+                "500,000",
+                "1,000,000",
+                "1",
+                "3,000,000"
+              ]
+            }
+          }
+        ]
+      },
+      "voluntaryList": [
+        {
+          "topicDetail": "(B2) เลือก Flight Secure เพิ่ม",
+          "coverageList": [
+            {
+              "code": "B1",
+              "description": "การเลื่อนหรือการบอกเลิกการเดินทางสูงสุด"
+            },
+            {
+              "code": "B2",
+              "description": "ค่าใช้จ่ายในการลดจำนวนการเดินทาง"
+            },
+            {
+              "code": "B3",
+              "description": "การพลาดการต่อเที่ยวบิน สูงสุด"
+            },
+            {
+              "code": "B4",
+              "description": "การชดเชยความล่าช้าในการเดินทาง ทุกๆ 6 ชั่วโมง"
+            },
+            {
+              "code": "B5",
+              "description": "ความรับผิดชอบต่อบุคคลภายนอกสูงสุด"
+            }
+          ],
+          "rateScaleList": [
+            {
+              "defaultFlag": false,
+              "code": "3",
+              "description": "แผน 3",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 200,
+              "rateScaleValue": {
+                "sumInsure": [
+                  "700,000",
+                  "500,000",
+                  "1,000,000",
+                  "1",
+                  "3,000,000"
+                ]
+              }
+            },
+            {
+              "defaultFlag": false,
+              "code": "4",
+              "description": "แผน 4",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 250,
+              "rateScaleValue": {
+                "sumInsure": [
+                  "800,000",
+                  "500,000",
+                  "1,000,000",
+                  "1",
+                  "3,000,000"
+                ]
+              }
+            },
+            {
+              "defaultFlag": true,
+              "code": "5",
+              "description": "แผน 5",
+              "minAge": 8,
+              "maxAge": 80,
+              "calculateMethod": "Next",
+              "price": 300,
+              "rateScaleValue": {
+                "sumInsure": [
+                  "900,000",
+                  "500,000",
+                  "1,000,000",
+                  "1",
+                  "3,000,000"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "topicDetail": "(C2) เลือก Property Safe เพิ่ม",
+          "coverageList": [
+            {
+              "code": "C1",
+              "description": "การสูญเสียหรือเสียหายของกระเป๋าเดินทางและทรัพย์สินส่วนตัวสูงสุดถึง"
+            },
+            {
+              "code": "C2",
+              "description": "การล่าช้าของกระเป๋าเดินทาง"
+            },
+            {
+              "code": "C3",
+              "description": "การสูญหายของกระเป๋าเดินทาง / การสูญหายของเอกสารการเดินทาง"
+            }
+          ],
+          "rateScaleList": [
             {
               "defaultFlag": false,
               "code": "3",
