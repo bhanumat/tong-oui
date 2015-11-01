@@ -235,9 +235,10 @@
                                             <div class="col-xs-12">
                                                 <h6>แผนประกันที่เลือก</h6>
 
-                                                <p>แผน {{ travel.campaign.mandatory.topicDetail}}<span
-                                                        ng-repeat="voluntary in travel.campaign.voluntaryList"
-                                                        ng-show="voluntary.topicDetail">, {{voluntary.topicDetail}}</span>
+                                                <p>แผน {{ travel.campaign.mandatory.topicDetail}}
+                                                    <span ng-repeat="voluntary in travel.campaign.voluntaryList"
+                                                          ng-show="voluntary.topicDetail">, {{voluntary.topicDetail}}
+                                                    </span>
                                                 </p>
                                                 <span class="sep hidden-xs"></span>
 
@@ -246,8 +247,8 @@
                                                     </p>
 
                                                     <p ng-if="tempData.discountAsAmount && tempData.isShowingDiscount">
-                                                        ส่วนลด <span ng-if="tempData.promotion.promoType == 'percent'">{{tempData.discount}}%</span><span
-                                                            class="right">{{tempData.discountAsAmount | number}} บาท</span>
+                                                        ส่วนลด <span ng-if="tempData.promotion.promoType == 'percent'">{{tempData.discount}}%</span>
+                                                        <span class="right">{{tempData.discountAsAmount | number}} บาท</span>
                                                     </p>
 
                                                     <p ng-if="tempData.promotion.promoType == 'gift'"

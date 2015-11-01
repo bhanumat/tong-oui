@@ -13,11 +13,11 @@
 
     MainController.$inject = [
         '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
-        'CONSTANTS', 'MESSAGES', 'SessionStorage', 'QueryService', 'ModalService'
+        'CONSTANTS', 'MESSAGES', 'SessionStorage', 'QueryService', 'dialogs'
     ];
 
 
-    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, SessionStorage, QueryService, ModalService) {
+    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, SessionStorage, QueryService, dialogs) {
 
         // 'controller as' syntax
         var self = this;
@@ -450,10 +450,11 @@
                         $scope.tempData.promotion = response.data.promotion;
                         if ($scope.tempData.promotion.promoFull === 'Y') {
                             $scope.travel.promoCode = null;
-                            var modalServiceOptions = {
-                                message: MESSAGES['promotion_reached_max_usage']
-                            };
-                            ModalService.showWarning(modalServiceOptions);
+                            //var modalServiceOptions = {
+                            //    message: MESSAGES['promotion_reached_max_usage']
+                            //};
+                            //ModalService.showWarning(modalServiceOptions);
+                            dialogs.notify();
                         } else {
                             self.getCoverageTable().then(function (response) {
                                 $scope.calculatePrice();
@@ -520,15 +521,21 @@
                 if( $scope.travel.campaign.voluntaryList.length>1 &&  hasVoluntary ) {
                     $scope.goToProfile(isFormValid);
                 } else {
-                    var modalServiceOptions = {
-                        btnClose : 'ใช่.. ข้าพเจ้าต้องการเพิ่มความคุ้มครองเสริม ',
-                        btnPrimary : 'ไม่.. ดำเนินการต่อโดยไม่เพิ่มความคุ้มครอง ',
-                        title : 'Confirmation',
-                        message: MESSAGES['privilege_voluntary']
-                    };
-                    var modalPromise = ModalService.showConfirm(modalServiceOptions);
-                    modalPromise.then(function() {// yes
-                        $scope.goToProfile(isFormValid);
+                    //var modalServiceOptions = {
+                    //    btnClose : 'ใช่.. ข้าพเจ้าต้องการเพิ่มความคุ้มครองเสริม ',
+                    //    btnPrimary : 'ไม่.. ดำเนินการต่อโดยไม่เพิ่มความคุ้มครอง ',
+                    //    title : 'Confirmation',
+                    //    message: MESSAGES['privilege_voluntary']
+                    //};
+                    //var modalPromise = ModalService.showConfirm(modalServiceOptions);
+                    //modalPromise.then(function() {// yes
+                    //    $scope.goToProfile(isFormValid);
+                    //});
+                    var dlg = dialogs.confirm();
+                    dlg.result.then(function(btn){
+                        $scope.confirmed = 'You confirmed "Yes."';
+                    },function(btn){
+                        $scope.confirmed = 'You confirmed "No."';
                     });
                 }
             }

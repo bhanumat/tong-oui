@@ -8691,13 +8691,10 @@ div.easy_social_box.vertical {
   white-space: nowrap;
 }
 
-.modal-body a {
-    border-left: 0px solid #fff;
-    color: #00aeef;
-    font: 18px/130% kittithada_bold_75regular;
-    padding: 8px 5px 8px 5px;
-}
-
 .section-heading h6 {
     color: #FFFFFF;
+}
+.modal-title {
+    font-size: 22px;
+    height: 24px;
 }
