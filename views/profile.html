@@ -366,7 +366,7 @@
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.subdistrict.$touched) }">
                                 <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
                                 <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].addressData.subdistrict}" disabled="true" ng-model="travel.applicationList[outerIndex].address.subDistrict" title="แขวง/ตำบล" data-size="5" required>
-                                  <li nya-bs-option="subDistrict in travelData.provinceList[provinceIndex].districtList[districtIndex].subDistrict | orderBy:'engName'" >
+                                  <li nya-bs-option="subDistrict in travelData.provinceList[provinceIndex].districtList[districtIndex].subDistrict | orderBy:'engName'" data-value="subDistrict.code">
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
                                       {{ subDistrict.engName }}
@@ -537,7 +537,7 @@
                         <p>ชื่อ - นามสกุล</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].title.name}} {{travel.passengersProfile[profile].firstname}} {{travel.passengersProfile[profile].lastname}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].title.engname}} {{travel.passengersProfile[profile].englishFirstname}} {{travel.passengersProfile[profile].englishFirstname}}</span></p>
+                        <p>{{travel.applicationList[outerIndex].title}} {{travel.applicationList[outerIndex].firstnameTh}} {{travel.applicationList[outerIndex].lastnameTh}}<span ng-if="tempData.isRequiredEng"><br>{{travel.applicationList[outerIndex].title}} {{travel.applicationList[outerIndex].firstnameEn}} {{travel.applicationList[outerIndex].lirstnameEn}}</span></p>
                       </div>
                     </div>
                     <div class="row">
@@ -545,7 +545,7 @@
                         <p>เลขที่บัตรประชาชน</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].nationalId}}</p>
+                        <p>{{travel.applicationList[outerIndex].ssn}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -553,7 +553,7 @@
                         <p>เลขที่หนังสือเดินทาง</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].passportId}}</p>
+                        <p>{{travel.applicationList[outerIndex].passportNo}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -561,7 +561,7 @@
                         <p>วัน / เดือน / ปีเกิด</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].birthDate}}</p>
+                        <p>{{travel.applicationList[outerIndex].dateOfBirth}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -569,7 +569,7 @@
                         <p>เพศ</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].gender.name}}</p>
+                        <p>{{travel.applicationList[outerIndex].sex}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -577,7 +577,7 @@
                         <p>อาชีพ</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].occupation.name}}</p>
+                        <p>{{travel.applicationList[outerIndex].occupation}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -585,7 +585,7 @@
                         <p>อีเมล</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].email}}</p>
+                        <p>{{travel.applicationList[outerIndex].email}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -593,7 +593,7 @@
                         <p>เบอร์โทรศัพท์</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.passengersProfile[profile].phone}}</p>
+                        <p>{{travel.applicationList[outerIndex].phone}}</p>
                       </div>
                     </div>
                   </div>
@@ -618,7 +618,7 @@
                   <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                     <div class="row">
                       <div class="col-xs-12">
-                        <p>{{travel.passengersProfile[profile].addressData.address}} แขวง{{travel.passengersProfile[profile].addressData.subdistrict.name}}, เขต{{travel.passengersProfile[profile].addressData.district.name}}, {{travel.passengersProfile[profile].addressData.province.name}} {{travel.passengersProfile[profile].addressData.postcode}}<span ng-if="tempData.isSchengen"><br>{{travel.passengersProfile[profile].addressData.englishAddress}} {{travel.passengersProfile[profile].addressData.subdistrict.engname}}, {{travel.passengersProfile[profile].addressData.district.engname}}, {{travel.passengersProfile[profile].addressData.province.engname}} {{travel.passengersProfile[profile].addressData.postcode}}</span></p>
+                        <p>{{travel.applicationList[outerIndex].address.addrTh}} แขวง{{travel.applicationList[outerIndex].address.subDistrict}}, เขต{{travel.applicationList[outerIndex].address.district}}, {{travel.applicationList[outerIndex].address.province}} {{travel.applicationList[outerIndex].address.zipcode}}<span ng-if="tempData.isRequiredEng"><br>{{travel.applicationList[outerIndex].address.addrEn}} {{travel.applicationList[outerIndex].address.subDistrict}}, {{travel.applicationList[outerIndex].address.district}}, {{travel.applicationList[outerIndex].address.province}} {{travel.applicationList[outerIndex].address.zipcode}}</span></p>
                       </div>
                     </div>
                   </div>
