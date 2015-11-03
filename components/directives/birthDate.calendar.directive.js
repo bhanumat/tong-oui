@@ -11,8 +11,10 @@
     // Definition of directive
     var directiveDefinitionObject = {
       restrict: 'EA',
-      link: function(scope, element, attrs) {
+      link: function(scope, element, attrs, model) {
           var min = new Date();
+          if(!scope.travelData.maxage)
+              scope.travelData.maxage = 80;
           min.setFullYear(min.getFullYear() - scope.travelData.maxage);
           var max = new Date();
           max.setFullYear(max.getFullYear() - 5);
@@ -25,8 +27,8 @@
             minDate: min,
             yearRange: "-80:-5",
             onSelect: function(date) {
-              scope.travel.passengersProfile[parseInt(attrs["index"])].birthDate = date;
-              scope.$apply();
+                model = date;
+                scope.$apply();
             }
           })
         }
