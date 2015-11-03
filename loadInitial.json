@@ -25,7 +25,7 @@
       "code": "AU",
       "id": 2,
       "type": "schengen",
-      "requiredEng": false
+      "requiredEng": true
     },
     {
       "country": "Austria",
@@ -210,17 +210,17 @@
   ],
   "provinceList": [
     {
-      "code": "1",
+      "code": "006",
       "thaiName": "กรุงเทพฯ",
       "engName": "Bangkok",
       "districtList": [
         {
-          "code": "1",
+          "code": "038",
           "thaiName": "ดุสิต",
           "engName": "Dusit",
           "subDistrict": [
             {
-              "code": "1",
+              "code": "021",
               "thaiName": "สวนจิตรลดา",
               "engName": "Suan Chitlada",
               "postelCode": "10900"
@@ -232,12 +232,22 @@
   ],
   "titleList": [
     {
+      "code": "2",
+      "thaiName": "นางสาว",
+      "engName": "Miss"
+    },
+    {
       "code": "1",
       "thaiName": "นาย",
       "engName": "Mr."
     }
   ],
   "genderList": [
+    {
+      "code": "2",
+      "thaiName": "หญิง",
+      "engName": "Female"
+    },
     {
       "code": "1",
       "thaiName": "ชาย",
@@ -246,6 +256,11 @@
   ],
   "relationship": [
     {
+      "code": "2",
+      "thaiName": "มารดา",
+      "engName": "Mother"
+    },
+    {
       "code": "1",
       "thaiName": "บิดา",
       "engName": "Farther"
@@ -253,9 +268,14 @@
   ],
   "occupationList": [
     {
+      "code": "2",
+      "thaiName": "ข้าราชการ",
+      "engName": "Authority"
+    },
+    {
       "code": "1",
       "thaiName": "พนักงานบริษัท",
-      "engName": "Officer"
+      "engName": "Salary Man"
     }
   ]
 }
