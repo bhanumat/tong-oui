@@ -17,7 +17,7 @@
 							<ol class="nya-bs-select form-control text-center" id="destination"
 									disabled="travel.destinations.length == 10" ng-class="{'filled': tempData.destination}"
 									ng-change="addDestination();" ng-model="tempData.destination" name="destinations"
-									title="เลือกประเทศ" data-size="5" data-live-search="true">
+									title="เลือกได้สูงสุด 10 ประเทศ" data-size="5" data-live-search="true">
 								<li nya-bs-option="item in travelData.destinationList">
 									<!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
 									<a>
@@ -32,12 +32,7 @@
 					</div>
 					<div class="row" ng-show="travel.destinations.length">
 						<div class="col-xs-12 col-sm-6 section-heading">
-							<h6>กลุ่มประเทศจุดหมายปลายทาง</h6>
-						</div>
-						<div class="col-xs-12 col-sm-6 " >
-							<div class="form-group">
-								<p class="form-control"><span>{{getProtectionArea()|capitalize}}</span></p>
-							</div>
+							<h6>กลุ่มประเทศจุดหมายปลายทาง {{getProtectionArea()|capitalize}}</h6>
 						</div>
 					</div>
 

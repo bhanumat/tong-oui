@@ -222,6 +222,7 @@
         };
 
         self.initDefaultCampaign = function () {
+            console.log('Hit');
             var campaigns = $scope.travelData.campaignList;
             if (!$scope.travel.campaign) {
                 var foundDefault;
@@ -236,27 +237,15 @@
                 if (!foundDefault) {
                     self.setupCampaign(campaigns[0]);
                 }
+            } else {
+                //Update
+                //TODO: update travel data
             }
         };
 
         $scope.calculatePrice = function () {
             $scope.calculateTotalPrice();
-            if ($scope.tempData.promotion.promoValue) {
-                var netPrice = 0;
-                if ($scope.tempData.promotion.promoType == "percent") {
-                    netPrice = $scope.tempData.totalPrice * ((100 - $scope.tempData.promotion.promoValue) / 100);
-                } else if ($scope.tempData.promotion.promoType == "amount") {
-                    netPrice = $scope.tempData.totalPrice - $scope.tempData.promotion.promoValue;
-                } else if ($scope.tempData.promotion.promoType == "gift") {
-                    netPrice = $scope.tempData.totalPrice;
-                }
-
-                $scope.tempData.price = netPrice < 0 ? 0 : netPrice;
-                $scope.tempData.discountAsAmount = $scope.tempData.totalPrice - $scope.tempData.price;
-            }
-            else {
-                $scope.tempData.price = $scope.tempData.totalPrice;
-            }
+            $scope.tempData.price = $scope.tempData.totalPrice;
         };
 
         $scope.changeStage = function (index, stage, validate) {
@@ -454,7 +443,9 @@
                             //    message: MESSAGES['promotion_reached_max_usage']
                             //};
                             //ModalService.showWarning(modalServiceOptions);
-                            dialogs.notify();
+                            dialogs.notify('Warning', MESSAGES['promotion_reached_max_usage'], {
+                                backdrop: 'static'
+                            });
                         } else {
                             self.getCoverageTable().then(function (response) {
                                 $scope.calculatePrice();
@@ -510,32 +501,24 @@
             }
         };
 
-        $scope.confirmPlanSelected = function(isFormValid) {
+        $scope.confirmPlanSelected = function (isFormValid) {
             $scope.formStepSubmitted = true;
-            if( isFormValid) {
+            if (isFormValid) {
                 var hasVoluntary = false;
-                for( var i= 0, len=$scope.travel.campaign.voluntaryList.length; i< len;++i) {
+                for (var i = 0, len = $scope.travel.campaign.voluntaryList.length; i < len; ++i) {
                     var voluntary = $scope.travel.campaign.voluntaryList[i];
                     hasVoluntary = hasVoluntary || voluntary.topicDetail;
                 }
-                if( $scope.travel.campaign.voluntaryList.length>1 &&  hasVoluntary ) {
+                if ($scope.travel.campaign.voluntaryList.length > 1 && hasVoluntary) {
                     $scope.goToProfile(isFormValid);
                 } else {
-                    //var modalServiceOptions = {
-                    //    btnClose : 'ใช่.. ข้าพเจ้าต้องการเพิ่มความคุ้มครองเสริม ',
-                    //    btnPrimary : 'ไม่.. ดำเนินการต่อโดยไม่เพิ่มความคุ้มครอง ',
-                    //    title : 'Confirmation',
-                    //    message: MESSAGES['privilege_voluntary']
-                    //};
-                    //var modalPromise = ModalService.showConfirm(modalServiceOptions);
-                    //modalPromise.then(function() {// yes
-                    //    $scope.goToProfile(isFormValid);
-                    //});
-                    var dlg = dialogs.confirm();
-                    dlg.result.then(function(btn){
-                        $scope.confirmed = 'You confirmed "Yes."';
-                    },function(btn){
-                        $scope.confirmed = 'You confirmed "No."';
+                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary'], {
+                        backdrop: 'static'
+                    });
+                    dlg.result.then(function (yesBtn) {
+                        $scope.goToProfile(isFormValid);
+                    }, function (noBtn) {
+
                     });
                 }
             }
