@@ -1,0 +1,74 @@
+{
+  "tokenCode": "q9EWJGz2K1sudRuGdSzg_7B078790E12DBAD3792965CE775E770C",
+  "destination": "Argentina,Austria",
+  "startTravelDate": "30/11/2015",
+  "endTravelDate": "30/11/2015",
+  "numberOfInsure": "1",
+  "promotion": "",
+  "mandatoryList":    [
+    {
+      "code": "T1",
+      "value": "Test1"
+    },
+    {
+      "code": "T2",
+      "value": "Test2"
+    },
+    {
+      "code": "T3",
+      "value": "Test3"
+    }
+  ],
+  "voluntaryList":    [
+    {
+      "code": "T4",
+      "value": "Test4"
+    },
+    {
+      "code": "T5",
+      "value": "Test5"
+    }
+  ],
+  "premiumAmount": 156,
+  "applicationList": [   {
+    "title": "1",
+    "firstnameTh": "?????",
+    "lastnameTh": "???????",
+    "firstnameEn": "Test",
+    "lastnameEn": "Longdo",
+    "ssn": "1111111111112",
+    "passportNo": "1234567",
+    "dateOfBirth": "26/02/1982",
+    "sex": "2",
+    "occupation": "2",
+    "email": "test@test.com",
+    "phone": "0819999999",
+    "address":       {
+      "addrTh": "???????",
+      "addrEn": "Address English",
+      "subDistrict": "021",
+      "district": "038",
+      "province": "006",
+      "zipcode": "10900"
+    },
+    "beneficiaryList": [
+      {
+        "title": "1",
+        "firstname": "???? ????",
+        "surname": "????????",
+        "relation": "1"
+      },
+      {
+        "title": "2",
+        "firstname": "???? ????",
+        "surname": "????????",
+        "relation": "1"
+      }]
+  }],
+  "payment":    {
+    "creditCardType": "02",
+    "creditCardNo": "1111222233334444",
+    "creditCardExpired": "0918",
+    "creaditCardName": "TESTER TESTER"
+  }
+}

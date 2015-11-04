@@ -90,11 +90,17 @@
             $scope.travelData = response.data;
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
             $scope.isSchengen();
+            $scope.isRequiredEng();
         }, function (response) {
         });
 
         QueryService.query('POST', 'getToken').then(function (response) {
             $scope.travel.tokenCode = response.data.tokenCode;
+        });
+
+        QueryService.query('POST', 'submitOrder').then(function (response) {
+            $scope.travel.applicationList = response.data.applicationList;
+        }, function (response) {
         });
 
         $scope.$watch('travel.days', function () {
@@ -333,6 +339,19 @@
                 }
                 else {
                     $scope.tempData.isSchengen = false;
+                }
+            }
+            return false;
+        };
+
+        $scope.isRequiredEng = function () {
+            for (var i = 0; i < $scope.travel.destinations.length; i++) {
+                if ($scope.travel.destinations[i].requiredEng == "Y" || $scope.travel.destinations[i].requiredEng == true) {
+                    $scope.tempData.isRequiredEng = true;
+                    return true;
+                }
+                else {
+                    $scope.tempData.isRequiredEng = false;
                 }
             }
             return false;
@@ -615,6 +634,7 @@
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
                     $scope.isSchengen();
+                    $scope.isRequiredEng();
                 }
             }
         };
@@ -623,6 +643,7 @@
             $scope.travelData.destinationList.push($scope.travel.destinations[index]);
             $scope.travel.destinations = $filter('filter')($scope.travel.destinations, {country: "!" + $scope.travel.destinations[index].country}, true);
             $scope.isSchengen();
+            $scope.isRequiredEng();
         };
 
         //datepicker
@@ -691,6 +712,9 @@
             return deferred.promise;
         };
 
+        $scope.getIndexOfByCode = function(code, items){
+            return _.findIndex(items, { code: code });
+        }
     }
 
 })();
