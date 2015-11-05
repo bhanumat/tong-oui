@@ -48,14 +48,12 @@
         });
 
         //Travel Model to post back to API
-        $scope.travel = {
-            destinations: [],
-            passengers: 1
-        };
+        $scope.travel = {};
 
         $scope.tempData = {};
         $scope.tempData.voluntaryCollapse = [];
-        $scope.tempData.destination = [];
+        $scope.tempData.destination = null;
+        $scope.tempData.destinations = [];
         $scope.tempData.promotion = {
             "promoType": null,
             "promoValue": null,
@@ -103,11 +101,11 @@
         }, function (response) {
         });
 
-        $scope.$watch('travel.days', function () {
-            if ($location.path() == '/insurance/profile' || $location.path() == '/insurance/payment') {
-                $location.path('/insurance/plan');
-                $location.replace();
-            }
+        $scope.$watch('travel.startDate', function () {
+            $scope.tempData.travelDateChanged = true;
+        });
+        $scope.$watch('travel.endDate', function () {
+            $scope.tempData.travelDateChanged = true;
         });
 
         $scope.$watch('travel.passengers', function () {
@@ -115,6 +113,10 @@
                 $location.path('/insurance/profile');
                 $location.replace();
             }
+        });
+
+        $scope.$watch('travel.country', function () {
+            $scope.tempData.countryChanged = true;
         });
 
         $scope.trustAsHtml = function (string) {
@@ -140,10 +142,6 @@
             }
         };
 
-        $scope.checkPromotionCodeChange = function () {
-            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode
-        };
-
         $scope.getPriceRate = function (plan) {
             var price = 0;
             if (plan && plan.rateScale) {//if any
@@ -154,9 +152,9 @@
 
         $scope.calculateTotalPrice = function () {
             if ($scope.travelData.campaignList) {
-                $scope.tempData.totalPrice = $scope.getPriceRate($scope.travel.campaign.mandatory);
-                for (var i = 0, len = $scope.travel.campaign.voluntaryList.length; i < len; ++i) {
-                    var voluntary = $scope.travel.campaign.voluntaryList[i];
+                $scope.tempData.totalPrice = $scope.getPriceRate($scope.travel.mandatory);
+                for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; ++i) {
+                    var voluntary = $scope.travel.voluntaryList[i];
                     $scope.tempData.totalPrice += $scope.getPriceRate(voluntary);
                 }
                 $scope.tempData.totalPrice *= $scope.travel.passengers;
@@ -164,9 +162,7 @@
         };
 
         self.setupCampaign = function (campaign) {
-            $scope.travel.campaign = {
-                campaignCode: campaign.campaignCode
-            };
+            $scope.travel.campaignCode = campaign.campaignCode;
 
             //Mandatory
             var foundDefaultRateScale;
@@ -177,7 +173,7 @@
                     foundDefaultRateScale = true;
                     foundIndexRateScale = i;
                     $scope.tempData.selectedPlanIndex = i;
-                    $scope.travel.campaign.mandatory = {
+                    $scope.travel.mandatory = {
                         topicDetail: campaign.mandatory.topicDetail,
                         coverageList: campaign.mandatory.coverageList,
                         rateScale: rateScale
@@ -190,7 +186,7 @@
             if (!foundDefaultRateScale) {//Use first item as default
                 $scope.tempData.selectedPlanIndex = 0;
                 foundIndexRateScale = 0;
-                $scope.travel.campaign.mandatory = {
+                $scope.travel.mandatory = {
                     topicDetail: campaign.mandatory.topicDetail,
                     coverageList: campaign.mandatory.coverageList,
                     rateScale: campaign.mandatory.rateScaleList[0]
@@ -199,7 +195,7 @@
 
 
             //Voluntary if any
-            $scope.travel.campaign.voluntaryList = [];
+            $scope.travel.voluntaryList = [];
             for (var i = 0, len = campaign.voluntaryList.length; i < len; ++i) {
                 var foundDefaultRateScale = false;
                 var voluntary = campaign.voluntaryList[i];
@@ -207,7 +203,7 @@
                     var rateScale = voluntary.rateScaleList[j];
                     if (rateScale.defaultFlag) {
                         foundDefaultRateScale = true;
-                        $scope.travel.campaign.voluntaryList.push({
+                        $scope.travel.voluntaryList.push({
                             topicDetail: voluntary.topicDetail,
                             coverageList: voluntary.coverageList,
                             rateScale: rateScale
@@ -217,7 +213,7 @@
                 }
                 //Fix invalid info from API if any
                 if (!foundDefaultRateScale) {//Use first item as default
-                    $scope.travel.campaign.voluntaryList.push({
+                    $scope.travel.voluntaryList.push({
                         topicDetail: voluntary.topicDetail,
                         coverageList: voluntary.coverageList,
                         rateScale: voluntary.rateScaleList[foundIndexRateScale]
@@ -227,10 +223,26 @@
 
         };
 
+        self.updateSelectedCampaign = function (campaign) {
+            $scope.travel.mandatory = {
+                topicDetail: campaign.mandatory.topicDetail,
+                coverageList: campaign.mandatory.coverageList,
+                rateScale: campaign.mandatory.rateScaleList[$scope.tempData.selectedPlanIndex]
+            };
+
+            $scope.travel.voluntaryList = [];
+            for (var i = 0, len = campaign.voluntaryList.length; i < len; i++) {
+                var voluntary = campaign.voluntaryList[i];
+                $scope.travel.voluntaryList.push({
+                    topicDetail: voluntary.topicDetail,
+                    coverageList: voluntary.coverageList,
+                    rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                });
+            }
+        };
         self.initDefaultCampaign = function () {
-            console.log('Hit');
             var campaigns = $scope.travelData.campaignList;
-            if (!$scope.travel.campaign) {
+            if (!$scope.travel.mandatory) {
                 var foundDefault;
                 for (var i = 0, len = campaigns.length; i < len; ++i) {
                     var campaign = campaigns[i];
@@ -244,8 +256,12 @@
                     self.setupCampaign(campaigns[0]);
                 }
             } else {
-                //Update
-                //TODO: update travel data
+                //Update travel
+                var campaign = _.find(campaigns, function (campaign) {
+                    return campaign.campaignCode = $scope.travel.campaignCode;
+                });
+
+                self.updateSelectedCampaign(campaign);
             }
         };
 
@@ -332,8 +348,8 @@
         };
 
         $scope.isSchengen = function () {
-            for (var i = 0; i < $scope.travel.destinations.length; i++) {
-                if ($scope.travel.destinations[i].type == "schengen") {
+            for (var i = 0; i < $scope.tempData.destinations.length; i++) {
+                if ($scope.tempData.destinations[i].type == "schengen") {
                     $scope.tempData.isSchengen = true;
                     return true;
                 }
@@ -345,8 +361,8 @@
         };
 
         $scope.isRequiredEng = function () {
-            for (var i = 0; i < $scope.travel.destinations.length; i++) {
-                if ($scope.travel.destinations[i].requiredEng == "Y" || $scope.travel.destinations[i].requiredEng == true) {
+            for (var i = 0; i < $scope.tempData.destinations.length; i++) {
+                if ($scope.tempData.destinations[i].requiredEng == "Y" || $scope.tempData.destinations[i].requiredEng == true) {
                     $scope.tempData.isRequiredEng = true;
                     return true;
                 }
@@ -358,8 +374,8 @@
         };
 
         $scope.isAsia = function () {
-            for (var i = 0; i < $scope.travel.destinations.length; i++) {
-                if ($scope.travel.destinations[i].type == "asia") {
+            for (var i = 0; i < $scope.tempData.destinations.length; i++) {
+                if ($scope.tempData.destinations[i].type == "asia") {
                     $scope.tempData.isAsia = true;
                     return true;
                 }
@@ -372,8 +388,8 @@
 
         $scope.isWorldWide = function () {
             var isWorld = function () {
-                for (var i = 0; i < $scope.travel.destinations.length; i++) {
-                    if ($scope.travel.destinations[i].type == "world wide") {
+                for (var i = 0; i < $scope.tempData.destinations.length; i++) {
+                    if ($scope.tempData.destinations[i].type == "world wide") {
                         $scope.tempData.isAsia = true;
                         return true;
                     }
@@ -389,7 +405,6 @@
             return false;
         };
 
-
         $scope.getProtectionArea = function () {
             if ($scope.isWorldWide()) {
                 return 'world wide';
@@ -402,6 +417,7 @@
             }
             return false;
         };
+
         $scope.termsToggle = function (index) {
             if (!$scope.tempData.passengersProfile[index].termsAccepted) {
                 $scope.tempData.passengersProfile[index].termsAccepted = true;
@@ -414,12 +430,12 @@
 
         $scope.voluntaryToggle = function (campaignIndex, voluntaryIndex, rateScaleIndex) {
             if (rateScaleIndex == $scope.tempData.selectedPlanIndex) {
-                if ($scope.travel.campaign.voluntaryList[voluntaryIndex].rateScale) {//existing
+                if ($scope.travel.voluntaryList[voluntaryIndex].rateScale) {//existing
                     //Currently, no id for voluntary. So, cannot remove item it will cause index invalid.
-                    $scope.travel.campaign.voluntaryList[voluntaryIndex] = {};
+                    $scope.travel.voluntaryList[voluntaryIndex] = {};
                 } else {
                     var voluntary = $scope.travelData.campaignList[campaignIndex].voluntaryList[voluntaryIndex];
-                    $scope.travel.campaign.voluntaryList[voluntaryIndex] = {
+                    $scope.travel.voluntaryList[voluntaryIndex] = {
                         topicDetail: voluntary.topicDetail,
                         coverageList: voluntary.coverageList,
                         rateScale: voluntary.rateScaleList[rateScaleIndex]
@@ -458,10 +474,6 @@
                         $scope.tempData.promotion = response.data.promotion;
                         if ($scope.tempData.promotion.promoFull === 'Y') {
                             $scope.travel.promoCode = null;
-                            //var modalServiceOptions = {
-                            //    message: MESSAGES['promotion_reached_max_usage']
-                            //};
-                            //ModalService.showWarning(modalServiceOptions);
                             dialogs.notify('Warning', MESSAGES['promotion_reached_max_usage'], {
                                 backdrop: 'static'
                             });
@@ -524,11 +536,11 @@
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 var hasVoluntary = false;
-                for (var i = 0, len = $scope.travel.campaign.voluntaryList.length; i < len; ++i) {
-                    var voluntary = $scope.travel.campaign.voluntaryList[i];
+                for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; ++i) {
+                    var voluntary = $scope.travel.voluntaryList[i];
                     hasVoluntary = hasVoluntary || voluntary.topicDetail;
                 }
-                if ($scope.travel.campaign.voluntaryList.length > 1 && hasVoluntary) {
+                if ($scope.travel.voluntaryList.length > 1 && hasVoluntary) {
                     $scope.goToProfile(isFormValid);
                 } else {
                     var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary'], {
@@ -545,7 +557,7 @@
 
         $scope.isRateScaleSameAsSelected = function (rateScale) {
             if (rateScale)
-                return rateScale.code == $scope.travel.campaign.mandatory.rateScale.code;
+                return rateScale.code == $scope.travel.mandatory.rateScale.code;
             else
                 return false;
         };
@@ -589,23 +601,7 @@
                 self.setupCampaign($scope.travelData.campaignList[campaignIndex - 1]);
             } else {
                 $scope.tempData.selectedPlanIndex = rateScaleIndex;
-                //Set mandatory selected
-                if (rateScale) {
-                    $scope.travel.campaign.mandatory.rateScale = rateScale;
-                } else {
-                    $scope.travel.campaign.mandatory.rateScale = campaign.mandatory.rateScaleList[rateScaleIndex];
-                }
-
-                //Set voluntaries selected
-                for (var i = 0, len = campaign.voluntaryList.length; i < len; ++i) {
-                    var voluntary = campaign.voluntaryList[i];
-                    $scope.travel.campaign.voluntaryList[i] = {
-                        topicDetail: voluntary.topicDetail,
-                        coverageList: voluntary.coverageList,
-                        rateScale: voluntary.rateScaleList[rateScaleIndex]
-                    }
-                }
-
+                self.updateSelectedCampaign(campaign);
                 if (rateScaleIndex < 2) {
                     $scope.translatey = 'translatey(12.5%)';
                 }
@@ -628,11 +624,13 @@
         };
 
         $scope.addDestination = function () {
-            if ($scope.tempData.destination) {
-                if ($scope.travel.destinations.length < 10) {
-                    $scope.travel.destinations.push($scope.tempData.destination);
+            if ($scope.tempData.destinations) {
+                if ($scope.tempData.destinations.length < 10) {
+                    $scope.tempData.destinations.push($scope.tempData.destination);
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
+                    $scope.travel.destination = $scope.getProtectionArea();
+                    $scope.travel.country = _.pluck($scope.tempData.destinations,'country').join('| ')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
                 }
@@ -640,8 +638,10 @@
         };
 
         $scope.removeDestination = function (index) {
-            $scope.travelData.destinationList.push($scope.travel.destinations[index]);
-            $scope.travel.destinations = $filter('filter')($scope.travel.destinations, {country: "!" + $scope.travel.destinations[index].country}, true);
+            $scope.travelData.destinationList.push($scope.tempData.destinations[index]);
+            $scope.tempData.destinations = $filter('filter')($scope.tempData.destinations, {country: "!" + $scope.tempData.destinations[index].country}, true);
+            $scope.travel.destination = $scope.getProtectionArea();
+            $scope.travel.country = _.pluck($scope.tempData.destinations,'country').join('|')
             $scope.isSchengen();
             $scope.isRequiredEng();
         };
@@ -712,8 +712,8 @@
             return deferred.promise;
         };
 
-        $scope.getIndexOfByCode = function(code, items){
-            return _.findIndex(items, { code: code });
+        $scope.getIndexOfByCode = function (code, items) {
+            return _.findIndex(items, {code: code});
         }
     }
 

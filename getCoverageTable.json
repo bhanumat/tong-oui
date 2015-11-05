@@ -437,20 +437,7 @@
               }
             },
             {
-              "defaultFlag": false,
-              "code": "4",
-              "description": "แผน 4",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
-              "price": 250,
-              "rateScaleValue": {
-                "sumInsure": [
-                  "8,000",
-                  "Max<br />8,000",
-                  "1,000/2,500"
-                ]
-              }
+
             },
             {
               "defaultFlag": false,

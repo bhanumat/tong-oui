@@ -3,7 +3,7 @@
         <h3>ผลประโยชน์ความคุ้มครอง</h3>
 
         <div class="plan-selection" ng-repeat="campaign in travelData.campaignList"
-             ng-show="campaign.campaignCode === travel.campaign.campaignCode" ng-init="campaignIndex=$index">
+             ng-show="campaign.campaignCode === travel.campaignCode" ng-init="campaignIndex=$index">
             <h4>เลือกความคุ้มครองหลัก</h4>
 
             <div class="plan-table row hidden-xs" id="plan"
@@ -150,7 +150,7 @@
                                     <div class="plan-table-top" equalizer="'group2'">
                                         <h5>
 											<span class="option-checkbox">
-												<span ng-class="{'icon-check': travel.campaign.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
+												<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
                                                       class=""></span>
 											</span>
                                             {{rateScale.price | number}}
@@ -194,7 +194,7 @@
                                     <div class="plan-table-top text-center">
                                         <h5>
 											<span class="option-checkbox">
-											<span ng-class="{'icon-check': travel.campaign.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
+											<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
                                                   class=""></span>
 											</span>
                                             {{rateScale.price|number}}
@@ -235,3 +235,4 @@
         </div>
     </div>
 </div>
+<pre>{{travel|json}}</pre>

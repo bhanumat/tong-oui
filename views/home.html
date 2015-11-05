@@ -41,8 +41,8 @@
                                     <div class="col-xs-6">
                                         <h6>
                                             <img src="../images/icon-big-primary-caret-down.png" alt=""> แผนประกัน
-                                            {{ travel.campaign.mandatory.topicDetail}}
-                                            <span ng-repeat="voluntary in travel.campaign.voluntaryList"
+                                            {{ travel.mandatory.topicDetail}}
+                                            <span ng-repeat="voluntary in travel.voluntaryList"
                                                   ng-show="voluntary.topicDetail">, {{voluntary.topicDetail}}
                                             </span>
                                         </h6>
@@ -59,7 +59,7 @@
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="insurance-details-heading summary-bar-heading">
                                         <h5>รายละเอียดการเดินทาง</h5>
-                                        <a ng-click="editSummarybar(summaryForm.$valid&&(travel.destinations.length));"
+                                        <a ng-click="editSummarybar(summaryForm.$valid&&(tempData.destinations.length));"
                                            style="cursor: pointer;" href="">
                                             <img src="images/icon-edit.png" alt="">
                                         </a>
@@ -71,14 +71,14 @@
                                                     <h6>จุดหมายปลายทาง</h6>
 
                                                     <p ng-hide="editingSummarybar" class="destination-list"><span
-                                                            ng-repeat="destination in travel.destinations">{{destination.country}}</span>
+                                                            ng-repeat="destination in tempData.destinations">{{destination.country}}</span>
                                                     </p>
 
                                                     <div ng-show="editingSummarybar" class="form-group"
                                                          style="margin-bottom: 10px;"
-                                                         ng-class="{ 'has-error' : !travel.destinations.length && summaryBarSubmitted }">
+                                                         ng-class="{ 'has-error' : !tempData.destinations.length && summaryBarSubmitted }">
                                                         <ol class="nya-bs-select form-control text-center"
-                                                            id="destination" disabled="travel.destinations.length == 10"
+                                                            id="destination" disabled="tempData.destinations.length == 10"
                                                             ng-class="{'filled': tempData.destination}"
                                                             ng-change="addDestination();"
                                                             ng-model="tempData.destination" name="destinations"
@@ -91,7 +91,7 @@
                                                             </li>
                                                         </ol>
                                                         <div class="help-block"
-                                                             ng-messages="{hasDestination:!travel.destinations.length}"
+                                                             ng-messages="{hasDestination:!tempData.destinations.length}"
                                                              ng-if="summaryBarSubmitted">
                                                             <p ng-message="hasDestination">
                                                                 กรุณาเลือกจุดหมายปลายทางอย่างน้อย 1 สถานที่</p>
@@ -99,9 +99,9 @@
                                                     </div>
                                                     <div class="row" style="margin-right: -6px;margin-left: -6px;">
                                                         <div ng-show="editingSummarybar"
-                                                             ng-repeat="destination in travel.destinations | limitTo: 10"
+                                                             ng-repeat="destination in tempData.destinations | limitTo: 10"
                                                              class="col-sm-6"
-                                                             ng-class="{'col-xs-12':travel.destinations.length < 4,'col-xs-6':travel.destinations.length > 3 }">
+                                                             ng-class="{'col-xs-12':tempData.destinations.length < 4,'col-xs-6':tempData.destinations.length > 3 }">
                                                             <div class="travel-destination">
                                                                 <span ng-bind="destination.country"></span>
                                                                 <button class="btn btn-tag"
@@ -212,9 +212,9 @@
                                                     <div ng-show="editingSummarybar" class="form-group">
                                                         <label class="sr-only" for="promotionCode">Promotion
                                                             Code</label>
-                                                        <input type="text" ng-model="tempData.promoCode"
+                                                        <input type="text" ng-model="travel.promoCode"
                                                                name="promotionCode" class="form-control"
-                                                               id="promotionCode" ng-blur="checkPromotionCodeChange()">
+                                                               id="promotionCode">
                                                     </div>
                                                     <p ng-show="travel.promoCode && !editingSummarybar"
                                                        ng-bind="travel.promoCode"></p>
@@ -235,8 +235,8 @@
                                             <div class="col-xs-12">
                                                 <h6>แผนประกันที่เลือก</h6>
 
-                                                <p>แผน {{ travel.campaign.mandatory.topicDetail}}
-                                                    <span ng-repeat="voluntary in travel.campaign.voluntaryList"
+                                                <p>แผน {{ travel.mandatory.topicDetail}}
+                                                    <span ng-repeat="voluntary in travel.voluntaryList"
                                                           ng-show="voluntary.topicDetail">, {{voluntary.topicDetail}}
                                                     </span>
                                                 </p>
