@@ -154,9 +154,9 @@
                                                       class=""></span>
 											</span>
                                             {{rateScale.price | number}}
-                                            <small>บาท</small>
+                                            <small ng-show="rateScale.price">บาท</small>
                                         </h5>
-                                        <p>ความคุ้มครองสูงสุด (บาท)</p>
+                                        <p ng-show="rateScale.price">ความคุ้มครองสูงสุด (บาท)</p>
                                     </div>
                                     <div collapse="isCollapsed($parent.$index)">
                                         <div class="plan-table-row" equalizer="'options1-row{{$index}}'"
@@ -182,7 +182,7 @@
                                  alt="">
                             <h5>{{voluntary.topicDetail}}</h5>
 
-                            <p>ความคุ้มครองสูงสุด (บาท)</p>
+                            <p ngo-show="voluntary.topicDetail">ความคุ้มครองสูงสุด (บาท)</p>
                         </div>
                     </div>
                     <div class="plan-table-content col-xs-12">
@@ -198,7 +198,7 @@
                                                   class=""></span>
 											</span>
                                             {{rateScale.price|number}}
-                                            <small>บาท</small>
+                                            <small ng-show="rateScale.price">บาท</small>
                                         </h5>
                                     </div>
                                 </div>

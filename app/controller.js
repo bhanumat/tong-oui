@@ -50,7 +50,7 @@
         //Travel Model to post back to API
         $scope.travel = {};
 
-        $scope.tempData = {};
+        $scope.tempData = {passengers:1};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
         $scope.tempData.destinations = [];
