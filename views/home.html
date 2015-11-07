@@ -59,7 +59,7 @@
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="insurance-details-heading summary-bar-heading">
                                         <h5>รายละเอียดการเดินทาง</h5>
-                                        <a ng-click="editSummarybar(summaryForm.$valid&&(tempData.destinations.length));"
+                                        <a ng-click="editSummaryBar(summaryForm.$valid&&(tempData.destinations.length));"
                                            style="cursor: pointer;" href="">
                                             <img src="images/icon-edit.png" alt="">
                                         </a>
@@ -214,7 +214,7 @@
                                                             Code</label>
                                                         <input type="text" ng-model="travel.promoCode"
                                                                name="promotionCode" class="form-control"
-                                                               id="promotionCode">
+                                                               id="promotionCode" ng-blur="checkPromotionCodeChange()">
                                                     </div>
                                                     <p ng-show="travel.promoCode && !editingSummarybar"
                                                        ng-bind="travel.promoCode"></p>
