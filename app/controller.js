@@ -149,7 +149,7 @@
 
         $scope.getPriceRate = function (plan) {
             var price = 0;
-            if (plan && plan.rateScale) {//if any
+            if (plan && plan.rateScale && plan.rateScale.price) {//if any
                 price = plan.rateScale.price;
             }
             return price;

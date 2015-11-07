@@ -147,14 +147,14 @@
                                      ng-class="{'selected':isRateScaleSameAsSelected(rateScale),'hidePlan': hideRateScale($index)}"
                                      ng-repeat="rateScale in voluntary.rateScaleList"
                                      ng-click="voluntaryToggle(campaignIndex, voluntaryIndex, $index)">
-                                    <div class="plan-table-top" equalizer="'group2'">
+                                    <div class="plan-table-top" equalizer="'group2'" ng-show="rateScale.price">
                                         <h5>
 											<span class="option-checkbox">
 												<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
                                                       class=""></span>
 											</span>
                                             {{rateScale.price | number}}
-                                            <small ng-show="rateScale.price">บาท</small>
+                                            <small>บาท</small>
                                         </h5>
                                         <p ng-show="rateScale.price">ความคุ้มครองสูงสุด (บาท)</p>
                                     </div>
@@ -191,14 +191,14 @@
                                  ng-class="{'col-xs-12':tempData.voluntaryCollapse[voluntaryIndex],'col-xs-3':!tempData.voluntaryCollapse[voluntaryIndex]}">
                                 <div class="plan selected" ng-repeat="rateScale in voluntary.rateScaleList"
                                      ng-click="voluntaryToggle(campaignIndex, voluntaryIndex, $index)">
-                                    <div class="plan-table-top text-center">
+                                    <div class="plan-table-top text-center" ng-show="rateScale.price">
                                         <h5>
 											<span class="option-checkbox">
 											<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.code===rateScale.code}"
                                                   class=""></span>
 											</span>
                                             {{rateScale.price|number}}
-                                            <small ng-show="rateScale.price">บาท</small>
+                                            <small>บาท</small>
                                         </h5>
                                     </div>
                                 </div>
