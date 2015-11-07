@@ -68,22 +68,6 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
-        //QueryService.query('GET', 'NewTravel').then(function (response) {
-        //    $scope.travelData = response.data;
-        //    $scope.travel = {
-        //        selectedPlan: $scope.travelData.quotation.defaultPlanid,
-        //        flightSecured: $scope.travelData.flightsecure.defaultTick,
-        //        propertySafe: $scope.travelData.propertysafe.defaultTick,
-        //        destinations: [],
-        //        passengers: 1
-        //    };
-        //
-        //    $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
-        //    $scope.isSchengen();
-        //}, function (response) {
-        //});
-
-        //TODO: temporary commented, will be uncomment later
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
@@ -107,6 +91,7 @@
             }
 
         });
+
         $scope.$watch('travel.endDate', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.travelDateChanged = true;
@@ -260,6 +245,7 @@
                 });
             }
         };
+
         self.initDefaultCampaign = function () {
             var campaigns = $scope.travelData.campaignList;
             if (!$scope.travel.mandatory) {
@@ -725,7 +711,6 @@
             };
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
-                    //TODO: Uncomment below when API is ready.
                     $scope.travelData.campaignList = response.data.campaignList;
                     self.initDefaultCampaign();
                     deferred.resolve(response);
