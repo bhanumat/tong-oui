@@ -495,9 +495,7 @@
             $scope.formStepSubmitted = true;
 
             if (isFormValid) {
-                if ($scope.tempData.promoCode) {
-                    $scope.travel.promoCode = $scope.tempData.promoCode;
-
+                if ($scope.travel.promoCode) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
                         self.getCoverageTable().then(function () {
