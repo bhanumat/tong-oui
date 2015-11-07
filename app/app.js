@@ -19,13 +19,15 @@
     angular
         .module('cignaApp', [
             'ngRoute', 'ngAnimate', 'ui.bootstrap', 'sticky', 'duParallax', 'duScroll', 'nya.bootstrap.select', 'ui.router', 'ngMessages',
-            'ngEqualizer', 'ngSanitize', 'ngMask', 'angulartics', 'angulartics.google.tagmanager', 'dialogs.main'
+            'ngEqualizer', 'ngSanitize', 'ngMask', 'angulartics', 'angulartics.google.tagmanager', 'dialogs.main',
+            'pascalprecht.translate', 'dialogs.default-translations'
         ])
-        .config(config);
+        .config(routingConfig)
+        .config(dialogConfig);
 
     // safe dependency injection
     // this prevents minification issues
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$compileProvider', '$analyticsProvider'];
+    routingConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$compileProvider', '$analyticsProvider'];
     /**
      * App routing
      *
@@ -33,7 +35,7 @@
      * into separate file
      *
      */
-    function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider, $analyticsProvider) {
+    function routingConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $compileProvider, $analyticsProvider) {
 
         $locationProvider.html5Mode(false);
         // routes
@@ -68,6 +70,35 @@
 
         $httpProvider.interceptors.push('authInterceptor');
 
+    }
+
+    /**
+     * Dialog configuration
+     * dialogConfig
+     * Reference from https://github.com/m-e-conroy/angular-dialog-service
+     */
+    dialogConfig.$inject = ['dialogsProvider', '$translateProvider'];
+    function dialogConfig(dialogsProvider, $translateProvider) {
+        dialogsProvider.useBackdrop('static');
+        $translateProvider.translations('th', {
+            DIALOGS_ERROR: "Error",
+            DIALOGS_ERROR_MSG: "พบข้อผิดพลาด",
+            DIALOGS_CLOSE: "ปิด",
+            DIALOGS_PLEASE_WAIT: "โปรดรอ",
+            DIALOGS_PLEASE_WAIT_ELIPS: "โปรดรอ...",
+            DIALOGS_PLEASE_WAIT_MSG: "โปรดรอซักครู่.",
+            DIALOGS_PERCENT_COMPLETE: "% เรียบร้อย",
+            DIALOGS_NOTIFICATION: "Notification",
+            DIALOGS_NOTIFICATION_MSG: "แจ้งเพื่อทราบ.",
+            DIALOGS_CONFIRMATION: "Confirmation",
+            DIALOGS_CONFIRMATION_MSG: "ยืนยัน.",
+            DIALOGS_OK: "ตกลง",
+            DIALOGS_YES: "ใช่",
+            DIALOGS_NO: "ไม่ใช่"
+        });
+
+        $translateProvider.preferredLanguage('th');
+        $translateProvider.useSanitizeValueStrategy(null);
     }
 
 
