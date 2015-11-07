@@ -8694,7 +8694,24 @@ div.easy_social_box.vertical {
 .section-heading h6 {
     color: #FFFFFF;
 }
+
+.modal-body {
+    color:#000000;
+}
 .modal-title {
     font-size: 22px;
     height: 24px;
+    color:#ffffff;
+}
+
+.dialog-header-notify {
+    background-color:#188ccc;
+}
+
+.dialog-header-confirm {
+    background-color:#188ccc;
+}
+
+.dialog-header-error {
+    background-color:#f68621;
 }

@@ -477,7 +477,7 @@
                     deferred.reject(response);
 
                     $scope.travel.promoCode = null;
-                    dialogs.notify('Warning', MESSAGES['promotion_reached_max_usage'], {
+                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage'], {
                         backdrop: 'static'
                     });
                 } else {
