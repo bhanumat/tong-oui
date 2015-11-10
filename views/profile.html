@@ -1,19 +1,20 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
     <h3>ข้อมูลผู้ขอประกัน</h3>
-    <div class="profileGroup" ng-repeat="profile in range(1,travel.passengers)" ng-show="tempData.passengersProfile[profile].stage == 'saved' || tempData.passengersProfile[profile].stage == 'edit'" ng-init="outerIndex=$index" >
+    <div class="profileGroup" ng-repeat="application in travel.applicationList" ng-init="outerIndex=$index" >
+      <div ng-init="profile = outerIndex" ></div>
       <ng-form name="profileForm" novalidate>
-      <div class="profile" ng-class="{'edit':tempData.passengersProfile[profile].stage == 'edit','saved':tempData.passengersProfile[profile].stage == 'saved'}">
+      <div class="profile" ng-class="{'edit':tempData.passengersProfile[outerIndex].stage == 'edit','saved':tempData.passengersProfile[outerIndex].stage == 'saved'}">
         <div class="row">
           <div class="col-xs-12">
             <div class="profile-add-button" ng-click="changeStage(profile,'edit',profileForm.$valid);">
               <h4>
               <span class="glyphicon glyphicon-plus-sign"></span>
-              ผู้ขอประกันคนที่ {{profile}}
+              ผู้ขอประกันคนที่ {{outerIndex + 1}}
               </h4>
             </div>
             <div class="profile-header">
-              <h4>ผู้ขอประกันคนที่ {{profile}} <div class="right" ng-if="tempData.passengersProfile[profile].stage == 'saved'"><span ng-click="changeStage(profile,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(profile,'reset',profileForm.$valid);"><img src="images/icon-trash.png" alt=""></span></div></h4>
+              <h4>ผู้ขอประกันคนที่ {{outerIndex + 1}} <div class="right" ng-if="tempData.passengersProfile[profile].stage == 'saved'"><span ng-click="changeStage(profile,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(profile,'reset',profileForm.$valid);"><img src="images/icon-trash.png" alt=""></span></div></h4>
             </div>
             <div ng-if="tempData.passengersProfile[profile].stage == 'edit'" class="profile-details">
               <div class="profile-details-section">
@@ -218,8 +219,11 @@
                         </div>
                         <div class="col-xs-12 col-sm-8">
                           <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
-                            <span ng-class="{'active':tempData.passengersProfile[profile].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger,profile)" ng-repeat="passenger in range(1,profile-1)">
-                              {{passenger}}
+                            <span ng-repeat="passenger in range(0, profile)" >
+                              <span ng-class="{'active':tempData.passengersProfile[profile].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger, profile)"
+                                    ng-if="passenger != profile" >
+                                {{passenger + 1}}
+                              </span>
                             </span>
                           </p>
                         </div>
@@ -317,7 +321,7 @@
                             <div class="col-xs-12">
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.englishAddress.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishAddress.$touched) }">
                                 <label class="sr-only" for="englishAddress">ที่อยู่ (ภาษาอังกฤษเพื่อยื่นขอวีซ่า)</label>
-                                <input ng-model="travel.passengersProfile[profile].addressData.englishAddress" class="form-control" ng-minlength="1" ng-maxlength="80" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษเพื่อยื่นขอวีซ่า)" ng-pattern="/^[^ก-๙]+$/" required>
+                                <input ng-model="travel.applicationList[outerIndex].address.addrEn" class="form-control" ng-minlength="1" ng-maxlength="80" type="text" name="englishAddress" placeholder="ที่อยู่ (ภาษาอังกฤษเพื่อยื่นขอวีซ่า)" ng-pattern="/^[^ก-๙]+$/" required>
                                 <div class="help-block" ng-messages="profileForm.englishAddress.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.englishAddress.$touched">
                                   <p ng-message="required">กรุณากรอกที่อยู่ (ภาษาอังกฤษ)</p>
                                   <p ng-message="pattern">กรุณากรอกที่อยู่เป็นภาษาอังกฤษ</p>
@@ -679,3 +683,4 @@
     </div>
   </div>
 </div>
+<pre>{{travel|json}}</pre>

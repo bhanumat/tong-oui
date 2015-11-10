@@ -42,10 +42,10 @@
         };
         $scope.formStepSubmitted = false;
         $scope.tempData.currentState = $location.path();
-        $scope.tempData.passengersProfile = [];
-        $scope.tempData.passengersProfile[1] = {};
-        $scope.tempData.passengersProfile[1].stage = "edit";
-        $scope.tempData.passengersProfile[1].isManualAddress = true;
+        //$scope.tempData.passengersProfile = [];
+        //$scope.tempData.passengersProfile[1] = {};
+        //$scope.tempData.passengersProfile[1].stage = "edit";
+        //$scope.tempData.passengersProfile[1].isManualAddress = true;
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
@@ -124,10 +124,10 @@
             $scope.travel.tokenCode = response.data.tokenCode;
         });
 
-        QueryService.query('POST', 'submitOrder').then(function (response) {
-            $scope.travel.applicationList = response.data.applicationList;
-        }, function (response) {
-        });
+        //QueryService.query('POST', 'submitOrder').then(function (response) {
+            //$scope.travel.applicationList = response.data.applicationList;
+        //}, function (response) {
+        //});
 
         $scope.$watch('travel.startDate', function () {
             if ($location.path() != '/insurance/destination') {
@@ -142,11 +142,38 @@
             }
         });
 
-        $scope.$watch('travel.passengers', function () {
+        $scope.$watch('travel.passengers', function (newValue) {
+            console.log('$watch travel.passengers : '+newValue);
             if ($location.path() == '/insurance/payment') {
                 $location.path('/insurance/profile');
                 $location.replace();
             }
+            if(!newValue)
+                return;
+            if(!$scope.travel.applicationList){
+                $scope.travel.applicationList = [];
+                $scope.tempData.passengersProfile = [];
+                angular.forEach($scope.range(1, newValue), function(value, index){
+                    $scope.travel.applicationList.push({});
+                    $scope.tempData.passengersProfile.push({stage : 'edit'});
+                });
+            } else{
+                var applicationLength = $scope.travel.applicationList.length;
+                var passengersArray = $scope.range(0, newValue-1);
+                var applicationArray = $scope.range(0, $scope.travel.applicationList.length-1);
+                var differenceArray = _.difference(applicationArray, passengersArray);
+                console.log(differenceArray);
+                if(applicationLength > newValue) {
+                    $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
+                    $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
+                } else if(applicationLength < newValue) {
+                    angular.forEach($scope.range(1, (newValue-applicationLength)), function(value, index) {
+                        $scope.travel.applicationList.push({});
+                        $scope.tempData.passengersProfile.push({stage : 'edit'});
+                    });
+                }
+            }
+            $scope.tempData.passengersProfile[0].isManualAddress = true;
         });
 
         $scope.$watch('travel.country', function () {
@@ -353,17 +380,19 @@
         };
 
         $scope.copyPassengerAddress = function (templateIndex, targetIndex) {
-            if (!$scope.travel.passengersProfile[targetIndex]) {
-                $scope.travel.passengersProfile[targetIndex] = {};
+            console.log(templateIndex+ ':' + targetIndex);
+            if (!$scope.travel.applicationList[targetIndex]) {
+                $scope.travel.applicationList[targetIndex] = {};
             }
             $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
-            $scope.travel.passengersProfile[targetIndex].addressData = {};
-            $scope.travel.passengersProfile[targetIndex].addressData = $scope.travel.passengersProfile[templateIndex].addressData;
+            //$scope.travel.applicationList[targetIndex].address = {};
+            $scope.travel.applicationList[targetIndex].address = angular.copy($scope.travel.applicationList[templateIndex].address);
         };
 
         $scope.addAddress = function (index) {
             $scope.tempData.passengersProfile[index].isManualAddress = true;
-            $scope.travel.passengersProfile[index].addressData = {};
+            if(!$scope.travel.applicationList[index].address)
+                $scope.travel.applicationList[index].address = {};
         };
 
         $scope.addBeneficiary = function (index, validate) {
