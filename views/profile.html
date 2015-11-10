@@ -1,3 +1,4 @@
+<form name="insuranceForm" novalidate>
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
     <h3>ข้อมูลผู้ขอประกัน</h3>
@@ -132,7 +133,7 @@
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.birthDate.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.birthDate.$touched) }">
                           <label class="sr-only" for="birthDate">วัน / เดือน / ปีเกิด</label>
                           <input type="text" name="birthDate" birth-date-calendar="1" index="{{outerIndex}}" ng-model="travel.applicationList[outerIndex].dateOfBirth" placeholder="วัน / เดือน / ปีเกิด" class="form-control" required/>
-                          <div class="help-block" ng-messages="profileForm.birthDate.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.birthDate.$touched">
+                          <div class="help-block" ng-messages="profileForm.birthDate.$error" ng-if="tempData.passengersProfile[outerIndex].profileFormSubmitted || profileForm.birthDate.$touched">
                             <p ng-message="required">กรุณาระบุ วัน / เดือน / ปีเกิด</p>
                           </div>
                         </div>
@@ -150,22 +151,6 @@
                           </ol>
                           <div class="help-block" ng-messages="profileForm.gender.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.gender.$touched">
                             <p ng-message="required">กรุณเลือกเพศ</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xs-6 col-sm-3">
-                        <div class="form-group" ng-class="{ 'has-error' : profileForm.occupation.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.occupation.$touched) }">
-                          <label class="sr-only" for="occupation">อาชีพ</label>
-                          <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[profile].occupation}" ng-model="travel.applicationList[outerIndex].occupation" name="occupation" title="อาชีพ" data-size="5" required>
-                            <li nya-bs-option="occupation in travelData.occupationList | orderBy:'code'" data-value="occupation.code">
-                              <!-- the text content of anchor element will be used for search -->
-                              <a>
-                                {{ occupation.thaiName }}
-                              </a>
-                            </li>
-                          </ol>
-                          <div class="help-block" ng-messages="profileForm.occupation.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.occupation.$touched">
-                            <p ng-message="required">กรุณาเลือกอาชีพ</p>
                           </div>
                         </div>
                       </div>
@@ -578,14 +563,6 @@
                     </div>
                     <div class="row">
                       <div class="col-xs-6">
-                        <p>อาชีพ</p>
-                      </div>
-                      <div class="col-xs-6">
-                        <p>{{travel.applicationList[outerIndex].occupation}}</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-6">
                         <p>อีเมล</p>
                       </div>
                       <div class="col-xs-6">
@@ -684,3 +661,4 @@
   </div>
 </div>
 <pre>{{travel|json}}</pre>
+  </form>

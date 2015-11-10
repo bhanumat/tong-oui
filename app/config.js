@@ -11,7 +11,8 @@
     angular
         .module('cignaApp')
         .constant('CONSTANTS', {
-            'API_URL': 'http://cigna.localhost:8080/'
+            //'API_URL': 'http://cigna.localhost:8080/'
+            'API_URL': '/'
         })
         .constant('MESSAGES', {
             '001': 'รหัสโปรโมชั่นไม่ถูกต้อง/หมดอายุ กรุณาตรวจสอบรายละเอียดข้อมูลที่กรอก',
@@ -23,7 +24,6 @@
             'timeout':'ขออภัย ท่านรายการเกินเวลาที่กำหนด'
         })
         .constant('PAYMENT_INFO', {
-            //'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/payment/payForm.jsp',
             'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
             //'paymentUrl':'http://cigna.localhost:8080/payment.php',
             'merchantId':'1204',
