@@ -381,6 +381,7 @@
                 if (validate) {
                     $scope.beneficiaryFormSubmitted = false;
                     if ($scope.tempData.passengersProfile[index].beneficiaries < 3) {
+                        $scope.travel.applicationList[index].beneficiaryList.push({});
                         $scope.tempData.passengersProfile[index].beneficiaries += 1;
                     }
                 }
@@ -389,22 +390,19 @@
                 }
             }
             else {
+                $scope.travel.applicationList[index].beneficiaryList = [{}];
                 $scope.tempData.passengersProfile[index].beneficiaries = 1;
             }
         };
 
-        $scope.deleteBeneficiary = function (profileId, beneficiaryId) {
+        $scope.deleteBeneficiaryList = function (profileIdx, beneficiaryIdx) {
             $scope.tempData.passengersProfile[profileId].beneficiaries -= 1;
-            for (var i = beneficiaryId; i < 3; i++) {
-                if ($scope.travel.passengersProfile[profileId].beneficiaries[i + 1]) {
-                    $scope.travel.passengersProfile[profileId].beneficiaries[i] = $scope.travel.passengersProfile[profileId].beneficiaries[i + 1];
-                    $scope.travel.passengersProfile[profileId].beneficiaries[i + 1] = {};
+                if ($scope.travel.applicationList[profileIdx].beneficiaryList) {
+                    $scope.travel.applicationList[profileIdx].beneficiaryList.splice(beneficiaryIdx, 1);
                 }
                 else {
-                    $scope.travel.passengersProfile[profileId].beneficiaries[i] = {};
+                    $scope.travel.applicationList[profileIdx].beneficiaryList.push({});
                 }
-            }
-            ;
             $scope.beneficiaryFormSubmitted = false;
         };
 
