@@ -21,6 +21,8 @@
 
         // 'controller as' syntax
         var self = this;
+        var sessionTimeWarningPromise;
+        var sessionTimePromise;
 
         ////////////  function definitions
 
@@ -68,12 +70,36 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
+        self.initSessionTimer = function () {
+            var timeout = SessionStorage.get('insurance.timeout');
+            var warningDialog;
+            sessionTimeWarningPromise = $timeout(function () {
+                warningDialog = dialogs.notify('Warning', MESSAGES['timeout_warning']);
+            }, (timeout - 5) * 60000);
+            sessionTimePromise = $timeout(function () {
+                warningDialog.close();
+                var dlg = dialogs.error('Error', MESSAGES['timeout']);
+                dlg.result.then(function(){
+                    $location.path('/insurance/destination');
+                    $location.replace();
+                }, function(){
+                    $location.path('/insurance/destination');
+                    $location.replace();
+                });
+            }, (timeout) * 60000);
+        };
+
+        self.resetTimer = function () {
+            $timeout.cancel(sessionTimeWarningPromise);
+            $timeout.cancel(sessionTimePromise);
+            self.initSessionTimer();
+        };
+
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
+            SessionStorage.update('insurance.timeout', $scope.travelData.timeOut);
+            self.initSessionTimer();
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
-            $scope.isSchengen();
-            $scope.isRequiredEng();
-        }, function (response) {
         });
 
         QueryService.query('POST', 'getToken').then(function (response) {
@@ -500,6 +526,7 @@
                 promoCode: $scope.travel.promoCode
             };
             QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
+                self.resetTimer()
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
 
@@ -738,6 +765,7 @@
             };
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
+                    self.resetTimer();
                     $scope.travelData.campaignList = response.data.campaignList;
                     self.initDefaultCampaign();
                     deferred.resolve(response);
