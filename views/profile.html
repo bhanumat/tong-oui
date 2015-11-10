@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
     <h3>ข้อมูลผู้ขอประกัน</h3>
-    <div class="profileGroup" ng-repeat="profile in travel.applicationList" ng-init="outerIndex=$index" >
+    <div class="profileGroup" ng-repeat="application in travel.applicationList" ng-init="outerIndex=$index" >
       <div ng-init="profile = outerIndex" ></div>
       <ng-form name="profileForm" novalidate>
       <div class="profile" ng-class="{'edit':tempData.passengersProfile[outerIndex].stage == 'edit','saved':tempData.passengersProfile[outerIndex].stage == 'saved'}">
