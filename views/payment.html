@@ -1,174 +1,240 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-		<div class="payment">
-			<div class="payment-header">
-				<div class="row">
-					<div class="col-xs-12 text-center"><h4>ข้อมูลการชำระเงิน</h4></div>
-				</div>
-			</div>
-			<div class="payment-details">
-				<div class="row">
-					<div class="col-xs-12 col-sm-10 col-sm-offset-1" >
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cardnumber.$invalid && (formStepSubmitted || insuranceForm.cardnumber1.$touched || insuranceForm.cardnumber2.$touched || insuranceForm.cardnumber3.$touched || insuranceForm.cardnumber4.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">หมายเลขบัตรเครดิต :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-3">
-										<input type="text" name="cardnumber1" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber1" class="cardnumber form-control text-center">
-									</div>
-									<div class="col-xs-3">
-										<input type="text" name="cardnumber2" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber2"  class="cardnumber form-control text-center">
-									</div>
-									<div class="col-xs-3">
-										<input type="text" name="cardnumber3" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber3"  class="cardnumber form-control text-center">
-									</div>
-									<div class="col-xs-3">
-										<input type="text" name="cardnumber4" mask="9999" maxlength="4" restrict="reject" clean="true" ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4" ng-model="tempData.paymant.cardnumber4"  class="cardnumber form-control text-center">
-									</div>
-									<input type="hidden" name="cardnumber" ng-model="travel.paymant.cardnumber" ng-pattern="/^\d{16}$/" required>
-									<div class="col-xs-12">
-										<div class="help-block" ng-messages="insuranceForm.cardnumber.$error" ng-if="insuranceForm.cardnumber.$invalid && (formStepSubmitted || insuranceForm.cardnumber1.$touched || insuranceForm.cardnumber2.$touched || insuranceForm.cardnumber3.$touched || insuranceForm.cardnumber4.$touched)">
-					                        <p ng-message="required">กรุณากรอกเลขบัตรเครดิท</p>
-					                        <p ng-message="pattern">กรุณากรอกเลขบัตรเครดิทที่ถูกต้อง</p>
-					                    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cvv2.$invalid && (formStepSubmitted || insuranceForm.cvv2.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">รหัสรักษาความปลอดภัย (CVV2) :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-6">
-										<input type="text" name="cvv2" mask="9999?" restrict="reject" clean="true" ng-model="travel.paymant.cvv2" class="form-control" required ng-pattern="/^[0-9][0-9][0-9][0-9]?$/">
-										<div class="help-block" ng-messages="insuranceForm.cvv2.$error" ng-if="insuranceForm.cvv2.$invalid && (formStepSubmitted || insuranceForm.cvv2.$touched)">
-				                            <p ng-message="required">กรุณากรอกเลข CVV2</p>
-				                            <p ng-message="pattern">กรุณากรอกเลข CVV2 ที่ถูกต้อง</p>
-				                        </div>
-									</div>
-									<div class="col-xs-6">
-										<p class="control-label" ng-click="showCvv2 = !showCvv2" style="cursor:pointer;">CVV2 คืออะไร?</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group">
-							<div>
-								<p class="col-xs-12 col-sm-6 control-label">วันหมดอายุ (เดือน/ปี) :</p>
-							</div>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-6">
-										<div class="form-group" style="margin-bottom: 0;" ng-class="{ 'has-error' : (insuranceForm.expiryMonth.$invalid && (formStepSubmitted || insuranceForm.expiryMonth.$touched)) }">
-											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryMonth}" ng-model="travel.paymant.expiryMonth" name="expiryMonth" title="เดือน" data-size="5" required>
-												<li nya-bs-option="expiryMonth in range(1,12)">
-													<!-- the text content of anchor element will be used for search -->
-													<a>
-														{{ expiryMonth }}
-													</a>
-												</li>
-											</ol>
-											<div class="help-block" ng-messages="insuranceForm.expiryMonth.$error" ng-if="insuranceForm.expiryMonth.$invalid && (formStepSubmitted || insuranceForm.expiryMonth.$touched)">
-							                    <p ng-message="required">กรุณาเลือก เดือน ที่หมดอายุ</p>
-							                </div>
-										</div>
-									</div>
-									<div class="col-xs-6">
-										<div class="form-group" style="margin-bottom: 0;" ng-class="{ 'has-error' : (insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)) }"> 
-											<ol class="nya-bs-select form-control" ng-class="{'filled': travel.paymant.expiryYear}" ng-model="travel.paymant.expiryYear" name="expiryYear" title="ปี" data-size="5" required>
-												<li nya-bs-option="expiryYear in range(2015,2115)">
-													<!-- the text content of anchor element will be used for search -->
-													<a>
-														{{ expiryYear }}
-													</a>
-												</li>
-											</ol>
-											<div class="help-block" ng-messages="insuranceForm.expiryYear.$error" ng-if="insuranceForm.expiryYear.$invalid && (formStepSubmitted || insuranceForm.expiryYear.$touched)">
-							                    <p ng-message="required">กรุณาเลือก ปี ที่หมดอายุ</p>
-							                </div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cardholdername.$invalid && (formStepSubmitted || insuranceForm.cardholdername.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">ชื่อผู้ถือบัตร :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-12">
-										<input type="text" style="text-transform: uppercase;" name="cardholdername" ng-change="travel.paymant.cardholdername = travel.paymant.cardholdername.toUpperCase();" ng-model="travel.paymant.cardholdername" class="form-control" ng-minlength="3" ng-maxlength="40"  mask="@?s?" validate="false"  repeat="40" restrict="reject" clean="true" ng-pattern="/^[a-zA-Z]+[ ]?[a-zA-Z]*$/" required>
-										<div class="help-block" ng-messages="insuranceForm.cardholdername.$error" ng-if="insuranceForm.cardholdername.$invalid && (formStepSubmitted || insuranceForm.cardholdername.$touched)">
-							                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตร</p>
-							                <p ng-message="pattern">กรุณากรอกชื่อผู้ถือบัตรที่ถูกต้อง</p>
-							                <p ng-message="minlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
-                              				<p ng-message="maxlength">กรุณากรอกชื่อผู้ถือบัตร 3 - 40 ตัวอักษร</p>
-							            </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-group" ng-class="{ 'has-error' : insuranceForm.cardholderPhoneNumber.$invalid && (formStepSubmitted || insuranceForm.cardholderPhoneNumber.$touched) }">
-							<p class="col-xs-12 col-sm-6 control-label">เบอร์โทรศัพท์ :</p>
-							<div class="col-xs-12 col-sm-6" style="padding:0;">
-								<div class="row">
-									<div class="col-xs-12">
-										<input class="form-control" ng-model="travel.paymant.cardholderPhoneNumber" mask="(099) 999-9999" restrict="reject" clean="true" type="text" name="cardholderPhoneNumber" placeholder="เบอร์โทรศัพท์" required ng-pattern="/^\d{10}$/">
-										<div class="help-block" ng-messages="insuranceForm.cardholderPhoneNumber.$error" ng-if="insuranceForm.cardholderPhoneNumber.$invalid && (formStepSubmitted || insuranceForm.cardholderPhoneNumber.$touched)">
-							                <p ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
-                            				<p ng-message="pattern">กรุณากรอกเบอร์โทรศัพท์เป็นตัวเลข 10 หลัก</p>
-							            </div>
-									</div>
-								</div>
-							</div>
-						</div>
+<form name="paymentForm" action="{{action}}" name="paymentForm" id="insurance-form"
+      ng-submit="submitOrder($event,paymentForm.$valid)" novalidate>
+    <input type="hidden" name="merchantId" value="{{paymentInfo.merchantId}}"/>
+    <input type="hidden" name="amount" value="{{travel.premiumAmount}}"/>
+    <input type="hidden" name="orderRef" value="{{tempData.referenceId}}"/>
+    <input type="hidden" name="currCode" value="{{paymentInfo.currCode}}"/>
+    <input type="hidden" name="pMethod" value="{{tempData.cardType|uppercase}}"/>
+    <input type="hidden" name="cardNo" value="{{travel.paymant.cardnumber}}"/>
+    <input type="hidden" name="securityCode" value="{{travel.paymant.cvv2}}"/>
+    <input type="hidden" name="cardHolder" value="{{travel.paymant.cardholdername}}"/>
+    <input type="hidden" name="epMonth" value="{{travel.paymant.expiryMonth}}"/>
+    <input type="hidden" name="epYear" value="{{travel.paymant.expiryYear}}"/>
+    <input type="hidden" name="successUrl" value="{{paymentInfo.successUrl}}"/>
+    <input type="hidden" name="failUrl" value="{{paymentInfo.failUrl}}"/>
+    <input type="hidden" name="cancelUrl" value="{{paymentInfo.cancelUrl}}"/>
+    <input type="hidden" name="payType" value="{{paymentInfo.payType}}"/>
+    <input type="hidden" name="lang" value="{{paymentInfo.lang}}"/>
+    <input type="hidden" name="remark" value="{{paymentInfo.remark}}"/>
 
-						<div class="row">
-							<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-								<div class="row">
-									<div class="col-xs-4 text-center" style="padding:0;">
-										<div class="row">
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-visa.png" alt="" style="margin-top: 10px;">
-											</div>
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-verifled-visa.png" alt="" style="margin-top: 10px;">
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-4 text-center" style="padding:0;">
-										<div class="row">
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-mastercard.png" alt="" style="margin-top: 10px;">
-											</div>
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-verifled-mastercard.png" alt="" style="margin-top: 10px;">
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-4 text-center" style="padding:0;">
-										<div class="row">
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-jcb.png" alt="" style="margin-top: 10px;">
-											</div>
-											<div class="col-xs-10 col-sm-6" style="padding:0;">
-												<img src="../images/icon-verifled-jcb.png" alt="" style="margin-top: 10px;">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="cvv2-lightbox"  ng-show="showCvv2" ng-click="showCvv2 = !showCvv2">
-				<img style="padding: 30px;background-color: #fff;" src="images/cvv2.png" alt="">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center" style="padding: 0;">
-				<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToOrder(insuranceForm.$valid)" class="btn btn-super btn-block step-submit-button"><span>ชำระเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div class="payment">
+                <div class="payment-header">
+                    <div class="row">
+                        <div class="col-xs-12 text-center"><h4>ข้อมูลการชำระเงิน</h4></div>
+                    </div>
+                </div>
+                <div class="payment-details">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                            <div class="row form-group"
+                                 ng-class="{ 'has-error' : paymentForm.cardnumber.$invalid && (formStepSubmitted || paymentForm.cardnumber1.$touched || paymentForm.cardnumber2.$touched || paymentForm.cardnumber3.$touched || paymentForm.cardnumber4.$touched) }">
+                                <p class="col-xs-12 col-sm-6 control-label">หมายเลขบัตรเครดิต :</p>
+
+                                <div class="col-xs-12 col-sm-6" style="padding:0;">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <input type="text" name="cardnumber1" mask="9999" maxlength="4"
+                                                   restrict="reject" clean="true"
+                                                   ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4"
+                                                   ng-model="tempData.paymant.cardnumber1"
+                                                   class="cardnumber form-control text-center">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" name="cardnumber2" mask="9999" maxlength="4"
+                                                   restrict="reject" clean="true"
+                                                   ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4"
+                                                   ng-model="tempData.paymant.cardnumber2"
+                                                   class="cardnumber form-control text-center">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" name="cardnumber3" mask="9999" maxlength="4"
+                                                   restrict="reject" clean="true"
+                                                   ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4"
+                                                   ng-model="tempData.paymant.cardnumber3"
+                                                   class="cardnumber form-control text-center">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" name="cardnumber4" mask="9999" maxlength="4"
+                                                   restrict="reject" clean="true"
+                                                   ng-change="travel.paymant.cardnumber = tempData.paymant.cardnumber1 + tempData.paymant.cardnumber2 + tempData.paymant.cardnumber3 + tempData.paymant.cardnumber4"
+                                                   ng-model="tempData.paymant.cardnumber4"
+                                                   class="cardnumber form-control text-center">
+                                        </div>
+                                        <input type="hidden" name="cardnumber" ng-model="travel.paymant.cardnumber"
+                                               ng-pattern="validCardType" required>
+
+                                        <div class="col-xs-12">
+                                            <div class="help-block" ng-messages="paymentForm.cardnumber.$error"
+                                                 ng-if="paymentForm.cardnumber.$invalid && (formStepSubmitted || paymentForm.cardnumber1.$touched || paymentForm.cardnumber2.$touched || paymentForm.cardnumber3.$touched || paymentForm.cardnumber4.$touched)">
+                                                <p ng-message="required">กรุณากรอกเลขบัตรเครดิท</p>
+
+                                                <p ng-message="pattern">กรุณากรอกเลขบัตรเครดิทที่ถูกต้อง</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group"
+                                 ng-class="{ 'has-error' : paymentForm.cvv2.$invalid && (formStepSubmitted || paymentForm.cvv2.$touched) }">
+                                <p class="col-xs-12 col-sm-6 control-label">รหัสรักษาความปลอดภัย (CVV2/CVC2) :</p>
+
+                                <div class="col-xs-12 col-sm-6" style="padding:0;">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="text" name="cvv2" mask="9999?" restrict="reject" clean="true"
+                                                   ng-model="travel.paymant.cvv2" class="form-control" required
+                                                   ng-pattern="/^[0-9][0-9][0-9][0-9]?$/">
+
+                                            <div class="help-block" ng-messages="paymentForm.cvv2.$error"
+                                                 ng-if="paymentForm.cvv2.$invalid && (formStepSubmitted || paymentForm.cvv2.$touched)">
+                                                <p ng-message="required">กรุณากรอกเลข CVV2/CVC2</p>
+
+                                                <p ng-message="pattern">กรุณากรอกเลข CVV2/CVC2 ที่ถูกต้อง</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="control-label" ng-click="showCvv2 = !showCvv2"
+                                               style="cursor:pointer;">CVV2/CVC2 คืออะไร?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div>
+                                    <p class="col-xs-12 col-sm-6 control-label">วันหมดอายุ (เดือน/ปี) :</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6" style="padding:0;">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group" style="margin-bottom: 0;"
+                                                 ng-class="{ 'has-error' : (paymentForm.expiryMonth.$invalid && (formStepSubmitted || paymentForm.expiryMonth.$touched)) }">
+                                                <ol class="nya-bs-select form-control"
+                                                    ng-class="{'filled': travel.paymant.expiryMonth}"
+                                                    ng-model="travel.paymant.expiryMonth" name="expiryMonth"
+                                                    title="เดือน"
+                                                    data-size="5" required>
+                                                    <li nya-bs-option="expiryMonth in range(1,12)">
+                                                        <!-- the text content of anchor element will be used for search -->
+                                                        <a>
+                                                            {{ expiryMonth }}
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <div class="help-block" ng-messages="paymentForm.expiryMonth.$error"
+                                                     ng-if="paymentForm.expiryMonth.$invalid && (formStepSubmitted || paymentForm.expiryMonth.$touched)">
+                                                    <p ng-message="required">กรุณาเลือก เดือน ที่หมดอายุ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group" style="margin-bottom: 0;"
+                                                 ng-class="{ 'has-error' : (paymentForm.expiryYear.$invalid && (formStepSubmitted || paymentForm.expiryYear.$touched)) }">
+                                                <ol class="nya-bs-select form-control"
+                                                    ng-class="{'filled': travel.paymant.expiryYear}"
+                                                    ng-model="travel.paymant.expiryYear" name="expiryYear" title="ปี"
+                                                    data-size="5" required>
+                                                    <li nya-bs-option="expiryYear in range(2015,2115)">
+                                                        <!-- the text content of anchor element will be used for search -->
+                                                        <a>
+                                                            {{ expiryYear }}
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <div class="help-block" ng-messages="paymentForm.expiryYear.$error"
+                                                     ng-if="paymentForm.expiryYear.$invalid && (formStepSubmitted || paymentForm.expiryYear.$touched)">
+                                                    <p ng-message="required">กรุณาเลือก ปี ที่หมดอายุ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group"
+                                 ng-class="{ 'has-error' : paymentForm.cardholdername.$invalid && (formStepSubmitted || paymentForm.cardholdername.$touched) }">
+                                <p class="col-xs-12 col-sm-6 control-label">ชื่อผู้ถือบัตร :</p>
+
+                                <div class="col-xs-12 col-sm-6" style="padding:0;">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input type="text" style="text-transform: uppercase;" name="cardholdername"
+                                                   ng-change="travel.paymant.cardholdername = travel.paymant.cardholdername.toUpperCase();"
+                                                   ng-model="travel.paymant.cardholdername" class="form-control"
+                                                   ng-minlength="1" ng-maxlength="100" mask="@?s?" validate="false"
+                                                   repeat="40" restrict="reject" clean="true"
+                                                   ng-pattern="/^[a-zA-Z]+[ ]?[a-zA-Z]*$/" required>
+
+                                            <div class="help-block" ng-messages="paymentForm.cardholdername.$error"
+                                                 ng-if="paymentForm.cardholdername.$invalid && (formStepSubmitted || paymentForm.cardholdername.$touched)">
+                                                <p ng-message="required">กรุณากรอกชื่อผู้ถือบัตร</p>
+
+                                                <p ng-message="pattern">กรุณากรอกชื่อผู้ถือบัตรที่ถูกต้อง</p>
+
+                                                <p ng-message="minlength">กรุณากรอกชื่อผู้ถือบัตร 1 - 100 ตัวอักษร</p>
+
+                                                <p ng-message="maxlength">กรุณากรอกชื่อผู้ถือบัตร 1 - 100 ตัวอักษร</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center" style="padding:0;">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-visa.png" alt="" style="margin-top: 10px;">
+                                                </div>
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-verifled-visa.png" alt=""
+                                                         style="margin-top: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-center" style="padding:0;">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-mastercard.png" alt=""
+                                                         style="margin-top: 10px;">
+                                                </div>
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-verifled-mastercard.png" alt=""
+                                                         style="margin-top: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 text-center" style="padding:0;">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-jcb.png" alt="" style="margin-top: 10px;">
+                                                </div>
+                                                <div class="col-xs-10 col-sm-6" style="padding:0;">
+                                                    <img src="../images/icon-verifled-jcb.png" alt=""
+                                                         style="margin-top: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cvv2-lightbox" ng-show="showCvv2" ng-click="showCvv2 = !showCvv2">
+                    <img style="padding: 30px;background-color: #fff;" src="images/cvv2.png" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center" style="padding: 0;">
+                    <button type="submit" href="#form-navigation" offset="30"
+                            class="btn btn-super btn-block step-submit-button">
+                        <span>ชำระเบี้ยประกัน</span> <span class="glyphicon glyphicon-menu-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

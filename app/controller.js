@@ -13,44 +13,23 @@
 
     MainController.$inject = [
         '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
-        'CONSTANTS', 'MESSAGES', 'SessionStorage', 'QueryService', 'dialogs'
+        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'SessionStorage', 'LocalStorage', 'QueryService', 'dialogs'
     ];
 
 
-    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, SessionStorage, QueryService, dialogs) {
+    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
 
         // 'controller as' syntax
         var self = this;
         var sessionTimeWarningPromise;
         var sessionTimePromise;
 
-        ////////////  function definitions
-
-        $scope.start = true;
-        if ($scope.start == true) {
-            $scope.start = false;
-            $location.path('/insurance/destination');
-            $location.replace();
-        }
-
-        // comment for testing
-
-        $scope.$on('$locationChangeStart', function (next, current) {
-            if ($location.path() == '/insurance') {
-                $location.path('/insurance/destination');
-                $location.replace();
-            }
-            else if ($location.path() == '/plan') {
-                $location.path('/insurance/plan');
-                $location.replace();
-            }
-            else {
-                $scope.tempData.currentState = $location.path();
-            }
-        });
-
         //Travel Model to post back to API
         $scope.travel = {};
+
+        //Payment
+        $scope.paymentInfo = PAYMENT_INFO;
+        $scope.action = $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl);
 
         $scope.tempData = {passengers: 1};
         $scope.tempData.voluntaryCollapse = [];
@@ -70,8 +49,47 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
+        /**
+         * Load data from session if any
+         */
+        if (LocalStorage.get('insurance.travel')) {
+            console.log('Found storage');
+            $scope.travel = LocalStorage.get('insurance.travel');
+            $scope.travelData = LocalStorage.get('insurance.travelData');
+            $scope.tempData = LocalStorage.get('insurance.tempData');
+        } else {
+            console.log('No storage found.');
+        }
+        $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+
+        ////////////  function definitions
+        $scope.start = LocalStorage.get('insurance.start') === null ? true : LocalStorage.get('insurance.start');
+        console.log('Start=', $scope.start);
+        if ($scope.start == true) {
+            $scope.start = false;
+            LocalStorage.update('insurance.start', false);
+            $location.path('/insurance/destination');
+            $location.replace();
+        }
+
+        // comment for testing
+
+        $scope.$on('$locationChangeStart', function (next, current) {
+            if ($location.path() == '/insurance') {
+                $location.path('/insurance/destination');
+                $location.replace();
+            }
+            else if ($location.path() == '/plan') {
+                $location.path('/insurance/plan');
+                $location.replace();
+            }
+
+            $scope.tempData.currentState = $location.path();
+
+        });
+
         self.initSessionTimer = function () {
-            var timeout = SessionStorage.get('insurance.timeout');
+            var timeout = LocalStorage.get('insurance.timeout');
             var warningDialog;
             sessionTimeWarningPromise = $timeout(function () {
                 warningDialog = dialogs.notify('Warning', MESSAGES['timeout_warning']);
@@ -79,10 +97,10 @@
             sessionTimePromise = $timeout(function () {
                 warningDialog.close();
                 var dlg = dialogs.error('Error', MESSAGES['timeout']);
-                dlg.result.then(function(){
+                dlg.result.then(function () {
                     $location.path('/insurance/destination');
                     $location.replace();
-                }, function(){
+                }, function () {
                     $location.path('/insurance/destination');
                     $location.replace();
                 });
@@ -97,7 +115,7 @@
 
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
-            SessionStorage.update('insurance.timeout', $scope.travelData.timeOut);
+            LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
             self.initSessionTimer();
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
         });
@@ -137,11 +155,11 @@
             }
         });
 
-        $scope.trustAsHtml = function (string) {
-            return $sce.trustAsHtml(string);
+        $scope.trustAsHtml = function (value) {
+            return $sce.trustAsHtml(value);
         };
 
-        $scope.editSummaryBar = function (isFormValid) {
+        $scope.editSummaryBar = function ($event, isFormValid) {
             $scope.summaryBarSubmitted = true;
             if (!$scope.editingSummarybar) {
                 $scope.editingSummarybar = true;
@@ -154,7 +172,7 @@
                             });
                         });
                     } else if ($scope.tempData.travelDateChanged || $scope.tempData.countryChanged) {
-                        $scope.goToPlanSelection(isFormValid);
+                        $scope.goToPlanSelection($event, isFormValid);
                     } else {
                         $scope.calculatePrice();
                     }
@@ -300,6 +318,7 @@
         $scope.calculatePrice = function () {
             $scope.calculateTotalPrice();
             $scope.tempData.price = $scope.tempData.totalPrice;
+            $scope.travel.premiumAmount = $scope.tempData.price
         };
 
         $scope.changeStage = function (index, stage, validate) {
@@ -478,15 +497,14 @@
             }
         };
 
-        $scope.processForm = function () {
-        };
-
-        $scope.goToOrder = function (isFormValid) {
+        $scope.submitOrder = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
-                $state.go('^.thankyou');
+            } else {
+                $event.preventDefault();
+                $event.stopPropagation();
             }
         };
 
@@ -504,9 +522,7 @@
                     deferred.reject(response);
 
                     $scope.travel.promoCode = null;
-                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage'], {
-                        backdrop: 'static'
-                    });
+                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage']);
                 } else {
                     deferred.resolve(response);
                 }
@@ -517,7 +533,9 @@
             return deferred.promise;
         };
 
-        $scope.goToPlanSelection = function (isFormValid) {
+        $scope.goToPlanSelection = function ($event, isFormValid) {
+            //$event.preventDefault();
+            //$event.stopPropagation();
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
 
@@ -547,13 +565,21 @@
             }
         };
 
-        $scope.goToPayment = function (isFormValid) {
+        $scope.goToPayment = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
 
             if (isFormValid) {
-                $scope.formStepSubmitted = false;
-                $state.go('^.payment');
+                //Store data to session storage before payment
+                LocalStorage.update('insurance.travel', $scope.travel);
+                LocalStorage.update('insurance.travelData', $scope.travelData);
+                LocalStorage.update('insurance.tempData', $scope.tempData);
+
+                QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                    $scope.formStepSubmitted = false;
+                    $scope.tempData.referenceId = response.data.referenceId;
+                    $state.go('^.payment');
+                });
             }
         };
 
@@ -564,10 +590,13 @@
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
+
             }
         };
 
-        $scope.confirmPlanSelected = function (isFormValid) {
+        $scope.confirmPlanSelected = function ($event, isFormValid) {
+            //$event.preventDefault();
+            //$event.stopPropagation();
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 var hasVoluntary = false;
@@ -578,9 +607,7 @@
                 if ($scope.travel.voluntaryList.length > 1 && hasVoluntary) {
                     $scope.goToProfile(isFormValid);
                 } else {
-                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary'], {
-                        backdrop: 'static'
-                    });
+                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary']);
                     dlg.result.then(function (yesBtn) {
                         $scope.goToProfile(isFormValid);
                     }, function (noBtn) {
@@ -715,15 +742,6 @@
 
         $scope.background = parallaxHelper.createAnimator(-0.05);
 
-        /**
-         * Load data from session if any
-         */
-        if (SessionStorage.get('travel')) {
-            $scope.travel = SessionStorage.get('travel');
-            $scope.travelData = SessionStorage.get('travelData');
-            $scope.tempData = SessionStorage.get('tempData');
-        }
-
         self.getCoverageTable = function () {
             var deferred = $q.defer();
             var area = $scope.getProtectionArea();
@@ -750,6 +768,21 @@
         $scope.getIndexOfByCode = function (code, items) {
             return _.findIndex(items, {code: code});
         }
+
+        $scope.validCardType = (function () {
+            var cards = PAYMENT_INFO.cards;
+            return {
+                test: function (number) {
+                    for (var card in cards) {
+                        if (cards[card].test(number)) {
+                            $scope.tempData.cardType = card;
+                            return card;
+                        }
+                    }
+                    return false;
+                }
+            };
+        })();
     }
 
 })();

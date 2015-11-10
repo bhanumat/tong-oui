@@ -11,7 +11,7 @@
   "maxDays": 90,
   "termCondition": "",
   "hasPromotion": true,
-  "timeOut": 6,
+  "timeOut": 20,
   "destinationList": [
     {
       "country": "Argentina",

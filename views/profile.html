@@ -183,7 +183,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.phone.$invalid && (tempData.passengersProfile[profile].profileFormSubmitted || profileForm.phone.$touched) }">
                           <label class="sr-only" for="phone">เบอร์โทรศัพท์</label>
-                          <input class="form-control" ng-model="travel.applicationList[outerIndex].phone" mask="(099) 999-9999" restrict="reject" clean="true" type="text" name="phone" placeholder="เบอร์โทรศัพท์" required ng-pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$">
+                          <input class="form-control" ng-model="travel.applicationList[outerIndex].phone" mask="(099) 999-9999" restrict="reject" clean="true" type="text" name="phone" placeholder="เบอร์โทรศัพท์" required ng-pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/">
                           <div class="help-block" ng-messages="profileForm.phone.$error" ng-if="tempData.passengersProfile[profile].profileFormSubmitted || profileForm.phone.$touched">
                             <p ng-message="required">กรุณากรอกเบอร์โทรศัพท์</p>
                             <p ng-message="pattern">กรุณากรอกเบอร์โทรศัพท์เป็นตัวเลข 10 หลัก</p>
@@ -624,7 +624,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="profile-summary-section" ng-if="tempData.passengersProfile[profile].beneficiaries">
                 <div class="profile-summary-section-header">
                   <div class="row">
@@ -673,7 +673,8 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center" style="padding: 0;">
-        <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPayment(insuranceForm.$valid)" ng-show="insuranceForm.$valid" class="btn btn-super btn-block step-submit-button"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+        <button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPayment($event, insuranceForm.$valid)" ng-show="insuranceForm.$valid" class="btn btn-super btn-block step-submit-button"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>
+        <!--<button href="#form-navigation" offset="30" du-smooth-scroll ng-click="goToPayment($event, true)" class="btn btn-super btn-block step-submit-button"><span>ชำระเงิน</span> <span class="glyphicon glyphicon-menu-right"></span></button>-->
       </div>
     </div>
   </div>

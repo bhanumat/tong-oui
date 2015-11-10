@@ -2004,6 +2004,8 @@ div.easy_social_box.vertical{height:68px}
 .dropdown-header{display:block;padding:3px 20px;font-size:24px;line-height:1.42857143;color:#777}
 .section-heading h6{color:#FFF}
 .modal-body{color:#000}
+.modal-body a{color:#c00f00}
+.modal-body a:hover{color:#FF4E00}
 .modal-title{font-size:22px;height:24px;color:#fff}
 .dialog-header-confirm,.dialog-header-notify{background-color:#188ccc}
 .dialog-header-error{background-color:#f68621}
