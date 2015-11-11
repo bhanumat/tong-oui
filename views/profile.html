@@ -38,7 +38,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.title.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.title.$touched) }">
                           <label class="sr-only" for="title">คำนำหน้าชื่อ</label>
-                          <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].title}" ng-model="travel.applicationList[applicationIndex].title" name="title" title="คำนำหน้าชื่อ" data-size="5" required>
+                          <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].title}" ng-model="travel.applicationList[applicationIndex].title" name="title" title="คำนำหน้าชื่อ" data-size="5" required>
                             <li nya-bs-option="title in travelData.titleList | orderBy:'code'" data-value="title.code" >
                               <!-- the text content of anchor element will be used for search -->
                               <a>
@@ -140,7 +140,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.gender.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.gender.$touched) }">
                           <label class="sr-only" for="gender">เพศ</label>
-                          <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].gender}" ng-model="travel.applicationList[applicationIndex].sex" name="gender" title="เพศ" data-size="5" required>
+                          <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].sex}" ng-model="travel.applicationList[applicationIndex].sex" name="gender" title="เพศ" data-size="5" required>
                             <li nya-bs-option="gender in travelData.genderList | orderBy:'thaiName'" data-value="gender.code">
                               <!-- the text content of anchor element will be used for search -->
                               <a>
@@ -240,7 +240,7 @@
                         <div class="col-xs-6 col-sm-6">
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.province.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.province.$touched) }">
                             <label class="sr-only" for="province">จังหวัด</label>
-                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.province}" ng-model="travel.applicationList[applicationIndex].address.province" name="province" title="จังหวัด" data-size="5" required>
+                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.province}" ng-model="travel.applicationList[applicationIndex].address.province" name="province" title="จังหวัด" data-size="5" required>
                               <li nya-bs-option="province in travelData.provinceList | orderBy:'thaiName'" data-value="province.code">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
@@ -256,7 +256,7 @@
                         <div class="col-xs-6 col-sm-6">
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.district.$touched) }">
                             <label class="sr-only" for="district">เขต/อำเภอ</label>
-                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.district}" ng-model="travel.applicationList[applicationIndex].address.district" name="district" title="เขต/อำเภอ" data-size="5" required
+                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.district}" ng-model="travel.applicationList[applicationIndex].address.district" name="district" title="เขต/อำเภอ" data-size="5" required
                                 ng-init="provinceIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.province, travelData.provinceList)"
                                 ng-click="provinceIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.province, travelData.provinceList)" >
                               <li nya-bs-option="district in travelData.provinceList[provinceIndex].districtList | orderBy:'thaiName'" data-value="district.code">
@@ -276,7 +276,7 @@
                         <div class="col-xs-6 col-sm-6">
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.subdistrict.$touched) }">
                             <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
-                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.subdistrict}" ng-model="travel.applicationList[applicationIndex].address.subDistrict" name="subdistrict" title="แขวง/ตำบล" data-size="5" required
+                            <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.subDistrict}" ng-model="travel.applicationList[applicationIndex].address.subDistrict" name="subdistrict" title="แขวง/ตำบล" data-size="5" required
                                 ng-init="districtIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.district, travelData.provinceList[provinceIndex].districtList)"
                                 ng-click="districtIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.district, travelData.provinceList[provinceIndex].districtList)">
                               <li nya-bs-option="subDistrict in travelData.provinceList[provinceIndex].districtList[districtIndex].subDistrict | orderBy:'thaiName'"
@@ -321,7 +321,7 @@
                             <div class="col-xs-6 col-sm-6">
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.province.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.province.$touched) }">
                                 <label class="sr-only" for="province">จังหวัด</label>
-                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.province}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.province" title="จังหวัด" data-size="5" required>
+                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.province}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.province" title="จังหวัด" data-size="5" required>
                                   <li nya-bs-option="province in travelData.provinceList | orderBy:'engName'" data-value="province.code" >
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
@@ -337,7 +337,7 @@
                             <div class="col-xs-6 col-sm-6">
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.district.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.district.$touched) }">
                                 <label class="sr-only" for="district">เขต/อำเภอ</label>
-                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.district}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.district" title="เขต/อำเภอ" data-size="5" required>
+                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.district}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.district" title="เขต/อำเภอ" data-size="5" required>
                                   <li nya-bs-option="district in travelData.provinceList[provinceIndex].districtList | orderBy:'engName'" data-value="district.code">
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
@@ -355,7 +355,7 @@
                             <div class="col-xs-6 col-sm-6">
                               <div class="form-group" ng-class="{ 'has-error' : profileForm.subdistrict.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.subdistrict.$touched) }">
                                 <label class="sr-only" for="subdistrict">แขวง/ตำบล</label>
-                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.passengersProfile[applicationIndex].addressData.subdistrict}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.subDistrict" title="แขวง/ตำบล" data-size="5" required>
+                                <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.subDistrict}" disabled="true" ng-model="travel.applicationList[applicationIndex].address.subDistrict" title="แขวง/ตำบล" data-size="5" required>
                                   <li nya-bs-option="subDistrict in travelData.provinceList[provinceIndex].districtList[districtIndex].subDistrict | orderBy:'engName'" data-value="subDistrict.code">
                                     <!-- the text content of anchor element will be used for search -->
                                     <a>
@@ -389,7 +389,7 @@
                 <div class="profile-details-section-header">
                   <div class="row">
                     <div class="hidden-xs text-right col-xs-1">
-                      <img src="images/icon-beneficiary.png" alt="">ิ
+                      <img src="images/icon-beneficiary.png" alt="">
                     </div>
                     <div class="col-xs-12 col-sm-11">
                       <div class="row">
@@ -451,22 +451,22 @@
                         <div class="col-xs-12 col-sm-6">
                           <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.firstname.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[applicationIndex].profileFormSubmitted || beneficiaryForm.firstname.$touched) }">
                             <label class="sr-only" for="firstname">ชื่อ</label>
-                            <input ng-model="travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].firstname" type="text" ng-minlength="3" ng-maxlength="40" name="firstname" class="form-control" placeholder="ชื่อ" required>
+                            <input ng-model="travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].firstname" type="text" ng-minlength="1" ng-maxlength="100" name="firstname" class="form-control" placeholder="ชื่อ" required>
                             <div class="help-block" ng-messages="beneficiaryForm.firstname.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[applicationIndex].profileFormSubmitted || beneficiaryForm.firstname.$touched">
                               <p ng-message="required">กรุณากรอกชื่อ</p>
-                              <p ng-message="minlength">กรุณากรอกชื่อ 3 - 40 ตัวอักษร</p>
-                              <p ng-message="maxlength">กรุณากรอกชื่อ 3 - 40 ตัวอักษร</p>
+                              <p ng-message="minlength">กรุณากรอกชื่อ 1 - 100 ตัวอักษร</p>
+                              <p ng-message="maxlength">กรุณากรอกชื่อ 1 - 100 ตัวอักษร</p>
                             </div>
                           </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                           <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.lastname.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[applicationIndex].profileFormSubmitted || beneficiaryForm.lastname.$touched) }">
                             <label class="sr-only" for="lastname">นามสกุล</label>
-                            <input ng-model="travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].lastname" type="text" ng-minlength="3" ng-maxlength="40" name="lastname" class="form-control" placeholder="นามสกุล" required>
+                            <input ng-model="travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].lastname" type="text" ng-minlength="1" ng-maxlength="100" name="lastname" class="form-control" placeholder="นามสกุล" required>
                             <div class="help-block" ng-messages="beneficiaryForm.lastname.$error" ng-if="beneficiaryFormSubmitted || tempData.passengersProfile[applicationIndex].profileFormSubmitted || beneficiaryForm.lastname.$touched">
                               <p ng-message="required">กรุณากรอกนามสกุล</p>
-                              <p ng-message="minlength">กรุณากรอกนามสกุล 3 - 40 ตัวอักษร</p>
-                              <p ng-message="maxlength">กรุณากรอกนามสกุล 3 - 40 ตัวอักษร</p>
+                              <p ng-message="minlength">กรุณากรอกนามสกุล 1 - 100 ตัวอักษร</p>
+                              <p ng-message="maxlength">กรุณากรอกนามสกุล 1 - 100 ตัวอักษร</p>
                             </div>
                           </div>
                         </div>
@@ -564,14 +564,6 @@
                     </div>
                     <div class="row">
                       <div class="col-xs-6">
-                        <p>อาชีพ</p>
-                      </div>
-                      <div class="col-xs-6">
-                        <p>{{travel.applicationList[applicationIndex].occupation}}</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-6">
                         <p>อีเมล</p>
                       </div>
                       <div class="col-xs-6">
@@ -631,12 +623,12 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                      <div class="row" ng-repeat="beneficiary in travel.passengersProfile[applicationIndex].beneficiaries">
+                      <div class="row" ng-repeat="beneficiary in travel.applicationList[applicationIndex].beneficiaryList">
                         <div class="col-xs-6">
-                          <p>{{beneficiary.title.name}}  {{beneficiary.firstname}} {{beneficiary.lastname}}</p>
+                          <p>{{beneficiary.title}}  {{beneficiary.firstname}} {{beneficiary.lastname}}</p>
                         </div>
                         <div class="col-xs-6">
-                          <p>ความสัมพันธ์เป็น {{beneficiary.relationship.name}}</p>
+                          <p>ความสัมพันธ์เป็น {{beneficiary.relation}}</p>
                         </div>
                       </div>
                     </div>
