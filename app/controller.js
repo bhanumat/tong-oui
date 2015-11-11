@@ -24,6 +24,8 @@
         var sessionTimeWarningPromise;
         var sessionTimePromise;
 
+        $scope.refId = $location.search().Ref;
+
         //Travel Model to post back to API
         $scope.travel = {};
 
