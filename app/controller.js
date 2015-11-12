@@ -13,44 +13,25 @@
 
     MainController.$inject = [
         '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
-        'CONSTANTS', 'MESSAGES', 'SessionStorage', 'QueryService', 'dialogs'
+        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'SessionStorage', 'LocalStorage', 'QueryService', 'dialogs'
     ];
 
 
-    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, SessionStorage, QueryService, dialogs) {
+    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
 
         // 'controller as' syntax
         var self = this;
         var sessionTimeWarningPromise;
         var sessionTimePromise;
 
-        ////////////  function definitions
-
-        $scope.start = true;
-        if ($scope.start == true) {
-            $scope.start = false;
-            $location.path('/insurance/destination');
-            $location.replace();
-        }
-
-        // comment for testing
-
-        $scope.$on('$locationChangeStart', function (next, current) {
-            if ($location.path() == '/insurance') {
-                $location.path('/insurance/destination');
-                $location.replace();
-            }
-            else if ($location.path() == '/plan') {
-                $location.path('/insurance/plan');
-                $location.replace();
-            }
-            else {
-                $scope.tempData.currentState = $location.path();
-            }
-        });
+        $scope.refId = $location.search().Ref;
 
         //Travel Model to post back to API
         $scope.travel = {};
+
+        //Payment
+        $scope.paymentInfo = PAYMENT_INFO;
+        $scope.action = $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl);
 
         $scope.tempData = {passengers: 1};
         $scope.tempData.voluntaryCollapse = [];
@@ -70,8 +51,58 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
+        /**
+         * Load data from session if any
+         */
+        if (LocalStorage.get('insurance.travel')) {
+
+            console.log('Found storage');
+            $scope.travel = LocalStorage.get('insurance.travel');
+            $scope.travelData = LocalStorage.get('insurance.travelData');
+            $scope.tempData = LocalStorage.get('insurance.tempData');
+
+            $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+
+            var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
+
+            if (sessionStartDate) {
+                var sessionStartTimeout = moment(sessionStartDate).add($scope.travelData.timeOut, 'minutes');
+                var now = moment();
+
+                if (sessionStartTimeout.isBefore(now)) {//timeout
+                    LocalStorage.removeAll();
+                }
+                console.log(sessionStartDate);
+            }
+        }
+
+        ////////////  function definitions
+        $scope.start = true;
+        if ($scope.start == true && !$scope.tempData.currentState) {
+            $scope.start = false;
+            $location.path('/insurance/destination');
+            $location.replace();
+        }
+
+        // comment for testing
+
+        $scope.$on('$locationChangeStart', function (next, current) {
+            if ($location.path() == '/insurance') {
+                $location.path('/insurance/destination');
+                $location.replace();
+            }
+            else if ($location.path() == '/plan') {
+                $location.path('/insurance/plan');
+                $location.replace();
+            }
+            else {
+                $scope.tempData.currentState = $location.path();
+            }
+
+        });
+
         self.initSessionTimer = function () {
-            var timeout = SessionStorage.get('insurance.timeout');
+            var timeout = LocalStorage.get('insurance.timeout');
             var warningDialog;
             sessionTimeWarningPromise = $timeout(function () {
                 warningDialog = dialogs.notify('Warning', MESSAGES['timeout_warning']);
@@ -79,25 +110,28 @@
             sessionTimePromise = $timeout(function () {
                 warningDialog.close();
                 var dlg = dialogs.error('Error', MESSAGES['timeout']);
-                dlg.result.then(function(){
+                dlg.result.then(function () {
+                    LocalStorage.removeAll();
                     $location.path('/insurance/destination');
                     $location.replace();
-                }, function(){
+                }, function () {
                     $location.path('/insurance/destination');
                     $location.replace();
                 });
             }, (timeout) * 60000);
         };
 
-        self.resetTimer = function () {
+        self.restartTimer = function () {
             $timeout.cancel(sessionTimeWarningPromise);
             $timeout.cancel(sessionTimePromise);
+            LocalStorage.update('insurance.sessionStartDate', new Date())
             self.initSessionTimer();
         };
 
+
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
-            SessionStorage.update('insurance.timeout', $scope.travelData.timeOut);
+            LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
             self.initSessionTimer();
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
         });
@@ -107,7 +141,7 @@
         });
 
         //QueryService.query('POST', 'submitOrder').then(function (response) {
-            //$scope.travel.applicationList = response.data.applicationList;
+        //$scope.travel.applicationList = response.data.applicationList;
         //}, function (response) {
         //});
 
@@ -125,33 +159,33 @@
         });
 
         $scope.$watch('travel.passengers', function (newValue) {
-            console.log('$watch travel.passengers : '+newValue);
+            console.log('$watch travel.passengers : ' + newValue);
             if ($location.path() == '/insurance/payment') {
                 $location.path('/insurance/profile');
                 $location.replace();
             }
-            if(!newValue)
+            if (!newValue)
                 return;
-            if(!$scope.travel.applicationList){
+            if (!$scope.travel.applicationList) {
                 $scope.travel.applicationList = [];
                 $scope.tempData.passengersProfile = [];
-                angular.forEach($scope.range(1, newValue), function(value, index){
+                angular.forEach($scope.range(1, newValue), function (value, index) {
                     $scope.travel.applicationList.push({});
-                    $scope.tempData.passengersProfile.push({stage : 'edit'});
+                    $scope.tempData.passengersProfile.push({stage: 'edit'});
                 });
-            } else{
+            } else {
                 var applicationLength = $scope.travel.applicationList.length;
-                var passengersArray = $scope.range(0, newValue-1);
-                var applicationArray = $scope.range(0, $scope.travel.applicationList.length-1);
+                var passengersArray = $scope.range(0, newValue - 1);
+                var applicationArray = $scope.range(0, $scope.travel.applicationList.length - 1);
                 var differenceArray = _.difference(applicationArray, passengersArray);
                 console.log(differenceArray);
-                if(applicationLength > newValue) {
+                if (applicationLength > newValue) {
                     $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
                     $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
-                } else if(applicationLength < newValue) {
-                    angular.forEach($scope.range(1, (newValue-applicationLength)), function(value, index) {
+                } else if (applicationLength < newValue) {
+                    angular.forEach($scope.range(1, (newValue - applicationLength)), function (value, index) {
                         $scope.travel.applicationList.push({});
-                        $scope.tempData.passengersProfile.push({stage : 'edit'});
+                        $scope.tempData.passengersProfile.push({stage: 'edit'});
                     });
                 }
             }
@@ -164,11 +198,11 @@
             }
         });
 
-        $scope.trustAsHtml = function (string) {
-            return $sce.trustAsHtml(string);
+        $scope.trustAsHtml = function (value) {
+            return $sce.trustAsHtml(value);
         };
 
-        $scope.editSummaryBar = function (isFormValid) {
+        $scope.editSummaryBar = function ($event, isFormValid) {
             $scope.summaryBarSubmitted = true;
             if (!$scope.editingSummarybar) {
                 $scope.editingSummarybar = true;
@@ -181,7 +215,7 @@
                             });
                         });
                     } else if ($scope.tempData.travelDateChanged || $scope.tempData.countryChanged) {
-                        $scope.goToPlanSelection(isFormValid);
+                        $scope.goToPlanSelection($event, isFormValid);
                     } else {
                         $scope.calculatePrice();
                     }
@@ -327,6 +361,7 @@
         $scope.calculatePrice = function () {
             $scope.calculateTotalPrice();
             $scope.tempData.price = $scope.tempData.totalPrice;
+            $scope.travel.premiumAmount = $scope.tempData.price
         };
 
         $scope.changeStage = function (index, stage, validate) {
@@ -361,7 +396,7 @@
         };
 
         $scope.copyPassengerAddress = function (templateIndex, targetIndex) {
-            console.log(templateIndex+ ':' + targetIndex);
+            console.log(templateIndex + ':' + targetIndex);
             if (!$scope.travel.applicationList[targetIndex]) {
                 $scope.travel.applicationList[targetIndex] = {};
             }
@@ -372,7 +407,7 @@
 
         $scope.addAddress = function (index) {
             $scope.tempData.passengersProfile[index].isManualAddress = true;
-            if(!$scope.travel.applicationList[index].address)
+            if (!$scope.travel.applicationList[index].address)
                 $scope.travel.applicationList[index].address = {};
         };
 
@@ -505,15 +540,14 @@
             }
         };
 
-        $scope.processForm = function () {
-        };
-
-        $scope.goToOrder = function (isFormValid) {
+        $scope.submitOrder = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
-                $state.go('^.thankyou');
+            } else {
+                $event.preventDefault();
+                $event.stopPropagation();
             }
         };
 
@@ -524,16 +558,14 @@
                 promoCode: $scope.travel.promoCode
             };
             QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
-                self.resetTimer()
+                self.restartTimer()
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
 
                     deferred.reject(response);
 
                     $scope.travel.promoCode = null;
-                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage'], {
-                        backdrop: 'static'
-                    });
+                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage']);
                 } else {
                     deferred.resolve(response);
                 }
@@ -544,7 +576,9 @@
             return deferred.promise;
         };
 
-        $scope.goToPlanSelection = function (isFormValid) {
+        $scope.goToPlanSelection = function ($event, isFormValid) {
+            //$event.preventDefault();
+            //$event.stopPropagation();
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
 
@@ -574,13 +608,21 @@
             }
         };
 
-        $scope.goToPayment = function (isFormValid) {
+        $scope.goToPayment = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
 
             if (isFormValid) {
-                $scope.formStepSubmitted = false;
-                $state.go('^.payment');
+                //Store data to session storage before payment
+                LocalStorage.update('insurance.travel', $scope.travel);
+                LocalStorage.update('insurance.travelData', $scope.travelData);
+                LocalStorage.update('insurance.tempData', $scope.tempData);
+
+                QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                    $scope.formStepSubmitted = false;
+                    $scope.tempData.referenceId = response.data.referenceId;
+                    $state.go('^.payment');
+                });
             }
         };
 
@@ -591,10 +633,13 @@
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
+
             }
         };
 
-        $scope.confirmPlanSelected = function (isFormValid) {
+        $scope.confirmPlanSelected = function ($event, isFormValid) {
+            //$event.preventDefault();
+            //$event.stopPropagation();
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 var hasVoluntary = false;
@@ -605,9 +650,7 @@
                 if ($scope.travel.voluntaryList.length > 1 && hasVoluntary) {
                     $scope.goToProfile(isFormValid);
                 } else {
-                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary'], {
-                        backdrop: 'static'
-                    });
+                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary']);
                     dlg.result.then(function (yesBtn) {
                         $scope.goToProfile(isFormValid);
                     }, function (noBtn) {
@@ -692,7 +735,7 @@
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
                     $scope.travel.destination = $scope.getProtectionArea();
-                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'country').join('| ')
+                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'country').join('|')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
                 }
@@ -742,15 +785,6 @@
 
         $scope.background = parallaxHelper.createAnimator(-0.05);
 
-        /**
-         * Load data from session if any
-         */
-        if (SessionStorage.get('travel')) {
-            $scope.travel = SessionStorage.get('travel');
-            $scope.travelData = SessionStorage.get('travelData');
-            $scope.tempData = SessionStorage.get('tempData');
-        }
-
         self.getCoverageTable = function () {
             var deferred = $q.defer();
             var area = $scope.getProtectionArea();
@@ -763,7 +797,7 @@
             };
             QueryService.query('POST', 'getCoverageTable', getCoverageTableParams, getCoverageTableParams)
                 .then(function (response) {
-                    self.resetTimer();
+                    self.restartTimer();
                     $scope.travelData.campaignList = response.data.campaignList;
                     self.initDefaultCampaign();
                     deferred.resolve(response);
@@ -777,6 +811,21 @@
         $scope.getIndexOfByCode = function (code, items) {
             return _.findIndex(items, {code: code});
         }
+
+        $scope.validCardType = (function () {
+            var cards = PAYMENT_INFO.cards;
+            return {
+                test: function (number) {
+                    for (var card in cards) {
+                        if (cards[card].test(number)) {
+                            $scope.tempData.cardType = card;
+                            return card;
+                        }
+                    }
+                    return false;
+                }
+            };
+        })();
     }
 
 })();

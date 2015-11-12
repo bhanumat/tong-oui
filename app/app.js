@@ -80,6 +80,7 @@
     dialogConfig.$inject = ['dialogsProvider', '$translateProvider'];
     function dialogConfig(dialogsProvider, $translateProvider) {
         dialogsProvider.useBackdrop('static');
+        dialogsProvider.setSize('md');
         $translateProvider.translations('th', {
             DIALOGS_ERROR: "Error",
             DIALOGS_ERROR_MSG: "พบข้อผิดพลาด",

@@ -59,7 +59,7 @@
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="insurance-details-heading summary-bar-heading">
                                         <h5>รายละเอียดการเดินทาง</h5>
-                                        <a ng-click="editSummaryBar(summaryForm.$valid&&(tempData.destinations.length));"
+                                        <a ng-click="editSummaryBar($event, summaryForm.$valid&&(tempData.destinations.length));"
                                            style="cursor: pointer;" href="">
                                             <img src="images/icon-edit.png" alt="">
                                         </a>
@@ -78,11 +78,13 @@
                                                          style="margin-bottom: 10px;"
                                                          ng-class="{ 'has-error' : !tempData.destinations.length && summaryBarSubmitted }">
                                                         <ol class="nya-bs-select form-control text-center"
-                                                            id="destination" disabled="tempData.destinations.length == 10"
+                                                            id="destination"
+                                                            disabled="tempData.destinations.length == 10"
                                                             ng-class="{'filled': tempData.destination}"
                                                             ng-change="addDestination();"
                                                             ng-model="tempData.destination" name="destinations"
-                                                            title="เลือกได้สูงสุด 10 ประเทศ" data-size="5" data-live-search="true">
+                                                            title="เลือกได้สูงสุด 10 ประเทศ" data-size="5"
+                                                            data-live-search="true">
                                                             <li nya-bs-option="item in travelData.destinationList">
                                                                 <!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
                                                                 <a>
@@ -274,9 +276,7 @@
                         class="glyphicon glyphicon-menu-up"></span>Go to top</span>
             </div>
             <div class="insurance-form-wrapper">
-                <form name="insuranceForm" novalidate id="insurance-form" ng-submit="processForm()">
-                    <div id="form-views" ui-view></div>
-                </form>
+                <div id="form-views" ui-view></div>
             </div>
             <div class="bg">
                 <div class="bg-inner">

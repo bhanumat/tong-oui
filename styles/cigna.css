@@ -8698,6 +8698,15 @@ div.easy_social_box.vertical {
 .modal-body {
     color:#000000;
 }
+
+.modal-body a {
+    color:#c00f00;
+}
+
+.modal-body a:hover {
+    color:#FF4E00;
+}
+
 .modal-title {
     font-size: 22px;
     height: 24px;
