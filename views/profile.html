@@ -109,10 +109,12 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.nationalId.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.nationalId.$touched) }">
                           <label class="sr-only" for="nationalId">เลขที่บัตรประชาชน</label>
-                          <input class="form-control" ng-model="travel.applicationList[applicationIndex].ssn" mask="9 9999 99999 99 9" restrict="reject" clean="true" type="text" name="nationalId" placeholder="เลขที่บัตรประชาชน" ng-pattern="/^[\s\d]{17}$/" required >
+                          <input class="form-control" ng-model="travel.applicationList[applicationIndex].ssn" mask="9 9999 99999 99 9" restrict="reject" clean="true" type="text" name="nationalId" placeholder="เลขที่บัตรประชาชน"
+                                 ng-pattern="/^[\s\d]{17}$/" national-id required >
                           <div class="help-block" ng-messages="profileForm.nationalId.$error" ng-if="tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.nationalId.$touched">
                             <p ng-message="required">กรุณากรอกเลขที่บัตรประชาชน</p>
                             <p ng-message="pattern">กรุณากรอกเลขที่บัตรประชาชนเป็นตัวเลข 13 หลัก</p>
+                            <p ng-message="validNationalId">กรุณากรอกเลขที่บัตรประชาชนให้ถูกต้อง</p>
                           </div>
                         </div>
                       </div>
