@@ -95,6 +95,10 @@
                 $location.path('/insurance/plan');
                 $location.replace();
             }
+            else if ($location.path() == '/profile') {
+                $location.path('/insurance/profile');
+                $location.replace();
+            }
             else {
                 $scope.tempData.currentState = $location.path();
             }
@@ -158,38 +162,12 @@
             }
         });
 
-        $scope.$watch('travel.passengers', function (newValue) {
-            console.log('$watch travel.passengers : ' + newValue);
+        $scope.$watch('travel.passengers', function (newValue, oldValue) {
+            console.log('$watch travel.passengers : ' + newValue + ', '+ oldValue);
             if ($location.path() == '/insurance/payment') {
                 $location.path('/insurance/profile');
                 $location.replace();
             }
-            if (!newValue)
-                return;
-            if (!$scope.travel.applicationList) {
-                $scope.travel.applicationList = [];
-                $scope.tempData.passengersProfile = [];
-                angular.forEach($scope.range(1, newValue), function (value, index) {
-                    $scope.travel.applicationList.push({});
-                    $scope.tempData.passengersProfile.push({stage: 'edit'});
-                });
-            } else {
-                var applicationLength = $scope.travel.applicationList.length;
-                var passengersArray = $scope.range(0, newValue - 1);
-                var applicationArray = $scope.range(0, $scope.travel.applicationList.length - 1);
-                var differenceArray = _.difference(applicationArray, passengersArray);
-                console.log(differenceArray);
-                if (applicationLength > newValue) {
-                    $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
-                    $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
-                } else if (applicationLength < newValue) {
-                    angular.forEach($scope.range(1, (newValue - applicationLength)), function (value, index) {
-                        $scope.travel.applicationList.push({});
-                        $scope.tempData.passengersProfile.push({stage: 'edit'});
-                    });
-                }
-            }
-            $scope.tempData.passengersProfile[0].isManualAddress = true;
         });
 
         $scope.$watch('travel.country', function () {
@@ -198,11 +176,39 @@
             }
         });
 
+        $scope.passengersChange = function(){
+            if (!$scope.travel.applicationList) {
+                $scope.travel.applicationList = [];
+                $scope.tempData.passengersProfile = [];
+                angular.forEach($scope.range(1, $scope.travel.passengers), function (value, index) {
+                    $scope.travel.applicationList.push({});
+                    $scope.tempData.passengersProfile.push({stage: 'edit'});
+                });
+            } else {
+                var applicationLength = $scope.travel.applicationList.length;
+                var passengersArray = $scope.range(0, $scope.travel.passengers - 1);
+                var applicationArray = $scope.range(0, $scope.travel.applicationList.length - 1);
+                var differenceArray = _.difference(applicationArray, passengersArray);
+                console.log(differenceArray);
+                if (applicationLength > $scope.travel.passengers) {
+                    $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
+                    $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
+                } else if (applicationLength < $scope.travel.passengers) {
+                    angular.forEach($scope.range(1, ($scope.travel.passengers - applicationLength)), function (value, index) {
+                        $scope.travel.applicationList.push({});
+                        $scope.tempData.passengersProfile.push({stage: 'edit'});
+                    });
+                }
+            }
+            $scope.tempData.passengersProfile[0].isManualAddress = true;
+        }
+
         $scope.trustAsHtml = function (value) {
             return $sce.trustAsHtml(value);
         };
 
         $scope.editSummaryBar = function ($event, isFormValid) {
+            console.log('editSummaryBar..');
             $scope.summaryBarSubmitted = true;
             if (!$scope.editingSummarybar) {
                 $scope.editingSummarybar = true;
@@ -225,6 +231,19 @@
                     $scope.tempData.promoCodeChanged = false;
                     $scope.tempData.travelDateChanged = false;
                     $scope.tempData.countryChanged = false;
+                    //  Add/Remove passengers profile.
+                    if($scope.travel.passengers < $scope.travel.applicationList.length){
+                        var dlg = dialogs.confirm('Warning', MESSAGES['confirm_passengers_change']);
+                        dlg.result.then(function (yesBtn) {
+                            $scope.passengersChange();
+                        }, function (noBtn) {
+                            $scope.travel.passengers = $scope.travel.applicationList.length;
+                            $scope.calculatePrice();
+                            $scope.editingSummarybar = true;
+                        });
+                    } else if($scope.travel.passengers > $scope.travel.applicationList.length){
+                        $scope.passengersChange();
+                    }
                 }
             }
         };
@@ -369,8 +388,8 @@
                 $scope.tempData.passengersProfile[index] = {};
                 $scope.tempData.passengersProfile[index].stage = '';
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
-                $scope.travel.passengersProfile[index] = {}
-                $scope.travel.passengersProfile[index].birthDate = '';
+                $scope.travel.applicationList[index] = {}
+                $scope.travel.applicationList[index].dateOfBirth = '';
             }
             if (stage == 'edit') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
@@ -387,7 +406,7 @@
             }
             if (stage == 'reset') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
-                $scope.travel.passengersProfile[index] = {};
+                $scope.travel.applicationList[index] = {};
                 $scope.tempData.passengersProfile[index].termsAccepted = false;
                 $scope.tempData.passengersProfile[index].stage = "";
                 $scope.tempData.passengersProfile[index].profileForm = null;
@@ -401,7 +420,6 @@
                 $scope.travel.applicationList[targetIndex] = {};
             }
             $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
-            //$scope.travel.applicationList[targetIndex].address = {};
             $scope.travel.applicationList[targetIndex].address = angular.copy($scope.travel.applicationList[templateIndex].address);
         };
 
@@ -633,7 +651,8 @@
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
-
+                if(!$scope.travel.applicationList)
+                    $scope.passengersChange();
             }
         };
 
