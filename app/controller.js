@@ -23,7 +23,6 @@
         var self = this;
         var sessionTimeWarningPromise;
         var sessionTimePromise;
-
         $scope.refId = $location.search().Ref;
 
         //Travel Model to post back to API
@@ -597,8 +596,6 @@
         };
 
         $scope.goToPlanSelection = function ($event, isFormValid) {
-            //$event.preventDefault();
-            //$event.stopPropagation();
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
 
