@@ -6,7 +6,7 @@
     .module('cignaApp')
     .directive('birthDateCalendar', initBirthDateCalendar)
 
-      .directive('nationalId', ['$http', function($http) {
+      .directive('nationalId', function() {
           function validateNationalId (pid) {
               pid = pid.toString().replace(/\D/g,'');
               if(pid.length == 13){
@@ -29,7 +29,7 @@
                   })
                 }
           }
-      }]);
+      });
 
   function initBirthDateCalendar() {
 
