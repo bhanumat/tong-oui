@@ -28,6 +28,8 @@
             //'paymentUrl':'http://cigna.localhost:8080/payment.php',
             'merchantId':'1203',
             'currCode':'764',
+            //'cvv2Url':'https://ipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
+            'cvv2Url':'https://psipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
             'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
             'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
             'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',

@@ -5,6 +5,10 @@
     {
       "campaignCode": "CGINGPSTTV",
       "defaultFlag": true,
+      "defaultRateScale": 1,
+      "minAge": 5,
+      "maxAge": 80,
+      "calculateMethod": "01",
       "mandatory": {
         "topicDetail": "(A) Travel Care",
         "coverageList": [
@@ -31,12 +35,9 @@
         ],
         "rateScaleList": [
           {
-            "defaultFlag": false,
-            "code": "1",
+            "rateScale": 1,
+            "groupId": 1,
             "description": "แผน 1",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 100,
             "rateScaleValue": {
               "sumInsure": [
@@ -49,12 +50,9 @@
             }
           },
           {
-            "defaultFlag": true,
-            "code": "2",
+            "rateScale": 2,
+            "groupId": 1,
             "description": "แผน 2",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 150,
             "rateScaleValue": {
               "sumInsure": [
@@ -65,14 +63,11 @@
                 "3,000,000"
               ]
             }
-		  },
-			{
-            "defaultFlag": false,
-            "code": "21",
+          },
+          {
+            "rateScale": 3,
+            "groupId": 2,
             "description": "แผน 2.1",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 170,
             "rateScaleValue": {
               "sumInsure": [
@@ -113,12 +108,9 @@
           ],
           "rateScaleList": [
             {
-              "defaultFlag": false,
-              "code": "1",
+              "rateScale": 1,
+              "groupId": 2,
               "description": "แผน 1",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 100,
               "rateScaleValue": {
                 "sumInsure": [
@@ -131,12 +123,9 @@
               }
             },
             {
-              "defaultFlag": true,
-              "code": "2",
+              "rateScale": 2,
+              "groupId": 1,
               "description": "แผน 2",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 150,
               "rateScaleValue": {
                 "sumInsure": [
@@ -149,12 +138,9 @@
               }
             },
             {
-              "defaultFlag": true,
-              "code": "21",
+              "rateScale": 3,
+              "groupId": 1,
               "description": "แผน 2.1",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 170,
               "rateScaleValue": {
                 "sumInsure": [
@@ -186,12 +172,9 @@
           ],
           "rateScaleList": [
             {
-              "defaultFlag": false,
-              "code": "1",
+              "rateScale": 1,
+              "groupId": 1,
               "description": "แผน 1",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 100,
               "rateScaleValue": {
                 "sumInsure": [
@@ -202,12 +185,9 @@
               }
             },
             {
-              "defaultFlag": true,
-              "code": "2",
+              "rateScale": 2,
+              "groupId": 2,
               "description": "แผน 2",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 150,
               "rateScaleValue": {
                 "sumInsure": [
@@ -218,12 +198,9 @@
               }
             },
             {
-              "defaultFlag": true,
-              "code": "21",
+              "rateScale": 3,
+              "groupId": 1,
               "description": "แผน 21",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 170,
               "rateScaleValue": {
                 "sumInsure": [
@@ -237,9 +214,13 @@
         }
       ]
     },
-	{
-      "campaignCode": "CGINGPSTTT",
+    {
+      "campaignCode": "CGNIGWBTTV2",
       "defaultFlag": false,
+      "defaultRateScale": 1,
+      "minAge": 8,
+      "maxAge": 80,
+      "calculateMethod": "02",
       "mandatory": {
         "topicDetail": "(A2) Travel Care",
         "coverageList": [
@@ -266,12 +247,9 @@
         ],
         "rateScaleList": [
           {
-            "defaultFlag": false,
-            "code": "3",
+            "rateScale": 1,
+            "groupId": 3,
             "description": "แผน 3",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 200,
             "rateScaleValue": {
               "sumInsure": [
@@ -284,12 +262,9 @@
             }
           },
           {
-            "defaultFlag": false,
-            "code": "4",
+            "rateScale": 2,
+            "groupId": 3,
             "description": "แผน 4",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 250,
             "rateScaleValue": {
               "sumInsure": [
@@ -302,12 +277,9 @@
             }
           },
           {
-            "defaultFlag": true,
-            "code": "5",
+            "rateScale": 3,
+            "groupId": 3,
             "description": "แผน 5",
-            "minAge": 8,
-            "maxAge": 80,
-            "calculateMethod": "Next",
             "price": 300,
             "rateScaleValue": {
               "sumInsure": [
@@ -348,12 +320,9 @@
           ],
           "rateScaleList": [
             {
-              "defaultFlag": false,
-              "code": "3",
+              "rateScale": 1,
+              "groupId": 1,
               "description": "แผน 3",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 200,
               "rateScaleValue": {
                 "sumInsure": [
@@ -366,12 +335,9 @@
               }
             },
             {
-              "defaultFlag": false,
-              "code": "4",
+              "rateScale": 2,
+              "groupId": 3,
               "description": "แผน 4",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 250,
               "rateScaleValue": {
                 "sumInsure": [
@@ -384,12 +350,9 @@
               }
             },
             {
-              "defaultFlag": true,
-              "code": "5",
+              "rateScale": 3,
+              "groupId": 1,
               "description": "แผน 5",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 300,
               "rateScaleValue": {
                 "sumInsure": [
@@ -421,12 +384,9 @@
           ],
           "rateScaleList": [
             {
-              "defaultFlag": false,
-              "code": "3",
+              "rateScale": 1,
+              "groupId": 3,
               "description": "แผน 3",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 200,
               "rateScaleValue": {
                 "sumInsure": [
@@ -437,15 +397,11 @@
               }
             },
             {
-
             },
             {
-              "defaultFlag": false,
-              "code": "5",
+              "rateScale": 2,
+              "groupId": 3,
               "description": "แผน 5",
-              "minAge": 8,
-              "maxAge": 80,
-              "calculateMethod": "Next",
               "price": 300,
               "rateScaleValue": {
                 "sumInsure": [
