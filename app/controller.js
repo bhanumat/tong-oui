@@ -44,10 +44,6 @@
         };
         $scope.formStepSubmitted = false;
         $scope.tempData.currentState = $location.path();
-        //$scope.tempData.passengersProfile = [];
-        //$scope.tempData.passengersProfile[1] = {};
-        //$scope.tempData.passengersProfile[1].stage = "edit";
-        //$scope.tempData.passengersProfile[1].isManualAddress = true;
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
@@ -144,11 +140,6 @@
             $scope.travel.tokenCode = response.data.tokenCode;
         });
 
-        //QueryService.query('POST', 'submitOrder').then(function (response) {
-        //$scope.travel.applicationList = response.data.applicationList;
-        //}, function (response) {
-        //});
-
         $scope.$watch('travel.startDate', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.travelDateChanged = true;
@@ -163,7 +154,7 @@
         });
 
         $scope.$watch('travel.passengers', function (newValue, oldValue) {
-            console.log('$watch travel.passengers : ' + newValue + ', '+ oldValue);
+            //console.log('$watch travel.passengers : ' + newValue + ', '+ oldValue);
             if ($location.path() == '/insurance/payment') {
                 $location.path('/insurance/profile');
                 $location.replace();
@@ -177,7 +168,7 @@
         });
 
         $scope.passengersChange = function(){
-            if (!$scope.travel.applicationList) {
+            if (!$scope.tempData.passengersProfile) {
                 $scope.travel.applicationList = [];
                 $scope.tempData.passengersProfile = [];
                 angular.forEach($scope.range(1, $scope.travel.passengers), function (value, index) {
@@ -185,16 +176,16 @@
                     $scope.tempData.passengersProfile.push({stage: 'edit'});
                 });
             } else {
-                var applicationLength = $scope.travel.applicationList.length;
                 var passengersArray = $scope.range(0, $scope.travel.passengers - 1);
-                var applicationArray = $scope.range(0, $scope.travel.applicationList.length - 1);
-                var differenceArray = _.difference(applicationArray, passengersArray);
-                console.log(differenceArray);
-                if (applicationLength > $scope.travel.passengers) {
+                var profileArray = $scope.range(0, $scope.tempData.passengersProfile.length - 1);
+                var differenceArray = _.difference(profileArray, passengersArray);
+                var profileLength = $scope.tempData.passengersProfile.length;
+                //console.log(differenceArray);
+                if (profileLength > $scope.travel.passengers) {
                     $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
                     $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
-                } else if (applicationLength < $scope.travel.passengers) {
-                    angular.forEach($scope.range(1, ($scope.travel.passengers - applicationLength)), function (value, index) {
+                } else if (profileLength < $scope.travel.passengers) {
+                    angular.forEach($scope.range(1, ($scope.travel.passengers - profileLength)), function (value, index) {
                         $scope.travel.applicationList.push({});
                         $scope.tempData.passengersProfile.push({stage: 'edit'});
                     });
@@ -232,16 +223,16 @@
                     $scope.tempData.travelDateChanged = false;
                     $scope.tempData.countryChanged = false;
                     //  Add/Remove passengers profile.
-                    if($scope.travel.passengers < $scope.travel.applicationList.length){
-                        var dlg = dialogs.confirm('Warning', MESSAGES['confirm_passengers_change']);
+                    if($scope.travel.passengers < $scope.tempData.passengersProfile.length){
+                        var dlg = dialogs.confirm('Warning', MESSAGES['confirm_edit_passengers']);
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
                         }, function (noBtn) {
-                            $scope.travel.passengers = $scope.travel.applicationList.length;
+                            $scope.travel.passengers = $scope.tempData.passengersProfile.length;
                             $scope.calculatePrice();
                             $scope.editingSummarybar = true;
                         });
-                    } else if($scope.travel.passengers > $scope.travel.applicationList.length){
+                    } else if($scope.travel.passengers > $scope.tempData.passengersProfile.length){
                         $scope.passengersChange();
                     }
                 }
@@ -389,7 +380,6 @@
                 $scope.tempData.passengersProfile[index].stage = '';
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
                 $scope.travel.applicationList[index] = {}
-                $scope.travel.applicationList[index].dateOfBirth = '';
             }
             if (stage == 'edit') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
@@ -405,11 +395,15 @@
                 }
             }
             if (stage == 'reset') {
-                $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
-                $scope.travel.applicationList[index] = {};
-                $scope.tempData.passengersProfile[index].termsAccepted = false;
-                $scope.tempData.passengersProfile[index].stage = "";
-                $scope.tempData.passengersProfile[index].profileForm = null;
+                var dlg = dialogs.confirm('Warning', MESSAGES['confirm_delete_profile']);
+                dlg.result.then(function (yesBtn) {
+                    $scope.tempData.passengersProfile.splice(index, 1);
+                    $scope.tempData.passengersProfile.push({profileFormSubmitted:false, stage:'', profileForm:null});
+                    $scope.travel.applicationList.splice(index, 1);
+                    //$scope.travel.applicationList.push({});
+                }, function (noBtn) {
+
+                });
             }
 
         };
@@ -651,7 +645,7 @@
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
-                if(!$scope.travel.applicationList)
+                if(!$scope.tempData.passengersProfile)
                     $scope.passengersChange();
             }
         };
