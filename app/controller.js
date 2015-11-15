@@ -657,16 +657,16 @@
                 var checkBlacklistParam = self.initCheckBlacklistParam();
                 QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
                     var blacklists = _.where(response.data.blacklists, {result: true});
-                    console.log('blacklists : '+blacklists);
-                    if(blacklists){
-                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, MESSAGES['blacklist_warning']));
+                    //console.log('blacklists : '+blacklists);
+                    if(blacklists && blacklists.length > 0){
+                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, MESSAGES['ER-ESA-008']));
                     } else {
                         var checkOverlapParam = self.initCheckOverlapParam();
                         QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
                             var overlaps = _.where(response.data.overlaps, {result: true});
-                            console.log('overlaps : '+overlaps);
-                            if(overlaps) {
-                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['overlap_warning']));
+                            //console.log('overlaps : '+overlaps);
+                            if(overlaps && overlaps.length > 0) {
+                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['ER-ESA-009']));
                             } else {
                                 //Store data to session storage before payment
                                 LocalStorage.update('insurance.travel', $scope.travel);
@@ -940,10 +940,12 @@
                 overlaps : []
             }
             angular.forEach($scope.travel.applicationList, function(obj, index){
+                var startTravelDate = $scope.travel.startDate;
+                var endTravelDate = $scope.travel.endDate;
                 checkOverlapParam.overlaps.push({
                     ssn : obj.ssn,
-                    startTravelDate : '',
-                    endTravelDate : ''
+                    startTravelDate : startTravelDate,
+                    endTravelDate : endTravelDate
                 });
             });
             return checkOverlapParam;
@@ -961,8 +963,8 @@
             var profileWarningMessage = notifyMessage.replace('{{msg}}', message);
             return profileWarningMessage;
         }
-    }
 
         console.log("Current State:", $scope.tempData.currentState);
     }
+
 })();

@@ -6,13 +6,13 @@
     "ssn": "5875841071835",
     "startTravelDate": "07/12/2015",
     "endTravelDate": "02/11/2015",
-    "result": false
+    "result": true
     },
     {
       "ssn": "9699168252887",
       "startTravelDate": "07/12/2015",
       "endTravelDate": "02/11/2015",
-      "result": false
+      "result": true
     }
   ]
 }
