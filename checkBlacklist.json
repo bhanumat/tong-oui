@@ -1,0 +1,18 @@
+{
+  "resultCode": "0",
+  "resultDesc": "",
+  "blacklists": [
+    {
+      "firstname": "Test",
+      "lastname": "Tester",
+      "ssn": "1111111111112",
+      "result": false
+    },
+    {
+      "firstname": "Test",
+      "lastname": "Tester",
+      "ssn": "1111111111112",
+      "result": false
+    }
+  ]
+}
