@@ -963,8 +963,6 @@
                         message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                     else
                         message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
-                } else {
-                    console.log('cannot find ssn : '+ item.ssn +' in travel.applicationList.');
                 }
             });
             if(message)
