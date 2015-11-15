@@ -925,22 +925,22 @@
             var checkBlacklistParam = {
                 tokenCode : $scope.travel.tokenCode,
                 blacklists : []
-            }
+            };
             angular.forEach($scope.travel.applicationList, function(obj, index){
                 checkBlacklistParam.blacklists.push({
                     firstname : obj.firstnameTh,
                     lastname : obj.lastnameTh,
-                    ssn : obj.ssn,
+                    ssn : obj.ssn
                 });
             });
             return checkBlacklistParam;
-        }
+        };
 
         self.initCheckOverlapParam = function(){
             var checkOverlapParam = {
                 tokenCode : $scope.travel.tokenCode,
                 overlaps : []
-            }
+            };
             angular.forEach($scope.travel.applicationList, function(obj, index){
                 var startTravelDate = $scope.travel.startDate;
                 var endTravelDate = $scope.travel.endDate;
@@ -951,7 +951,7 @@
                 });
             });
             return checkOverlapParam;
-        }
+        };
 
         self.buildProfileWarningMessage = function(list, notifyMessage){
             var message;
@@ -972,7 +972,7 @@
             else
                 profileWarningMessage = notifyMessage;
             return profileWarningMessage;
-        }
+        };
 
         console.log("Current State:", $scope.tempData.currentState);
     }
