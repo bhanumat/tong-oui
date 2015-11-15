@@ -491,7 +491,7 @@
                       <div class="checkbox" ng-class="{ 'checked' : tempData.passengersProfile[applicationIndex].termsAccepted == true }">
                         <label for="termsAccepted" ng-click="termsToggle(applicationIndex);">
                           <input type="checkbox" name="termsAccepted" ng-model="tempData.passengersProfile[applicationIndex].termsAccepted" required>
-                          ข้าพเจ้ายินยอมให้บริษัทฯติดต่อแจ้งผลการอนุมัติ การรับประกันภัย ทางหมายเลขโทรศัพท์มือถือ และ/หรือ อีเมล์อิเลคโทรนิคที่ให้ไว้ข้างต้น รวมถึงใช้เพื่อการติดต่อแจ้งข่าวสารและผลประโยชน์ต่างๆ ของบริษัทฯ บริษัทในเครือ และบริษัทคู่ค้าทางธุรกิจ
+                          {{travelData.termCondition}}
                         </label>
                       </div>
                     </div>
