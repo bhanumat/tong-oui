@@ -955,14 +955,22 @@
 
         self.buildProfileWarningMessage = function(list, notifyMessage){
             var message;
+            var profileWarningMessage;
             angular.forEach(list, function(item, index){
                 var profile = _.findWhere($scope.travel.applicationList, {ssn:item.ssn});
-                if(message)
-                    message = (message + ', ' + profile.title +' ' + profile.firstnameTh + ' '+profile.lastnameTh);
-                else
-                    message = (profile.title +' ' + profile.firstnameTh + ' '+profile.lastnameTh);
+                if(profile) {
+                    if (message)
+                        message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                    else
+                        message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                } else {
+                    console.log('cannot find ssn : '+ item.ssn +' in travel.applicationList.');
+                }
             });
-            var profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+            if(message)
+                profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+            else
+                profileWarningMessage = notifyMessage;
             return profileWarningMessage;
         }
 
