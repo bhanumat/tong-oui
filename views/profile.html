@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
     <h3>ข้อมูลผู้ขอประกัน</h3>
-    <div class="profileGroup" ng-repeat="application in travel.applicationList" ng-init="applicationIndex=$index" >
+    <div class="profileGroup" ng-repeat="application in range(1, tempData.passengersProfile.length)" ng-init="applicationIndex=$index" >
       <ng-form name="profileForm" novalidate>
       <div class="profile" ng-class="{'edit':tempData.passengersProfile[applicationIndex].stage == 'edit','saved':tempData.passengersProfile[applicationIndex].stage == 'saved'}">
         <div class="row">
@@ -491,7 +491,7 @@
                       <div class="checkbox" ng-class="{ 'checked' : tempData.passengersProfile[applicationIndex].termsAccepted == true }">
                         <label for="termsAccepted" ng-click="termsToggle(applicationIndex);">
                           <input type="checkbox" name="termsAccepted" ng-model="tempData.passengersProfile[applicationIndex].termsAccepted" required>
-                          ข้าพเจ้ายินยอมให้บริษัทฯติดต่อแจ้งผลการอนุมัติ การรับประกันภัย ทางหมายเลขโทรศัพท์มือถือ และ/หรือ อีเมล์อิเลคโทรนิคที่ให้ไว้ข้างต้น รวมถึงใช้เพื่อการติดต่อแจ้งข่าวสารและผลประโยชน์ต่างๆ ของบริษัทฯ บริษัทในเครือ และบริษัทคู่ค้าทางธุรกิจ
+                          {{travelData.termCondition}}
                         </label>
                       </div>
                     </div>
