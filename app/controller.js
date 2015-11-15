@@ -47,6 +47,21 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
+        self.reset = function() {
+            LocalStorage.removeAll();
+            $scope.travel = {};
+            $scope.tempData = {passengers: 1};
+            $scope.tempData.voluntaryCollapse = [];
+            $scope.tempData.destination = null;
+            $scope.tempData.destinations = [];
+            $scope.tempData.promotion = {
+                "promoType": null,
+                "promoValue": null,
+                "promoFull": null
+            };
+            $scope.formStepSubmitted = false;
+        };
+
         /**
          * Load data from session if any
          */
@@ -98,7 +113,7 @@
 
         $scope.$on('$locationChangeStart', function (next, current) {
             console.log('Stage changed:', $location.path());
-            if ($location.path() == '/insurance') {
+        if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
             }
@@ -142,22 +157,6 @@
             LocalStorage.update('insurance.sessionStartDate', new Date())
             self.initSessionTimer();
         };
-
-        self.reset = function() {
-            LocalStorage.removeAll();
-            $scope.travel = {};
-            $scope.tempData = {passengers: 1};
-            $scope.tempData.voluntaryCollapse = [];
-            $scope.tempData.destination = null;
-            $scope.tempData.destinations = [];
-            $scope.tempData.promotion = {
-                "promoType": null,
-                "promoValue": null,
-                "promoFull": null
-            };
-            $scope.formStepSubmitted = false;
-        };
-
 
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
@@ -669,7 +668,13 @@
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['ER-ESA-009']));
                             } else {
                                 //Store data to session storage before payment
-                                QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                                var submitOrderParams = angular.copy($scope.travel);
+                                delete submitOrderParams.mandatory;
+                                delete submitOrderParams.voluntaryList;
+                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.rateScale;
+                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'rateScale').join(',');
+                                console.log(submitOrderParams);
+                                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                                     self.restartTimer();
                                     $scope.formStepSubmitted = false;
                                     $scope.tempData.referenceId = response.data.referenceId;
