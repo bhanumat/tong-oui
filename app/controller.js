@@ -127,10 +127,10 @@
                 var dlg = dialogs.error('Error', MESSAGES['timeout']);
                 dlg.result.then(function () {
                     self.reset();
-                    $location.path('/insurance/destination');
+                    $location.path('/insurance');
                     $location.replace();
                 }, function () {
-                    $location.path('/insurance/destination');
+                    $location.path('/insurance');
                     $location.replace();
                 });
             }, (timeout) * 60000);
