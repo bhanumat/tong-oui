@@ -90,7 +90,7 @@
         $scope.start = true;
         if ($scope.start == true && !$scope.tempData.currentState) {
             $scope.start = false;
-            $location.path('/insurance/destination');
+            $location.path('/insurance/');
             $location.replace();
         }
 
@@ -669,13 +669,15 @@
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['ER-ESA-009']));
                             } else {
                                 //Store data to session storage before payment
-                                LocalStorage.update('insurance.travel', $scope.travel);
-                                LocalStorage.update('insurance.travelData', $scope.travelData);
-                                LocalStorage.update('insurance.tempData', $scope.tempData);
-
                                 QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                                    self.restartTimer();
                                     $scope.formStepSubmitted = false;
                                     $scope.tempData.referenceId = response.data.referenceId;
+                                    $scope.tempData.currentState = "/insurance/payment";
+                                    //Store data to session storage before payment
+                                    LocalStorage.update('insurance.travel', $scope.travel);
+                                    LocalStorage.update('insurance.travelData', $scope.travelData);
+                                    LocalStorage.update('insurance.tempData', $scope.tempData);
                                     $state.go('^.payment');
                                 });
                             }
