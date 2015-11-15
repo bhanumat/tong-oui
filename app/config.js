@@ -24,7 +24,8 @@
             'timeout':'ขออภัย ท่านรายการเกินเวลาที่กำหนด',
             'confirm_edit_passengers':'ยืนยัน การแก้ไขจำนวนผู้ขอประกัน',
             'confirm_delete_profile':'ยืนยัน การลบข้อมูลผู้ขอประกัน',
-            'blacklist':'ขออภัย ไม่ผ่านการตรวจสอบข้อมูล'
+            'blacklist':'ขออภัย ไม่ผ่านการตรวจสอบข้อมูล',
+            'ER-ESA-011':'ข้อมูลหมายเลขบัตรเครดิต/ รหัส/ CVC/ CVV2 /  วันหมดอายุ ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง'
         })
         .constant('PAYMENT_INFO', {
             'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
@@ -33,12 +34,12 @@
             'currCode':'764',
             //'cvv2Url':'https://ipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
             'cvv2Url':'https://psipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
-            'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
-            'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-            'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-            // 'successUrl':'http://localhost:3000/#/insurance/thankyou',
-            //'failUrl':'http://localhost:3000/#/insurance/payment',
-            //'cancelUrl':'http://localhost:3000/#/insurance/payment',
+            //'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
+            //'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
+            //'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
+             'successUrl':'http://localhost:3000/#/insurance/thankyou',
+            'failUrl':'http://localhost:3000/#/insurance/payment',
+            'cancelUrl':'http://localhost:3000/#/insurance/payment',
             'payType':'N',
             'lang':'T',
             'remark':'-',

@@ -23,9 +23,10 @@
         var self = this;
         var sessionTimeWarningPromise;
         var sessionTimePromise;
-        $scope.refId = $location.search().Ref;
+        var dialog;
 
-        //Travel Model to post back to API
+
+        //Travel Model to keep data for post to Back-End
         $scope.travel = {};
 
         //Payment
@@ -42,7 +43,7 @@
             "promoFull": null
         };
         $scope.formStepSubmitted = false;
-        $scope.tempData.currentState = $location.path();
+        $scope.tempData.currentState;
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
@@ -50,24 +51,38 @@
          * Load data from session if any
          */
         if (LocalStorage.get('insurance.travel')) {
-
-            console.log('Found storage');
+            console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
             $scope.tempData = LocalStorage.get('insurance.tempData');
-
-            $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
-
             var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
 
-            if (sessionStartDate) {
-                var sessionStartTimeout = moment(sessionStartDate).add($scope.travelData.timeOut, 'minutes');
-                var now = moment();
+            $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+            $scope.refId = $location.search().Ref;
+            var cleanStorageRequired;
+            if ($location.path() == "/insurance/payment" && $scope.refId) {
+                dialog = dialogs.error('Error', MESSAGES['ER-ESA-011']);
+            } else {
+                cleanStorageRequired = true;
+            }
 
-                if (sessionStartTimeout.isBefore(now)) {//timeout
-                    LocalStorage.removeAll();
+            var redirectRequired;
+            if (sessionStartDate) {
+                var startDate = moment(sessionStartDate);
+                var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
+                var now = moment();
+                if (sessionStartTimeout.utc().isBefore(now)) {//timeout
+                    cleanStorageRequired = true;
+                    redirectRequired = true;
                 }
-                console.log(sessionStartDate);
+            }
+
+            if (cleanStorageRequired) {
+                self.reset();
+            }
+            if (redirectRequired) {
+                $location.path('/insurance');
+                $location.replace();
             }
         }
 
@@ -82,6 +97,7 @@
         // comment for testing
 
         $scope.$on('$locationChangeStart', function (next, current) {
+            console.log('Stage changed:', $location.path());
             if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
@@ -101,16 +117,16 @@
         });
 
         self.initSessionTimer = function () {
-            var timeout = LocalStorage.get('insurance.timeout');
-            var warningDialog;
+            var timeout = $scope.travelData.timeOut
+
             sessionTimeWarningPromise = $timeout(function () {
-                warningDialog = dialogs.error('Warning', MESSAGES['timeout_warning']);
+                dialog = dialogs.error('Warning', MESSAGES['timeout_warning']);
             }, (timeout - 5) * 60000);
             sessionTimePromise = $timeout(function () {
-                warningDialog.close();
+                dialog.close();
                 var dlg = dialogs.error('Error', MESSAGES['timeout']);
                 dlg.result.then(function () {
-                    LocalStorage.removeAll();
+                    self.reset();
                     $location.path('/insurance/destination');
                     $location.replace();
                 }, function () {
@@ -125,6 +141,21 @@
             $timeout.cancel(sessionTimePromise);
             LocalStorage.update('insurance.sessionStartDate', new Date())
             self.initSessionTimer();
+        };
+
+        self.reset = function() {
+            LocalStorage.removeAll();
+            $scope.travel = {};
+            $scope.tempData = {passengers: 1};
+            $scope.tempData.voluntaryCollapse = [];
+            $scope.tempData.destination = null;
+            $scope.tempData.destinations = [];
+            $scope.tempData.promotion = {
+                "promoType": null,
+                "promoValue": null,
+                "promoFull": null
+            };
+            $scope.formStepSubmitted = false;
         };
 
 
@@ -153,8 +184,7 @@
         });
 
         $scope.$watch('travel.passengers', function (newValue, oldValue) {
-            //console.log('$watch travel.passengers : ' + newValue + ', '+ oldValue);
-            if ($location.path() == '/insurance/payment') {
+            if ($location.path() == '/insurance/payment' && newValue != oldValue) {
                 $location.path('/insurance/profile');
                 $location.replace();
             }
@@ -191,7 +221,7 @@
                 }
             }
             $scope.tempData.passengersProfile[0].isManualAddress = true;
-        }
+        };
 
         $scope.trustAsHtml = function (value) {
             return $sce.trustAsHtml(value);
@@ -571,7 +601,7 @@
                 promoCode: $scope.travel.promoCode
             };
             QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
-                self.restartTimer()
+                self.restartTimer();
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
 
@@ -625,30 +655,32 @@
 
             if (isFormValid) {
                 var checkBlackListData = {
-                    tokenCode : $scope.travel.tokenCode,
-                    blacklists : []
+                    tokenCode: $scope.travel.tokenCode,
+                    blacklists: []
                 }
-                angular.forEach($scope.travel.applicationList, function(obj, index){
+                angular.forEach($scope.travel.applicationList, function (obj, index) {
                     checkBlackListData.blacklists.push({
-                        firstname : obj.firstnameTh,
-                        lastname : obj.lastnameTh,
-                        ssn : obj.ssn,
+                        firstname: obj.firstnameTh,
+                        lastname: obj.lastnameTh,
+                        ssn: obj.ssn,
                     });
                 });
                 QueryService.query('POST', 'checkBlacklist', undefined, checkBlackListData).then(function (response) {
+                    self.restartTimer();
                     var isBlacklist = _.findWhere(response.data.blacklists, {result: true});
-                    console.log('isBlacklist : '+isBlacklist);
-                    if(isBlacklist) {
+                    console.log('isBlacklist : ' + isBlacklist);
+                    if (isBlacklist) {
                         dialogs.notify('Warning', MESSAGES['blacklist']);
                     } else {
-                        //Store data to session storage before payment
-                        LocalStorage.update('insurance.travel', $scope.travel);
-                        LocalStorage.update('insurance.travelData', $scope.travelData);
-                        LocalStorage.update('insurance.tempData', $scope.tempData);
-
                         QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                            self.restartTimer();
                             $scope.formStepSubmitted = false;
                             $scope.tempData.referenceId = response.data.referenceId;
+                            $scope.tempData.currentState = "/insurance/payment";
+                            //Store data to session storage before payment
+                            LocalStorage.update('insurance.travel', $scope.travel);
+                            LocalStorage.update('insurance.travelData', $scope.travelData);
+                            LocalStorage.update('insurance.tempData', $scope.tempData);
                             $state.go('^.payment');
                         });
                     }
@@ -884,12 +916,12 @@
             };
             return {
                 test: function (date) {
-                    console.log('hit')
                     var age = calculateAge($scope.travel.calculateMethod, moment(date, 'DD MMM YYYY'));
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };
         })();
-    }
 
+        console.log("Current State:", $scope.tempData.currentState);
+    }
 })();

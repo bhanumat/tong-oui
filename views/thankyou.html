@@ -20,9 +20,8 @@
 						<img src="images/icon-plan-4.png" alt="">
 					</div>
 					<p class="col-xs-10">
-						ศูนย์บริการลูกค้าซิกน่า โทร: 1758 หรือ 0-2763-0000 (เว้นวันหยุดนักขัตฤกษ์)<br>
-						วันจันทร์-วันศุกร์ เวลาทำการ 08.00-20.00 น. วันเสาร์-วันอาทิตย์ เวลาทำการ 08.30-17.30 น.<br>
-						อีเมล: cigna.customerservice@cigna.com, www.facebook.com/CignaThailand
+						<span ng-bind-html="trustAsHtml(travelData.contactInfo)"></span>
+						<br>อีเมล: {{travelData.emailInfo}}
 					</p>
 				</div>
 			</div>
