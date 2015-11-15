@@ -624,15 +624,34 @@
             $scope.formStepSubmitted = true;
 
             if (isFormValid) {
-                //Store data to session storage before payment
-                LocalStorage.update('insurance.travel', $scope.travel);
-                LocalStorage.update('insurance.travelData', $scope.travelData);
-                LocalStorage.update('insurance.tempData', $scope.tempData);
+                var checkBlackListData = {
+                    tokenCode : $scope.travel.tokenCode,
+                    blacklists : []
+                }
+                angular.forEach($scope.travel.applicationList, function(obj, index){
+                    checkBlackListData.blacklists.push({
+                        firstname : obj.firstnameTh,
+                        lastname : obj.lastnameTh,
+                        ssn : obj.ssn,
+                    });
+                });
+                QueryService.query('POST', 'checkBlacklist', undefined, checkBlackListData).then(function (response) {
+                    var isBlacklist = _.findWhere(response.data.blacklists, {result: true});
+                    console.log('isBlacklist : '+isBlacklist);
+                    if(isBlacklist) {
+                        dialogs.notify('Warning', MESSAGES['blacklist']);
+                    } else {
+                        //Store data to session storage before payment
+                        LocalStorage.update('insurance.travel', $scope.travel);
+                        LocalStorage.update('insurance.travelData', $scope.travelData);
+                        LocalStorage.update('insurance.tempData', $scope.tempData);
 
-                QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
-                    $scope.formStepSubmitted = false;
-                    $scope.tempData.referenceId = response.data.referenceId;
-                    $state.go('^.payment');
+                        QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                            $scope.formStepSubmitted = false;
+                            $scope.tempData.referenceId = response.data.referenceId;
+                            $state.go('^.payment');
+                        });
+                    }
                 });
             }
         };

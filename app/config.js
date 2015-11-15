@@ -23,7 +23,8 @@
             'timeout_warning':'ท่านเหลือระยะเวลาทำรายการอีก 5 นาที',
             'timeout':'ขออภัย ท่านรายการเกินเวลาที่กำหนด',
             'confirm_edit_passengers':'ยืนยัน การแก้ไขจำนวนผู้ขอประกัน',
-            'confirm_delete_profile':'ยืนยัน การลบข้อมูลผู้ขอประกัน'
+            'confirm_delete_profile':'ยืนยัน การลบข้อมูลผู้ขอประกัน',
+            'blacklist':'ขออภัย ไม่ผ่านการตรวจสอบข้อมูล'
         })
         .constant('PAYMENT_INFO', {
             'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
