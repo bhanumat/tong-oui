@@ -166,7 +166,7 @@
             }
         });
 
-        $scope.passengersChange = function(){
+        $scope.passengersChange = function () {
             if (!$scope.tempData.passengersProfile) {
                 $scope.travel.applicationList = [];
                 $scope.tempData.passengersProfile = [];
@@ -222,7 +222,7 @@
                     $scope.tempData.travelDateChanged = false;
                     $scope.tempData.countryChanged = false;
                     //  Add/Remove passengers profile.
-                    if($scope.travel.passengers < $scope.tempData.passengersProfile.length){
+                    if ($scope.travel.passengers < $scope.tempData.passengersProfile.length) {
                         var dlg = dialogs.confirm('Warning', MESSAGES['confirm_edit_passengers']);
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
@@ -231,7 +231,7 @@
                             $scope.calculatePrice();
                             $scope.editingSummarybar = true;
                         });
-                    } else if($scope.travel.passengers > $scope.tempData.passengersProfile.length){
+                    } else if ($scope.travel.passengers > $scope.tempData.passengersProfile.length) {
                         $scope.passengersChange();
                     }
                 }
@@ -331,7 +331,7 @@
 
             for (var i = 0, len = campaign.voluntaryList.length; i < len; i++) {
                 var voluntary = campaign.voluntaryList[i];
-                $scope.travel.voluntaryList[i]={
+                $scope.travel.voluntaryList[i] = {
                     topicDetail: voluntary.topicDetail,
                     coverageList: voluntary.coverageList,
                     rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
@@ -399,7 +399,7 @@
                 var dlg = dialogs.confirm('Warning', MESSAGES['confirm_delete_profile']);
                 dlg.result.then(function (yesBtn) {
                     $scope.tempData.passengersProfile.splice(index, 1);
-                    $scope.tempData.passengersProfile.push({profileFormSubmitted:false, stage:'', profileForm:null});
+                    $scope.tempData.passengersProfile.push({profileFormSubmitted: false, stage: '', profileForm: null});
                     $scope.travel.applicationList.splice(index, 1);
                     //$scope.travel.applicationList.push({});
                 }, function (noBtn) {
@@ -644,7 +644,7 @@
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
                 $state.go('^.profile');
-                if(!$scope.tempData.passengersProfile)
+                if (!$scope.tempData.passengersProfile)
                     $scope.passengersChange();
             }
         };
@@ -835,6 +835,39 @@
                         }
                     }
                     return false;
+                }
+            };
+        })();
+
+        $scope.validAge = (function () {
+            var calculateNextAge = function (birthDate) {
+                var nowDate = new Date();
+                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+                return Math.ceil(yearPrecision);
+            };
+            var calculateLastAge = function (birthDate) {
+                var nowDate = new Date();
+                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+                return Math.floor(yearPrecision);
+            };
+            var calculateNearAge = function (birthDate) {
+                var nowDate = new Date();
+                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+                var year = moment(nowDate).diff(birthDate, 'years');
+                var month = Math.floor((yearPrecision - year) * 12);
+                return year + Math.round(month / 12);
+            };
+            var calculateMethods = {
+                "01": calculateNextAge, "02": calculateLastAge, "03": calculateNearAge
+            };
+            var calculateAge = function (method, date) {
+                return calculateMethods[method](date);
+            };
+            return {
+                test: function (date) {
+                    console.log('hit')
+                    var age = calculateAge($scope.travel.calculateMethod, moment(date, 'DD MMM YYYY'));
+                    return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };
         })();

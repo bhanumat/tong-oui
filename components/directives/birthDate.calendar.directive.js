@@ -33,7 +33,6 @@
         });
 
     function initBirthDateCalendar() {
-
         // Definition of directive
         var directiveDefinitionObject = {
             restrict: 'EA',
@@ -41,7 +40,7 @@
                 var min = new Date();
                 min.setFullYear(min.getFullYear() - scope.travel.maxAge);
                 var max = new Date();
-                max.setFullYear(max.getFullYear() - 5);
+                max.setFullYear(max.getFullYear() - scope.travel.minAge);
                 return element.datepicker({
                     dateFormat: 'dd MM yy',
                     changeMonth: true,
@@ -54,7 +53,7 @@
                         scope.travel.applicationList[parseInt(attrs["index"])].dateOfBirth = date;
                         scope.$apply();
                     }
-                })
+                });
             }
         }
         return directiveDefinitionObject;

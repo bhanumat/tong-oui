@@ -133,9 +133,12 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.birthDate.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.birthDate.$touched) }">
                           <label class="sr-only" for="birthDate">วัน / เดือน / ปีเกิด</label>
-                          <input type="text" name="birthDate" birth-date-calendar="1" index="{{applicationIndex}}" ng-model="travel.applicationList[applicationIndex].dateOfBirth" placeholder="วัน / เดือน / ปีเกิด" class="form-control" required/>
+                          <input type="text" name="birthDate" birth-date-calendar="1" index="{{applicationIndex}}" ng-model="travel.applicationList[applicationIndex].dateOfBirth"
+                                 placeholder="วัน / เดือน / ปีเกิด ({{travel.minAge}} – {{travel.maxAge}} ปี)" class="form-control"
+                                 ng-pattern="validAge" required/>
                           <div class="help-block" ng-messages="profileForm.birthDate.$error" ng-if="tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.birthDate.$touched">
                             <p ng-message="required">กรุณาระบุ วัน / เดือน / ปีเกิด</p>
+                            <p ng-message="pattern">อายุไม่อยู่ในเงื่อนไขที่กำหนด ({{travel.minAge}} – {{travel.maxAge}} ปี)</p>
                           </div>
                         </div>
                       </div>
