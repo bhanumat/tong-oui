@@ -654,34 +654,31 @@
             $scope.formStepSubmitted = true;
 
             if (isFormValid) {
-                var checkBlackListData = {
-                    tokenCode: $scope.travel.tokenCode,
-                    blacklists: []
-                }
-                angular.forEach($scope.travel.applicationList, function (obj, index) {
-                    checkBlackListData.blacklists.push({
-                        firstname: obj.firstnameTh,
-                        lastname: obj.lastnameTh,
-                        ssn: obj.ssn,
-                    });
-                });
-                QueryService.query('POST', 'checkBlacklist', undefined, checkBlackListData).then(function (response) {
-                    self.restartTimer();
-                    var isBlacklist = _.findWhere(response.data.blacklists, {result: true});
-                    console.log('isBlacklist : ' + isBlacklist);
-                    if (isBlacklist) {
-                        dialogs.notify('Warning', MESSAGES['blacklist']);
+                var checkBlacklistParam = self.initCheckBlacklistParam();
+                QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
+                    var blacklists = _.where(response.data.blacklists, {result: true});
+                    console.log('blacklists : '+blacklists);
+                    if(blacklists){
+                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, MESSAGES['blacklist_warning']));
                     } else {
-                        QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
-                            self.restartTimer();
-                            $scope.formStepSubmitted = false;
-                            $scope.tempData.referenceId = response.data.referenceId;
-                            $scope.tempData.currentState = "/insurance/payment";
-                            //Store data to session storage before payment
-                            LocalStorage.update('insurance.travel', $scope.travel);
-                            LocalStorage.update('insurance.travelData', $scope.travelData);
-                            LocalStorage.update('insurance.tempData', $scope.tempData);
-                            $state.go('^.payment');
+                        var checkOverlapParam = self.initCheckOverlapParam();
+                        QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
+                            var overlaps = _.where(response.data.overlaps, {result: true});
+                            console.log('overlaps : '+overlaps);
+                            if(overlaps) {
+                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['overlap_warning']));
+                            } else {
+                                //Store data to session storage before payment
+                                LocalStorage.update('insurance.travel', $scope.travel);
+                                LocalStorage.update('insurance.travelData', $scope.travelData);
+                                LocalStorage.update('insurance.tempData', $scope.tempData);
+
+                                QueryService.query('POST', 'submitOrder', undefined, $scope.travel).then(function (response) {
+                                    $scope.formStepSubmitted = false;
+                                    $scope.tempData.referenceId = response.data.referenceId;
+                                    $state.go('^.payment');
+                                });
+                            }
                         });
                     }
                 });
@@ -921,6 +918,50 @@
                 }
             };
         })();
+
+        self.initCheckBlacklistParam = function(){
+            var checkBlacklistParam = {
+                tokenCode : $scope.travel.tokenCode,
+                blacklists : []
+            }
+            angular.forEach($scope.travel.applicationList, function(obj, index){
+                checkBlacklistParam.blacklists.push({
+                    firstname : obj.firstnameTh,
+                    lastname : obj.lastnameTh,
+                    ssn : obj.ssn,
+                });
+            });
+            return checkBlacklistParam;
+        }
+
+        self.initCheckOverlapParam = function(){
+            var checkOverlapParam = {
+                tokenCode : $scope.travel.tokenCode,
+                overlaps : []
+            }
+            angular.forEach($scope.travel.applicationList, function(obj, index){
+                checkOverlapParam.overlaps.push({
+                    ssn : obj.ssn,
+                    startTravelDate : '',
+                    endTravelDate : ''
+                });
+            });
+            return checkOverlapParam;
+        }
+
+        self.buildProfileWarningMessage = function(list, notifyMessage){
+            var message;
+            angular.forEach(list, function(item, index){
+                var profile = _.findWhere($scope.travel.applicationList, {ssn:item.ssn});
+                if(message)
+                    message = (message + ', ' + profile.title +' ' + profile.firstnameTh + ' '+profile.lastnameTh);
+                else
+                    message = (profile.title +' ' + profile.firstnameTh + ' '+profile.lastnameTh);
+            });
+            var profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+            return profileWarningMessage;
+        }
+    }
 
         console.log("Current State:", $scope.tempData.currentState);
     }
