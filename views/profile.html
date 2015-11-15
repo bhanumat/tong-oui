@@ -439,7 +439,7 @@
                           <div class="form-group" ng-class="{ 'has-error' : beneficiaryForm.relationship.$invalid && (beneficiaryFormSubmitted || tempData.passengersProfile[applicationIndex].profileFormSubmitted || beneficiaryForm.relationship.$touched) }">
                             <label class="sr-only" for="relationship">ความสัมพันธ์</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].relation}" ng-model="travel.applicationList[applicationIndex].beneficiaryList[beneficiaryIndex].relation" name="relationship" title="ความสัมพันธ์" data-size="5" required>
-                              <li nya-bs-option="relationship in travelData.relationship | orderBy:'thaiName'" data-value="relationship.code">
+                              <li nya-bs-option="relationship in travelData.relationshipList | orderBy:'thaiName'" data-value="relationship.code">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
                                   {{ relationship.thaiName }}
