@@ -47,7 +47,7 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
-        self.reset = function() {
+        self.reset = function () {
             LocalStorage.removeAll();
             $scope.travel = {};
             $scope.tempData = {passengers: 1};
@@ -113,7 +113,7 @@
 
         $scope.$on('$locationChangeStart', function (next, current) {
             console.log('Stage changed:', $location.path());
-        if ($location.path() == '/insurance') {
+            if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
             }
@@ -160,6 +160,15 @@
 
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
+            $scope.messages = _.reduce($scope.travelData.resultCodes, function (result, n, key) {
+                if (key === 1) {
+                    result[result.resultCode] = result.resultDesc;
+                    delete result.resultCode;
+                    delete result.resultDesc;
+                }
+                result[n.resultCode] = n.resultDesc;
+                return result;
+            });
             LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
             self.initSessionTimer();
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
@@ -657,14 +666,14 @@
                 QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
                     var blacklists = _.where(response.data.blacklists, {result: true});
                     //console.log('blacklists : '+blacklists);
-                    if(blacklists && blacklists.length > 0){
+                    if (blacklists && blacklists.length > 0) {
                         dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, MESSAGES['ER-ESA-008']));
                     } else {
                         var checkOverlapParam = self.initCheckOverlapParam();
                         QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
                             var overlaps = _.where(response.data.overlaps, {result: true});
                             //console.log('overlaps : '+overlaps);
-                            if(overlaps && overlaps.length > 0) {
+                            if (overlaps && overlaps.length > 0) {
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['ER-ESA-009']));
                             } else {
                                 //Store data to session storage before payment
@@ -926,51 +935,51 @@
             };
         })();
 
-        self.initCheckBlacklistParam = function(){
+        self.initCheckBlacklistParam = function () {
             var checkBlacklistParam = {
-                tokenCode : $scope.travel.tokenCode,
-                blacklists : []
+                tokenCode: $scope.travel.tokenCode,
+                blacklists: []
             };
-            angular.forEach($scope.travel.applicationList, function(obj, index){
+            angular.forEach($scope.travel.applicationList, function (obj, index) {
                 checkBlacklistParam.blacklists.push({
-                    firstname : obj.firstnameTh,
-                    lastname : obj.lastnameTh,
-                    ssn : obj.ssn
+                    firstname: obj.firstnameTh,
+                    lastname: obj.lastnameTh,
+                    ssn: obj.ssn
                 });
             });
             return checkBlacklistParam;
         };
 
-        self.initCheckOverlapParam = function(){
+        self.initCheckOverlapParam = function () {
             var checkOverlapParam = {
-                tokenCode : $scope.travel.tokenCode,
-                overlaps : []
+                tokenCode: $scope.travel.tokenCode,
+                overlaps: []
             };
-            angular.forEach($scope.travel.applicationList, function(obj, index){
+            angular.forEach($scope.travel.applicationList, function (obj, index) {
                 var startTravelDate = $scope.travel.startDate;
                 var endTravelDate = $scope.travel.endDate;
                 checkOverlapParam.overlaps.push({
-                    ssn : obj.ssn,
-                    startTravelDate : startTravelDate,
-                    endTravelDate : endTravelDate
+                    ssn: obj.ssn,
+                    startTravelDate: startTravelDate,
+                    endTravelDate: endTravelDate
                 });
             });
             return checkOverlapParam;
         };
 
-        self.buildProfileWarningMessage = function(list, notifyMessage){
+        self.buildProfileWarningMessage = function (list, notifyMessage) {
             var message;
             var profileWarningMessage;
-            angular.forEach(list, function(item, index){
-                var profile = _.findWhere($scope.travel.applicationList, {ssn:item.ssn});
-                if(profile) {
+            angular.forEach(list, function (item, index) {
+                var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
+                if (profile) {
                     if (message)
                         message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                     else
                         message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
-            if(message)
+            if (message)
                 profileWarningMessage = notifyMessage.replace('{{msg}}', message);
             else
                 profileWarningMessage = notifyMessage;

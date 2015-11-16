@@ -12,6 +12,53 @@
   "termCondition": "ข้าพเจ้ายินยอมให้บริษัทฯติดต่อแจ้งผลการอนุมัติ การรับประกันภัย ทางหมายเลขโทรศัพท์มือถือ และ/หรือ อีเมล์อิเลคโทรนิคที่ให้ไว้ข้างต้น รวมถึงใช้เพื่อการติดต่อแจ้งข่าวสารและผลประโยชน์ต่างๆ ของบริษัทฯ บริษัทในเครือ และบริษัทคู่ค้าทางธุรกิจ",
   "hasPromotion": true,
   "timeOut": 20,
+  "advancePeriod": 730,
+  "resultCodes": [
+    {
+      "resultCode": "ER_ESA_001",
+      "resultDesc": "ท่านเหลือระยะเวลาทำรายการอีก 5 นาที หากต้องการเพิ่มเวลาทำรายการ กรุณากดปุ่ม 'ทำรายการต่อ'"
+    },
+    {
+      "resultCode": "ER_ESA_002",
+      "resultDesc": "ขออภัย ท่านทำรายการเกินเวลาที่กำหนด"
+    },
+    {
+      "resultCode": "ER_ESA_003",
+      "resultDesc": "กรุณาล็อกอิน หรือ สมัครสมัครชิก เพื่อความสะดวกในการใช้บริการ"
+    },
+    {
+      "resultCode": "ER_ESA_004",
+      "resultDesc": "รหัสโปรโมชั่นไม่ถูกต้อง/หมดอายุกรุณาตรวจสอบรายละเอียดข้อมูลที่กรอก"
+    },
+    {
+      "resultCode": "ER_ESA_005",
+      "resultDesc": "ขออภัย สิทธิ์โปรโมชั่นครบตามที่บริษัทฯ กำหนดแล้วท่านสามารถตรวจสอบโปรโมชั่นอื่นได้ที่"
+    },
+    {
+      "resultCode": "ER_ESA_006",
+      "resultDesc": "เลือกเพิ่ม!<br>จ่ายเพิ่มเพียงเล็กน้อย ได้ความคุ้มครองที่เหนือกว่า<br>-คุ้มครองเที่ยวบินล่าช้า พลาดต่อเที่ยวบิน<br>-กระเป๋าหรือทรัพย์สินเสียหาย<br>-รวมไปถึงความรับผิดต่อบุคคลภายนอก<br>ปุ่ม<br>ใช่.. ข้าพเจ้าต้องการเพิ่มความคุ้มครองเสริม<br>ไม่.. ดำเนินการต่อโดยไม่เพิ่มความคุ้มครอง"
+    },
+    {
+      "resultCode": "ER_ESA_007",
+      "resultDesc": "ยืนยันการลบข้อมูล"
+    },
+    {
+      "resultCode": "ER_ESA_008",
+      "resultDesc": "บริษัท ซิกน่า ประกันภัย จำกัด (มหาชน) ขออภัยที่จะเรียนให้ท่านทราบว่าทางบริษัทฯ ไม่สามารถรับประกันภัยตามคำขอของท่านได้ เนื่องจากกฏเกณฑ์ของบริษัทฯ <คำนำหน้า1 ชื่อ1 นามสกุล1>…และ <คำนำหน้า5 ชื่อ5 นามสกุล5>"
+    },
+    {
+      "resultCode": "ER_ESA_009",
+      "resultDesc": "ท่านมีประกันเดินทางในช่วงวัน/เวลาดังกล่าว กรุณาเลือกวันเดินทางใหม่"
+    },
+    {
+      "resultCode": "ER_ESA_010",
+      "resultDesc": "เลขบัตรประจำตัวประชาชนของ {{title}} {{name}} {{surename}} ไม่ถูกต้อง / ซ้ำ กรุณาตรวจสอบข้อมูลใหม่อีกครั้ง"
+    },
+    {
+      "resultCode": "ER_ESA_011",
+      "resultDesc": "ข้อมูลหมายเลขบัตรเครดิต/ รหัส/ CVC/ CVV2 /  วันหมดอายุ ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง"
+    }
+  ],
   "destinationList": [
     {
       "country": "Argentina",
@@ -210,72 +257,150 @@
   ],
   "provinceList": [
     {
-      "code": "006",
-      "thaiName": "กรุงเทพฯ",
+      "code": "01",
+      "thaiName": "กรุงเทพมหานคร",
       "engName": "Bangkok",
-      "districtList": [
-        {
-          "code": "038",
-          "thaiName": "ดุสิต",
-          "engName": "Dusit",
-          "subDistrict": [
-            {
-              "code": "021",
-              "thaiName": "สวนจิตรลดา",
-              "engName": "Suan Chitlada",
-              "postelCode": "10900"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "titleList": [
-    {
-      "code": "2",
-      "thaiName": "นางสาว",
-      "engName": "Miss"
+      "districtList": []
     },
     {
-      "code": "1",
-      "thaiName": "นาย",
-      "engName": "Mr."
+      "code": "02",
+      "thaiName": "สมุทรปราการ",
+      "engName": "Samut Prakan",
+      "districtList": []
+    },
+    {
+      "code": "03",
+      "thaiName": "นนทบุรี",
+      "engName": "Nonthaburi",
+      "districtList": []
+    },
+    {
+      "code": "04",
+      "thaiName": "ปทุมธานี",
+      "engName": "Pathum Thani",
+      "districtList": []
+    },
+    {
+      "code": "05",
+      "thaiName": "พระนครศรีอยุธยา",
+      "engName": "Phra Nakhon Si Ayutthaya",
+      "districtList": []
+    },
+    {
+      "code": "06",
+      "thaiName": "อ่างทอง",
+      "engName": "Ang Thong",
+      "districtList": []
+    },
+    {
+      "code": "07",
+      "thaiName": "ลพบุรี",
+      "engName": "Loburi",
+      "districtList": []
+    },
+    {
+      "code": "08",
+      "thaiName": "สิงห์บุรี",
+      "engName": "Sing Buri",
+      "districtList": []
+    },
+    {
+      "code": "09",
+      "thaiName": "ชัยนาท",
+      "engName": "Chai Nat",
+      "districtList": []
+    },
+    {
+      "code": "10",
+      "thaiName": "สระบุรี",
+      "engName": "Saraburi",
+      "districtList": []
     }
   ],
   "genderList": [
     {
-      "code": "2",
-      "thaiName": "หญิง",
-      "engName": "Female"
-    },
-    {
-      "code": "1",
+      "code": "01",
       "thaiName": "ชาย",
       "engName": "Male"
+    },
+    {
+      "code": "02",
+      "thaiName": "หญิง",
+      "engName": "Female"
+    }
+  ],
+  "titleList": [
+    {
+      "code": "01",
+      "thaiName": "นาย",
+      "engName": "Mr."
+    },
+    {
+      "code": "02",
+      "thaiName": "นาง",
+      "engName": "Mrs."
+    },
+    {
+      "code": "03",
+      "thaiName": "นางสาว",
+      "engName": "Ms."
+    },
+    {
+      "code": "04",
+      "thaiName": "ด.ช.",
+      "engName": "Master"
+    },
+    {
+      "code": "05",
+      "thaiName": "ด.ญ.",
+      "engName": "Miss"
     }
   ],
   "relationshipList": [
     {
-      "code": "2",
-      "thaiName": "มารดา",
-      "engName": "Mother"
+      "code": "01",
+      "thaiName": "บิดา/  มารดา",
+      "engName": "บิดา/  มารดา"
     },
     {
-      "code": "1",
-      "thaiName": "บิดา",
-      "engName": "Farther"
-    }
-  ],
-  "occupationList": [
-    {
-      "code": "2",
-      "thaiName": "ข้าราชการ",
-      "engName": "Authority"
+      "code": "02",
+      "thaiName": "สามี/ ภรรยา",
+      "engName": "สามี/ ภรรยา"
     },
     {
-      "code": "1",
-      "thaiName": "พนักงานบริษัท",
-      "engName": "Salary Man"
+      "code": "03",
+      "thaiName": "บุตร",
+      "engName": "บุตร"
+    },
+    {
+      "code": "04",
+      "thaiName": "พี่ / น้อง",
+      "engName": "พี่ / น้อง"
+    },
+    {
+      "code": "05",
+      "thaiName": "ลุง/ ป้า",
+      "engName": "ลุง/ ป้า"
+    },
+    {
+      "code": "06",
+      "thaiName": "น้า / อา",
+      "engName": "น้า / อา"
+    },
+    {
+      "code": "07",
+      "thaiName": "ปู่ /ย่า",
+      "engName": "ปู่ /ย่า"
+    },
+    {
+      "code": "08",
+      "thaiName": "ตา / ยาย",
+      "engName": "ตา / ยาย"
+    },
+    {
+      "code": "09",
+      "thaiName": "หลาน",
+      "engName": "หลาน"
     }
   ]
 }
