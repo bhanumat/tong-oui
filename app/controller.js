@@ -483,7 +483,7 @@
         };
 
         $scope.deleteBeneficiaryList = function (profileIdx, beneficiaryIdx) {
-            $scope.tempData.passengersProfile[profileId].beneficiaries -= 1;
+            $scope.tempData.passengersProfile[profileIdx].beneficiaries -= 1;
             if ($scope.travel.applicationList[profileIdx].beneficiaryList) {
                 $scope.travel.applicationList[profileIdx].beneficiaryList.splice(beneficiaryIdx, 1);
             }
