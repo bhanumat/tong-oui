@@ -623,7 +623,7 @@
                 }
             }, function (response) {
                 $scope.travel.promoCode = null;
-                if( response.status ==500) {
+                if (response.status == 500) {
                     dialogs.error('Error', $scope.messages['ER_ESA_004']);
                 }
             });
@@ -733,7 +733,8 @@
                     var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_006']);
                     dlg.result.then(function (yesBtn) {
                         $scope.goToProfile(isFormValid);
-                    }, function (noBtn) {});
+                    }, function (noBtn) {
+                    });
                 }
             }
         }
