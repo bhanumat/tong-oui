@@ -12,7 +12,9 @@
         .module('cignaApp')
         .constant('CONSTANTS', {
             //'API_URL': 'http://cigna.localhost:8080/'
-            'API_URL': '/'
+            'API_URL': '/',
+            'DATE_FORMAT_DISPLAY':'DD MMMM YYYY',
+            'DATE_FORMAT':'DD/MM/YYYY'
         })
         .constant('MESSAGES', {
             'UNKNOWN_ERROR':'ขออภัย ไม่สามารถทำรายการได้',
