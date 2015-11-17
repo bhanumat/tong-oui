@@ -208,74 +208,152 @@
       "type": "schengen"
     }
   ],
-  "provinceList": [
+  "provinceList":    [
     {
-      "code": "006",
-      "thaiName": "กรุงเทพฯ",
+      "code": "01",
+      "thaiName": "กรุงเทพมหานคร",
       "engName": "Bangkok",
-      "districtList": [
-        {
-          "code": "038",
-          "thaiName": "ดุสิต",
-          "engName": "Dusit",
-          "subDistrict": [
-            {
-              "code": "021",
-              "thaiName": "สวนจิตรลดา",
-              "engName": "Suan Chitlada",
-              "postelCode": "10900"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "titleList": [
-    {
-      "code": "2",
-      "thaiName": "นางสาว",
-      "engName": "Miss"
+      "districtList": []
     },
     {
-      "code": "1",
+      "code": "02",
+      "thaiName": "สมุทรปราการ",
+      "engName": "Samut Prakan",
+      "districtList": []
+    },
+    {
+      "code": "03",
+      "thaiName": "นนทบุรี",
+      "engName": "Nonthaburi",
+      "districtList": []
+    },
+    {
+      "code": "04",
+      "thaiName": "ปทุมธานี",
+      "engName": "Pathum Thani",
+      "districtList": []
+    },
+    {
+      "code": "05",
+      "thaiName": "พระนครศรีอยุธยา",
+      "engName": "Phra Nakhon Si Ayutthaya",
+      "districtList": []
+    },
+    {
+      "code": "06",
+      "thaiName": "อ่างทอง",
+      "engName": "Ang Thong",
+      "districtList": []
+    },
+    {
+      "code": "07",
+      "thaiName": "ลพบุรี",
+      "engName": "Loburi",
+      "districtList": []
+    },
+    {
+      "code": "08",
+      "thaiName": "สิงห์บุรี",
+      "engName": "Sing Buri",
+      "districtList": []
+    },
+    {
+      "code": "09",
+      "thaiName": "ชัยนาท",
+      "engName": "Chai Nat",
+      "districtList": []
+    },
+    {
+      "code": "10",
+      "thaiName": "สระบุรี",
+      "engName": "Saraburi",
+      "districtList": []
+    }
+  ],
+  "titleList":    [
+    {
+      "code": "01",
       "thaiName": "นาย",
       "engName": "Mr."
-    }
-  ],
-  "genderList": [
-    {
-      "code": "2",
-      "thaiName": "หญิง",
-      "engName": "Female"
     },
     {
-      "code": "1",
+      "code": "02",
+      "thaiName": "นาง",
+      "engName": "Mrs."
+    },
+    {
+      "code": "03",
+      "thaiName": "นางสาว",
+      "engName": "Ms."
+    },
+    {
+      "code": "04",
+      "thaiName": "ด.ช.",
+      "engName": "Master"
+    },
+    {
+      "code": "05",
+      "thaiName": "ด.ญ.",
+      "engName": "Miss"
+    }
+  ],
+  "genderList":    [
+    {
+      "code": "01",
       "thaiName": "ชาย",
       "engName": "Male"
-    }
-  ],
-  "relationshipList": [
-    {
-      "code": "2",
-      "thaiName": "มารดา",
-      "engName": "Mother"
     },
     {
-      "code": "1",
-      "thaiName": "บิดา",
-      "engName": "Farther"
+      "code": "02",
+      "thaiName": "หญิง",
+      "engName": "Female"
     }
   ],
-  "occupationList": [
+  "relationshipList":    [
     {
-      "code": "2",
-      "thaiName": "ข้าราชการ",
-      "engName": "Authority"
+      "code": "01",
+      "thaiName": "บิดา/  มารดา",
+      "engName": "บิดา/  มารดา"
     },
     {
-      "code": "1",
-      "thaiName": "พนักงานบริษัท",
-      "engName": "Salary Man"
+      "code": "02",
+      "thaiName": "สามี/ ภรรยา",
+      "engName": "สามี/ ภรรยา"
+    },
+    {
+      "code": "03",
+      "thaiName": "บุตร",
+      "engName": "บุตร"
+    },
+    {
+      "code": "04",
+      "thaiName": "พี่ / น้อง",
+      "engName": "พี่ / น้อง"
+    },
+    {
+      "code": "05",
+      "thaiName": "ลุง/ ป้า",
+      "engName": "ลุง/ ป้า"
+    },
+    {
+      "code": "06",
+      "thaiName": "น้า / อา",
+      "engName": "น้า / อา"
+    },
+    {
+      "code": "07",
+      "thaiName": "ปู่ /ย่า",
+      "engName": "ปู่ /ย่า"
+    },
+    {
+      "code": "08",
+      "thaiName": "ตา / ยาย",
+      "engName": "ตา / ยาย"
+    },
+    {
+      "code": "09",
+      "thaiName": "หลาน",
+      "engName": "หลาน"
     }
   ]
 }

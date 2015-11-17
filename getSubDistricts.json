@@ -1,0 +1,42 @@
+{
+  "resultCode": "0",
+  "resultDesc": "",
+  "subDistricts":    [
+    {
+      "code": "0001",
+      "thaiName": "คลองเตย",
+      "engName": "Khlong Toei",
+      "postelCode": "10110"
+    },
+    {
+      "code": "0002",
+      "thaiName": "คลองตัน",
+      "engName": "Khlong Ton",
+      "postelCode": "10110"
+    },
+    {
+      "code": "0003",
+      "thaiName": "พระโขนง",
+      "engName": "Phra Kha Nong",
+      "postelCode": "10110"
+    },
+    {
+      "code": "0004",
+      "thaiName": "คลองเตยเหนือ",
+      "engName": "Khlong Toei Nua",
+      "postelCode": "10110"
+    },
+    {
+      "code": "0005",
+      "thaiName": "คลองตันเหนือ",
+      "engName": "Khlong Tan Nua",
+      "postelCode": "10110"
+    },
+    {
+      "code": "0006",
+      "thaiName": "พระโขนงเหนือ",
+      "engName": "Phra Khanong Nua",
+      "postelCode": "10110"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "resultCode": "0",
+  "resultDesc": "",
+  "districts":    [
+    {
+      "code": "001",
+      "thaiName": "คลองเตย",
+      "engName": "Khlong Toei",
+      "subDistrictList": []
+    },
+    {
+      "code": "002",
+      "thaiName": "คลองสาน",
+      "engName": "Khlong San",
+      "subDistrictList": []
+    },
+    {
+      "code": "003",
+      "thaiName": "คลองสามวา",
+      "engName": "Khlong Sam Wa",
+      "subDistrictList": []
+    },
+    {
+      "code": "004",
+      "thaiName": "คันนายาว",
+      "engName": "Khan Na Yao",
+      "subDistrictList": []
+    },
+    {
+      "code": "005",
+      "thaiName": "จตุจักร",
+      "engName": "Chatuchak",
+      "subDistrictList": []
+    },
+    {
+      "code": "006",
+      "thaiName": "จอมทอง",
+      "engName": "Chom Thong",
+      "subDistrictList": []
+    },
+    {
+      "code": "007",
+      "thaiName": "ดอนเมือง",
+      "engName": "Don Mueang",
+      "subDistrictList": []
+    },
+    {
+      "code": "008",
+      "thaiName": "ดินแดง",
+      "engName": "Din Daeng",
+      "subDistrictList": []
+    },
+    {
+      "code": "009",
+      "thaiName": "ดุสิต",
+      "engName": "Dusit",
+      "subDistrictList": []
+    },
+    {
+      "code": "010",
+      "thaiName": "ตลิ่งชัน",
+      "engName": "Taling Chan",
+      "subDistrictList": []
+    }
+  ]
+}
