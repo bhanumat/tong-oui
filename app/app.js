@@ -112,9 +112,9 @@
         .module('cignaApp')
         .factory('authInterceptor', authInterceptor);
 
-    authInterceptor.$inject = ['$rootScope', '$q', 'SessionStorage', '$location', 'MESSAGES', '$injector'];
+    authInterceptor.$inject = ['$rootScope', '$q', '$location', 'MESSAGES', '$injector'];
 
-    function authInterceptor($rootScope, $q, SessionStorage, $location, MESSAGES, $injector) {
+    function authInterceptor($rootScope, $q, $location, MESSAGES, $injector) {
 
         return {
 
@@ -126,9 +126,10 @@
 
             // Catch errors
             responseError: function (response) {
+
                 if (response.data && response.data.responseCode) {
-                    var modalService = $injector.get('ModalService');
-                    modalService.showError({message: MESSAGES[response.data.responseCode]});
+                    var dialogs = $injector.get('dialogs');
+                    dialogs.error('Error', MESSAGES[response.data.responseCode]);
                 } else if (response.status === 404) {
                     $location.path('/');
                     return $q.reject(response);

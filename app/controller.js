@@ -47,7 +47,7 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
-        self.reset = function() {
+        self.reset = function () {
             LocalStorage.removeAll();
             $scope.travel = {};
             $scope.tempData = {passengers: 1};
@@ -70,13 +70,14 @@
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
             $scope.tempData = LocalStorage.get('insurance.tempData');
+            $scope.messages = LocalStorage.get('insurance.messages');
             var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
 
             $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
             $scope.refId = $location.search().Ref;
             var cleanStorageRequired;
             if ($location.path() == "/insurance/payment" && $scope.refId) {
-                dialog = dialogs.error('Error', MESSAGES['ER-ESA-011']);
+                dialog = dialogs.error('Error', $scope.messages['ER-ESA-011']);
             } else {
                 cleanStorageRequired = true;
             }
@@ -112,8 +113,7 @@
         // comment for testing
 
         $scope.$on('$locationChangeStart', function (next, current) {
-            console.log('Stage changed:', $location.path());
-        if ($location.path() == '/insurance') {
+            if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
             }
@@ -135,11 +135,11 @@
             var timeout = $scope.travelData.timeOut
 
             sessionTimeWarningPromise = $timeout(function () {
-                dialog = dialogs.error('Warning', MESSAGES['timeout_warning']);
+                dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
             }, (timeout - 5) * 60000);
             sessionTimePromise = $timeout(function () {
                 dialog.close();
-                var dlg = dialogs.error('Error', MESSAGES['timeout']);
+                var dlg = dialogs.error('Error', $scope.messages['ER_ESA_002']);
                 dlg.result.then(function () {
                     self.reset();
                     $location.path('/insurance');
@@ -160,6 +160,15 @@
 
         QueryService.query('POST', 'loadInitial').then(function (response) {
             $scope.travelData = response.data;
+            $scope.messages = _.reduce($scope.travelData.resultCodes, function (result, n, key) {
+                if (key === 1) {
+                    result[result.resultCode] = result.resultDesc;
+                    delete result.resultCode;
+                    delete result.resultDesc;
+                }
+                result[n.resultCode] = n.resultDesc;
+                return result;
+            });
             LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
             self.initSessionTimer();
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
@@ -253,7 +262,7 @@
                     $scope.tempData.countryChanged = false;
                     //  Add/Remove passengers profile.
                     if ($scope.travel.passengers < $scope.tempData.passengersProfile.length) {
-                        var dlg = dialogs.confirm('Warning', MESSAGES['confirm_edit_passengers']);
+                        var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_007']);
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
                         }, function (noBtn) {
@@ -426,7 +435,7 @@
                 }
             }
             if (stage == 'reset') {
-                var dlg = dialogs.confirm('Warning', MESSAGES['confirm_delete_profile']);
+                var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_007']);
                 dlg.result.then(function (yesBtn) {
                     $scope.tempData.passengersProfile.splice(index, 1);
                     $scope.tempData.passengersProfile.push({profileFormSubmitted: false, stage: '', profileForm: null});
@@ -474,7 +483,7 @@
         };
 
         $scope.deleteBeneficiaryList = function (profileIdx, beneficiaryIdx) {
-            $scope.tempData.passengersProfile[profileIdx].beneficiaries -= 1;
+            $scope.tempData.passengersProfile[profileId].beneficiaries -= 1;
             if ($scope.travel.applicationList[profileIdx].beneficiaryList) {
                 $scope.travel.applicationList[profileIdx].beneficiaryList.splice(beneficiaryIdx, 1);
             }
@@ -608,12 +617,15 @@
                     deferred.reject(response);
 
                     $scope.travel.promoCode = null;
-                    dialogs.error('Warning', MESSAGES['promotion_reached_max_usage']);
+                    dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                 } else {
                     deferred.resolve(response);
                 }
-            }, function () {
+            }, function (response) {
                 $scope.travel.promoCode = null;
+                if (response.status == 500) {
+                    dialogs.error('Error', $scope.messages['ER_ESA_004']);
+                }
             });
 
             return deferred.promise;
@@ -622,7 +634,7 @@
         $scope.goToPlanSelection = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
-
+            console.log(submitOrderParams);
             if (isFormValid) {
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
@@ -651,29 +663,28 @@
 
         $scope.goToPayment = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
-            $scope.formStepSubmitted = true;
-
             if (isFormValid) {
                 var checkBlacklistParam = self.initCheckBlacklistParam();
                 QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
                     var blacklists = _.where(response.data.blacklists, {result: true});
-                    //console.log('blacklists : '+blacklists);
-                    if(blacklists && blacklists.length > 0){
-                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, MESSAGES['ER-ESA-008']));
+                    if (blacklists && blacklists.length > 0) {
+                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, $scope.messages['ER_ESA_008']));
                     } else {
                         var checkOverlapParam = self.initCheckOverlapParam();
                         QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
                             var overlaps = _.where(response.data.overlaps, {result: true});
                             //console.log('overlaps : '+overlaps);
-                            if(overlaps && overlaps.length > 0) {
-                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, MESSAGES['ER-ESA-009']));
+                            if (overlaps && overlaps.length > 0) {
+                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                             } else {
                                 //Store data to session storage before payment
                                 var submitOrderParams = angular.copy($scope.travel);
                                 delete submitOrderParams.mandatory;
                                 delete submitOrderParams.voluntaryList;
-                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.rateScale;
-                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'rateScale').join(',');
+                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
+                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                                 console.log(submitOrderParams);
                                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                                     self.restartTimer();
@@ -684,6 +695,7 @@
                                     LocalStorage.update('insurance.travel', $scope.travel);
                                     LocalStorage.update('insurance.travelData', $scope.travelData);
                                     LocalStorage.update('insurance.tempData', $scope.tempData);
+                                    LocalStorage.update('insurance.messages', $scope.messages);
                                     $state.go('^.payment');
                                 });
                             }
@@ -718,11 +730,10 @@
                 if ($scope.travel.voluntaryList.length > 1 && hasVoluntary) {
                     $scope.goToProfile(isFormValid);
                 } else {
-                    var dlg = dialogs.confirm('Warning', MESSAGES['privilege_voluntary']);
+                    var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_006']);
                     dlg.result.then(function (yesBtn) {
                         $scope.goToProfile(isFormValid);
                     }, function (noBtn) {
-
                     });
                 }
             }
@@ -927,51 +938,51 @@
             };
         })();
 
-        self.initCheckBlacklistParam = function(){
+        self.initCheckBlacklistParam = function () {
             var checkBlacklistParam = {
-                tokenCode : $scope.travel.tokenCode,
-                blacklists : []
+                tokenCode: $scope.travel.tokenCode,
+                blacklists: []
             };
-            angular.forEach($scope.travel.applicationList, function(obj, index){
+            angular.forEach($scope.travel.applicationList, function (obj, index) {
                 checkBlacklistParam.blacklists.push({
-                    firstname : obj.firstnameTh,
-                    lastname : obj.lastnameTh,
-                    ssn : obj.ssn
+                    firstname: obj.firstnameTh,
+                    lastname: obj.lastnameTh,
+                    ssn: obj.ssn
                 });
             });
             return checkBlacklistParam;
         };
 
-        self.initCheckOverlapParam = function(){
+        self.initCheckOverlapParam = function () {
             var checkOverlapParam = {
-                tokenCode : $scope.travel.tokenCode,
-                overlaps : []
+                tokenCode: $scope.travel.tokenCode,
+                overlaps: []
             };
-            angular.forEach($scope.travel.applicationList, function(obj, index){
+            angular.forEach($scope.travel.applicationList, function (obj, index) {
                 var startTravelDate = $scope.travel.startDate;
                 var endTravelDate = $scope.travel.endDate;
                 checkOverlapParam.overlaps.push({
-                    ssn : obj.ssn,
-                    startTravelDate : startTravelDate,
-                    endTravelDate : endTravelDate
+                    ssn: obj.ssn,
+                    startTravelDate: startTravelDate,
+                    endTravelDate: endTravelDate
                 });
             });
             return checkOverlapParam;
         };
 
-        self.buildProfileWarningMessage = function(list, notifyMessage){
+        self.buildProfileWarningMessage = function (list, notifyMessage) {
             var message;
             var profileWarningMessage;
-            angular.forEach(list, function(item, index){
-                var profile = _.findWhere($scope.travel.applicationList, {ssn:item.ssn});
-                if(profile) {
+            angular.forEach(list, function (item, index) {
+                var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
+                if (profile) {
                     if (message)
                         message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                     else
                         message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
-            if(message)
+            if (message)
                 profileWarningMessage = notifyMessage.replace('{{msg}}', message);
             else
                 profileWarningMessage = notifyMessage;
@@ -1008,8 +1019,6 @@
                 profile.provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
             });
         };
-
-        console.log("Current State:", $scope.tempData.currentState);
     }
 
 })();
