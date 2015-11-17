@@ -113,7 +113,6 @@
         // comment for testing
 
         $scope.$on('$locationChangeStart', function (next, current) {
-            console.log('Stage changed:', $location.path());
             if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
@@ -609,7 +608,7 @@
                 tokenCode: $scope.travel.tokenCode,
                 promoCode: $scope.travel.promoCode
             };
-            QueryService.query('POST', 'validatePromoCode1', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
+            QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
                 self.restartTimer();
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {

@@ -15,6 +15,9 @@
             'API_URL': '/'
         })
         .constant('MESSAGES', {
+            'UNKNOWN_ERROR':'ขออภัย ไม่สามารถทำรายการได้',
+            '404':'File not found',
+            '500':'ขออภัย ไม่สามารถทำรายการได้'
         })
         .constant('PAYMENT_INFO', {
             'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
