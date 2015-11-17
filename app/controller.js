@@ -633,7 +633,6 @@
         $scope.goToPlanSelection = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
-            console.log(submitOrderParams);
             if (isFormValid) {
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
@@ -684,6 +683,7 @@
                                 submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
                                 submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                                 submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                                 console.log(submitOrderParams);
                                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                                     self.restartTimer();
