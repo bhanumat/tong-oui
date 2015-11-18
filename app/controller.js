@@ -77,7 +77,7 @@
             $scope.refId = $location.search().Ref;
             var cleanStorageRequired;
             if ($location.path() == "/insurance/payment" && $scope.refId) {
-                dialog = dialogs.error('Error', $scope.messages['ER-ESA-011']);
+                dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
             } else {
                 cleanStorageRequired = true;
             }
