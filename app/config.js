@@ -31,7 +31,7 @@
             //'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
             //'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
             //'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-             'successUrl':'http://localhost:3000/#/insurance/thankyou',
+            'successUrl':'http://localhost:3000/#/insurance/thankyou',
             'failUrl':'http://localhost:3000/#/insurance/payment',
             'cancelUrl':'http://localhost:3000/#/insurance/payment',
             'payType':'N',

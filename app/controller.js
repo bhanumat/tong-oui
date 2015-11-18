@@ -50,7 +50,7 @@
         self.reset = function () {
             LocalStorage.removeAll();
             $scope.travel = {};
-            $scope.tempData = {passengers: 1};
+            $scope.tempData.passengers = 1;
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
             $scope.tempData.destinations = [];
@@ -65,7 +65,7 @@
         /**
          * Load data from session if any
          */
-        if (LocalStorage.get('insurance.travel')) {
+        if (LocalStorage.get('insurance.travel') && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
             console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
@@ -100,14 +100,13 @@
                 $location.path('/insurance');
                 $location.replace();
             }
-        }
-
-        ////////////  function definitions
-        $scope.start = true;
-        if ($scope.start == true && !$scope.tempData.currentState) {
-            $scope.start = false;
-            $location.path('/insurance/');
-            $location.replace();
+        } else {
+            $scope.start = true;
+            if ($scope.start == true && !$scope.tempData.currentState) {
+                $scope.start = false;
+                $location.path('/insurance/');
+                $location.replace();
+            }
         }
 
         // comment for testing
@@ -989,31 +988,31 @@
             return profileWarningMessage;
         };
 
-        $scope.getDistricts = function(profile, provinceCode){
-            console.log('getDistricts..'+provinceCode)
-            if(!provinceCode)
+        $scope.getDistricts = function (profile, provinceCode) {
+            console.log('getDistricts..' + provinceCode)
+            if (!provinceCode)
                 return;
             var provinceParam = {
-                tokenCode : $scope.travel.tokenCode,
+                tokenCode: $scope.travel.tokenCode,
                 loginFlag: 'N',
-                provinceCode : provinceCode
+                provinceCode: provinceCode
             };
-            profile.provinceSelected = _.findWhere($scope.tempData.provinceList, {code : provinceCode});
+            profile.provinceSelected = _.findWhere($scope.tempData.provinceList, {code: provinceCode});
             QueryService.query('POST', 'getDistricts', undefined, provinceParam).then(function (response) {
                 profile.provinceSelected.districtList = response.data.districts;
             });
         };
 
-        $scope.getSubDistricts = function(profile, districtCode){
-            console.log('getSubDistricts..'+districtCode)
-            if(!districtCode)
+        $scope.getSubDistricts = function (profile, districtCode) {
+            console.log('getSubDistricts..' + districtCode)
+            if (!districtCode)
                 return;
             var districtParam = {
-                tokenCode : $scope.travel.tokenCode,
+                tokenCode: $scope.travel.tokenCode,
                 loginFlag: 'N',
-                districtCode : districtCode
+                districtCode: districtCode
             };
-            profile.districtSelected = _.findWhere(profile.provinceSelected.districtList, {code : districtCode});
+            profile.districtSelected = _.findWhere(profile.provinceSelected.districtList, {code: districtCode});
             var idx = $scope.getIndexOfByCode(districtCode, profile.provinceSelected.districtList);
             QueryService.query('POST', 'getSubDistricts', undefined, districtParam).then(function (response) {
                 profile.provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
