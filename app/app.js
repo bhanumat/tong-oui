@@ -83,7 +83,7 @@
         dialogsProvider.setSize('md');
         $translateProvider.translations('th', {
             DIALOGS_ERROR: "Error",
-            DIALOGS_ERROR_MSG: "พบข้อผิดพลาด",
+            DIALOGS_ERROR_MSG: "ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง",
             DIALOGS_CLOSE: "ปิด",
             DIALOGS_PLEASE_WAIT: "โปรดรอ",
             DIALOGS_PLEASE_WAIT_ELIPS: "โปรดรอ...",
