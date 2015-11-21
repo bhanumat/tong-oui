@@ -140,7 +140,6 @@
         };
     }
 
-
     /**
      * Run block
      */
@@ -151,7 +150,6 @@
     run.$inject = ['$rootScope', '$location'];
 
     function run($rootScope, $location) {
-
         // put here everything that you need to run on page load
 
     }

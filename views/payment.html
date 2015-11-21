@@ -1,22 +1,5 @@
-<form name="paymentForm" action="{{action}}" name="paymentForm" id="insurance-form"
-      ng-submit="submitOrder($event,paymentForm.$valid)" novalidate>
-    <input type="hidden" name="merchantId" value="{{paymentInfo.merchantId}}"/>
-    <input type="hidden" name="amount" value="{{travel.premiumAmount}}"/>
-    <input type="hidden" name="orderRef" value="{{tempData.referenceId}}"/>
-    <input type="hidden" name="currCode" value="{{paymentInfo.currCode}}"/>
-    <input type="hidden" name="pMethod" value="{{tempData.cardType|uppercase}}"/>
-    <input type="hidden" name="cardNo" value="{{travel.paymant.cardnumber}}"/>
-    <input type="hidden" name="securityCode" value="{{travel.paymant.cvv2}}"/>
-    <input type="hidden" name="cardHolder" value="{{travel.paymant.cardholdername}}"/>
-    <input type="hidden" name="epMonth" value="{{travel.paymant.expiryMonth}}"/>
-    <input type="hidden" name="epYear" value="{{travel.paymant.expiryYear}}"/>
-    <input type="hidden" name="successUrl" value="{{paymentInfo.successUrl}}"/>
-    <input type="hidden" name="failUrl" value="{{paymentInfo.failUrl}}"/>
-    <input type="hidden" name="cancelUrl" value="{{paymentInfo.cancelUrl}}"/>
-    <input type="hidden" name="payType" value="{{paymentInfo.payType}}"/>
-    <input type="hidden" name="lang" value="{{paymentInfo.lang}}"/>
-    <input type="hidden" name="remark" value="{{paymentInfo.remark}}"/>
-
+<form name="paymentForm" id="insurance-form"
+      ng-submit="submitOrder($event,paymentForm, paymentFormHidden)" novalidate>
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             <div class="payment">
@@ -241,3 +224,4 @@
         </div>
     </div>
 </form>
+<div auto-submit-form event="gateway.redirect"></div>

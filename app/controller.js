@@ -12,12 +12,12 @@
         .controller('MainController', MainController);
 
     MainController.$inject = [
-        '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
+        '$rootScope', '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
         'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'SessionStorage', 'LocalStorage', 'QueryService', 'dialogs'
     ];
 
 
-    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
+    function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
 
         // 'controller as' syntax
         var self = this;
@@ -30,9 +30,6 @@
         $scope.travel = {};
 
         //Payment
-        $scope.paymentInfo = PAYMENT_INFO;
-        $scope.action = $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl);
-
         $scope.tempData = {passengers: 1};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
@@ -50,6 +47,7 @@
         self.reset = function () {
             LocalStorage.removeAll();
             $scope.travel = {};
+            $scope.tempData = {};
             $scope.tempData.passengers = 1;
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
@@ -94,7 +92,7 @@
             }
 
             if (cleanStorageRequired) {
-                self.reset();
+                //self.reset();
             }
             if (redirectRequired) {
                 $location.path('/insurance');
@@ -591,11 +589,56 @@
             }
         };
 
-        $scope.submitOrder = function ($event, isFormValid) {
+        $scope.submitOrder = function ($event, paymentForm, paymentFormHidden) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
-            if (isFormValid) {
+            if (paymentForm.$valid) {
                 $scope.formStepSubmitted = false;
+                //Store data to session storage before payment
+                var submitOrderParams = angular.copy($scope.travel);
+                delete submitOrderParams.mandatory;
+                delete submitOrderParams.voluntaryList;
+                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
+                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
+                    self.restartTimer();
+                    $scope.formStepSubmitted = false;
+                    $scope.tempData.trackingNumber = response.data.trackingNumber;
+                    $scope.tempData.orderId = response.data.orderId;
+                    $scope.tempData.currentState = "/insurance/payment";
+                    //Store data to session storage before payment
+                    LocalStorage.update('insurance.travel', $scope.travel);
+                    LocalStorage.update('insurance.travelData', $scope.travelData);
+                    LocalStorage.update('insurance.tempData', $scope.tempData);
+                    LocalStorage.update('insurance.messages', $scope.messages);
+                    var data = {
+                        actionUrl: $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl),
+                        method: 'POST',
+                        inputData: {
+                            merchantId: PAYMENT_INFO.merchantId,
+                            amount: $scope.travel.premiumAmount,
+                            orderRef: $scope.tempData.trackingNumber,
+                            currCode: PAYMENT_INFO.currCode,
+                            pMethod: $scope.tempData.cardType,
+                            cardNo: $scope.travel.paymant.cardnumber,
+                            securityCode: $scope.travel.paymant.cvv2,
+                            cardHolder: $scope.travel.paymant.cardholdername,
+                            epMonth: $scope.travel.paymant.expiryMonth,
+                            epYear: $scope.travel.paymant.expiryYear,
+                            successUrl: PAYMENT_INFO.successUrl,
+                            failUrl: PAYMENT_INFO.failUrl,
+                            cancelUrl: PAYMENT_INFO.cancelUrl,
+                            payType: PAYMENT_INFO.payType,
+                            lang: PAYMENT_INFO.lang,
+                            remark: PAYMENT_INFO.remark
+                        }
+                    };
+
+                    $rootScope.$broadcast('gateway.redirect', data);
+                });
             } else {
                 $event.preventDefault();
                 $event.stopPropagation();
@@ -675,28 +718,7 @@
                             if (overlaps && overlaps.length > 0) {
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                             } else {
-                                //Store data to session storage before payment
-                                var submitOrderParams = angular.copy($scope.travel);
-                                delete submitOrderParams.mandatory;
-                                delete submitOrderParams.voluntaryList;
-                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
-                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
-                                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                console.log(submitOrderParams);
-                                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
-                                    self.restartTimer();
-                                    $scope.formStepSubmitted = false;
-                                    $scope.tempData.referenceId = response.data.referenceId;
-                                    $scope.tempData.currentState = "/insurance/payment";
-                                    //Store data to session storage before payment
-                                    LocalStorage.update('insurance.travel', $scope.travel);
-                                    LocalStorage.update('insurance.travelData', $scope.travelData);
-                                    LocalStorage.update('insurance.tempData', $scope.tempData);
-                                    LocalStorage.update('insurance.messages', $scope.messages);
-                                    $state.go('^.payment');
-                                });
+                                $state.go('^.payment');
                             }
                         });
                     }
