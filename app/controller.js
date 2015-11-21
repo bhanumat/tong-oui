@@ -153,11 +153,10 @@
                 var dlg = dialogs.error('Error', $scope.messages['ER_ESA_002']);
                 dlg.result.then(function () {
                     self.reset();
-                    $location.path('/insurance');
-                    $location.replace();
+                    $scope.tempData.currentState = "/insurance/destination";
+                    $state.go('^.destination');
                 }, function () {
-                    $location.path('/insurance');
-                    $location.replace();
+                    $state.go('^.destination');
                 });
             }, (timeout) * 60000);
         };
