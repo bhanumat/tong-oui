@@ -17,9 +17,9 @@
             'DATE_FORMAT':'DD/MM/YYYY'
         })
         .constant('MESSAGES', {
-            'UNKNOWN_ERROR':'ขออภัย ไม่สามารถทำรายการได้',
-            '404':'File not found',
-            '500':'ขออภัย ไม่สามารถทำรายการได้'
+            'UNKNOWN_ERROR':'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง',
+            '404':'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง',
+            '500':'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง'
         })
         .constant('PAYMENT_INFO', {
             'paymentUrl':'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
