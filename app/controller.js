@@ -951,32 +951,32 @@
         })();
 
         $scope.validAge = (function () {
-            var calculateNextAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+            var calculateNextAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
                 return Math.ceil(yearPrecision);
             };
-            var calculateLastAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+            var calculateLastAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
                 return Math.floor(yearPrecision);
             };
-            var calculateNearAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
-                var year = moment(nowDate).diff(birthDate, 'years');
+            var calculateNearAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
+                var year = moment(startDate).diff(birthDate, 'years');
                 var month = Math.floor((yearPrecision - year) * 12);
                 return year + Math.round(month / 12);
             };
             var calculateMethods = {
                 "01": calculateNextAge, "02": calculateLastAge, "03": calculateNearAge
             };
-            var calculateAge = function (method, date) {
-                return calculateMethods[method](date);
+            var calculateAge = function (method,travelDate, birthOfDate) {
+                return calculateMethods[method](travelDate, birthOfDate);
             };
             return {
                 test: function (date) {
-                    var age = calculateAge($scope.travel.calculateMethod, moment(date, 'DD MMM YYYY'));
+                    var days = moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).diff(moment(), 'days');
+                    var startDate = moment().add(days, 'days');
+                    var age = calculateAge($scope.travel.calculateMethod, startDate, moment(date, CONSTANTS.DATE_FORMAT_DISPLAY));
+                    //console.log('age=',age);
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };
