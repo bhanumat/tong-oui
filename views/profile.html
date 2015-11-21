@@ -534,7 +534,14 @@
                         <p>ชื่อ - นามสกุล</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.applicationList[applicationIndex].title}} {{travel.applicationList[applicationIndex].firstnameTh}} {{travel.applicationList[applicationIndex].lastnameTh}}<span ng-if="tempData.isRequiredEng"><br>{{travel.applicationList[applicationIndex].title}} {{travel.applicationList[applicationIndex].firstnameEn}} {{travel.applicationList[applicationIndex].lirstnameEn}}</span></p>
+                        <p>
+                          {{ travelData.titleList[getIndexOfByCode(travel.applicationList[applicationIndex].title, travelData.titleList)].thaiName }}
+                          {{travel.applicationList[applicationIndex].firstnameTh}} {{travel.applicationList[applicationIndex].lastnameTh}}
+                          <span ng-if="tempData.isRequiredEng"><br>
+                            {{ travelData.titleList[getIndexOfByCode(travel.applicationList[applicationIndex].title, travelData.titleList)].engName }}
+                            {{travel.applicationList[applicationIndex].firstnameEn}} {{travel.applicationList[applicationIndex].lastnameEn}}
+                          </span>
+                        </p>
                       </div>
                     </div>
                     <div class="row">
@@ -566,7 +573,7 @@
                         <p>เพศ</p>
                       </div>
                       <div class="col-xs-6">
-                        <p>{{travel.applicationList[applicationIndex].sex}}</p>
+                        <p>{{ travelData.genderList[getIndexOfByCode(travel.applicationList[applicationIndex].sex, travelData.genderList)].thaiName}}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -607,7 +614,20 @@
                   <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                     <div class="row">
                       <div class="col-xs-12">
-                        <p>{{travel.applicationList[applicationIndex].address.addrTh}} แขวง{{travel.applicationList[applicationIndex].address.subDistrict}}, เขต{{travel.applicationList[applicationIndex].address.district}}, {{travel.applicationList[applicationIndex].address.province}} {{travel.applicationList[applicationIndex].address.zipcode}}<span ng-if="tempData.isRequiredEng"><br>{{travel.applicationList[applicationIndex].address.addrEn}} {{travel.applicationList[applicationIndex].address.subDistrict}}, {{travel.applicationList[applicationIndex].address.district}}, {{travel.applicationList[applicationIndex].address.province}} {{travel.applicationList[applicationIndex].address.zipcode}}</span></p>
+                        <p ng-init="districtIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.district, tempData.passengersProfile[applicationIndex].provinceSelected.districtList)" >
+                          {{travel.applicationList[applicationIndex].address.addrTh}}
+                          แขวง{{ tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].subDistrictList[getIndexOfByCode(travel.applicationList[applicationIndex].address.subDistrict, tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].subDistrictList)].thaiName }},
+                          เขต{{ tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].thaiName }},
+                          {{ tempData.passengersProfile[applicationIndex].provinceSelected.thaiName }}
+                          {{travel.applicationList[applicationIndex].address.zipcode}}
+                          <span ng-if="tempData.isRequiredEng"><br>
+                            {{ travel.applicationList[applicationIndex].address.addrEn }}
+                            {{ tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].subDistrictList[getIndexOfByCode(travel.applicationList[applicationIndex].address.subDistrict, tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].subDistrictList)].engName }},
+                            {{ tempData.passengersProfile[applicationIndex].provinceSelected.districtList[districtIndex].engName }},
+                            {{ tempData.passengersProfile[applicationIndex].provinceSelected.engName }}
+                            {{travel.applicationList[applicationIndex].address.zipcode}}
+                          </span>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -632,10 +652,10 @@
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                       <div class="row" ng-repeat="beneficiary in travel.applicationList[applicationIndex].beneficiaryList">
                         <div class="col-xs-6">
-                          <p>{{beneficiary.title}}  {{beneficiary.firstname}} {{beneficiary.lastname}}</p>
+                          <p>{{ travelData.titleList[getIndexOfByCode(beneficiary.title, travelData.titleList)].thaiName }}  {{beneficiary.firstname}} {{beneficiary.lastname}}</p>
                         </div>
                         <div class="col-xs-6">
-                          <p>ความสัมพันธ์เป็น {{beneficiary.relation}}</p>
+                          <p>ความสัมพันธ์เป็น {{ travelData.relationshipList[getIndexOfByCode(beneficiary.relation, travelData.relationshipList)].thaiName}}</p>
                         </div>
                       </div>
                     </div>
