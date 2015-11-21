@@ -30,6 +30,8 @@
         $scope.travel = {};
 
         //Payment
+        $scope.payment = {};
+        $scope.nowYear = moment().get('year');
         $scope.tempData = {passengers: 1};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
@@ -46,8 +48,10 @@
 
         self.reset = function () {
             LocalStorage.removeAll();
+            $scope.start = true;
             $scope.travel = {};
             $scope.tempData = {};
+            $scope.payment = {};
             $scope.tempData.passengers = 1;
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
@@ -63,24 +67,27 @@
         /**
          * Load data from session if any
          */
-        if (LocalStorage.get('insurance.travel') && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
+        var foundStorageData = LocalStorage.get('insurance.travel');
+        if (foundStorageData && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
             console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
             $scope.tempData = LocalStorage.get('insurance.tempData');
             $scope.messages = LocalStorage.get('insurance.messages');
             var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
-
+            var cleanStorageRequired;
+            var redirectRequired;
             $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
             $scope.refId = $location.search().Ref;
-            var cleanStorageRequired;
-            if ($location.path() == "/insurance/payment" && $scope.refId) {
-                dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
-            } else {
-                cleanStorageRequired = true;
+
+            if ($scope.refId) {
+                if ($location.path() == "/insurance/payment") {
+                    dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
+                } else if ($location.path() == "/insurance/thankyou") {
+                    cleanStorageRequired = true;
+                }
             }
 
-            var redirectRequired;
             if (sessionStartDate) {
                 var startDate = moment(sessionStartDate);
                 var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
@@ -92,19 +99,22 @@
             }
 
             if (cleanStorageRequired) {
-                //self.reset();
+                self.reset();
+                $scope.tempData.currentState = "/insurance/thankyou";
             }
+
             if (redirectRequired) {
                 $location.path('/insurance');
                 $location.replace();
             }
         } else {
             $scope.start = true;
-            if ($scope.start == true && !$scope.tempData.currentState) {
-                $scope.start = false;
-                $location.path('/insurance/');
-                $location.replace();
-            }
+        }
+
+        if ($scope.start == true && !foundStorageData) {
+            $scope.start = false;
+            $location.path('/insurance/');
+            $location.replace();
         }
 
         // comment for testing
@@ -123,6 +133,10 @@
                 $location.replace();
             }
             else {
+                if (!$scope.start && !$scope.tempData.step1Completed) {
+                    $location.path('/insurance/destination');
+                    $location.replace();
+                }
                 $scope.tempData.currentState = $location.path();
             }
 
@@ -589,7 +603,7 @@
             }
         };
 
-        $scope.submitOrder = function ($event, paymentForm, paymentFormHidden) {
+        $scope.submitOrder = function ($event, paymentForm) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
             if (paymentForm.$valid) {
@@ -602,13 +616,18 @@
                 submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
                 submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
+                    var profile = submitOrderParams.applicationList[i];
+                    profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                }
+                submitOrderParams.payment.creditCardExpired = $scope.tempData.payment.expiryMonth + $scope.tempData.payment.expiryYear;
                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                     self.restartTimer();
                     $scope.formStepSubmitted = false;
                     $scope.tempData.trackingNumber = response.data.trackingNumber;
                     $scope.tempData.orderId = response.data.orderId;
                     $scope.tempData.currentState = "/insurance/payment";
+
                     //Store data to session storage before payment
                     LocalStorage.update('insurance.travel', $scope.travel);
                     LocalStorage.update('insurance.travelData', $scope.travelData);
@@ -623,11 +642,11 @@
                             orderRef: $scope.tempData.trackingNumber,
                             currCode: PAYMENT_INFO.currCode,
                             pMethod: $scope.tempData.cardType,
-                            cardNo: $scope.travel.paymant.cardnumber,
-                            securityCode: $scope.travel.paymant.cvv2,
-                            cardHolder: $scope.travel.paymant.cardholdername,
-                            epMonth: $scope.travel.paymant.expiryMonth,
-                            epYear: $scope.travel.paymant.expiryYear,
+                            cardNo: $scope.travel.payment.creditCardNo,
+                            securityCode: $scope.payment.cvv2,
+                            cardHolder: $scope.travel.payment.creditCardName,
+                            epMonth: $scope.tempData.payment.expiryMonth,
+                            epYear: $scope.tempData.payment.expiryYear,
                             successUrl: PAYMENT_INFO.successUrl,
                             failUrl: PAYMENT_INFO.failUrl,
                             cancelUrl: PAYMENT_INFO.cancelUrl,
@@ -677,6 +696,7 @@
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
             if (isFormValid) {
+                $scope.tempData.step1Completed = true;
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
@@ -718,6 +738,7 @@
                             if (overlaps && overlaps.length > 0) {
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                             } else {
+                                $scope.tempData.step3Completed = true;
                                 $state.go('^.payment');
                             }
                         });
@@ -732,6 +753,7 @@
 
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
+                $scope.tempData.step2Completed = true;
                 $state.go('^.profile');
                 if (!$scope.tempData.passengersProfile)
                     $scope.passengersChange();
@@ -743,6 +765,7 @@
             //$event.stopPropagation();
             $scope.formStepSubmitted = true;
             if (isFormValid) {
+                $scope.tempData.step2Completed = true;
                 var hasVoluntary = false;
                 for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; ++i) {
                     var voluntary = $scope.travel.voluntaryList[i];
