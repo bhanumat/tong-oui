@@ -12,12 +12,12 @@
         .controller('MainController', MainController);
 
     MainController.$inject = [
-        '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
+        '$rootScope', '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
         'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'SessionStorage', 'LocalStorage', 'QueryService', 'dialogs'
     ];
 
 
-    function MainController($scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
+    function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
 
         // 'controller as' syntax
         var self = this;
@@ -30,9 +30,8 @@
         $scope.travel = {};
 
         //Payment
-        $scope.paymentInfo = PAYMENT_INFO;
-        $scope.action = $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl);
-
+        $scope.payment = {};
+        $scope.nowYear = moment().get('year');
         $scope.tempData = {passengers: 1};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
@@ -49,7 +48,10 @@
 
         self.reset = function () {
             LocalStorage.removeAll();
+            $scope.start = true;
             $scope.travel = {};
+            $scope.tempData = {};
+            $scope.payment = {};
             $scope.tempData.passengers = 1;
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
@@ -65,24 +67,27 @@
         /**
          * Load data from session if any
          */
-        if (LocalStorage.get('insurance.travel') && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
+        var foundStorageData = LocalStorage.get('insurance.travel');
+        if (foundStorageData && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
             console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
             $scope.tempData = LocalStorage.get('insurance.tempData');
             $scope.messages = LocalStorage.get('insurance.messages');
             var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
-
+            var cleanStorageRequired;
+            var redirectRequired;
             $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
             $scope.refId = $location.search().Ref;
-            var cleanStorageRequired;
-            if ($location.path() == "/insurance/payment" && $scope.refId) {
-                dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
-            } else {
-                cleanStorageRequired = true;
+
+            if ($scope.refId) {
+                if ($location.path() == "/insurance/payment") {
+                    dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
+                } else if ($location.path() == "/insurance/thankyou") {
+                    cleanStorageRequired = true;
+                }
             }
 
-            var redirectRequired;
             if (sessionStartDate) {
                 var startDate = moment(sessionStartDate);
                 var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
@@ -95,18 +100,21 @@
 
             if (cleanStorageRequired) {
                 self.reset();
+                $scope.tempData.currentState = "/insurance/thankyou";
             }
+
             if (redirectRequired) {
                 $location.path('/insurance');
                 $location.replace();
             }
         } else {
             $scope.start = true;
-            if ($scope.start == true && !$scope.tempData.currentState) {
-                $scope.start = false;
-                $location.path('/insurance/');
-                $location.replace();
-            }
+        }
+
+        if ($scope.start == true && !foundStorageData) {
+            $scope.start = false;
+            $location.path('/insurance/');
+            $location.replace();
         }
 
         // comment for testing
@@ -125,6 +133,10 @@
                 $location.replace();
             }
             else {
+                if (!$scope.start && !$scope.tempData.step1Completed) {
+                    $location.path('/insurance/destination');
+                    $location.replace();
+                }
                 $scope.tempData.currentState = $location.path();
             }
 
@@ -591,11 +603,61 @@
             }
         };
 
-        $scope.submitOrder = function ($event, isFormValid) {
+        $scope.submitOrder = function ($event, paymentForm) {
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
-            if (isFormValid) {
+            if (paymentForm.$valid) {
                 $scope.formStepSubmitted = false;
+                //Store data to session storage before payment
+                var submitOrderParams = angular.copy($scope.travel);
+                delete submitOrderParams.mandatory;
+                delete submitOrderParams.voluntaryList;
+                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
+                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
+                    var profile = submitOrderParams.applicationList[i];
+                    profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                }
+                submitOrderParams.payment.creditCardExpired = $scope.tempData.payment.expiryMonth + $scope.tempData.payment.expiryYear;
+                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
+                    self.restartTimer();
+                    $scope.formStepSubmitted = false;
+                    $scope.tempData.trackingNumber = response.data.trackingNumber;
+                    $scope.tempData.orderId = response.data.orderId;
+                    $scope.tempData.currentState = "/insurance/payment";
+
+                    //Store data to session storage before payment
+                    LocalStorage.update('insurance.travel', $scope.travel);
+                    LocalStorage.update('insurance.travelData', $scope.travelData);
+                    LocalStorage.update('insurance.tempData', $scope.tempData);
+                    LocalStorage.update('insurance.messages', $scope.messages);
+                    var data = {
+                        actionUrl: $sce.trustAsResourceUrl(PAYMENT_INFO.paymentUrl),
+                        method: 'POST',
+                        inputData: {
+                            merchantId: PAYMENT_INFO.merchantId,
+                            amount: $scope.travel.premiumAmount,
+                            orderRef: $scope.tempData.trackingNumber,
+                            currCode: PAYMENT_INFO.currCode,
+                            pMethod: $scope.tempData.cardType,
+                            cardNo: $scope.travel.payment.creditCardNo,
+                            securityCode: $scope.payment.cvv2,
+                            cardHolder: $scope.travel.payment.creditCardName,
+                            epMonth: $scope.tempData.payment.expiryMonth,
+                            epYear: $scope.tempData.payment.expiryYear,
+                            successUrl: PAYMENT_INFO.successUrl,
+                            failUrl: PAYMENT_INFO.failUrl,
+                            cancelUrl: PAYMENT_INFO.cancelUrl,
+                            payType: PAYMENT_INFO.payType,
+                            lang: PAYMENT_INFO.lang,
+                            remark: PAYMENT_INFO.remark
+                        }
+                    };
+
+                    $rootScope.$broadcast('gateway.redirect', data);
+                });
             } else {
                 $event.preventDefault();
                 $event.stopPropagation();
@@ -634,6 +696,7 @@
             // set to true to show all error messages (if there are any)
             $scope.formStepSubmitted = true;
             if (isFormValid) {
+                $scope.tempData.step1Completed = true;
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
@@ -675,28 +738,8 @@
                             if (overlaps && overlaps.length > 0) {
                                 dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                             } else {
-                                //Store data to session storage before payment
-                                var submitOrderParams = angular.copy($scope.travel);
-                                delete submitOrderParams.mandatory;
-                                delete submitOrderParams.voluntaryList;
-                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
-                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
-                                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                console.log(submitOrderParams);
-                                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
-                                    self.restartTimer();
-                                    $scope.formStepSubmitted = false;
-                                    $scope.tempData.referenceId = response.data.referenceId;
-                                    $scope.tempData.currentState = "/insurance/payment";
-                                    //Store data to session storage before payment
-                                    LocalStorage.update('insurance.travel', $scope.travel);
-                                    LocalStorage.update('insurance.travelData', $scope.travelData);
-                                    LocalStorage.update('insurance.tempData', $scope.tempData);
-                                    LocalStorage.update('insurance.messages', $scope.messages);
-                                    $state.go('^.payment');
-                                });
+                                $scope.tempData.step3Completed = true;
+                                $state.go('^.payment');
                             }
                         });
                     }
@@ -710,6 +753,7 @@
 
             if (isFormValid) {
                 $scope.formStepSubmitted = false;
+                $scope.tempData.step2Completed = true;
                 $state.go('^.profile');
                 if (!$scope.tempData.passengersProfile)
                     $scope.passengersChange();
@@ -721,6 +765,7 @@
             //$event.stopPropagation();
             $scope.formStepSubmitted = true;
             if (isFormValid) {
+                $scope.tempData.step2Completed = true;
                 var hasVoluntary = false;
                 for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; ++i) {
                     var voluntary = $scope.travel.voluntaryList[i];
@@ -906,32 +951,32 @@
         })();
 
         $scope.validAge = (function () {
-            var calculateNextAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+            var calculateNextAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
                 return Math.ceil(yearPrecision);
             };
-            var calculateLastAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
+            var calculateLastAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
                 return Math.floor(yearPrecision);
             };
-            var calculateNearAge = function (birthDate) {
-                var nowDate = new Date();
-                var yearPrecision = moment(nowDate).diff(birthDate, 'years', true);
-                var year = moment(nowDate).diff(birthDate, 'years');
+            var calculateNearAge = function (startDate, birthDate) {
+                var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
+                var year = moment(startDate).diff(birthDate, 'years');
                 var month = Math.floor((yearPrecision - year) * 12);
                 return year + Math.round(month / 12);
             };
             var calculateMethods = {
                 "01": calculateNextAge, "02": calculateLastAge, "03": calculateNearAge
             };
-            var calculateAge = function (method, date) {
-                return calculateMethods[method](date);
+            var calculateAge = function (method,travelDate, birthOfDate) {
+                return calculateMethods[method](travelDate, birthOfDate);
             };
             return {
                 test: function (date) {
-                    var age = calculateAge($scope.travel.calculateMethod, moment(date, 'DD MMM YYYY'));
+                    var days = moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).diff(moment(), 'days');
+                    var startDate = moment().add(days, 'days');
+                    var age = calculateAge($scope.travel.calculateMethod, startDate, moment(date, CONSTANTS.DATE_FORMAT_DISPLAY));
+                    //console.log('age=',age);
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };
@@ -975,16 +1020,22 @@
             angular.forEach(list, function (item, index) {
                 var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
                 if (profile) {
-                    if (message)
-                        message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
-                    else
-                        message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                    var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
+                    if(message && (list.length == (index + 1))) {
+                        message += ' และ ';
+                    } else if (message) {
+                        message += ', ';
+                    } else {
+                        message = '';
+                    }
+                    message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
-            if (message)
+            if (message) {
                 profileWarningMessage = notifyMessage.replace('{{msg}}', message);
-            else
+            } else {
                 profileWarningMessage = notifyMessage;
+            }
             return profileWarningMessage;
         };
 
