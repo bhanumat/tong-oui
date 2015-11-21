@@ -975,16 +975,22 @@
             angular.forEach(list, function (item, index) {
                 var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
                 if (profile) {
-                    if (message)
-                        message = (message + ', ' + profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
-                    else
-                        message = (profile.title + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                    var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
+                    if(message && (list.length == (index + 1))) {
+                        message += ' และ ';
+                    } else if (message) {
+                        message += ', ';
+                    } else {
+                        message = '';
+                    }
+                    message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
-            if (message)
+            if (message) {
                 profileWarningMessage = notifyMessage.replace('{{msg}}', message);
-            else
+            } else {
                 profileWarningMessage = notifyMessage;
+            }
             return profileWarningMessage;
         };
 
