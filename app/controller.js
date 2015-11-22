@@ -68,7 +68,7 @@
          * Load data from session if any
          */
         var foundStorageData = LocalStorage.get('insurance.travel');
-        if (foundStorageData && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
+        if (foundStorageData) {
             console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
@@ -147,7 +147,7 @@
 
             sessionTimeWarningPromise = $timeout(function () {
                 dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
-            }, (timeout - 5) * 60000);
+            }, (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimePromise = $timeout(function () {
                 dialog.close();
                 var dlg = dialogs.error('Error', $scope.messages['ER_ESA_002']);
@@ -253,6 +253,9 @@
                 $scope.editingSummarybar = true;
             } else {
                 if (isFormValid) {
+                    //reset state
+                    $scope.editingSummarybar = false;
+
                     if ($scope.tempData.promoCodeChanged) {
                         self.validatePromotionCode().then(function () {
                             self.getCoverageTable().then(function () {
@@ -265,13 +268,9 @@
                         $scope.calculatePrice();
                     }
 
-                    //reset state
-                    $scope.editingSummarybar = false;
-                    $scope.tempData.promoCodeChanged = false;
-                    $scope.tempData.travelDateChanged = false;
-                    $scope.tempData.countryChanged = false;
                     //  Add/Remove passengers profile.
-                    if ($scope.travel.passengers < $scope.tempData.passengersProfile.length) {
+                    var passengersProfileCount = $scope.tempData.passengersProfile?$scope.tempData.passengersProfile.length:0;
+                    if ($scope.travel.passengers < passengersProfileCount) {
                         var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_007']);
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
@@ -607,6 +606,7 @@
             $scope.formStepSubmitted = true;
             if (paymentForm.$valid) {
                 $scope.formStepSubmitted = false;
+                $scope.isProcessing = true;
                 //Store data to session storage before payment
                 var submitOrderParams = angular.copy($scope.travel);
                 delete submitOrderParams.mandatory;
@@ -671,6 +671,7 @@
             };
             QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
                 self.restartTimer();
+                $scope.tempData.promoCodeChanged=false;
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
 
@@ -696,6 +697,8 @@
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 $scope.tempData.step1Completed = true;
+                $scope.tempData.travelDateChanged = false;
+                $scope.tempData.countryChanged = false;
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
