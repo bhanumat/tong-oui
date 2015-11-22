@@ -15,7 +15,7 @@
             'API_URL': '/',
             'DATE_FORMAT_DISPLAY': 'DD MMMM YYYY',
             'DATE_FORMAT': 'DD/MM/YYYY',
-            'WARNING_BEFORE_TIMEOUT': 1
+            'WARNING_BEFORE_TIMEOUT': 5
         })
         .constant('MESSAGES', {
             'UNKNOWN_ERROR': 'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง',
