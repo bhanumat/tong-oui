@@ -68,7 +68,7 @@
          * Load data from session if any
          */
         var foundStorageData = LocalStorage.get('insurance.travel');
-        if (foundStorageData && ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou')) {
+        if (foundStorageData) {
             console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
@@ -147,7 +147,7 @@
 
             sessionTimeWarningPromise = $timeout(function () {
                 dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
-            }, (timeout - 5) * 60000);
+            }, (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimePromise = $timeout(function () {
                 dialog.close();
                 var dlg = dialogs.error('Error', $scope.messages['ER_ESA_002']);
@@ -253,6 +253,9 @@
                 $scope.editingSummarybar = true;
             } else {
                 if (isFormValid) {
+                    //reset state
+                    $scope.editingSummarybar = false;
+
                     if ($scope.tempData.promoCodeChanged) {
                         self.validatePromotionCode().then(function () {
                             self.getCoverageTable().then(function () {
@@ -265,13 +268,9 @@
                         $scope.calculatePrice();
                     }
 
-                    //reset state
-                    $scope.editingSummarybar = false;
-                    $scope.tempData.promoCodeChanged = false;
-                    $scope.tempData.travelDateChanged = false;
-                    $scope.tempData.countryChanged = false;
                     //  Add/Remove passengers profile.
-                    if ($scope.travel.passengers < $scope.tempData.passengersProfile.length) {
+                    var passengersProfileCount = $scope.tempData.passengersProfile?$scope.tempData.passengersProfile.length:0;
+                    if ($scope.travel.passengers < passengersProfileCount) {
                         var dlg = dialogs.confirm('Warning', $scope.messages['ER_ESA_007']);
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
@@ -465,6 +464,7 @@
             }
             $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
             $scope.travel.applicationList[targetIndex].address = angular.copy($scope.travel.applicationList[templateIndex].address);
+            $scope.tempData.passengersProfile[targetIndex].provinceSelected = angular.copy($scope.tempData.passengersProfile[templateIndex].provinceSelected);
         };
 
         $scope.addAddress = function (index) {
@@ -607,6 +607,7 @@
             $scope.formStepSubmitted = true;
             if (paymentForm.$valid) {
                 $scope.formStepSubmitted = false;
+                $scope.isProcessing = true;
                 //Store data to session storage before payment
                 var submitOrderParams = angular.copy($scope.travel);
                 delete submitOrderParams.mandatory;
@@ -671,6 +672,7 @@
             };
             QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
                 self.restartTimer();
+                $scope.tempData.promoCodeChanged=false;
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
 
@@ -696,6 +698,8 @@
             $scope.formStepSubmitted = true;
             if (isFormValid) {
                 $scope.tempData.step1Completed = true;
+                $scope.tempData.travelDateChanged = false;
+                $scope.tempData.countryChanged = false;
                 if ($scope.travel.promoCode) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
@@ -724,25 +728,50 @@
         $scope.goToPayment = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             if (isFormValid) {
-                var checkBlacklistParam = self.initCheckBlacklistParam();
-                QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
-                    var blacklists = _.where(response.data.blacklists, {result: true});
-                    if (blacklists && blacklists.length > 0) {
-                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, $scope.messages['ER_ESA_008']));
-                    } else {
-                        var checkOverlapParam = self.initCheckOverlapParam();
-                        QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
-                            var overlaps = _.where(response.data.overlaps, {result: true});
-                            //console.log('overlaps : '+overlaps);
-                            if (overlaps && overlaps.length > 0) {
-                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
-                            } else {
-                                $scope.tempData.step3Completed = true;
-                                $state.go('^.payment');
-                            }
-                        });
-                    }
-                });
+                var duplicateIdCardList = self.checkDuplicateIdCard();
+                if(duplicateIdCardList.length == 0) {
+                    var checkBlacklistParam = self.initCheckBlacklistParam();
+                    QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
+                        var blacklists = _.where(response.data.blacklists, {result: true});
+                        if (blacklists && blacklists.length > 0) {
+                            dialogs.notify('Warning', $scope.messages['ER_ESA_008']);
+                        } else {
+                            var checkOverlapParam = self.initCheckOverlapParam();
+                            QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
+                                var overlaps = _.where(response.data.overlaps, {result: true});
+                                //console.log('overlaps : '+overlaps);
+                                if (overlaps && overlaps.length > 0) {
+                                    dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
+                                } else {
+                                    //Store data to session storage before payment
+                                    var submitOrderParams = angular.copy($scope.travel);
+                                    delete submitOrderParams.mandatory;
+                                    delete submitOrderParams.voluntaryList;
+                                    submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
+                                    submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                                    submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    console.log(submitOrderParams);
+                                    QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
+                                        self.restartTimer();
+                                        $scope.formStepSubmitted = false;
+                                        $scope.tempData.referenceId = response.data.referenceId;
+                                        $scope.tempData.currentState = "/insurance/payment";
+                                        //Store data to session storage before payment
+                                        LocalStorage.update('insurance.travel', $scope.travel);
+                                        LocalStorage.update('insurance.travelData', $scope.travelData);
+                                        LocalStorage.update('insurance.tempData', $scope.tempData);
+                                        LocalStorage.update('insurance.messages', $scope.messages);
+                                        $state.go('^.payment');
+                                    });
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    dialogs.notify('Warning', self.buildProfileWarningMessageFromList(duplicateIdCardList, $scope.messages['ER_ESA_010']));
+                }
             }
         };
 
@@ -1014,19 +1043,13 @@
         };
 
         self.buildProfileWarningMessage = function (list, notifyMessage) {
-            var message;
+            var message = '';
             var profileWarningMessage;
             angular.forEach(list, function (item, index) {
                 var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
                 if (profile) {
                     var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
-                    if(message && (list.length == (index + 1))) {
-                        message += ' และ ';
-                    } else if (message) {
-                        message += ', ';
-                    } else {
-                        message = '';
-                    }
+                    message += '<br/>';
                     message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
@@ -1067,6 +1090,39 @@
             QueryService.query('POST', 'getSubDistricts', undefined, districtParam).then(function (response) {
                 profile.provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
             });
+        };
+
+        self.checkDuplicateIdCard = function(){
+            var duplicateList = [];
+            angular.forEach($scope.travel.applicationList, function(obj){
+                var checkList = _.findWhere(duplicateList, {ssn: obj.ssn});
+                if(!checkList) {
+                    var applications = _.where($scope.travel.applicationList, {ssn: obj.ssn});
+                    if (applications.length > 1) {
+                        //applications.splice(0, 1);
+                        duplicateList = _.union(duplicateList, applications);
+                    }
+                }
+            });
+            return duplicateList;
+        };
+
+        self.buildProfileWarningMessageFromList = function (list, notifyMessage) {
+            var message = '';
+            var profileWarningMessage;
+            angular.forEach(list, function (profile, index) {
+                if (profile) {
+                    var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
+                    message += '<br/>';
+                    message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                }
+            });
+            if (message) {
+                profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+            } else {
+                profileWarningMessage = notifyMessage;
+            }
+            return profileWarningMessage;
         };
     }
 
