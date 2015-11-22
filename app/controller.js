@@ -662,45 +662,50 @@
         $scope.goToPayment = function ($event, isFormValid) {
             // set to true to show all error messages (if there are any)
             if (isFormValid) {
-                var checkBlacklistParam = self.initCheckBlacklistParam();
-                QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
-                    var blacklists = _.where(response.data.blacklists, {result: true});
-                    if (blacklists && blacklists.length > 0) {
-                        dialogs.notify('Warning', self.buildProfileWarningMessage(blacklists, $scope.messages['ER_ESA_008']));
-                    } else {
-                        var checkOverlapParam = self.initCheckOverlapParam();
-                        QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
-                            var overlaps = _.where(response.data.overlaps, {result: true});
-                            //console.log('overlaps : '+overlaps);
-                            if (overlaps && overlaps.length > 0) {
-                                dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
-                            } else {
-                                //Store data to session storage before payment
-                                var submitOrderParams = angular.copy($scope.travel);
-                                delete submitOrderParams.mandatory;
-                                delete submitOrderParams.voluntaryList;
-                                submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
-                                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
-                                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                                console.log(submitOrderParams);
-                                QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
-                                    self.restartTimer();
-                                    $scope.formStepSubmitted = false;
-                                    $scope.tempData.referenceId = response.data.referenceId;
-                                    $scope.tempData.currentState = "/insurance/payment";
+                var duplicateIdCardList = self.checkDuplicateIdCard();
+                if(duplicateIdCardList.length == 0) {
+                    var checkBlacklistParam = self.initCheckBlacklistParam();
+                    QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
+                        var blacklists = _.where(response.data.blacklists, {result: true});
+                        if (blacklists && blacklists.length > 0) {
+                            dialogs.notify('Warning', $scope.messages['ER_ESA_008']);
+                        } else {
+                            var checkOverlapParam = self.initCheckOverlapParam();
+                            QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
+                                var overlaps = _.where(response.data.overlaps, {result: true});
+                                //console.log('overlaps : '+overlaps);
+                                if (overlaps && overlaps.length > 0) {
+                                    dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
+                                } else {
                                     //Store data to session storage before payment
-                                    LocalStorage.update('insurance.travel', $scope.travel);
-                                    LocalStorage.update('insurance.travelData', $scope.travelData);
-                                    LocalStorage.update('insurance.tempData', $scope.tempData);
-                                    LocalStorage.update('insurance.messages', $scope.messages);
-                                    $state.go('^.payment');
-                                });
-                            }
-                        });
-                    }
-                });
+                                    var submitOrderParams = angular.copy($scope.travel);
+                                    delete submitOrderParams.mandatory;
+                                    delete submitOrderParams.voluntaryList;
+                                    submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
+                                    submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                                    submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    submitOrderParams.birthDate = moment(submitOrderParams.birthDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                                    console.log(submitOrderParams);
+                                    QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
+                                        self.restartTimer();
+                                        $scope.formStepSubmitted = false;
+                                        $scope.tempData.referenceId = response.data.referenceId;
+                                        $scope.tempData.currentState = "/insurance/payment";
+                                        //Store data to session storage before payment
+                                        LocalStorage.update('insurance.travel', $scope.travel);
+                                        LocalStorage.update('insurance.travelData', $scope.travelData);
+                                        LocalStorage.update('insurance.tempData', $scope.tempData);
+                                        LocalStorage.update('insurance.messages', $scope.messages);
+                                        $state.go('^.payment');
+                                    });
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    dialogs.notify('Warning', self.buildProfileWarningMessageFromList(duplicateIdCardList, $scope.messages['ER_ESA_010']));
+                }
             }
         };
 
@@ -970,19 +975,13 @@
         };
 
         self.buildProfileWarningMessage = function (list, notifyMessage) {
-            var message;
+            var message = '';
             var profileWarningMessage;
             angular.forEach(list, function (item, index) {
                 var profile = _.findWhere($scope.travel.applicationList, {ssn: item.ssn});
                 if (profile) {
                     var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
-                    if(message && (list.length == (index + 1))) {
-                        message += ' และ ';
-                    } else if (message) {
-                        message += ', ';
-                    } else {
-                        message = '';
-                    }
+                    message += '<br/>';
                     message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
                 }
             });
@@ -1023,6 +1022,40 @@
             QueryService.query('POST', 'getSubDistricts', undefined, districtParam).then(function (response) {
                 profile.provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
             });
+        };
+
+        self.checkDuplicateIdCard = function(){
+            var duplicateList = [];
+            angular.forEach($scope.travel.applicationList, function(obj){
+                var checkList = _.findWhere(duplicateList, {ssn: obj.ssn});
+                if(!checkList) {
+                    var applications = _.where($scope.travel.applicationList, {ssn: obj.ssn});
+                    if (applications.length > 1) {
+                        //applications.splice(0, 1);
+                        duplicateList = _.union(duplicateList, applications);
+                    }
+                }
+            });
+            console.log(duplicateList);
+            return duplicateList;
+        };
+
+        self.buildProfileWarningMessageFromList = function (list, notifyMessage) {
+            var message = '';
+            var profileWarningMessage;
+            angular.forEach(list, function (profile, index) {
+                if (profile) {
+                    var thaiName = $scope.travelData.titleList[$scope.getIndexOfByCode(profile.title, $scope.travelData.titleList)].thaiName;
+                    message += '<br/>';
+                    message += (thaiName + ' ' + profile.firstnameTh + ' ' + profile.lastnameTh);
+                }
+            });
+            if (message) {
+                profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+            } else {
+                profileWarningMessage = notifyMessage;
+            }
+            return profileWarningMessage;
         };
     }
 
