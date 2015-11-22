@@ -464,6 +464,7 @@
             }
             $scope.tempData.passengersProfile[targetIndex].referenceAddress = templateIndex;
             $scope.travel.applicationList[targetIndex].address = angular.copy($scope.travel.applicationList[templateIndex].address);
+            $scope.tempData.passengersProfile[targetIndex].provinceSelected = angular.copy($scope.tempData.passengersProfile[templateIndex].provinceSelected);
         };
 
         $scope.addAddress = function (index) {
