@@ -1103,7 +1103,6 @@
                     }
                 }
             });
-            console.log(duplicateList);
             return duplicateList;
         };
 
