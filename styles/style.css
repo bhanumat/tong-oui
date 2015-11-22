@@ -1968,7 +1968,7 @@ MAIN PAGE
         top: 0;
         width: 100%;
         display: block;
-        z-index: 9;
+        z-index: 10;
         height: 12.5%;
         background-color: #124b78;
         text-align: center; }
@@ -2800,7 +2800,7 @@ NAVIGATION STYLES
         font-size: 20px;
         top: 0;
         width: 20px;
-        z-index: 9; }
+        z-index: 10; }
         .plan-selection .plan-table .plan-table-content .plan-navigation::before {
           margin-top: -10px;
           margin-left: -10px; }
