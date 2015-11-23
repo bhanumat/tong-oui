@@ -63,8 +63,9 @@
                         <div class="col-sm-6">
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.startDate.$invalid && (formStepSubmitted || destinationForm.startDate.$touched) }">
-                                <input type="text" name="startDate" start-date-calendar="2" ng-model="travel.startDate"
-                                       placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+                                <input type="text" name="startDate" start-date-calendar="2"
+                                       ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง"
+                                       class="form-control text-center" readonly required/>
 
                                 <div class="help-block" ng-messages="destinationForm.startDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.startDate.$touched">
@@ -76,7 +77,8 @@
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.endDate.$invalid && (formStepSubmitted || destinationForm.endDate.$touched) }">
                                 <input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate"
-                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" readonly
+                                       required/>
 
                                 <div class="help-block" ng-messages="destinationForm.endDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.endDate.$touched">
