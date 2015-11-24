@@ -11,7 +11,7 @@
     angular
         .module('cignaApp')
         .constant('CONSTANTS', {
-            //'API_URL': 'http://cigna.localhost:8080/'
+            //'API_URL': 'http://58.137.12.47:8089/CignaPortalWebService/rest/'
             'API_URL': '/',
             'DATE_FORMAT_DISPLAY': 'DD MMMM YYYY',
             'DATE_FORMAT': 'DD/MM/YYYY',
