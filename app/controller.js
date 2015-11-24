@@ -32,7 +32,7 @@
         //Payment
         $scope.payment = {};
         $scope.nowYear = moment().get('year');
-        $scope.tempData = {passengers: 1};
+        $scope.tempData={};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
         $scope.tempData.destinations = [];
@@ -52,7 +52,7 @@
             $scope.travel = {};
             $scope.tempData = {};
             $scope.payment = {};
-            $scope.tempData.passengers = 1;
+            $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
             $scope.tempData.destinations = [];

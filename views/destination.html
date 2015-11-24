@@ -150,7 +150,7 @@
                                 <ol class="nya-bs-select form-control text-center"
                                     ng-class="{'filled': travel.passengers}" ng-model="travel.passengers"
                                     name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
-                                    <li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}">
+                                    <li nya-bs-option="passenger in range(1, travelData.maxTraveller)" ng-value="{{passenger}}">
                                         <a>
                                             {{ passenger }}
                                         </a>
