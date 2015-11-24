@@ -342,7 +342,9 @@
 
             //Voluntary if any
             $scope.travel.voluntaryList = [];
+            $scope.tempData.voluntaryCollapse = [];
             for (var i = 0, len = campaign.voluntaryList.length; i < len; ++i) {
+                $scope.tempData.voluntaryCollapse[i] = true;
                 var voluntary = campaign.voluntaryList[i];
                 var rateScale;
                 for (var j = 0, rateScaleLen = voluntary.rateScaleList.length; j < rateScaleLen; ++j) {
