@@ -610,10 +610,10 @@
             if (paymentForm.$valid) {
                 $scope.formStepSubmitted = false;
                 $scope.isProcessing = true;
+
                 //Store data to session storage before payment
                 var submitOrderParams = angular.copy($scope.travel);
-                delete submitOrderParams.mandatory;
-                delete submitOrderParams.voluntaryList;
+                submitOrderParams.campaign = submitOrderParams.campaignCode;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
                 submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
@@ -622,7 +622,16 @@
                     var profile = submitOrderParams.applicationList[i];
                     profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 }
-                submitOrderParams.payment.creditCardExpired = $scope.tempData.payment.expiryMonth + $scope.tempData.payment.expiryYear;
+
+                submitOrderParams.payment = {};
+                submitOrderParams.payment.creditCardExpired = $scope.payment.expiryMonth + $scope.payment.expiryYear;
+                submitOrderParams.payment.creditCardNo = $scope.payment.creditCardNo;
+                submitOrderParams.payment.creditCardName=$scope.payment.creditCardName;
+
+                delete submitOrderParams.mandatory;
+                delete submitOrderParams.voluntaryList;
+                delete submitOrderParams.campaignCode;
+
                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                     self.restartTimer();
                     $scope.formStepSubmitted = false;
@@ -643,12 +652,12 @@
                             amount: $scope.travel.premiumAmount,
                             orderRef: $scope.tempData.trackingNumber,
                             currCode: PAYMENT_INFO.currCode,
-                            pMethod: $scope.tempData.cardType,
-                            cardNo: $scope.travel.payment.creditCardNo,
+                            pMethod: $scope.payment.cardType,
+                            cardNo: $scope.payment.creditCardNo,
                             securityCode: $scope.payment.cvv2,
-                            cardHolder: $scope.travel.payment.creditCardName,
-                            epMonth: $scope.tempData.payment.expiryMonth,
-                            epYear: $scope.tempData.payment.expiryYear,
+                            cardHolder: $scope.payment.creditCardName,
+                            epMonth: $scope.payment.expiryMonth,
+                            epYear: $scope.payment.expiryYear,
                             successUrl: PAYMENT_INFO.successUrl,
                             failUrl: PAYMENT_INFO.failUrl,
                             cancelUrl: PAYMENT_INFO.cancelUrl,
@@ -868,7 +877,7 @@
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
                     $scope.travel.destination = $scope.getProtectionArea();
-                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'country').join('|')
+                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'id').join(',')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
                 }
@@ -951,7 +960,7 @@
                 test: function (number) {
                     for (var card in cards) {
                         if (cards[card].test(number)) {
-                            $scope.tempData.cardType = card;
+                            $scope.payment.cardType = card;
                             return card;
                         }
                     }
