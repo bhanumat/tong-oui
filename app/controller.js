@@ -613,9 +613,9 @@
 
                 //Store data to session storage before payment
                 var submitOrderParams = angular.copy($scope.travel);
-                submitOrderParams.campaign = submitOrderParams.campaignCode;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
-                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId').join(',');
+                submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
+                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
                 submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
@@ -630,7 +630,6 @@
 
                 delete submitOrderParams.mandatory;
                 delete submitOrderParams.voluntaryList;
-                delete submitOrderParams.campaignCode;
 
                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                     self.restartTimer();
