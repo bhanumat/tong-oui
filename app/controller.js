@@ -901,8 +901,9 @@
         };
 
         $scope.calcTravelDays = function () {
-            var oneDay = 24 * 60 * 60 * 1000;
-            $scope.travel.days = Math.floor(( Date.parse($scope.tempData.endDateForCal) - Date.parse($scope.tempData.startDateForCal) ) / oneDay);
+            var end = Date.parse($scope.tempData.endDateForCal);
+            var begin = Date.parse($scope.tempData.startDateForCal);
+            $scope.travel.days = moment(end).diff(begin, 'days')+1;
             $scope.tempData.daysAsText = "รวม " + $scope.travel.days + " วัน";
         };
 
