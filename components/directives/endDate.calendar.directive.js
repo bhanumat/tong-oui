@@ -30,8 +30,6 @@
           return element.datepicker({
             dateFormat: 'dd MM yy',
             numberOfMonths: parseInt(attrs["endDateCalendar"]),
-            minDate: $scope.minDate,
-            maxDate: $scope.maxDate,
             onSelect: function(date) {
               $scope.travel.endDate = date;
               $scope.tempData.endDateForCal = element.datepicker('getDate');
