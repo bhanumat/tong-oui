@@ -63,6 +63,7 @@
             $scope.tempData = {};
             $scope.payment = {};
             $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
+            $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
             $scope.tempData.destinations = [];
