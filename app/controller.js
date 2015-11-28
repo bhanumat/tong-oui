@@ -49,6 +49,9 @@
         self.reset = function () {
             LocalStorage.removeAll();
             $scope.start = true;
+
+            //restore travelData;
+            $scope.travelData.destinationList = $scope.travelData.destinationList.concat($scope.tempData.destinations);
             $scope.travel = {};
             $scope.tempData = {};
             $scope.payment = {};
@@ -507,7 +510,7 @@
 
         $scope.isSchengen = function () {
             for (var i = 0; i < $scope.tempData.destinations.length; i++) {
-                if ($scope.tempData.destinations[i].type == "schengen") {
+                if ($scope.tempData.destinations[i].type == "02") {
                     $scope.tempData.isSchengen = true;
                     return true;
                 }
@@ -533,7 +536,7 @@
 
         $scope.isAsia = function () {
             for (var i = 0; i < $scope.tempData.destinations.length; i++) {
-                if ($scope.tempData.destinations[i].type == "asia") {
+                if ($scope.tempData.destinations[i].type == "01") {
                     $scope.tempData.isAsia = true;
                     return true;
                 }
@@ -547,7 +550,7 @@
         $scope.isWorldWide = function () {
             var isWorld = function () {
                 for (var i = 0; i < $scope.tempData.destinations.length; i++) {
-                    if ($scope.tempData.destinations[i].type == "world wide") {
+                    if ($scope.tempData.destinations[i].type == "03") {
                         $scope.tempData.isAsia = true;
                         return true;
                     }
