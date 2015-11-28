@@ -46,6 +46,13 @@
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
+        $scope.range = function (min, max, step) {
+            step = step || 1;
+            var input = [];
+            for (var i = min; i <= max; i += step) input.push(i);
+            return input;
+        };
+
         self.reset = function () {
             LocalStorage.removeAll();
             $scope.start = true;
@@ -863,13 +870,6 @@
             }
 
             $scope.calculatePrice();
-        };
-
-        $scope.range = function (min, max, step) {
-            step = step || 1;
-            var input = [];
-            for (var i = min; i <= max; i += step) input.push(i);
-            return input;
         };
 
         $scope.addDestination = function () {
