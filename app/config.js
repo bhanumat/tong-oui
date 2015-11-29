@@ -11,8 +11,8 @@
     angular
         .module('cignaApp')
         .constant('CONSTANTS', {
-            //'API_URL': 'http://58.137.12.47:8089/CignaPortalWebService/rest/',
-            'API_URL': '/',
+            'API_URL': 'http://58.137.12.47:8089/CignaPortalWebService/rest/',
+            //'API_URL': '/',
             'DATE_FORMAT_DISPLAY': 'DD MMMM YYYY',
             'DATE_FORMAT': 'DD/MM/YYYY',
             'WARNING_BEFORE_TIMEOUT': 1
@@ -32,12 +32,12 @@
             //'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
             //'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
             //'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-            //'failUrl':'http://58.137.12.47:8089/#/insurance/payment',
-            //'successUrl':'http://58.137.12.47:8089/#/insurance/thankyou',
-            //'cancelUrl':'http://58.137.12.47:8089/#/insurance/payment',
-            'successUrl': 'http://localhost:3000/#/insurance/thankyou',
-            'failUrl': 'http://localhost:3000/#/insurance/payment',
-            'cancelUrl': 'http://localhost:3000/#/insurance/payment',
+            'failUrl':'http://58.137.12.47:8089/#/insurance/payment',
+            'successUrl':'http://58.137.12.47:8089/#/insurance/thankyou',
+            'cancelUrl':'http://58.137.12.47:8089/#/insurance/payment',
+            //'successUrl': 'http://localhost:3000/#/insurance/thankyou',
+            //'failUrl': 'http://localhost:3000/#/insurance/payment',
+            //'cancelUrl': 'http://localhost:3000/#/insurance/payment',
             'payType': 'N',
             'lang': 'T',
             'remark': '-',
