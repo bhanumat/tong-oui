@@ -1031,13 +1031,12 @@
                 overlaps: []
             };
             angular.forEach($scope.travel.applicationList, function (obj, index) {
-                var startTravelDate = $scope.travel.startDate;
-                var endTravelDate = $scope.travel.endDate;
-                checkOverlapParam.overlaps.push({
+                var checkOverlapObj = {
                     ssn: obj.ssn,
-                    startTravelDate: startTravelDate,
-                    endTravelDate: endTravelDate
-                });
+                    startTravelDate: moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT),
+                    endTravelDate: moment($scope.travel.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT)
+                };
+                checkOverlapParam.overlaps.push(checkOverlapObj);
             });
             return checkOverlapParam;
         };
