@@ -756,7 +756,7 @@
                             dialogs.notify('Warning', $scope.messages['ER_ESA_008']);
                         } else {
                             var checkOverlapParam = self.initCheckOverlapParam();
-                            QueryService.query('POST', 'checkOverlap', undefined, checkOverlapParam).then(function (response) {
+                            QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
                                 var overlaps = _.where(response.data.overlaps, {result: true});
                                 //console.log('overlaps : '+overlaps);
                                 if (overlaps && overlaps.length > 0) {
