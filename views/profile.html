@@ -247,7 +247,7 @@
                             <label class="sr-only" for="province">จังหวัด</label>
                             <ol class="nya-bs-select form-control" ng-class="{'filled': travel.applicationList[applicationIndex].address.province}" ng-model="travel.applicationList[applicationIndex].address.province" name="province" title="จังหวัด" data-size="5" required>
                               <li nya-bs-option="province in tempData.provinceList | orderBy:'thaiName'" data-value="province.code"
-                                      ng-click="getDistricts(tempData.passengersProfile[applicationIndex] ,province.code)">
+                                      ng-click="changeProvince(applicationIndex ,province.code)">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
                                   {{ province.thaiName }}
@@ -266,7 +266,7 @@
                                 ng-init="provinceIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.province, tempData.provinceList)"
                                 ng-click="provinceIndex = getIndexOfByCode(travel.applicationList[applicationIndex].address.province, tempData.provinceList)" >
                               <li nya-bs-option="district in tempData.passengersProfile[applicationIndex].provinceSelected.districtList | orderBy:'thaiName'" data-value="district.code"
-                                  ng-click="getSubDistricts(tempData.passengersProfile[applicationIndex] ,district.code)">
+                                  ng-click="changeDistrict(applicationIndex ,district.code)">
                                 <!-- the text content of anchor element will be used for search -->
                                 <a>
                                   {{ district.thaiName }}

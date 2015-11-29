@@ -1057,8 +1057,8 @@
             return profileWarningMessage;
         };
 
-        $scope.getDistricts = function (profile, provinceCode) {
-            console.log('getDistricts..' + provinceCode)
+        $scope.changeProvince = function (applicationIndex, provinceCode) {
+            //console.log('changeProvince..' + provinceCode);
             if (!provinceCode)
                 return;
             var provinceParam = {
@@ -1066,14 +1066,20 @@
                 loginFlag: 'N',
                 provinceCode: provinceCode
             };
-            profile.provinceSelected = _.findWhere($scope.tempData.provinceList, {code: provinceCode});
+            if(!$scope.travel.applicationList[applicationIndex].address)
+                $scope.travel.applicationList[applicationIndex].address = {};
+
+            $scope.travel.applicationList[applicationIndex].address.district = null;
+            $scope.travel.applicationList[applicationIndex].address.subDistrict = null;
+            $scope.travel.applicationList[applicationIndex].address.zipcode = null;
+            $scope.tempData.passengersProfile[applicationIndex].provinceSelected = _.findWhere($scope.tempData.provinceList, {code: provinceCode});
             QueryService.query('POST', 'getDistricts', undefined, provinceParam).then(function (response) {
-                profile.provinceSelected.districtList = response.data.districts;
+                $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList = response.data.districts;
             });
         };
 
-        $scope.getSubDistricts = function (profile, districtCode) {
-            console.log('getSubDistricts..' + districtCode)
+        $scope.changeDistrict = function (applicationIndex, districtCode) {
+            //console.log('changeDistrict..' + districtCode);
             if (!districtCode)
                 return;
             var districtParam = {
@@ -1081,10 +1087,14 @@
                 loginFlag: 'N',
                 districtCode: districtCode
             };
-            profile.districtSelected = _.findWhere(profile.provinceSelected.districtList, {code: districtCode});
-            var idx = $scope.getIndexOfByCode(districtCode, profile.provinceSelected.districtList);
+            if(!$scope.travel.applicationList[applicationIndex].address)
+                $scope.travel.applicationList[applicationIndex].address = {};
+
+            $scope.travel.applicationList[applicationIndex].address.subDistrict = null;
+            $scope.travel.applicationList[applicationIndex].address.zipcode = null;
+            var idx = $scope.getIndexOfByCode(districtCode, $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList);
             QueryService.query('POST', 'getSubDistricts', undefined, districtParam).then(function (response) {
-                profile.provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
+                $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
             });
         };
 
