@@ -11,11 +11,11 @@
     angular
         .module('cignaApp')
         .constant('CONSTANTS', {
-            'API_URL': 'http://58.137.12.47:8089/CignaPortalWebService/rest/',
-            //'API_URL': '/',
+            //'API_URL': 'http://58.137.12.47:8089/CignaPortalWebService/rest/',
+            'API_URL': '/',
             'DATE_FORMAT_DISPLAY': 'DD MMMM YYYY',
             'DATE_FORMAT': 'DD/MM/YYYY',
-            'WARNING_BEFORE_TIMEOUT': 1
+            'WARNING_BEFORE_TIMEOUT': 5
         })
         .constant('MESSAGES', {
             'UNKNOWN_ERROR': 'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง',
@@ -29,12 +29,12 @@
             'currCode': '764',
             //'cvv2Url':'https://ipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
             'cvv2Url': 'https://psipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
-            //'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-            //'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
-            //'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
-            'successUrl': 'http://localhost:3000/#/insurance/thankyou',
-            'failUrl': 'http://localhost:3000/#/insurance/payment',
-            'cancelUrl': 'http://localhost:3000/#/insurance/payment',
+            'failUrl':'http://bhanumat.16mb.com/#/insurance/payment',
+            'successUrl':'http://bhanumat.16mb.com/#/insurance/thankyou',
+            'cancelUrl':'http://bhanumat.16mb.com/#/insurance/payment',
+            //'successUrl': 'http://localhost:3000/#/insurance/thankyou',
+            //'failUrl': 'http://localhost:3000/#/insurance/payment',
+            //'cancelUrl': 'http://localhost:3000/#/insurance/payment',
             'payType': 'N',
             'lang': 'T',
             'remark': '-',
