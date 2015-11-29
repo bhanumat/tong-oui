@@ -635,7 +635,11 @@
                 }
 
                 submitOrderParams.payment = {};
-                submitOrderParams.payment.creditCardExpired = $scope.payment.expiryMonth + $scope.payment.expiryYear;
+                var pad = "00";
+                var month = ''+$scope.payment.expiryMonth;
+                var mm = pad.substring(0, pad.length - month.length) + month;
+                var yy = (''+$scope.payment.expiryYear).substr(2,2);
+                submitOrderParams.payment.creditCardExpired =mm  + yy;
                 submitOrderParams.payment.creditCardNo = $scope.payment.creditCardNo;
                 submitOrderParams.payment.creditCardName = $scope.payment.creditCardName;
 
