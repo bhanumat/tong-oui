@@ -64,195 +64,195 @@
       "country": "Argentina",
       "code": "AR",
       "id": 1,
-      "type": "schengen",
+     "type": "02",
       "requiredEng": false
     },
     {
       "country": "Australia",
       "code": "AU",
       "id": 2,
-      "type": "schengen",
+     "type": "02",
       "requiredEng": true
     },
     {
       "country": "Austria",
       "code": "AT",
       "id": 3,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Belgium",
       "code": "BE",
       "id": 4,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Brazil",
       "code": "BR",
       "id": 5,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "France",
       "code": "FR",
       "id": 6,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "French Guiana",
       "code": "GF",
       "id": 7,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "French Polynesia",
       "code": "PF",
       "id": 8,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "French Southern Territories",
       "code": "TF",
       "id": 9,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Germany",
       "code": "DE",
       "id": 10,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Hong Kong",
       "code": "HK",
       "id": 11,
-      "type": "asia"
+      "type": "01"
     },
     {
       "country": "Japan",
       "code": "JP",
       "id": 12,
-      "type": "asia"
+      "type": "01"
     },
     {
       "country": "Korea, Republic",
       "code": "KR",
       "id": 13,
-      "type": "asia"
+     "type": "01"
     },
     {
       "country": "Macao",
       "code": "MO",
       "id": 14,
-      "type": "asia"
+     "type": "01"
     },
     {
       "country": "Malaysia",
       "code": "MY",
       "id": 15,
-      "type": "asia"
+     "type": "01"
     },
     {
       "country": "Maldives",
       "code": "MV",
       "id": 16,
-      "type": "asia"
+     "type": "01"
     },
     {
       "country": "Netherlands",
       "code": "NL",
       "id": 17,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Norway",
       "code": "NO",
       "id": 18,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Poland",
       "code": "PL",
       "id": 19,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Portugal",
       "code": "PT",
       "id": 20,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Romania",
       "code": "RO",
       "id": 21,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Russian Federation",
       "code": "RU",
       "id": 22,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Serbia and Montenegro",
       "code": "CS",
       "id": 23,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Spain",
       "code": "ES",
       "id": 24,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Sweden",
       "code": "SE",
       "id": 25,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Switzerland",
       "code": "CH",
       "id": 26,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Syrian Arab Republic",
       "code": "SY",
       "id": 27,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "Taiwan, Province of China",
       "code": "TW",
       "id": 28,
-      "type": "asia"
+     "type": "01"
     },
     {
       "country": "Ukraine",
       "code": "UA",
       "id": 29,
-      "type": "schengen"
+     "type": "02"
     },
     {
       "country": "United Arab Emirates",
       "code": "AE",
       "id": 30,
-      "type": "schengen"
+      "type": "02"
     },
     {
       "country": "United Kingdom",
       "code": "GB",
       "id": 31,
-      "type": "schengen"
+      "type": "02"
     },
     {
       "country": "United States",
       "code": "US",
       "id": 32,
-      "type": "schengen"
+     "type": "02"
     }
   ],
   "provinceList":    [

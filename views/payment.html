@@ -21,33 +21,33 @@
                                             <div class="col-xs-3">
                                                 <input type="text" name="cardnumber1" mask="9999" maxlength="4"
                                                        restrict="reject" clean="true"
-                                                       ng-change="travel.payment.creditCardNo = tempData.payment.cardnumber1 + tempData.payment.cardnumber2 + tempData.payment.cardnumber3 + tempData.payment.cardnumber4"
-                                                       ng-model="tempData.payment.cardnumber1" autocomplete="off"
+                                                       ng-change="payment.creditCardNo = payment.cardnumber1 + payment.cardnumber2 + payment.cardnumber3 + payment.cardnumber4"
+                                                       ng-model="payment.cardnumber1" autocomplete="off"
                                                        class="cardnumber form-control text-center">
                                             </div>
                                             <div class="col-xs-3">
                                                 <input type="text" name="cardnumber2" mask="9999" maxlength="4"
                                                        restrict="reject" clean="true"
-                                                       ng-change="travel.payment.creditCardNo = tempData.payment.cardnumber1 + tempData.payment.cardnumber2 + tempData.payment.cardnumber3 + tempData.payment.cardnumber4"
-                                                       ng-model="tempData.payment.cardnumber2" autocomplete="off"
+                                                       ng-change="payment.creditCardNo = payment.cardnumber1 + payment.cardnumber2 + payment.cardnumber3 + payment.cardnumber4"
+                                                       ng-model="payment.cardnumber2" autocomplete="off"
                                                        class="cardnumber form-control text-center">
                                             </div>
                                             <div class="col-xs-3">
                                                 <input type="text" name="cardnumber3" mask="9999" maxlength="4"
                                                        restrict="reject" clean="true"
-                                                       ng-change="travel.payment.creditCardNo = tempData.payment.cardnumber1 + tempData.payment.cardnumber2 + tempData.payment.cardnumber3 + tempData.payment.cardnumber4"
-                                                       ng-model="tempData.payment.cardnumber3" autocomplete="off"
+                                                       ng-change="payment.creditCardNo = payment.cardnumber1 + payment.cardnumber2 + payment.cardnumber3 + payment.cardnumber4"
+                                                       ng-model="payment.cardnumber3" autocomplete="off"
                                                        class="cardnumber form-control text-center">
                                             </div>
                                             <div class="col-xs-3">
                                                 <input type="text" name="cardnumber4" mask="9999" maxlength="4"
                                                        restrict="reject" clean="true"
-                                                       ng-change="travel.payment.creditCardNo = tempData.payment.cardnumber1 + tempData.payment.cardnumber2 + tempData.payment.cardnumber3 + tempData.payment.cardnumber4"
-                                                       ng-model="tempData.payment.cardnumber4" autocomplete="off"
+                                                       ng-change="payment.creditCardNo = payment.cardnumber1 + payment.cardnumber2 + payment.cardnumber3 + payment.cardnumber4"
+                                                       ng-model="payment.cardnumber4" autocomplete="off"
                                                        class="cardnumber form-control text-center">
                                             </div>
                                             <input type="hidden" name="cardnumber"
-                                                   ng-model="travel.payment.creditCardNo"
+                                                   ng-model="payment.creditCardNo"
                                                    ng-pattern="validCardType" required>
                                             <div class="col-xs-12">
                                                 <div class="help-block" ng-messages="paymentForm.cardnumber.$error"
@@ -100,8 +100,8 @@
                                                 <div class="form-group" style="margin-bottom: 0;"
                                                      ng-class="{ 'has-error' : (paymentForm.expiryMonth.$invalid && (formStepSubmitted || paymentForm.expiryMonth.$touched)) }">
                                                     <ol class="nya-bs-select form-control"
-                                                        ng-class="{'filled': travel.payment.expiryMonth}"
-                                                        ng-model="tempData.payment.expiryMonth" name="expiryMonth"
+                                                        ng-class="{'filled': payment.expiryMonth}"
+                                                        ng-model="payment.expiryMonth" name="expiryMonth"
                                                         title="เดือน"
                                                         data-size="5" required>
                                                         <li nya-bs-option="expiryMonth in range(1,12)">
@@ -121,8 +121,8 @@
                                                 <div class="form-group" style="margin-bottom: 0;"
                                                      ng-class="{ 'has-error' : (paymentForm.expiryYear.$invalid && (formStepSubmitted || paymentForm.expiryYear.$touched)) }">
                                                     <ol class="nya-bs-select form-control"
-                                                        ng-class="{'filled': travel.payment.expiryYear}"
-                                                        ng-model="tempData.payment.expiryYear" name="expiryYear"
+                                                        ng-class="{'filled': payment.expiryYear}"
+                                                        ng-model="payment.expiryYear" name="expiryYear"
                                                         title="ปี"
                                                         data-size="5" required>
                                                         <li nya-bs-option="expiryYear in range(nowYear,nowYear+15)">
@@ -150,8 +150,8 @@
                                             <div class="col-xs-12">
                                                 <input type="text" style="text-transform: uppercase;"
                                                        name="cardholdername"
-                                                       ng-change="travel.payment.creditCardName = travel.payment.creditCardName.toUpperCase();"
-                                                       ng-model="travel.payment.creditCardName" class="form-control"
+                                                       ng-change="payment.creditCardName = payment.creditCardName.toUpperCase();"
+                                                       ng-model="payment.creditCardName" class="form-control"
                                                        ng-minlength="1" ng-maxlength="100" validate="false"
                                                        repeat="40" restrict="reject" clean="true" autocomplete="off"
                                                        ng-pattern="/^(([a-zA-Z]+['-.]?)+|[a-zA-Z]*)[ ]?(([a-zA-Z]+['-.]?[.]?)+[ ]?[a-zA-Z]+|[a-zA-Z]*)$/"

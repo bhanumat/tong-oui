@@ -136,7 +136,7 @@
                                                         <input type="text" name="startDate" start-date-calendar="1"
                                                                ng-model="travel.startDate"
                                                                placeholder="วันที่เริ่มต้นเดินทาง"
-                                                               class="form-control text-center" required/>
+                                                               class="form-control text-center" readonly required/>
 
                                                         <div class="help-block"
                                                              ng-messages="summaryForm.startDate.$error"
@@ -155,7 +155,7 @@
                                                         <input type="text" name="endDate" end-date-calendar="1"
                                                                ng-model="travel.endDate"
                                                                placeholder="วันที่สิ้นสุดการเดินทาง"
-                                                               class="form-control text-center" required/>
+                                                               class="form-control text-center" readonly required/>
 
                                                         <div class="help-block" ng-messages="summaryForm.endDate.$error"
                                                              ng-if="summaryBarSubmitted || summaryForm.endDate.$touched">
@@ -249,7 +249,7 @@
                                                     </p>
 
                                                     <p ng-if="tempData.discountAsAmount && tempData.isShowingDiscount">
-                                                        ส่วนลด <span ng-if="tempData.promotion.promoType == 'percent'">{{tempData.discount}}%</span>
+                                                        ส่วนลด <span ng-if="tempData.promotion.promoType == '01'">{{tempData.discount}}%</span>
                                                         <span class="right">{{tempData.discountAsAmount | number}} บาท</span>
                                                     </p>
 

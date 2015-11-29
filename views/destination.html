@@ -18,11 +18,10 @@
                             <div class="form-group"
                                  ng-class="{ 'has-error' : !tempData.destinations.length && formStepSubmitted  }">
                                 <ol class="nya-bs-select form-control text-center" id="destination"
-                                    disabled="tempData.destinations.length == 10"
                                     ng-class="{'filled': tempData.destination}"
                                     ng-change="addDestination();" ng-model="tempData.destination" name="destinations"
                                     title="เลือกได้สูงสุด 10 ประเทศ" data-size="5" data-live-search="true">
-                                    <li nya-bs-option="item in travelData.destinationList">
+                                    <li nya-bs-option="item in travelData.destinationList | orderBy:'country'" ng-class="{disabled: tempData.destinations.length === 10 }">
                                         <!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
                                         <a>
                                             {{ item.country }}
@@ -63,8 +62,9 @@
                         <div class="col-sm-6">
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.startDate.$invalid && (formStepSubmitted || destinationForm.startDate.$touched) }">
-                                <input type="text" name="startDate" start-date-calendar="2" ng-model="travel.startDate"
-                                       placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+                                <input type="text" name="startDate" start-date-calendar="2"
+                                       ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง"
+                                       class="form-control text-center" readonly required/>
 
                                 <div class="help-block" ng-messages="destinationForm.startDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.startDate.$touched">
@@ -76,7 +76,8 @@
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.endDate.$invalid && (formStepSubmitted || destinationForm.endDate.$touched) }">
                                 <input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate"
-                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" readonly
+                                       required/>
 
                                 <div class="help-block" ng-messages="destinationForm.endDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.endDate.$touched">
@@ -148,7 +149,7 @@
                                 <ol class="nya-bs-select form-control text-center"
                                     ng-class="{'filled': travel.passengers}" ng-model="travel.passengers"
                                     name="passengers" title="เลือกจำนวนผู้เดินทาง" data-size="5" required>
-                                    <li nya-bs-option="passenger in tempData.passengers" ng-value="{{passenger}}">
+                                    <li nya-bs-option="passenger in range(1, travelData.maxTraveller)" ng-value="{{passenger}}">
                                         <a>
                                             {{ passenger }}
                                         </a>

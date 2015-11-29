@@ -2,8 +2,8 @@
   "resultCode": "0",
   "resultDesc": "",
   "promotion": {
-    "promoType": "gift",
+    "promoType": "01",
     "promoValue": "Free bag",
-    "promoFull": "Y"
+    "promoFull": "N"
   }
 }
