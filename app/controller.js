@@ -696,9 +696,7 @@
                 $scope.tempData.promoCodeChanged = false;
                 $scope.tempData.promotion = response.data.promotion;
                 if ($scope.tempData.promotion.promoFull === 'Y') {
-
                     deferred.reject(response);
-
                     $scope.travel.promoCode = null;
                     dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                 } else {

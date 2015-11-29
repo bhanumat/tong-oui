@@ -13,35 +13,15 @@
         "coverageList": [
           {
             "code": "TA",
-            "description": "ADB due to Travel Accident"
+            "description": "<img src='images/icon-plan-1.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ)</p>"
           },
           {
             "code": "TDIS",
-            "description": "ADIS due to Travel Accident"
+            "description": "<img src='images/icon-plan-2.png'><p>การเสียชีวิต การสูญเสียอวัยวะ สายตา หรือทุพพลภาพถาวรสิ้นเชิง (จากอุบัติเหตุ) ในรถสาธารณะ หรือรถยนตร์ส่วนบุคคล</p>"
           },
           {
             "code": "TTPD",
-            "description": "ATPD due to Travel Accident"
-          },
-          {
-            "code": "TTPD4",
-            "description": "ATPD due to Travel Accident"
-          },
-          {
-            "code": "TTPD5",
-            "description": "ATPD due to Travel Accident"
-          },
-          {
-            "code": "TTPD6",
-            "description": "ATPD due to Travel Accident"
-          },
-          {
-            "code": "TTPD7",
-            "description": "ATPD due to Travel Accident"
-          },
-          {
-            "code": "TTPD8",
-            "description": "ATPD due to Travel Accident"
+            "description": "<img src='images/icon-plan-3.png'><p>ค่ารักษาพยาบาลจากอุบัติเหตุและเจ็บป่วย สูงสุด</p>"
           }
         ],
         "rateScaleList": [
