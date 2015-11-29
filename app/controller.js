@@ -32,7 +32,7 @@
         //Payment
         $scope.payment = {};
         $scope.nowYear = moment().get('year');
-        $scope.tempData={};
+        $scope.tempData = {};
         $scope.tempData.voluntaryCollapse = [];
         $scope.tempData.destination = null;
         $scope.tempData.destinations = [];
@@ -637,7 +637,7 @@
                 submitOrderParams.payment = {};
                 submitOrderParams.payment.creditCardExpired = $scope.payment.expiryMonth + $scope.payment.expiryYear;
                 submitOrderParams.payment.creditCardNo = $scope.payment.creditCardNo;
-                submitOrderParams.payment.creditCardName=$scope.payment.creditCardName;
+                submitOrderParams.payment.creditCardName = $scope.payment.creditCardName;
 
                 delete submitOrderParams.mandatory;
                 delete submitOrderParams.voluntaryList;
@@ -905,7 +905,7 @@
         $scope.calcTravelDays = function () {
             var end = Date.parse($scope.tempData.endDateForCal);
             var begin = Date.parse($scope.tempData.startDateForCal);
-            $scope.travel.days = moment(end).diff(begin, 'days')+1;
+            $scope.travel.days = moment(end).diff(begin, 'days') + 1;
             $scope.tempData.daysAsText = "รวม " + $scope.travel.days + " วัน";
         };
 
