@@ -1,7 +1,7 @@
 <form name="insuranceForm" novalidate>
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-    <h3>ข้อมูลผู้ขอประกัน</h3>
+    <h3>ข้อมูลผู้ขอเอาประกันภัย</h3>
     <div class="profileGroup" ng-repeat="application in range(1, tempData.passengersProfile.length)" ng-init="applicationIndex=$index" >
       <ng-form name="profileForm" novalidate>
       <div class="profile" ng-class="{'edit':tempData.passengersProfile[applicationIndex].stage == 'edit','saved':tempData.passengersProfile[applicationIndex].stage == 'saved'}">
@@ -10,11 +10,11 @@
             <div class="profile-add-button" ng-click="changeStage(applicationIndex,'edit',profileForm.$valid);">
               <h4>
               <span class="glyphicon glyphicon-plus-sign"></span>
-              ผู้ขอประกันคนที่ {{applicationIndex + 1}}
+              ผู้ขอเอาประกันภัยคนที่ {{applicationIndex + 1}}
               </h4>
             </div>
             <div class="profile-header">
-              <h4>ผู้ขอประกันคนที่ {{applicationIndex + 1}} <div class="right" ng-if="tempData.passengersProfile[applicationIndex].stage == 'saved'"><span ng-click="changeStage(applicationIndex,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(applicationIndex,'reset',profileForm.$valid);"><img src="images/icon-trash.png" alt=""></span></div></h4>
+              <h4>ผู้ขอเอาประกันภัยคนที่ {{applicationIndex + 1}} <div class="right" ng-if="tempData.passengersProfile[applicationIndex].stage == 'saved'"><span ng-click="changeStage(applicationIndex,'edit',profileForm.$valid);"><img src="images/icon-edit.png" alt=""></span><span ng-click="changeStage(applicationIndex,'reset',profileForm.$valid);"><img src="images/icon-trash.png" alt=""></span></div></h4>
             </div>
             <div ng-if="tempData.passengersProfile[applicationIndex].stage == 'edit'" class="profile-details">
               <div class="profile-details-section">
@@ -207,7 +207,7 @@
                           <button ng-click="addAddress(applicationIndex);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
                         </div>
                         <div class="col-xs-12 col-sm-8">
-                          <p>ใช้ที่อยู่เหมือนผู้ขอประกันคนที่
+                          <p>ใช้ที่อยู่เหมือนผู้ขอเอาประกันภัยคนที่
                             <span ng-repeat="passenger in range(0, applicationIndex)" >
                               <span ng-class="{'active':tempData.passengersProfile[applicationIndex].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger, applicationIndex)"
                                     ng-if="passenger != applicationIndex" >
@@ -220,7 +220,7 @@
                           <div class="form-group" ng-class="{ 'has-error' : profileForm.referenceAddress.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.referenceAddress.$touched) }">
                             <input type="hidden" name="referenceAddress" ng-model="tempData.passengersProfile[applicationIndex].referenceAddress" required>
                             <div class="help-block" ng-messages="profileForm.referenceAddress.$error" ng-if="tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.referenceAddress.$touched">
-                              <p ng-message="required">กรุณากรอกที่อยู่หรือเลือกใช้ที่อยู่เดียวกับผู้ขอประกันท่านอื่น</p>
+                              <p ng-message="required">กรุณากรอกที่อยู่หรือเลือกใช้ที่อยู่เดียวกับผู้ขอเอาประกันภัยท่านอื่น</p>
                             </div>
                           </div>
                         </div>
@@ -673,7 +673,7 @@
           <div class="form-group" ng-class="{ 'has-error' : profileFormSubmittion.profileForm.$invalid && formStepSubmitted }">
             <input type="hidden" name="profileForm" ng-model="tempData.passengersProfile[applicationIndex].profileForm" required>
             <div class="help-block" ng-messages="profileFormSubmittion.profileForm.$error" ng-if="formStepSubmitted">
-              <p ng-message="required">กรุณากรอกข้อมูลของผู้ขอประกันคนที่ {{applicationIndex}}</p>
+              <p ng-message="required">กรุณากรอกข้อมูลของผู้ขอเอาประกันภัยคนที่ {{applicationIndex}}</p>
             </div>
           </div>
         </div>

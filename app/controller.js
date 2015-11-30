@@ -154,10 +154,13 @@
         });
 
         self.initSessionTimer = function () {
-            var timeout = $scope.travelData.timeOut
-
+            var timeout = $scope.travelData.timeOut;
             sessionTimeWarningPromise = $timeout(function () {
-                dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
+                //dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
+                dialogs.create('/dialogs/custom-close-to-continue.html', 'CustomDialogCtrl', {
+                    title: 'Warning',
+                    message: $scope.messages['ER_ESA_001']
+                });
             }, (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimePromise = $timeout(function () {
                 dialog.close();
@@ -175,7 +178,7 @@
         self.restartTimer = function () {
             $timeout.cancel(sessionTimeWarningPromise);
             $timeout.cancel(sessionTimePromise);
-            LocalStorage.update('insurance.sessionStartDate', new Date())
+            LocalStorage.update('insurance.sessionStartDate', new Date());
             self.initSessionTimer();
         };
 
@@ -197,6 +200,7 @@
         });
 
         QueryService.query('POST', 'getToken').then(function (response) {
+            self.restartTimer();
             $scope.travel.tokenCode = response.data.tokenCode;
         });
 
@@ -286,11 +290,11 @@
                         dlg.result.then(function (yesBtn) {
                             $scope.passengersChange();
                         }, function (noBtn) {
-                            $scope.travel.passengers = $scope.tempData.passengersProfile.length;
+                            $scope.travel.passengers = passengersProfileCount;
                             $scope.calculatePrice();
                             $scope.editingSummarybar = true;
                         });
-                    } else if ($scope.travel.passengers > $scope.tempData.passengersProfile.length) {
+                    } else if ($scope.travel.passengers > passengersProfileCount) {
                         $scope.passengersChange();
                     }
                 }
@@ -298,7 +302,7 @@
         };
 
         $scope.checkPromotionCodeChange = function () {
-            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode
+            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
             $scope.tempData.promoCode = $scope.travel.promoCode;
         };
 
@@ -636,10 +640,10 @@
 
                 submitOrderParams.payment = {};
                 var pad = "00";
-                var month = ''+$scope.payment.expiryMonth;
+                var month = '' + $scope.payment.expiryMonth;
                 var mm = pad.substring(0, pad.length - month.length) + month;
-                var yy = (''+$scope.payment.expiryYear).substr(2,2);
-                submitOrderParams.payment.creditCardExpired =mm  + yy;
+                var yy = ('' + $scope.payment.expiryYear).substr(2, 2);
+                submitOrderParams.payment.creditCardExpired = mm + yy;
                 submitOrderParams.payment.creditCardNo = $scope.payment.creditCardNo;
                 submitOrderParams.payment.creditCardName = $scope.payment.creditCardName;
 
@@ -695,24 +699,25 @@
                 tokenCode: $scope.travel.tokenCode,
                 promoCode: $scope.travel.promoCode
             };
-            QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
-                self.restartTimer();
-                $scope.tempData.promoCodeChanged = false;
-                $scope.tempData.promotion = response.data.promotion;
-                if ($scope.tempData.promotion.promoFull === 'Y') {
-                    deferred.reject(response);
+            $scope.tempData.promoCodeChanged = false;
+            if ($scope.travel.promoCode) {
+                QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
+                    self.restartTimer();
+                    $scope.tempData.promotion = response.data.promotion;
+                    if ($scope.tempData.promotion.promoFull === 'Y') {
+                        deferred.reject(response);
+                        $scope.travel.promoCode = null;
+                        dialogs.error('Warning', $scope.messages['ER_ESA_005']);
+                    } else {
+                        deferred.resolve(response);
+                    }
+                }, function (response) {
                     $scope.travel.promoCode = null;
-                    dialogs.error('Warning', $scope.messages['ER_ESA_005']);
-                } else {
-                    deferred.resolve(response);
-                }
-            }, function (response) {
-                $scope.travel.promoCode = null;
-                if (response.status == 500) {
-                    dialogs.error('Error', $scope.messages['ER_ESA_004']);
-                }
-            });
-
+                    if (response.status == 500) {
+                        dialogs.error('Error', $scope.messages['ER_ESA_004']);
+                    }
+                });
+            }
             return deferred.promise;
         };
 
@@ -755,12 +760,14 @@
                 if (duplicateIdCardList.length == 0) {
                     var checkBlacklistParam = self.initCheckBlacklistParam();
                     QueryService.query('POST', 'checkBlacklist', undefined, checkBlacklistParam).then(function (response) {
+                        self.restartTimer();
                         var blacklists = _.where(response.data.blacklists, {result: true});
                         if (blacklists && blacklists.length > 0) {
                             dialogs.notify('Warning', $scope.messages['ER_ESA_008']);
                         } else {
                             var checkOverlapParam = self.initCheckOverlapParam();
                             QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
+                                self.restartTimer();
                                 var overlaps = _.where(response.data.overlaps, {result: true});
                                 //console.log('overlaps : '+overlaps);
                                 if (overlaps && overlaps.length > 0) {
@@ -1066,7 +1073,7 @@
                 loginFlag: 'N',
                 provinceCode: provinceCode
             };
-            if(!$scope.travel.applicationList[applicationIndex].address)
+            if (!$scope.travel.applicationList[applicationIndex].address)
                 $scope.travel.applicationList[applicationIndex].address = {};
 
             $scope.travel.applicationList[applicationIndex].address.district = null;
@@ -1074,6 +1081,7 @@
             $scope.travel.applicationList[applicationIndex].address.zipcode = null;
             $scope.tempData.passengersProfile[applicationIndex].provinceSelected = _.findWhere($scope.tempData.provinceList, {code: provinceCode});
             QueryService.query('POST', 'getDistricts', undefined, provinceParam).then(function (response) {
+                self.restartTimer();
                 $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList = response.data.districts;
             });
         };
@@ -1087,13 +1095,14 @@
                 loginFlag: 'N',
                 districtCode: districtCode
             };
-            if(!$scope.travel.applicationList[applicationIndex].address)
+            if (!$scope.travel.applicationList[applicationIndex].address)
                 $scope.travel.applicationList[applicationIndex].address = {};
 
             $scope.travel.applicationList[applicationIndex].address.subDistrict = null;
             $scope.travel.applicationList[applicationIndex].address.zipcode = null;
             var idx = $scope.getIndexOfByCode(districtCode, $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList);
             QueryService.query('POST', 'getSubDistricts', undefined, districtParam).then(function (response) {
+                self.restartTimer();
                 $scope.tempData.passengersProfile[applicationIndex].provinceSelected.districtList[idx].subDistrictList = response.data.subDistricts;
             });
         };

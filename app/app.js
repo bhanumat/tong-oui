@@ -85,6 +85,7 @@
             DIALOGS_ERROR: "Error",
             DIALOGS_ERROR_MSG: "ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง",
             DIALOGS_CLOSE: "ปิด",
+            DIALOGS_CLOSE_TO_CONTINUE: "ทำรายการต่อ",
             DIALOGS_PLEASE_WAIT: "โปรดรอ",
             DIALOGS_PLEASE_WAIT_ELIPS: "โปรดรอ...",
             DIALOGS_PLEASE_WAIT_MSG: "โปรดรอซักครู่.",
@@ -141,17 +142,36 @@
     }
 
     /**
+     * Global controller
+     */
+    angular
+        .module('cignaApp')
+        .controller('CustomDialogCtrl', CustomDialogCtrl);
+    CustomDialogCtrl.$inject = ['$scope', '$modalInstance', 'data'];
+    function CustomDialogCtrl($scope, $modalInstance, data) {
+        $scope.msg = data.message;
+        $scope.header = data.title;
+        $scope.close = function(){
+            $modalInstance.close();
+            $scope.$destroy();
+        };
+    };
+
+    /**
      * Run block
      */
     angular
         .module('cignaApp')
         .run(run);
 
-    run.$inject = ['$rootScope', '$location'];
+    run.$inject = ['$rootScope', '$location', '$templateCache','$interpolate'];
 
-    function run($rootScope, $location) {
+    function run($rootScope, $location, $templateCache,$interpolate) {
         // put here everything that you need to run on page load
 
+        var startSym = $interpolate.startSymbol();
+        var endSym = $interpolate.endSymbol();
+        $templateCache.put('/dialogs/custom-close-to-continue.html', '<div class="modal-header dialog-header-error"><button type="button" class="close" ng-click="close()">&times;</button><h4 class="modal-title text-danger"><span class="glyphicon glyphicon-warning-sign"></span> <span ng-bind-html="header"></span></h4></div><div class="modal-body text-danger" ng-bind-html="msg"></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close()">'+startSym+'"DIALOGS_CLOSE_TO_CONTINUE" | translate'+endSym+'</button></div>');
     }
 
 
