@@ -580,7 +580,7 @@
 
         $scope.getProtectionArea = function () {
             if ($scope.isWorldWide()) {
-                return 'world wide';
+                return 'worldwide';
             }
             else if ($scope.isAsia()) {
                 return 'asia';
@@ -994,7 +994,7 @@
             var calculateNearAge = function (startDate, birthDate) {
                 var yearPrecision = moment(startDate).diff(birthDate, 'years', true);
                 var year = moment(startDate).diff(birthDate, 'years');
-                var month = Math.floor((yearPrecision - year) * 12);
+                var month = ((yearPrecision - year) * 12) + 0.001;
                 return year + Math.round(month / 12);
             };
             var calculateMethods = {
@@ -1005,10 +1005,9 @@
             };
             return {
                 test: function (date) {
-                    var days = moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).diff(moment(), 'days');
-                    var startDate = moment().add(days, 'days');
+                    var startDate = moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY);
                     var age = calculateAge($scope.travel.calculateMethod, startDate, moment(date, CONSTANTS.DATE_FORMAT_DISPLAY));
-                    //console.log('age=',age);
+                    console.log('age=', age);
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };

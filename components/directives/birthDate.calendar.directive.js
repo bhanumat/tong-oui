@@ -37,10 +37,26 @@
         var directiveDefinitionObject = {
             restrict: 'EA',
             link: function (scope, element, attrs) {
-                var min = new Date();
-                min.setFullYear(min.getFullYear() - scope.travel.maxAge);
-                var max = new Date();
-                max.setFullYear(max.getFullYear() - scope.travel.minAge);
+                var minDate = moment(scope.travel.startDate, 'DD MMM YYYY');
+                minDate.subtract(scope.travel.maxAge, 'years');
+                var min = minDate.toDate();
+                var maxDate = moment(scope.travel.startDate, 'DD MMM YYYY');
+                maxDate.subtract(scope.travel.minAge, 'years');
+                var max = maxDate.toDate();
+
+                var yearRange;
+                if( scope.travel.calculateMethod === '01') {
+                    max = maxDate.add(11,'months').add(maxDate.endOf('month').date()-maxDate.date(),'days').toDate();
+                    yearRange = minDate.year()+':'+maxDate.year();
+                } else if (scope.travel.calculateMethod === '02'){
+                    min = minDate.subtract(12, 'months').add(1, 'days').toDate();
+                    yearRange = minDate.year()+':'+maxDate.year();
+                } else {
+                    max = maxDate.add(6, 'months').toDate();
+                    min = minDate.subtract(6, 'month').add(1, 'days').toDate();
+                    yearRange = minDate.year()+':'+maxDate.year();
+                }
+                console.log('yearRange:',yearRange)
                 return element.datepicker({
                     dateFormat: 'dd MM yy',
                     changeMonth: true,
@@ -48,7 +64,7 @@
                     numberOfMonths: parseInt(attrs["birthDateCalendar"]),
                     maxDate: max,
                     minDate: min,
-                    yearRange: "-80:-5",
+                    yearRange: yearRange,
                     onSelect: function (date) {
                         scope.travel.applicationList[parseInt(attrs["index"])].dateOfBirth = date;
                         scope.$apply();
