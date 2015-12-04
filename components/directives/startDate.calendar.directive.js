@@ -21,7 +21,7 @@
         var directiveDefinitionObject = {
             restrict: 'EA',
             link: function ($scope, element, attrs) {
-                $scope.$watch("travel.endDate", (function (newValue, oldValue) {
+                $scope.$watch("travel.endTravelDate", (function (newValue, oldValue) {
 
                 }), true);
                 var min = $scope.addDays(new Date(), 1);
@@ -33,11 +33,11 @@
                     minDate: min,
                     maxDate: max,
                     onSelect: function (date) {
-                        $scope.travel.endDate = '';
+                        $scope.travel.endTravelDate = '';
                         $scope.travel.endDateForCal = '';
                         $scope.tempData.daysAsText = '';
                         $scope.travel.days = '';
-                        $scope.travel.startDate = date;
+                        $scope.travel.startTravelDate = date;
                         $scope.tempData.startDateForCal = element.datepicker('getDate');
                         $scope.tempData.maxDate = $scope.addDays(element.datepicker('getDate'), $scope.travelData.advancePeriod + ($scope.travelData.maxDays - 1));
                         $scope.tempData.minDate = $scope.addDays(element.datepicker('getDate'), 0);

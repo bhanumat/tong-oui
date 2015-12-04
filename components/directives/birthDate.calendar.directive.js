@@ -37,10 +37,10 @@
         var directiveDefinitionObject = {
             restrict: 'EA',
             link: function (scope, element, attrs) {
-                var minDate = moment(scope.travel.startDate, 'DD MMM YYYY');
+                var minDate = moment(scope.travel.startTravelDate, 'DD MMM YYYY');
                 minDate.subtract(scope.travel.maxAge, 'years');
                 var min = minDate.toDate();
-                var maxDate = moment(scope.travel.startDate, 'DD MMM YYYY');
+                var maxDate = moment(scope.travel.startTravelDate, 'DD MMM YYYY');
                 maxDate.subtract(scope.travel.minAge, 'years');
                 var max = maxDate.toDate();
 

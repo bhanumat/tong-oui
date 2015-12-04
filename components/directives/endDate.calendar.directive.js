@@ -22,7 +22,7 @@
       restrict: 'EA',
       link: function($scope, element, attrs) {
 
-        $scope.$watch("travel.startDate", (function(newValue, oldValue) {
+        $scope.$watch("travel.startTravelDate", (function(newValue, oldValue) {
           element.datepicker("option", "minDate", $scope.tempData.minDate);
           element.datepicker("option", "maxDate", $scope.tempData.maxDate);
         }), true);
@@ -31,7 +31,7 @@
             dateFormat: 'dd MM yy',
             numberOfMonths: parseInt(attrs["endDateCalendar"]),
             onSelect: function(date) {
-              $scope.travel.endDate = date;
+              $scope.travel.endTravelDate = date;
               $scope.tempData.endDateForCal = element.datepicker('getDate');
               var monthname=new Array("ม.ค.","ก.พ.","มี.ค","ม.ย","พ.ค","มิ.ย","ก.ค","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
               var monName = monthname[$scope.tempData.endDateForCal.getMonth()];

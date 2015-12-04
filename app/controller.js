@@ -156,16 +156,15 @@
         self.initSessionTimer = function () {
             var timeout = $scope.travelData.timeOut;
             sessionTimeWarningPromise = $timeout(function () {
-                //dialog = dialogs.error('Warning', $scope.messages['ER_ESA_001']);
-                dialogs.create('/dialogs/custom-close-to-continue.html', 'CustomDialogCtrl', {
+                dialog = dialogs.create('/dialogs/custom-close-to-continue.html', 'CustomDialogCtrl', {
                     title: 'Warning',
                     message: $scope.messages['ER_ESA_001']
                 });
             }, (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimePromise = $timeout(function () {
                 dialog.close();
-                var dlg = dialogs.error('Error', $scope.messages['ER_ESA_002']);
-                dlg.result.then(function () {
+                dialog = dialogs.error('Error', $scope.messages['ER_ESA_002']);
+                dialog.result.then(function () {
                     self.reset();
                     $scope.tempData.currentState = "/insurance/destination";
                     $state.go('^.destination');
@@ -204,14 +203,14 @@
             $scope.travel.tokenCode = response.data.tokenCode;
         });
 
-        $scope.$watch('travel.startDate', function () {
+        $scope.$watch('travel.startTravelDate', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.travelDateChanged = true;
             }
 
         });
 
-        $scope.$watch('travel.endDate', function () {
+        $scope.$watch('travel.endTravelDate', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.travelDateChanged = true;
             }
@@ -580,12 +579,15 @@
 
         $scope.getProtectionArea = function () {
             if ($scope.isWorldWide()) {
+                $scope.travel.destination = '03';
                 return 'worldwide';
             }
             else if ($scope.isAsia()) {
+                $scope.travel.destination = '01';
                 return 'asia';
             }
             else {
+                $scope.travel.destination = '02';
                 return 'schengen';
             }
             return false;
@@ -628,11 +630,12 @@
 
                 //Store data to session storage before payment
                 var submitOrderParams = angular.copy($scope.travel);
+                submitOrderParams.numberOfInsure = submitOrderParams.passengers;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
                 submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
-                submitOrderParams.startDate = moment(submitOrderParams.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                submitOrderParams.endDate = moment(submitOrderParams.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
+                submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
                     var profile = submitOrderParams.applicationList[i];
                     profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
@@ -649,6 +652,11 @@
 
                 delete submitOrderParams.mandatory;
                 delete submitOrderParams.voluntaryList;
+                delete submitOrderParams.days;
+                delete submitOrderParams.minAge;
+                delete submitOrderParams.maxAge;
+                delete submitOrderParams.calculateMethod;
+                delete submitOrderParams.passengers;
 
                 QueryService.query('POST', 'submitOrder', undefined, submitOrderParams).then(function (response) {
                     self.restartTimer();
@@ -728,7 +736,14 @@
                 $scope.tempData.step1Completed = true;
                 $scope.tempData.travelDateChanged = false;
                 $scope.tempData.countryChanged = false;
-                if ($scope.travel.promoCode) {
+
+                if ($scope.tempData.step2Completed) {
+                    for (var i = 0, len = $scope.tempData.passengersProfile.length; i < len; i++) {
+                        $scope.changeStage(i, 'edit', true);
+                    }
+                }
+
+                if ($scope.travel.promoCode && $scope.tempData.promoCodeChanged) {
                     //validate promotion code if any
                     self.validatePromotionCode().then(function () {
                         self.getCoverageTable().then(function () {
@@ -763,7 +778,7 @@
                         self.restartTimer();
                         var blacklists = _.where(response.data.blacklists, {result: true});
                         if (blacklists && blacklists.length > 0) {
-                            dialogs.notify('Warning', $scope.messages['ER_ESA_008']);
+                            dialogs.error('Error', $scope.messages['ER_ESA_008']);
                         } else {
                             var checkOverlapParam = self.initCheckOverlapParam();
                             QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
@@ -771,7 +786,7 @@
                                 var overlaps = _.where(response.data.overlaps, {result: true});
                                 //console.log('overlaps : '+overlaps);
                                 if (overlaps && overlaps.length > 0) {
-                                    dialogs.notify('Warning', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
+                                    dialogs.error('Error', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                                 } else {
                                     //Store data to session storage before payment
                                     $state.go('^.payment');
@@ -780,7 +795,7 @@
                         }
                     });
                 } else {
-                    dialogs.notify('Warning', self.buildProfileWarningMessageFromList(duplicateIdCardList, $scope.messages['ER_ESA_010']));
+                    dialogs.error('Error', self.buildProfileWarningMessageFromList(duplicateIdCardList, $scope.messages['ER_ESA_010']));
                 }
             }
         };
@@ -888,7 +903,7 @@
                     $scope.tempData.destinations.push($scope.tempData.destination);
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
-                    $scope.travel.destination = $scope.getProtectionArea();
+                    $scope.tempData.area = $scope.getProtectionArea();
                     $scope.travel.country = _.pluck($scope.tempData.destinations, 'id').join(',')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
@@ -1005,7 +1020,7 @@
             };
             return {
                 test: function (date) {
-                    var startDate = moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY);
+                    var startDate = moment($scope.travel.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY);
                     var age = calculateAge($scope.travel.calculateMethod, startDate, moment(date, CONSTANTS.DATE_FORMAT_DISPLAY));
                     console.log('age=', age);
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
@@ -1036,8 +1051,8 @@
             angular.forEach($scope.travel.applicationList, function (obj, index) {
                 var checkOverlapObj = {
                     ssn: obj.ssn,
-                    startTravelDate: moment($scope.travel.startDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT),
-                    endTravelDate: moment($scope.travel.endDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT)
+                    startTravelDate: moment($scope.travel.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT),
+                    endTravelDate: moment($scope.travel.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT)
                 };
                 checkOverlapParam.overlaps.push(checkOverlapObj);
             });

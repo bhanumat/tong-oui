@@ -134,7 +134,7 @@
                                                     <div ng-show="editingSummarybar" class="form-group"
                                                          ng-class="{ 'has-error' : summaryForm.startDate.$invalid && summaryBarSubmitted }">
                                                         <input type="text" name="startDate" start-date-calendar="1"
-                                                               ng-model="travel.startDate"
+                                                               ng-model="travel.startTravelDate"
                                                                placeholder="วันที่เริ่มต้นเดินทาง"
                                                                class="form-control text-center" readonly required/>
 
@@ -153,7 +153,7 @@
                                                     <div ng-show="editingSummarybar" class="form-group"
                                                          ng-class="{ 'has-error' : summaryForm.endDate.$invalid && summaryBarSubmitted }">
                                                         <input type="text" name="endDate" end-date-calendar="1"
-                                                               ng-model="travel.endDate"
+                                                               ng-model="travel.endTravelDate"
                                                                placeholder="วันที่สิ้นสุดการเดินทาง"
                                                                class="form-control text-center" readonly required/>
 

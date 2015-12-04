@@ -63,7 +63,7 @@
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.startDate.$invalid && (formStepSubmitted || destinationForm.startDate.$touched) }">
                                 <input type="text" name="startDate" start-date-calendar="2"
-                                       ng-model="travel.startDate" placeholder="วันที่เริ่มต้นเดินทาง"
+                                       ng-model="travel.startTravelDate" placeholder="วันที่เริ่มต้นเดินทาง"
                                        class="form-control text-center" readonly required/>
 
                                 <div class="help-block" ng-messages="destinationForm.startDate.$error"
@@ -75,7 +75,7 @@
                         <div class="col-sm-6">
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.endDate.$invalid && (formStepSubmitted || destinationForm.endDate.$touched) }">
-                                <input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endDate"
+                                <input type="text" name="endDate" end-date-calendar="2" ng-model="travel.endTravelDate"
                                        placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" readonly
                                        required/>
 
@@ -97,7 +97,7 @@
                         <div class="col-xs-12">
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.startDate.$invalid && (formStepSubmitted || destinationForm.startDate.$touched) }">
-                                <input type="text" name="startDate" start-date-calendar="1" ng-model="travel.startDate"
+                                <input type="text" name="startDate" start-date-calendar="1" ng-model="travel.startTravelDate"
                                        autocomplete="off"
                                        placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
 
@@ -115,7 +115,7 @@
                         <div class="col-xs-12">
                             <div class="form-group"
                                  ng-class="{ 'has-error' : destinationForm.endDate.$invalid && (formStepSubmitted || destinationForm.endDate.$touched) }">
-                                <input name="endDate" type="text" end-date-calendar="1" ng-model="travel.endDate"
+                                <input name="endDate" type="text" end-date-calendar="1" ng-model="travel.endTravelDate"
                                        autocomplete="off"
                                        placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
 
