@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1">
             <h3>ผลประโยชน์ความคุ้มครอง</h3>
-
             <div class="plan-selection" ng-repeat="campaign in travelData.campaignList"
                  ng-show="campaign.campaignCode === travel.campaignCode" ng-init="campaignIndex=$index">
                 <h4>เลือกความคุ้มครองหลัก</h4>
@@ -81,7 +80,7 @@
                                          ng-class="{'selected':isRateScaleSameAsSelected(rateScale),'hidePlan':hideRateScale($index)}"
                                          ng-repeat="rateScale in campaign.mandatory.rateScaleList"
                                          ng-click="selectPlan(campaignIndex, campaign, $index, rateScale)">
-                                        <div class="plan-table-top text-center">
+                                        <div class="plan-table-top text-center" ng-show="rateScale.rateScaleValue.sumInsure.length>0">
                                             <span class="radiobox"></span>
                                             <h5>
                                                 <small>{{rateScale.description}}</small>
@@ -149,7 +148,7 @@
                                          ng-class="{'selected':isRateScaleSameAsSelected(rateScale),'hidePlan': hideRateScale($index)}"
                                          ng-repeat="rateScale in voluntary.rateScaleList"
                                          ng-click="voluntaryToggle(campaignIndex, voluntaryIndex, $index)">
-                                        <div class="plan-table-top" equalizer="'group2'" ng-show="rateScale.price">
+                                        <div class="plan-table-top" equalizer="'group2'" ng-show="rateScale.rateScaleValue.sumInsure.length>0">
                                             <h5>
 											<span class="option-checkbox">
 												<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.rateScale===rateScale.rateScale}"
@@ -158,7 +157,7 @@
                                                 {{rateScale.price | number}}
                                                 <small>บาท</small>
                                             </h5>
-                                            <p ng-show="rateScale.price">ความคุ้มครองสูงสุด (บาท)</p>
+                                            <p ng-show="voluntary.topicDetail">ความคุ้มครองสูงสุด (บาท)</p>
                                         </div>
                                         <div collapse="isCollapsed($parent.$index)">
                                             <div class="plan-table-row" equalizer="'options1-row{{$index}}'"
@@ -184,7 +183,7 @@
                                      alt="">
                                 <h5>{{voluntary.topicDetail}}</h5>
 
-                                <p ngo-show="voluntary.topicDetail">ความคุ้มครองสูงสุด (บาท)</p>
+                                <p ng-show="voluntary.topicDetail">ความคุ้มครองสูงสุด (บาท)</p>
                             </div>
                         </div>
                         <div class="plan-table-content col-xs-12">
@@ -193,7 +192,7 @@
                                      ng-class="{'col-xs-12':tempData.voluntaryCollapse[voluntaryIndex],'col-xs-3':!tempData.voluntaryCollapse[voluntaryIndex]}">
                                     <div class="plan selected" ng-repeat="rateScale in voluntary.rateScaleList"
                                          ng-click="voluntaryToggle(campaignIndex, voluntaryIndex, $index)">
-                                        <div class="plan-table-top text-center" ng-show="rateScale.price">
+                                        <div class="plan-table-top text-center" ng-show="rateScale.rateScaleValue.sumInsure.length>0">
                                             <h5>
 											<span class="option-checkbox">
 											<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.rateScale===rateScale.rateScale}"
@@ -205,7 +204,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="plan-detail" collapse="tempData.option1IsCollapsed"
+                                <div class="plan-detail" collapse="isCollapsed($index)"
                                      ng-class="{'col-xs-12':tempData.voluntaryCollapse[voluntaryIndex],'col-xs-9':!tempData.voluntaryCollapse[voluntaryIndex]}">
                                     <div class="plan-table-row row" ng-repeat="coverage in voluntary.coverageList">
                                         <div class="col-xs-8">
