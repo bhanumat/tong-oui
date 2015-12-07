@@ -127,14 +127,14 @@
 
             // Catch errors
             responseError: function (response) {
-
+                var dialogs = $injector.get('dialogs');
                 if (response.data && response.data.responseCode) {
-                    var dialogs = $injector.get('dialogs');
                     dialogs.error('Error', MESSAGES[response.data.responseCode]);
                 } else if (response.status === 404) {
                     $location.path('/');
                     return $q.reject(response);
                 } else {
+                    dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
                     return $q.reject(response);
                 }
             }
