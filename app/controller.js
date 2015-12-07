@@ -75,6 +75,7 @@
                 "promoFull": null
             };
             $scope.formStepSubmitted = false;
+            $scope.tempData.cvv2Url = PAYMENT_INFO.cvv2Url;
 
             QueryService.query('POST', 'loadInitial').then(function (response) {
                 $scope.travelData = response.data;
@@ -429,7 +430,7 @@
                 var campaign;
                 for (var i = 0, len = campaigns.length; i < len; ++i) {
                     campaign = campaigns[i];
-                    if (campaign.campaignCode = $scope.travel.campaignCode) {
+                    if (campaign.campaignCode === $scope.travel.campaignCode) {
                         break;
                     }
                 }
@@ -841,7 +842,7 @@
                     });
                 }
             }
-        }
+        };
 
         $scope.isRateScaleSameAsSelected = function (rateScale) {
             if (rateScale)
@@ -975,7 +976,9 @@
                 .then(function (response) {
                     self.restartTimer();
                     $scope.travelData.campaignList = response.data.campaignList;
+                    console.log($scope.travelData.campaignList)
                     self.initDefaultCampaign();
+                    console.log($scope.travelData.campaignList)
                     deferred.resolve(response);
                 }, function (response) {
                     deferred.reject(response);
@@ -986,7 +989,7 @@
 
         $scope.getIndexOfByCode = function (code, items) {
             return _.findIndex(items, {code: code});
-        }
+        };
 
         $scope.validCardType = (function () {
             var cards = PAYMENT_INFO.cards;
