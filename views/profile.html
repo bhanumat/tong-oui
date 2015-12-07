@@ -163,7 +163,7 @@
                       <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{ 'has-error' : profileForm.email.$invalid && (tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.email.$touched) }">
                           <label class="sr-only" for="email">อีเมล</label>
-                          <input class="form-control" ng-model="travel.applicationList[applicationIndex].email" type="email" name="email" placeholder="อีเมล" required>
+                          <input class="form-control" ng-model="travel.applicationList[applicationIndex].email" type="email" name="email" placeholder="อีเมล e.g. test@example.com" required>
                           <div class="help-block" ng-messages="profileForm.email.$error" ng-if="tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.email.$touched">
                             <p ng-message="required">กรุณากรอกอีเมล</p>
                             <p ng-message="email">กรุณากรอกอีเมลที่ถูกต้อง</p>
