@@ -55,15 +55,17 @@
 
         self.reset = function () {
             LocalStorage.removeAll();
+            self.init();
+        };
+
+        self.init = function() {
             $scope.start = true;
 
             //restore travelData;
-            $scope.travelData.destinationList = $scope.travelData.destinationList.concat($scope.tempData.destinations);
             $scope.travel = {};
             $scope.tempData = {};
             $scope.payment = {};
-            $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
-            $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
+
             $scope.tempData.voluntaryCollapse = [];
             $scope.tempData.destination = null;
             $scope.tempData.destinations = [];
@@ -73,6 +75,29 @@
                 "promoFull": null
             };
             $scope.formStepSubmitted = false;
+
+            QueryService.query('POST', 'loadInitial').then(function (response) {
+                $scope.travelData = response.data;
+                $scope.messages = _.reduce($scope.travelData.resultCodes, function (result, n, key) {
+                    if (key === 1) {
+                        result[result.resultCode] = result.resultDesc;
+                        delete result.resultCode;
+                        delete result.resultDesc;
+                    }
+                    result[n.resultCode] = n.resultDesc;
+                    return result;
+                });
+
+                LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
+                self.initSessionTimer();
+                $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
+                $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
+            });
+
+            QueryService.query('POST', 'getToken').then(function (response) {
+                self.restartTimer();
+                $scope.travel.tokenCode = response.data.tokenCode;
+            });
         };
 
         /**
@@ -182,27 +207,7 @@
         };
 
         if (!foundStorageData) {
-            QueryService.query('POST', 'loadInitial').then(function (response) {
-                $scope.travelData = response.data;
-                $scope.messages = _.reduce($scope.travelData.resultCodes, function (result, n, key) {
-                    if (key === 1) {
-                        result[result.resultCode] = result.resultDesc;
-                        delete result.resultCode;
-                        delete result.resultDesc;
-                    }
-                    result[n.resultCode] = n.resultDesc;
-                    return result;
-                });
-                LocalStorage.update('insurance.timeout', $scope.travelData.timeOut);
-                self.initSessionTimer();
-                $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
-                $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
-            });
-
-            QueryService.query('POST', 'getToken').then(function (response) {
-                self.restartTimer();
-                $scope.travel.tokenCode = response.data.tokenCode;
-            });
+            self.init();
         }
 
         $scope.$watch('travel.startTravelDate', function () {
