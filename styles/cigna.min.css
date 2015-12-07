@@ -2009,3 +2009,4 @@ div.easy_social_box.vertical{height:68px}
 .modal-title{font-size:22px;height:24px;color:#fff}
 .dialog-header-confirm,.dialog-header-notify{background-color:#188ccc}
 .dialog-header-error{background-color:#f68621}
+.plan-selection .plan-table .plan-table-content .plan-navigation{z-index:10}

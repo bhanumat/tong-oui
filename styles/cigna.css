@@ -8724,3 +8724,10 @@ div.easy_social_box.vertical {
 .dialog-header-error {
     background-color:#f68621;
 }
+
+/**
+* Fix CSS for IE
+*/
+.plan-selection .plan-table .plan-table-content .plan-navigation {
+    z-index: 9;
+}
