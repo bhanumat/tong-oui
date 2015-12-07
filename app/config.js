@@ -23,8 +23,8 @@
             '500': 'ขออภัยค่ะ ขณะนี้ระบบขัดข้อง กรุณาทำรายการใหม่ภายหลัง'
         })
         .constant('PAYMENT_INFO', {
-            //'paymentUrl': 'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
-            'paymentUrl':'http://cigna.localhost:8080/payment.php',
+            'paymentUrl': 'https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp',
+            //'paymentUrl':'http://cigna.localhost:8080/payment.php',
             'merchantId': '1203',
             'currCode': '764',
             //'cvv2Url':'https://ipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',

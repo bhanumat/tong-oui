@@ -34,12 +34,12 @@
                     maxDate: max,
                     onSelect: function (date) {
                         $scope.travel.endTravelDate = '';
-                        $scope.travel.endDateForCal = '';
+                        $scope.tempData.endDateForCal = '';
                         $scope.tempData.daysAsText = '';
                         $scope.travel.days = '';
                         $scope.travel.startTravelDate = date;
                         $scope.tempData.startDateForCal = element.datepicker('getDate');
-                        $scope.tempData.maxDate = $scope.addDays(element.datepicker('getDate'), $scope.travelData.advancePeriod + ($scope.travelData.maxDays - 1));
+                        $scope.tempData.maxDate = $scope.addDays(element.datepicker('getDate'), $scope.travelData.maxDays - 1);
                         $scope.tempData.minDate = $scope.addDays(element.datepicker('getDate'), 0);
                         var monthname = new Array("ม.ค.", "ก.พ.", "มี.ค", "ม.ย", "พ.ค", "มิ.ย", "ก.ค", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
                         var monName = monthname[$scope.tempData.startDateForCal.getMonth()];

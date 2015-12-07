@@ -959,10 +959,9 @@
 
         self.getCoverageTable = function () {
             var deferred = $q.defer();
-            var area = $scope.getProtectionArea();
             var getCoverageTableParams = {
                 tokenCode: $scope.travel.tokenCode,
-                area: area,
+                area: $scope.travel.destination,
                 days: $scope.travel.days,
                 promoCode: $scope.travel.promoCode,
                 loginFlag: 'N'
