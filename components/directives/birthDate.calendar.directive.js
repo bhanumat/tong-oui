@@ -56,7 +56,6 @@
                     min = minDate.subtract(6, 'month').add(1, 'days').toDate();
                     yearRange = minDate.year()+':'+maxDate.year();
                 }
-                console.log('yearRange:',yearRange)
                 return element.datepicker({
                     dateFormat: 'dd MM yy',
                     changeMonth: true,

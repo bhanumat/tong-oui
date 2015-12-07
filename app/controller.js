@@ -269,7 +269,6 @@
         };
 
         $scope.editSummaryBar = function ($event, isFormValid) {
-            console.log('editSummaryBar..');
             $scope.summaryBarSubmitted = true;
             if (!$scope.editingSummarybar) {
                 $scope.editingSummarybar = true;
@@ -976,9 +975,7 @@
                 .then(function (response) {
                     self.restartTimer();
                     $scope.travelData.campaignList = response.data.campaignList;
-                    console.log($scope.travelData.campaignList)
                     self.initDefaultCampaign();
-                    console.log($scope.travelData.campaignList)
                     deferred.resolve(response);
                 }, function (response) {
                     deferred.reject(response);
@@ -1031,7 +1028,6 @@
                 test: function (date) {
                     var startDate = moment($scope.travel.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY);
                     var age = calculateAge($scope.travel.calculateMethod, startDate, moment(date, CONSTANTS.DATE_FORMAT_DISPLAY));
-                    console.log('age=', age);
                     return age >= $scope.travel.minAge && age <= $scope.travel.maxAge;
                 }
             };
