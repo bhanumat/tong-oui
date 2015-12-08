@@ -93,11 +93,10 @@
                 self.initSessionTimer();
                 $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
                 $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
-            });
 
-            QueryService.query('POST', 'getToken').then(function (response) {
-                self.restartTimer();
-                $scope.travel.tokenCode = response.data.tokenCode;
+                QueryService.query('POST', 'getToken').then(function (response) {
+                    $scope.travel.tokenCode = response.data.tokenCode;
+                });
             });
         };
 
@@ -749,6 +748,8 @@
                         $scope.changeStage(i, 'edit', true);
                     }
                 }
+
+                $scope.checkPromotionCodeChange();
 
                 if ($scope.travel.promoCode && $scope.tempData.promoCodeChanged) {
                     //validate promotion code if any

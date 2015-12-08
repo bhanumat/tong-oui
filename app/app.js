@@ -127,16 +127,26 @@
 
             // Catch errors
             responseError: function (response) {
+                if( $rootScope.instanceModalDialog) {
+                    instanceModalDialog.close();
+                }
                 var dialogs = $injector.get('dialogs');
-                if (response.data && response.data.responseCode) {
-                    dialogs.error('Error', MESSAGES[response.data.responseCode]);
+
+                if (response.data && response.data.resultCode) {
+                    var msg = MESSAGES[response.data.resultCode];
+                    if( msg) {
+                        $rootScope.instanceModalDialog = dialogs.error('Error', msg);
+                    }
+                    return $q.reject(response);
                 } else if (response.status === 404) {
                     $location.path('/');
                     return $q.reject(response);
                 } else {
-                    dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
+                    $rootScope.instanceModalDialog = dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
                     return $q.reject(response);
                 }
+
+
             }
         };
     }
