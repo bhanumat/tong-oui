@@ -128,7 +128,7 @@
             // Catch errors
             responseError: function (response) {
                 if( $rootScope.instanceModalDialog) {
-                    instanceModalDialog.close();
+                    $rootScope.instanceModalDialog.close();
                 }
                 var dialogs = $injector.get('dialogs');
 

@@ -236,6 +236,11 @@
             }
         });
 
+        $scope.$watch('travel.promoCode', function (newValue, oldValue) {
+            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
+            console.log("newVal:",newValue,"oldVal:",oldValue);
+        });
+
         $scope.passengersChange = function () {
             if (!$scope.tempData.passengersProfile) {
                 $scope.travel.applicationList = [];
@@ -304,11 +309,6 @@
                     }
                 }
             }
-        };
-
-        $scope.checkPromotionCodeChange = function () {
-            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
-            $scope.tempData.promoCode = $scope.travel.promoCode;
         };
 
         $scope.getPriceRate = function (plan) {
@@ -713,25 +713,32 @@
                 tokenCode: $scope.travel.tokenCode,
                 promoCode: $scope.travel.promoCode
             };
-            $scope.tempData.promoCodeChanged = false;
+
             if ($scope.travel.promoCode) {
                 QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
                     self.restartTimer();
                     $scope.tempData.promotion = response.data.promotion;
                     if ($scope.tempData.promotion.promoFull === 'Y') {
+                        $scope.travel.promoCode = $scope.tempData.promoCode;
                         deferred.reject(response);
-                        $scope.travel.promoCode = null;
                         dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                     } else {
+                        $scope.tempData.promoCode = $scope.travel.promoCode;
                         deferred.resolve(response);
                     }
                 }, function (response) {
-                    $scope.travel.promoCode = null;
+                    $scope.travel.promoCode = $scope.tempData.promoCode;
+                    deferred.reject(response);
                     if (response.status == 500) {
                         dialogs.error('Error', $scope.messages['ER_ESA_004']);
                     }
                 });
+            } else {
+                $scope.tempData.promoCode = $scope.travel.promoCode;
+                deferred.resolve({});
             }
+
+            $scope.tempData.promoCodeChanged = false;
             return deferred.promise;
         };
 
@@ -748,8 +755,6 @@
                         $scope.changeStage(i, 'edit', true);
                     }
                 }
-
-                $scope.checkPromotionCodeChange();
 
                 if ($scope.travel.promoCode && $scope.tempData.promoCodeChanged) {
                     //validate promotion code if any
