@@ -58,7 +58,7 @@
             self.init();
         };
 
-        self.init = function() {
+        self.init = function () {
             $scope.start = true;
 
             //restore travelData;
@@ -105,7 +105,6 @@
          */
         var foundStorageData = LocalStorage.get('insurance.travel');
         if (foundStorageData) {
-            console.log('Found storage, ', $location.path());
             $scope.travel = LocalStorage.get('insurance.travel');
             $scope.travelData = LocalStorage.get('insurance.travelData');
             $scope.tempData = LocalStorage.get('insurance.tempData');
@@ -238,7 +237,6 @@
 
         $scope.$watch('travel.promoCode', function (newValue, oldValue) {
             $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
-            console.log("newVal:",newValue,"oldVal:",oldValue);
         });
 
         $scope.passengersChange = function () {
@@ -254,7 +252,6 @@
                 var profileArray = $scope.range(0, $scope.tempData.passengersProfile.length - 1);
                 var differenceArray = _.difference(profileArray, passengersArray);
                 var profileLength = $scope.tempData.passengersProfile.length;
-                //console.log(differenceArray);
                 if (profileLength > $scope.travel.passengers) {
                     $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
                     $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
@@ -480,7 +477,6 @@
         };
 
         $scope.copyPassengerAddress = function (templateIndex, targetIndex) {
-            console.log(templateIndex + ':' + targetIndex);
             if (!$scope.travel.applicationList[targetIndex]) {
                 $scope.travel.applicationList[targetIndex] = {};
             }
@@ -606,7 +602,6 @@
             else {
                 $scope.tempData.passengersProfile[index].termsAccepted = false;
             }
-            // console.log($scope.tempData.passengersProfile[index].termsAccepted);
         };
 
         $scope.voluntaryToggle = function (campaignIndex, voluntaryIndex, rateScaleIndex) {
@@ -639,7 +634,11 @@
                 submitOrderParams.numberOfInsure = submitOrderParams.passengers;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
-                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
+                try {
+                    submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
+                } catch (ex) {
+                    submitOrderParams.voluntaryCodeList=[];
+                }
                 submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
@@ -797,7 +796,6 @@
                             QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
                                 self.restartTimer();
                                 var overlaps = _.where(response.data.overlaps, {result: true});
-                                //console.log('overlaps : '+overlaps);
                                 if (overlaps && overlaps.length > 0) {
                                     dialogs.error('Error', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                                 } else {
@@ -1090,7 +1088,6 @@
         };
 
         $scope.changeProvince = function (applicationIndex, provinceCode) {
-            //console.log('changeProvince..' + provinceCode);
             if (!provinceCode)
                 return;
             var provinceParam = {
@@ -1112,7 +1109,6 @@
         };
 
         $scope.changeDistrict = function (applicationIndex, districtCode) {
-            //console.log('changeDistrict..' + districtCode);
             if (!districtCode)
                 return;
             var districtParam = {
