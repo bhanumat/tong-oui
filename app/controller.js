@@ -637,7 +637,7 @@
                 try {
                     submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
                 } catch (ex) {
-                    submitOrderParams.voluntaryCodeList=[];
+                    submitOrderParams.voluntaryCodeList = [];
                 }
                 submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
@@ -698,7 +698,11 @@
                         }
                     };
 
-                    $rootScope.$broadcast('gateway.redirect', data);
+                    if (response.data.trackingNumber) {
+                        $rootScope.$broadcast('gateway.redirect', data);
+                    } else {
+                        dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
+                    }
                 });
             } else {
                 $event.preventDefault();
