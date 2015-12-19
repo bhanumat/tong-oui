@@ -79,13 +79,12 @@
                                                          ng-class="{ 'has-error' : !tempData.destinations.length && summaryBarSubmitted }">
                                                         <ol class="nya-bs-select form-control text-center"
                                                             id="destination"
-                                                            disabled="tempData.destinations.length == 10"
                                                             ng-class="{'filled': tempData.destination}"
                                                             ng-change="addDestination();"
                                                             ng-model="tempData.destination" name="destinations"
                                                             title="เลือกได้สูงสุด 10 ประเทศ" data-size="5"
                                                             data-live-search="true">
-                                                            <li nya-bs-option="item in travelData.destinationList">
+                                                            <li nya-bs-option="item in travelData.destinationList" ng-class="{disabled: tempData.destinations.length === 10 }">
                                                                 <!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
                                                                 <a>
                                                                     {{ item.country }}
