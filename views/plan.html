@@ -4,13 +4,13 @@
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <h3>ผลประโยชน์ความคุ้มครอง</h3>
                 <div class="plan-selection" ng-repeat="campaign in travelData.campaignList"
-                     ng-show="campaign.campaignCode === travel.campaignCode" ng-init="campaignIndex=$index">
+                     ng-show="campaign.campaignCode === travel.campaignCode" ng-init="campaignIndex=$index" data-equalizer="table-group">
                     <h4>เลือกความคุ้มครองหลัก</h4>
 
                     <div class="plan-table row hidden-xs" id="plan"
                          ng-class="{'one-plan':campaign.mandatory.rateScaleList.length == 1,'two-plan':campaign.mandatory.rateScaleList.length == 2}">
 
-                        <div class="plan-table-heading col-xs-5" equalizer="'table-group'">
+                        <div class="plan-table-heading col-xs-5" data-equalizer-watch="table-group">
                             <div class="plan-table-top" equalizer="'group'">
                                 <h5><span>{{campaign.mandatory.topicDetail}}</span><br>
                                     <small>ผลประโยชน์</small>
@@ -21,7 +21,7 @@
                                 <div ng-bind-html="trustAsHtml(coverage.description)"></div>
                             </div>
                         </div>
-                        <div class="plan-table-content col-xs-7" equalizer="'table-group'">
+                        <div class="plan-table-content col-xs-7" data-equalizer-watch="table-group">
                     <span ng-show="showLeftPlanNavigator(campaign, campaignIndex)"
                           class="glyphicon glyphicon-menu-left plan-navigation"
                           style="left:-20px;" equalizer="'group'"
@@ -86,8 +86,7 @@
                                                  ng-show="rateScale.rateScaleValue.sumInsure.length>0">
                                                 <span class="radiobox"></span>
                                                 <h5>
-                                                    <small>{{rateScale.description}}</small>
-                                                    <br>
+                                                    <small style="display: block; width: 100%;">{{rateScale.description}}</small>
                                                     <big>{{rateScale.price | number}}</big><br>
                                                     <small style="margin-top: -3px; display: block;">บาท</small>
                                                 </h5>

@@ -17,3 +17,28 @@ POSTS & CONTENT STYLES
 	}
 
 }
+
+.plan-selection {
+	.plan-table {
+		.plan-tab {
+			.plan-tab-inner {
+				.plan-table-top {
+					.radiobox {
+						  position: absolute;
+						  top: 50%;
+						  left: 15%;
+						  margin-top: -10px;
+					}
+					h5 {
+						  display: inline-block;
+						  text-align: center;
+						  width: 70%;
+						  margin-left: 30%;
+					}
+					padding: 0 0 0 0;
+				}
+				width: 100%;
+			}
+		}
+	}
+}

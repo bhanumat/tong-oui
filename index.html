@@ -34,15 +34,28 @@
 		      document.createElement('ui-select-choices');
 		    </script>
 		<![endif]-->
+
 		<!-- CSS -->
-		<!-- build:css css/style.min.css -->
+		<!-- build:css css/jquery-ui.min.css -->
 		<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
-		<link rel="stylesheet" type="text/css" href="bower_components/angular/angular-csp.css">
+		<!-- endbuild -->
+		<!-- build:css css/bootstrap.min.css -->
 		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css">
-		<link rel="stylesheet" type="text/css" href="bower_components/angular-dialog-service/dist/dialogs.css">
-		<link rel="stylesheet" type="text/css" href="styles/style.css" />
-		<link rel="stylesheet" type="text/css" href="styles/cigna.css" />
+		<!-- endbuild -->
+		<!-- build:css css/nya-bs-select.min.css -->
+		<link rel="stylesheet" type="text/css" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.min.css">
+		<!-- endbuild -->
+		<!-- build:css css/angular-csp.min.css -->
+		<link rel="stylesheet" type="text/css" href="bower_components/angular/angular-csp.css">
+		<!-- endbuild -->
+		<!-- build:css css/dialogs.min.css -->
+		<link rel="stylesheet" type="text/css" href="bower_components/angular-dialog-service/dist/dialogs.min.css">
+		<!-- endbuild -->
+		<!-- build:css css/style.min.css -->
+		<link rel="stylesheet" type="text/css" href="styles/style.min.css" />
+		<!-- endbuild -->
+		<!-- build:css css/cigna.min.css -->
+		<link rel="stylesheet" type="text/css" href="styles/cigna.min.css" />
 		<!-- endbuild -->
 		<script type="text/javascript" src="//cdn.optimizely.com/js/3139760231.js"></script>
 	</head>
@@ -77,6 +90,8 @@
 	<script type="text/javascript" src="bower_components/moment/lang/th.js"></script>
 	<script type="text/javascript" src="js/nonangular/jquery.ui.datepicker-th.js"></script>
 	<script type="text/javascript" src="js/nonangular/jquery.autotab.min.js"></script>
+	<script type="text/javascript" src="js/nonangular/foundation.min.js"></script>
+	<script type="text/javascript" src="js/nonangular/foundation.equalizer.js"></script>
 	<!-- endbuild -->
 
 	<!-- Non-angular libraries -->
@@ -127,7 +142,7 @@
 	<script type="text/javascript" src="components/directives/birthDate.calendar.directive.js"></script>
 	<script type="text/javascript" src="components/directives/main.footer.directive.js"></script>
 	<script type="text/javascript" src="components/directives/autoSubmitForm.directive.js"></script>
-
+	
 	<script type="text/javascript" src="components/filters/Capitalize.filter.js"></script>
 	<!-- endbuild -->
 

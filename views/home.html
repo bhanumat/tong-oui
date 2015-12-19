@@ -23,7 +23,7 @@
                 <img ng-show="tempData.currentState == '/insurance/thankyou'"
                      ng-src="{{'images/form-navigation-5.png'}}" alt="">
             </div>
-            <div class="row" sticky sticky-class="sticky" body-class="body-sticky"
+            <div class="row" offset="0" sticky sticky-class="sticky" body-class="body-sticky"
                  ng-if="tempData.currentState != '/insurance/destination' && tempData.currentState != '/insurance/thankyou' ">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 sticky-wrapper">
                     <div id="summary-bar" class="summary-bar" ng-class="{'expand':tempData.summaryBar.expand}">

@@ -11,6 +11,7 @@
 		$(this).on('focus','.cardnumber',function(){
 			$('.cardnumber').autotab('cardnumber');
 		});
+        $(document).foundation();
 	});
 
 

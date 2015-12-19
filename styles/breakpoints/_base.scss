@@ -649,7 +649,7 @@ MAIN PAGE
                 top: 0;
                 width: 100%;
                 display: block;
-                z-index: 10;
+                z-index: 1;
                 height: 12.5%;
                 background-color: $primary-color;
                 text-align: center;
@@ -911,7 +911,7 @@ MAIN PAGE
             span {
                 position: absolute;
 			    left: 15px;
-			    top: initial;            
+                top: 15px;         
 			}
         }
     }
