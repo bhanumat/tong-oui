@@ -10,7 +10,6 @@
 
     angular.module('angulartics.google.tagmanager', ['angulartics'])
         .config(['$analyticsProvider', function ($analyticsProvider) {
-            console.log('HIT ME ###############################################################################');
 
             /**
              * Send content views to the dataLayer
@@ -70,22 +69,6 @@
                 }
 
                 if (path.indexOf("thankyou") > 9) {
-                    /*Sample data for eCommerce tracking  (Locas can be apply this data) */
-                    dataLayer.push({
-                        'transactionId': '69696',
-                        'transactionAffiliation': 'Cigna Insurance',
-                        'transactionTotal': 200,
-                        'transactionTax': 0,
-                        'transactionShipping': 0,
-                        'transactionProducts': [{
-                            'sku': 'xx44',
-                            'name': 'Plan I',
-                            'category': 'Travel',
-                            'price': 200,
-                            'quantity': 1
-                        }]
-                    });
-
                     dataLayer.push({
                         'event': 'checkout',
                         'ecommerce': {
@@ -95,6 +78,8 @@
                         }
                     });
                 }
+
+                console.log(dataLayer);
             });
 
             /**
