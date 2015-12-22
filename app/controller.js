@@ -669,11 +669,15 @@
                 submitOrderParams.numberOfInsure = submitOrderParams.passengers;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
-                try {
-                    submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
-                } catch (ex) {
-                    submitOrderParams.voluntaryCodeList = [];
+
+                submitOrderParams.voluntaryCodeList = [];
+                for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; i++) {
+                    var voluntary = $scope.travel.voluntaryList[i];
+                    if (voluntary.rateScale) {
+                        submitOrderParams.voluntaryCodeList.push(voluntary.rateScale.groupId);
+                    }
                 }
+
                 submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
@@ -734,7 +738,7 @@
                     };
 
                     if (response.data.trackingNumber) {
-                        $rootScope.$broadcast('gateway.redirect', data);
+                        //$rootScope.$broadcast('gateway.redirect', data);
                     } else {
                         dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
                     }
