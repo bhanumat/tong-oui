@@ -103,7 +103,7 @@
         };
 
         $scope.start == true;
-        if ($scope.start == true ) {
+        if ($scope.start == true || $scope.start === undefined) {
             $scope.start = false;
             $location.path('/insurance/');
             $location.replace();
@@ -112,7 +112,16 @@
         // comment for testing
 
         $scope.$on('$locationChangeStart', function (next, current) {
-            console.log('hit');
+
+            foundStorageData = LocalStorage.get('insurance.travel');
+            if (foundStorageData) {
+                $scope.travel = LocalStorage.get('insurance.travel');
+                $scope.travelData = LocalStorage.get('insurance.travelData');
+                $scope.tempData = LocalStorage.get('insurance.tempData');
+                $scope.messages = LocalStorage.get('insurance.messages');
+                $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+            }
+
             if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
@@ -129,18 +138,11 @@
                 /**
                  * Load data from session if any
                  */
-                foundStorageData = LocalStorage.get('insurance.travel');
                 if (foundStorageData) {
-                    $scope.travel = LocalStorage.get('insurance.travel');
-                    $scope.travelData = LocalStorage.get('insurance.travelData');
-                    $scope.tempData = LocalStorage.get('insurance.tempData');
-                    $scope.messages = LocalStorage.get('insurance.messages');
                     var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
                     var cleanStorageRequired;
                     var redirectRequired;
-                    $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
                     $scope.refId = $location.search().Ref;
-
                     if ($scope.refId) {
                         if ($location.path() == "/insurance/payment") {
                             dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
@@ -206,11 +208,6 @@
                     $scope.start = true;
                 }
 
-                if ($scope.start == true && !foundStorageData) {
-                    $scope.start = false;
-                    $location.path('/insurance/');
-                    $location.replace();
-                }
             }
             else {
                 if (!$scope.start && !$scope.tempData.step1Completed) {
