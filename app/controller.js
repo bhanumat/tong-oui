@@ -738,7 +738,7 @@
                     };
 
                     if (response.data.trackingNumber) {
-                        //$rootScope.$broadcast('gateway.redirect', data);
+                        $rootScope.$broadcast('gateway.redirect', data);
                     } else {
                         dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
                     }
