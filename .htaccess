@@ -24,3 +24,6 @@ AddType application/x-font-woff              woff
     SetOutputFilter DEFLATE
   </FilesMatch>
 </IfModule>
+
+#Disable Directory Indexes
+Options -Indexes

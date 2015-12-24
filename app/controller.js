@@ -25,7 +25,6 @@
         var sessionTimeWarningPromise;
         var sessionTimePromise;
         var dialog;
-        var foundStorageData;
 
 
         //Travel Model to keep data for post to Back-End
@@ -44,7 +43,6 @@
             "promoFull": null
         };
         $scope.formStepSubmitted = false;
-        $scope.tempData.currentState;
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
@@ -57,12 +55,12 @@
 
         self.reset = function () {
             LocalStorage.removeAll();
-            self.init();
+            self.initFirstState();
         };
 
-        self.init = function () {
+        self.initFirstState = function () {
             $scope.start = true;
-
+            $scope.tempData.currentState = $location.path();
             //restore travelData;
             $scope.travel = {};
             $scope.tempData = {};
@@ -102,26 +100,100 @@
             });
         };
 
-        $scope.start == true;
-        if ($scope.start == true || $scope.start === undefined) {
-            $scope.start = false;
-            $location.path('/insurance/');
-            $location.replace();
-        }
-
-        // comment for testing
-
-        $scope.$on('$locationChangeStart', function (next, current) {
-
+        /**
+         * Load data from session if any
+         */
+        var foundStorageData = null;
+        $scope.refId = $location.search().Ref;
+        self.onPageLoad = function () {
             foundStorageData = LocalStorage.get('insurance.travel');
             if (foundStorageData) {
                 $scope.travel = LocalStorage.get('insurance.travel');
                 $scope.travelData = LocalStorage.get('insurance.travelData');
                 $scope.tempData = LocalStorage.get('insurance.tempData');
                 $scope.messages = LocalStorage.get('insurance.messages');
-                $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
-            }
+                var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
 
+                var cleanStorageRequired;
+                var redirectRequired;
+                $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+                if ($scope.refId) {
+                    if ($location.path() == "/insurance/payment") {
+                        dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
+                    } else if ($location.path() == "/insurance/thankyou") {
+                        cleanStorageRequired = true;
+
+                        //GTM Info
+                        var travelInfo = angular.copy($scope.travel);
+                        var planName = _.result(_.findWhere($scope.travelData.campaignList[0].mandatory.rateScaleList, {'rateScale': travelInfo.mandatory.rateScale.rateScale}), 'description');
+                        var price = travelInfo.premiumAmount / travelInfo.passengers;
+                        var products = [];
+                        for (var i = 1; i <= travelInfo.passengers; i++) {
+                            products.push({
+                                'name': planName,
+                                'id': travelInfo.mandatory.rateScale.rateScale,
+                                'price': price,
+                                'brand': 'CIGNA',
+                                'category': 'Travel',
+                                'quantity': 1
+                            });
+                        }
+
+                        GoogleTagManager.push({
+                            'ecommerce': {
+                                'purchase': {
+                                    'actionField': {
+                                        'id': $scope.refId,
+                                        'affiliation': '',
+                                        'revenue': travelInfo.premiumAmount,
+                                        'tax': '0.00',
+                                        'shipping': '0.00',
+                                        'step': 5, 'option': 'Travel Completed',
+                                        'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
+                                    },
+                                    'products': products
+                                }
+
+                            }
+                        });
+                    }
+                }
+
+                if (sessionStartDate) {
+                    var startDate = moment(sessionStartDate);
+                    var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
+                    var now = moment();
+                    if (sessionStartTimeout.utc().isBefore(now)) {//timeout
+                        cleanStorageRequired = true;
+                        redirectRequired = true;
+                    }
+                }
+
+                if (cleanStorageRequired) {
+                    self.reset();
+                    $scope.tempData.currentState = "/insurance/thankyou";
+                }
+
+                if (redirectRequired) {
+                    $location.path('/insurance');
+                    $location.replace();
+                }
+            } else {
+                self.initFirstState();
+            }
+        }
+
+        self.onPageLoad();
+
+        if ($scope.start == true && !foundStorageData) {
+            $scope.start = false;
+            $scope.tempData.currentState = $location.path();
+            $state.go('^.destination');
+        }
+
+        // comment for testing
+
+        $scope.$on('$locationChangeStart', function (next, current) {
             if ($location.path() == '/insurance') {
                 $location.path('/insurance/destination');
                 $location.replace();
@@ -134,87 +206,14 @@
                 $location.path('/insurance/profile');
                 $location.replace();
             }
-            else if ($location.path() == '/insurance/payment' || $location.path() == '/insurance/thankyou') {
-                /**
-                 * Load data from session if any
-                 */
-                if (foundStorageData) {
-                    var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
-                    var cleanStorageRequired;
-                    var redirectRequired;
-                    $scope.refId = $location.search().Ref;
-                    if ($scope.refId) {
-                        if ($location.path() == "/insurance/payment") {
-                            dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
-                        } else if ($location.path() == "/insurance/thankyou") {
-                            cleanStorageRequired = true;
-
-                            //GTM Info
-                            var travelInfo = angular.copy($scope.travel);
-                            var planName = _.result(_.findWhere($scope.travelData.campaignList[0].mandatory.rateScaleList, {'rateScale': travelInfo.mandatory.rateScale.rateScale}), 'description');
-                            var price = travelInfo.premiumAmount / travelInfo.passengers;
-                            var products = [];
-                            for (var i = 1; i <= travelInfo.passengers; i++) {
-                                products.push({
-                                    'name': planName,
-                                    'id': travelInfo.mandatory.rateScale.rateScale,
-                                    'price': price,
-                                    'brand': 'CIGNA',
-                                    'category': 'Travel',
-                                    'quantity': 1
-                                });
-                            }
-
-                            GoogleTagManager.push({
-                                'ecommerce': {
-                                    'purchase': {
-                                        'actionField': {
-                                            'id': $scope.refId,
-                                            'affiliation': '',
-                                            'revenue': travelInfo.premiumAmount,
-                                            'tax': '0.00',
-                                            'shipping': '0.00',
-                                            'step': 5, 'option': 'Travel Completed',
-                                            'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
-                                        },
-                                        'products': products
-                                    }
-
-                                }
-                            });
-                        }
-                    }
-
-                    if (sessionStartDate) {
-                        var startDate = moment(sessionStartDate);
-                        var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
-                        var now = moment();
-                        if (sessionStartTimeout.utc().isBefore(now)) {//timeout
-                            cleanStorageRequired = true;
-                            redirectRequired = true;
-                        }
-                    }
-
-                    if (cleanStorageRequired) {
-                        self.reset();
-                        $scope.tempData.currentState = "/insurance/thankyou";
-                    }
-
-                    if (redirectRequired) {
-                        $location.path('/insurance/');
-                        $location.replace();
-                    }
-                } else {
-                    $scope.start = true;
-                }
-
-            }
             else {
-                if (!$scope.start && !$scope.tempData.step1Completed) {
+                if ($scope.tempData.currentState == "/insurance/thankyou" || !$scope.tempData.step1Completed) {
+                    $scope.tempData.currentState = $location.path();
                     $location.path('/insurance/destination');
                     $location.replace();
+                } else {
+                    $scope.tempData.currentState = $location.path();
                 }
-                $scope.tempData.currentState = $location.path();
             }
 
         });
@@ -246,10 +245,6 @@
             LocalStorage.update('insurance.sessionStartDate', new Date());
             self.initSessionTimer();
         };
-
-        if (!foundStorageData) {
-            self.init();
-        }
 
         $scope.$watch('travel.startTravelDate', function () {
             if ($location.path() != '/insurance/destination') {
