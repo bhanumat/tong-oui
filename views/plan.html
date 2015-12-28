@@ -151,12 +151,12 @@
                                              ng-repeat="rateScale in voluntary.rateScaleList"
                                              ng-click="voluntaryToggle(campaignIndex, voluntaryIndex, $index)">
                                             <div class="plan-table-top" equalizer="'group2'"
-                                                 ng-show="rateScale.rateScaleValue.sumInsure.length>0">
+                                                        ng-show="rateScale.rateScaleValue.sumInsure.length>0">
                                                 <h5>
-											<span class="option-checkbox">
-												<span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.rateScale===rateScale.rateScale}"
-                                                      class=""></span>
-											</span>
+                                                <span class="option-checkbox">
+                                                    <span ng-class="{'icon-check': travel.voluntaryList[voluntaryIndex].rateScale.rateScale===rateScale.rateScale}"
+                                                          class=""></span>
+                                                </span>
                                                     {{rateScale.price | number}}
                                                     <small>บาท</small>
                                                 </h5>

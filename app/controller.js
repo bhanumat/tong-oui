@@ -153,9 +153,18 @@
                                     },
                                     'products': products
                                 }
-
                             }
                         });
+
+                        GoogleTagManager.push({
+                            'event': 'checkout',
+                            'ecommerce': {
+                                'checkout': {
+                                    'actionField': {'step': 5, 'option': 'Payment Confirmation'}
+                                }
+                            }
+                        });
+
                     }
                 }
 
@@ -181,7 +190,7 @@
             } else {
                 self.initFirstState();
             }
-        }
+        };
 
         self.onPageLoad();
 
@@ -609,7 +618,7 @@
                     }
                 }
                 return false;
-            }
+            };
             if ($scope.isSchengen() && $scope.isAsia() || isWorld()) {
                 return true;
             }
@@ -682,8 +691,8 @@
 
                 submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
-                    var profile = submitOrderParams.applicationList[i];
+                for (var j = 0, len2 = submitOrderParams.applicationList.length; j < len2; j++) {
+                    var profile = submitOrderParams.applicationList[j];
                     profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 }
 
