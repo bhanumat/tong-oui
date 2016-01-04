@@ -265,7 +265,7 @@ MAIN PAGE
         padding: 0 10px;
         font-family: $font;
         color: $white;
-        font-size: 45px;
+        font-size: 33px;
         line-height: 45px;
         @include text-shadow(1px, 1px, 3px, $text-color);
     }
@@ -322,8 +322,18 @@ MAIN PAGE
     }
 }
 
+.insurance-details {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+
 .sticky {
     z-index: 9999;
+    &.edit {
+        height: 100%;
+        background-color: rgba($black, 0.7);
+    }
     .go-to-top {
         right: 15px;
         @include opacity(1);
@@ -551,20 +561,6 @@ MAIN PAGE
         background-color: $white;
         position: relative;
         overflow: hidden;
-        .plan-tab {
-            background-color: $dark-gray;
-            padding: 0;
-            position: relative;
-            overflow: hidden;
-            .plan-tab-inner {
-                @include transition(all 0.5s ease);
-                position: absolute;
-                height: 100%;
-                .plan {
-                    height: 25%;
-                }
-            }
-        }
         .plan-detail {
             padding: 0;
             img {
@@ -578,6 +574,7 @@ MAIN PAGE
             .plan-table-content {
                 width: 25%;
                 .plan {
+                    width: 91%;
                     width: -moz-calc(100% - 40px);
                     width: -webkit-calc(100% - 40px);
                     width: calc(100% - 40px);
@@ -591,6 +588,7 @@ MAIN PAGE
             .plan-table-content {
                 width: 50%;
                 .plan {
+                    width: 45%;
                     width: -moz-calc(50% - 20px);
                     width: -webkit-calc(50% - 20px);
                     width: calc(50% - 20px);
@@ -625,6 +623,7 @@ MAIN PAGE
             p {
                 display: inline-block;
                 padding-left: 10px;
+                width: 91%;
                 width: -moz-calc(100% - 34px);
                 width: -webkit-calc(100% - 34px);
                 width: calc(100% - 34px);
@@ -641,6 +640,49 @@ MAIN PAGE
             width: 100%;
             background-color: $light-primary-color;
             padding: 0;
+            .plan-tab {
+                background-color: $dark-gray;
+                padding: 0;
+                position: relative;
+                overflow: hidden;
+                .plan-tab-inner {
+                    @include transition(all 0.5s ease);
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    .plan {
+                        height: 25%;
+                    }
+                }
+            }
+            &.one-plan {
+                .plan-tab {
+                    .plan-tab-inner {
+                        transform: translateY(0%) !important;
+                        .plan {
+                            height: 100%;
+
+                        }
+                    }
+                }
+                .plan-navigation {
+                    display: none;
+                }
+            }
+            &.two-plan {
+                .plan-tab {
+                    .plan-tab-inner {
+                        transform: translateY(0%) !important;
+                        .plan {
+                            height: 50%;
+
+                        }
+                    }
+                }
+                .plan-navigation {
+                    display: none;
+                }
+            }
             .plan-navigation {
                 cursor: pointer;
                 color: $white;
@@ -673,6 +715,7 @@ MAIN PAGE
                 @include transition(all 0.5s ease);
                 &:first-child {
                     &.hidePlan {
+                        width: 28%;
                         margin-left: -moz-calc(-30.5% + 20px);
                         margin-left: -webkit-calc(-30.5% + 20px);
                         margin-left: calc(-30.5% + 20px);

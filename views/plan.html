@@ -67,7 +67,7 @@
                                 <p>ความคุ้มครองสูงสุด (บาท)</p>
                             </div>
                         </div>
-                        <div class="plan-table-content col-xs-12">
+                        <div class="plan-table-content col-xs-12" ng-class="{'one-plan':travelData.quotation.protect.length == 1,'two-plan':travelData.quotation.protect.length == 2}">
                             <div class="row">
                                 <div class="plan-tab col-xs-3" equalizer="'xs-plan-table'">
                             <span ng-show="showLeftPlanNavigator(campaign, campaignIndex)"
