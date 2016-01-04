@@ -1,4 +1,4 @@
-<form name="paymentForm" id="insurance-form"
+<form name="paymentForm" id="insurance-form" method="post"
       ng-submit="submitOrder($event,paymentForm)" novalidate>
     <fieldset ng-disabled="isProcessing || editingSummarybar" style="border: 0px; margin:0; padding: 0px;">
         <div class="row">
@@ -232,4 +232,3 @@
     </fieldset>
 </form>
 <div auto-submit-form event="gateway.redirect"></div>
-<!--<pre>{{travel|json}}</pre>-->

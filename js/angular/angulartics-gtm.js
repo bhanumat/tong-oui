@@ -67,11 +67,6 @@
                         }
                     });
                 }
-
-                if (path.indexOf("thankyou") > 9) {
-                    //Moved to controller.js
-                }
-
             });
 
             /**

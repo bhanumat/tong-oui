@@ -148,23 +148,14 @@
                                         'revenue': travelInfo.premiumAmount,
                                         'tax': '0.00',
                                         'shipping': '0.00',
-                                        'step': 5, 'option': 'Travel Completed',
+                                        'step': 5,
+                                        'option': 'Travel Completed',
                                         'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
                                     },
                                     'products': products
                                 }
                             }
                         });
-
-                        GoogleTagManager.push({
-                            'event': 'checkout',
-                            'ecommerce': {
-                                'checkout': {
-                                    'actionField': {'step': 5, 'option': 'Payment Confirmation'}
-                                }
-                            }
-                        });
-
                     }
                 }
 
