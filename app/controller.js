@@ -671,6 +671,7 @@
                 submitOrderParams.numberOfInsure = submitOrderParams.passengers;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
+                submitOrderParams.country = _.pluck($scope.tempData.destinations, 'id').join(',');
 
                 submitOrderParams.voluntaryCodeList = [];
                 for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; i++) {
@@ -960,7 +961,6 @@
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
                     $scope.tempData.area = $scope.getProtectionArea();
-                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'id').join(',')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
                 }
@@ -971,7 +971,6 @@
             $scope.travelData.destinationList.push($scope.tempData.destinations[index]);
             $scope.tempData.destinations = $filter('filter')($scope.tempData.destinations, {country: "!" + $scope.tempData.destinations[index].country}, true);
             $scope.travel.destination = $scope.getProtectionArea();
-            $scope.travel.country = _.pluck($scope.tempData.destinations, 'country').join('|')
             $scope.isSchengen();
             $scope.isRequiredEng();
         };
