@@ -177,6 +177,9 @@ select {
   .form-control {
     font-weight: bold;
     margin-bottom: 0;
+    &.cardnumber {
+      padding: 6px;
+    }
     .form-control {
       margin-bottom: 0;
       height: 42px;

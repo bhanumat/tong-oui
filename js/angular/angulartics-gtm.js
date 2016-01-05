@@ -67,18 +67,6 @@
                         }
                     });
                 }
-
-                if (path.indexOf("thankyou") > 9) {
-                    dataLayer.push({
-                        'event': 'checkout',
-                        'ecommerce': {
-                            'checkout': {
-                                'actionField': {'step': 5, 'option': 'Payment Confirmation'}
-                            }
-                        }
-                    });
-                }
-
             });
 
             /**
