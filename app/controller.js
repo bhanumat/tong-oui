@@ -220,6 +220,8 @@
 
         self.initSessionTimer = function () {
             var timeout = $scope.travelData.timeOut;
+            console.log('timeout=', timeout);
+            console.log('Warning timeout=', (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimeWarningPromise = $timeout(function () {
                 dialog = dialogs.create('/dialogs/custom-close-to-continue.html', 'CustomDialogCtrl', {
                     title: 'Warning',
