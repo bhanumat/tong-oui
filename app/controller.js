@@ -266,11 +266,11 @@
             }
         });
 
-        $scope.$watch('travel.country', function () {
+        $scope.$watch('tempData.destinations', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.countryChanged = true;
             }
-        });
+        }, true);
 
         $scope.$watch('travel.promoCode', function (newValue, oldValue) {
             $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
