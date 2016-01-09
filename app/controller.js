@@ -220,8 +220,6 @@
 
         self.initSessionTimer = function () {
             var timeout = $scope.travelData.timeOut;
-            console.log('timeout=', timeout);
-            console.log('Warning timeout=', (timeout - CONSTANTS.WARNING_BEFORE_TIMEOUT) * 60000);
             sessionTimeWarningPromise = $timeout(function () {
                 dialog = dialogs.create('/dialogs/custom-close-to-continue.html', 'CustomDialogCtrl', {
                     title: 'Warning',
@@ -389,11 +387,12 @@
             }
 
             $scope.tempData.selectedPlanIndex = foundIndexRateScale;
+
             $scope.travel.mandatory = {
                 topicDetail: campaign.mandatory.topicDetail,
                 coverageList: campaign.mandatory.coverageList,
                 rateScale: rateScale
-            }
+            };
 
 
             //Voluntary if any
@@ -423,11 +422,15 @@
 
         };
 
-        self.updateSelectedCampaign = function (campaign) {
+        self.updateSelectedCampaign = function (campaign, backupIndex) {
             $scope.travel.campaignCode = campaign.campaignCode;
             $scope.travel.minAge = campaign.minAge;
             $scope.travel.maxAge = campaign.maxAge;
             $scope.travel.calculateMethod = campaign.calculateMethod;
+
+            if (backupIndex != undefined) {
+                $scope.tempData.selectedPlanIndex = backupIndex;
+            }
 
             $scope.travel.mandatory = {
                 topicDetail: campaign.mandatory.topicDetail,
@@ -437,11 +440,23 @@
 
             for (var i = 0, len = campaign.voluntaryList.length; i < len; i++) {
                 var voluntary = campaign.voluntaryList[i];
-                $scope.travel.voluntaryList[i] = {
-                    topicDetail: voluntary.topicDetail,
-                    coverageList: voluntary.coverageList,
-                    rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
-                };
+                if (backupIndex != undefined) {
+                    if ($scope.tempData.voluntaryList[i].coverageList) {
+                        $scope.travel.voluntaryList[i] = {
+                            topicDetail: voluntary.topicDetail,
+                            coverageList: voluntary.coverageList,
+                            rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                        };
+                    } else {
+                        $scope.travel.voluntaryList[i] = {};
+                    }
+                } else {
+                    $scope.travel.voluntaryList[i] = {
+                        topicDetail: voluntary.topicDetail,
+                        coverageList: voluntary.coverageList,
+                        rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                    };
+                }
             }
         };
 
@@ -469,8 +484,10 @@
                     }
                 }
                 if (campaign) {
+                    var backupSelectedPlanIndex = $scope.tempData.selectedPlanIndex;
+                    $scope.tempData.voluntaryList = $scope.travel.voluntaryList;
                     self.setupCampaign(campaign);
-                    self.updateSelectedCampaign(campaign);
+                    self.updateSelectedCampaign(campaign, backupSelectedPlanIndex);
                 }
             }
         };
