@@ -156,6 +156,15 @@
                                 }
                             }
                         });
+
+                        GoogleTagManager.push({
+                            'event': 'checkout',
+                            'ecommerce': {
+                                'checkout': {
+                                    'actionField': {'step': 5, 'option': 'Travel Completed'}
+                                }
+                            }
+                        });
                     }
                 }
 
