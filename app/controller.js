@@ -157,14 +157,14 @@
                             }
                         });
 
-                        GoogleTagManager.push({
-                            'event': 'checkout',
-                            'ecommerce': {
-                                'checkout': {
-                                    'actionField': {'step': 5, 'option': 'Travel Completed'}
-                                }
-                            }
-                        });
+                        //GoogleTagManager.push({
+                        //    'event': 'checkout',
+                        //    'ecommerce': {
+                        //        'checkout': {
+                        //            'actionField': {'step': 5, 'option': 'Travel Completed'}
+                        //        }
+                        //    }
+                        //});
                     }
                 }
 
@@ -309,7 +309,7 @@
                 }
             }
             $scope.tempData.passengersProfile[0].isManualAddress = true;
-            if(!$scope.tempData.passengerNoAddrCompleteList){
+            if (!$scope.tempData.passengerNoAddrCompleteList) {
                 $scope.tempData.passengerNoAddrCompleteList = [];
             }
         };
@@ -823,7 +823,11 @@
                     }
                 });
             } else {
-                $scope.tempData.promoCode = $scope.travel.promoCode;
+                $scope.tempData.promotion = {
+                    "promoType": null,
+                    "promoValue": null,
+                    "promoFull": null
+                };
                 deferred.resolve({});
             }
 
