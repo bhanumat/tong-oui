@@ -262,6 +262,9 @@
                 }
             }
             $scope.tempData.passengersProfile[0].isManualAddress = true;
+            if(!$scope.tempData.passengerNoAddrCompleteList){
+                $scope.tempData.passengerNoAddrCompleteList = [];
+            }
         };
 
         $scope.trustAsHtml = function (value) {
@@ -453,10 +456,17 @@
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
                 $scope.travel.applicationList[index] = {}
             }
+            // For fix bug copy address feature.
+            var passengerNoStr = ((index + 1) + '');
+            var passengerNoIndex = _.indexOf($scope.tempData.passengerNoAddrCompleteList, passengerNoStr);
+
             if (stage == 'edit') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
                 $scope.tempData.passengersProfile[index].stage = stage;
                 $scope.tempData.passengersProfile[index].profileForm = null;
+                if (passengerNoIndex > -1) {
+                    $scope.tempData.passengerNoAddrCompleteList.splice(passengerNoIndex, 1);
+                }
             }
             if (stage == 'saved') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = true;
@@ -464,6 +474,10 @@
                     $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
                     $scope.tempData.passengersProfile[index].profileForm = true;
                     $scope.tempData.passengersProfile[index].stage = stage;
+                    $scope.tempData.passengersProfile[index].isManualAddress = true;
+                    $scope.tempData.passengerNoAddrCompleteList.push(passengerNoStr);
+                } else if (passengerNoIndex > -1) {
+                    $scope.tempData.passengerNoAddrCompleteList.splice(passengerNoIndex, 1);
                 }
             }
             if (stage == 'reset') {
@@ -472,7 +486,9 @@
                     $scope.tempData.passengersProfile.splice(index, 1);
                     $scope.tempData.passengersProfile.push({profileFormSubmitted: false, stage: '', profileForm: null});
                     $scope.travel.applicationList.splice(index, 1);
-                    //$scope.travel.applicationList.push({});
+                    if (passengerNoIndex > -1) {
+                        $scope.tempData.passengerNoAddrCompleteList.splice(passengerNoIndex, 1);
+                    }
                 }, function (noBtn) {
 
                 });
@@ -785,7 +801,7 @@
                         self.restartTimer();
                         var blacklists = _.where(response.data.blacklists, {result: true});
                         if (blacklists && blacklists.length > 0) {
-                            dialogs.error('Error', $scope.messages['ER_ESA_008']);
+                            dialogs.error('Error', self.buildProfileWarningMessage(blacklists, $scope.messages['ER_ESA_008']));
                         } else {
                             var checkOverlapParam = self.initCheckOverlapParam();
                             QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
@@ -1076,7 +1092,8 @@
                 }
             });
             if (message) {
-                profileWarningMessage = notifyMessage.replace('{{msg}}', message);
+                profileWarningMessage = notifyMessage.replace('{{msg}}', '');
+                profileWarningMessage += message;
             } else {
                 profileWarningMessage = notifyMessage;
             }

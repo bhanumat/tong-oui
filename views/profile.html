@@ -207,11 +207,11 @@
                           <button ng-click="addAddress(applicationIndex);" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> กรอกที่อยู่</button>
                         </div>
                         <div class="col-xs-12 col-sm-8">
-                          <p>ใช้ที่อยู่เหมือนผู้ขอเอาประกันภัยคนที่
-                            <span ng-repeat="passenger in range(0, applicationIndex)" >
-                              <span ng-class="{'active':tempData.passengersProfile[applicationIndex].referenceAddress == passenger}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passenger, applicationIndex)"
-                                    ng-if="passenger != applicationIndex" >
-                                {{passenger + 1}}
+                          <p>xxx {{tempData.passengerNoAddrCompleteList}}<span ng-if="tempData.passengerNoAddrCompleteList.length" >ใช้ที่อยู่เหมือนผู้ขอเอาประกันภัยคนที่</span>
+                            <span ng-repeat="passengerNo in tempData.passengerNoAddrCompleteList" >
+                              <span ng-class="{'active':tempData.passengersProfile[applicationIndex].referenceAddress == $index}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress($index, applicationIndex)"
+                                    ng-if="(passengerNo != ((applicationIndex + 1) + ''))" >
+                                {{passengerNo}}
                               </span>
                             </span>
                           </p>
