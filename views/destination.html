@@ -99,7 +99,7 @@
                                  ng-class="{ 'has-error' : destinationForm.startDate.$invalid && (formStepSubmitted || destinationForm.startDate.$touched) }">
                                 <input type="text" name="startDate" start-date-calendar="1" ng-model="travel.startTravelDate"
                                        autocomplete="off"
-                                       placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" required/>
+                                       placeholder="วันที่เริ่มต้นเดินทาง" class="form-control text-center" readonly required/>
 
                                 <div class="help-block" ng-messages="destinationForm.startDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.startDate.$touched">
@@ -117,7 +117,7 @@
                                  ng-class="{ 'has-error' : destinationForm.endDate.$invalid && (formStepSubmitted || destinationForm.endDate.$touched) }">
                                 <input name="endDate" type="text" end-date-calendar="1" ng-model="travel.endTravelDate"
                                        autocomplete="off"
-                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" required/>
+                                       placeholder="วันที่สิ้นสุดการเดินทาง" class="form-control text-center" readonly required/>
 
                                 <div class="help-block" ng-messages="destinationForm.endDate.$error"
                                      ng-if="formStepSubmitted || destinationForm.endDate.$touched">
@@ -180,7 +180,7 @@
                             <div class="form-group">
                                 <label class="sr-only" for="promotionCode">Promotion Code</label>
                                 <input type="text" ng-model="travel.promoCode" name="promotionCode" class="form-control"
-                                       id="promotionCode" ng-blur="checkPromotionCodeChange()">
+                                       id="promotionCode">
                             </div>
                         </div>
                     </div>

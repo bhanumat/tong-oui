@@ -75,21 +75,6 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('./_build/css/'));
 });
 
-//cdn
-// gulp.task('cdnizer', function () {
-//    return gulp.src("./index.html")
-//        .pipe(cdnizer({
-//          allowRev: true,
-//          allowMin: true,
-//          files:[
-//            {
-//                package: 'jquery-ui',
-//                file: 'bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
-//                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/${version}/jquery-ui.min.css'
-//            }
-//        ]})).pipe(gulp.dest("./_build"));
-// });
-
 // minify HTML
 gulp.task('minify-html', function() {
   var opts = {
@@ -206,7 +191,7 @@ gulp.task('usemin', function() {
       'templates': '<script type="text/javascript" src="js/templates.js"></script>'
     }))
     .pipe($.usemin({
-      css: [$.minifyCss(), 'concat'],
+      //css: [$.minifyCss(),'concat'],
       libs: [$.uglify()],
       nonangularlibs: [$.uglify()],
       angularlibs: [$.uglify()],
@@ -286,7 +271,6 @@ gulp.task('build', function(callback) {
     'sass:build',
     'images',
     'jquery-ui-images',
-    // 'cdnizer',
     'templates',
     'usemin',
     'fonts',

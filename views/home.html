@@ -23,10 +23,10 @@
                 <img ng-show="tempData.currentState == '/insurance/thankyou'"
                      ng-src="{{'images/form-navigation-5.png'}}" alt="">
             </div>
-            <div class="row" sticky sticky-class="sticky" body-class="body-sticky"
+            <div class="row" offset="0" ng-class="{'edit':editingSummarybar}" sticky sticky-class="sticky" body-class="body-sticky"
                  ng-if="tempData.currentState != '/insurance/destination' && tempData.currentState != '/insurance/thankyou' ">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 sticky-wrapper">
-                    <div id="summary-bar" class="summary-bar" ng-class="{'expand':tempData.summaryBar.expand}">
+                    <div id="summary-bar" class="summary-bar" ng-class="{'expand':tempData.summaryBar.expand||editingSummarybar}">
                         <!-- <div class="nav-icon">
                                 <div class="row">
                                         <div class="col-12-xs">
@@ -64,6 +64,9 @@
                                             <img src="images/icon-edit.png" alt="">
                                         </a>
                                     </div>
+                                    <div class="form-group has-error text-right" style="margin-bottom:0;">
+                                        <p class="help-block" ng-show="editingSummarybar"> กรุณากดปุ่มดินสออีกครั้งเพื่อบันทึกการเปลี่ยนแปลง </p>
+                                    </div>
                                     <div class="insurance-details summary-bar-details">
                                         <ng-form name="summaryForm" novalidate>
                                             <div class="row">
@@ -79,13 +82,12 @@
                                                          ng-class="{ 'has-error' : !tempData.destinations.length && summaryBarSubmitted }">
                                                         <ol class="nya-bs-select form-control text-center"
                                                             id="destination"
-                                                            disabled="tempData.destinations.length == 10"
                                                             ng-class="{'filled': tempData.destination}"
                                                             ng-change="addDestination();"
                                                             ng-model="tempData.destination" name="destinations"
                                                             title="เลือกได้สูงสุด 10 ประเทศ" data-size="5"
                                                             data-live-search="true">
-                                                            <li nya-bs-option="item in travelData.destinationList">
+                                                            <li nya-bs-option="item in travelData.destinationList" ng-class="{disabled: tempData.destinations.length === 10 }">
                                                                 <!--<span class="dropdown-header">{{$group|capitalize}}</span>-->
                                                                 <a>
                                                                     {{ item.country }}
@@ -103,7 +105,7 @@
                                                         <div ng-show="editingSummarybar"
                                                              ng-repeat="destination in tempData.destinations | limitTo: 10"
                                                              class="col-sm-6"
-                                                             ng-class="{'col-xs-12':tempData.destinations.length < 4,'col-xs-6':tempData.destinations.length > 3 }">
+                                                             ng-class="{'col-xs-12':tempData.destinations.length < 3,'col-xs-6':tempData.destinations.length > 2 }">
                                                             <div class="travel-destination">
                                                                 <span ng-bind="destination.country"></span>
                                                                 <button class="btn btn-tag"
@@ -164,7 +166,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-2" ng-hide="editingSummarybar">
+                                                <div class="col-xs-3" ng-hide="editingSummarybar">
                                                     <div ng-if="tempData.daysAsText">
                                                         <h6>รวม</h6>
 
@@ -173,14 +175,14 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-2" ng-show="editingSummarybar">
+                                                <div class="col-xs-6" ng-show="editingSummarybar">
                                                     <div ng-if="tempData.daysAsText">
                                                         <h6>รวม</h6>
 
                                                         <p><span ng-bind="travel.days"></span> วัน</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-4">
+                                                <div class="col-xs-6">
                                                     <h6>ผู้ขอเอาประกันภัย</h6>
 
                                                     <p style="margin-bottom:0px;" ng-hide="editingSummarybar"><span
@@ -206,7 +208,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div ng-class="{'col-xs-8':!editingSummarybar,'col-xs-6':editingSummarybar}"
+                                                <div ng-class="{'col-xs-8':!editingSummarybar,'col-xs-12':editingSummarybar}"
                                                      ng-if="travelData.hasPromotion">
                                                     <h6 ng-show="travel.promoCode || editingSummarybar">
                                                         รหัสโปรโมชั่น</h6>
@@ -216,7 +218,7 @@
                                                             Code</label>
                                                         <input type="text" ng-model="travel.promoCode"
                                                                name="promotionCode" class="form-control"
-                                                               id="promotionCode" ng-blur="checkPromotionCodeChange()">
+                                                               id="promotionCode">
                                                     </div>
                                                     <p ng-show="travel.promoCode && !editingSummarybar"
                                                        ng-bind="travel.promoCode"></p>
@@ -228,7 +230,7 @@
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="insurance-plan-heading summary-bar-heading">
                                         <h5>ความคุ้มครองที่เลือก</h5>
-                                        <a ng-hide="isProcessing" href="#plan" offset="330" du-smooth-scroll>
+                                        <a ng-hide="isProcessing || editingSummarybar" href="#plan" offset="330" du-smooth-scroll>
                                             <img src="images/icon-edit.png" alt="">
                                         </a>
                                     </div>

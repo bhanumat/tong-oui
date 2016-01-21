@@ -13,11 +13,12 @@
 
     MainController.$inject = [
         '$rootScope', '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
-        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'SessionStorage', 'LocalStorage', 'QueryService', 'dialogs'
+        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'LocalStorage', 'QueryService', 'dialogs', 'GoogleTagManager'
     ];
 
 
-    function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state, $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, SessionStorage, LocalStorage, QueryService, dialogs) {
+    function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state,
+                            $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, LocalStorage, QueryService, dialogs, GoogleTagManager) {
 
         // 'controller as' syntax
         var self = this;
@@ -42,7 +43,6 @@
             "promoFull": null
         };
         $scope.formStepSubmitted = false;
-        $scope.tempData.currentState;
         $scope.tempData.isShowingDiscount = false;
         $scope.translatey = 'translatey(12.5%)';
 
@@ -55,12 +55,12 @@
 
         self.reset = function () {
             LocalStorage.removeAll();
-            self.init();
+            self.initFirstState();
         };
 
-        self.init = function() {
+        self.initFirstState = function () {
             $scope.start = true;
-
+            $scope.tempData.currentState = $location.path();
             //restore travelData;
             $scope.travel = {};
             $scope.tempData = {};
@@ -93,65 +93,111 @@
                 self.initSessionTimer();
                 $scope.tempData.passengers = $scope.range(1, $scope.travelData.maxTraveller);
                 $scope.tempData.provinceList = angular.copy($scope.travelData.provinceList);
-            });
 
-            QueryService.query('POST', 'getToken').then(function (response) {
-                self.restartTimer();
-                $scope.travel.tokenCode = response.data.tokenCode;
+                QueryService.query('POST', 'getToken').then(function (response) {
+                    $scope.travel.tokenCode = response.data.tokenCode;
+                });
             });
         };
 
         /**
          * Load data from session if any
          */
-        var foundStorageData = LocalStorage.get('insurance.travel');
-        if (foundStorageData) {
-            console.log('Found storage, ', $location.path());
-            $scope.travel = LocalStorage.get('insurance.travel');
-            $scope.travelData = LocalStorage.get('insurance.travelData');
-            $scope.tempData = LocalStorage.get('insurance.tempData');
-            $scope.messages = LocalStorage.get('insurance.messages');
-            var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
-            var cleanStorageRequired;
-            var redirectRequired;
-            $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
-            $scope.refId = $location.search().Ref;
+        var foundStorageData = null;
+        $scope.refId = $location.search().Ref;
+        self.onPageLoad = function () {
+            foundStorageData = LocalStorage.get('insurance.travel');
+            if (foundStorageData) {
+                $scope.travel = LocalStorage.get('insurance.travel');
+                $scope.travelData = LocalStorage.get('insurance.travelData');
+                $scope.tempData = LocalStorage.get('insurance.tempData');
+                $scope.messages = LocalStorage.get('insurance.messages');
+                var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
 
-            if ($scope.refId) {
-                if ($location.path() == "/insurance/payment") {
-                    dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
-                } else if ($location.path() == "/insurance/thankyou") {
-                    cleanStorageRequired = true;
+                var cleanStorageRequired;
+                var redirectRequired;
+                $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
+                if ($scope.refId) {
+                    if ($location.path() == "/insurance/payment") {
+                        dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
+                    } else if ($location.path() == "/insurance/thankyou") {
+                        cleanStorageRequired = true;
+
+                        //GTM Info
+                        var travelInfo = angular.copy($scope.travel);
+                        var planName = _.result(_.findWhere($scope.travelData.campaignList[0].mandatory.rateScaleList, {'rateScale': travelInfo.mandatory.rateScale.rateScale}), 'description');
+                        var price = travelInfo.premiumAmount / travelInfo.passengers;
+                        var products = [];
+                        for (var i = 1; i <= travelInfo.passengers; i++) {
+                            products.push({
+                                'name': planName,
+                                'id': travelInfo.mandatory.rateScale.rateScale,
+                                'price': price,
+                                'brand': 'CIGNA',
+                                'category': 'Travel',
+                                'quantity': 1
+                            });
+                        }
+
+                        GoogleTagManager.push({
+                            'ecommerce': {
+                                'purchase': {
+                                    'actionField': {
+                                        'id': $scope.refId,
+                                        'affiliation': '',
+                                        'revenue': travelInfo.premiumAmount,
+                                        'tax': '0.00',
+                                        'shipping': '0.00',
+                                        'step': 5,
+                                        'option': 'Travel Completed',
+                                        'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
+                                    },
+                                    'products': products
+                                }
+                            }
+                        });
+
+                        GoogleTagManager.push({
+                            'event': 'checkout',
+                            'ecommerce': {
+                                'checkout': {
+                                    'actionField': {'step': 5, 'option': 'Travel Completed'}
+                                }
+                            }
+                        });
+                    }
                 }
-            }
 
-            if (sessionStartDate) {
-                var startDate = moment(sessionStartDate);
-                var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
-                var now = moment();
-                if (sessionStartTimeout.utc().isBefore(now)) {//timeout
-                    cleanStorageRequired = true;
-                    redirectRequired = true;
+                if (sessionStartDate) {
+                    var startDate = moment(sessionStartDate);
+                    var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
+                    var now = moment();
+                    if (sessionStartTimeout.utc().isBefore(now)) {//timeout
+                        cleanStorageRequired = true;
+                        redirectRequired = true;
+                    }
                 }
-            }
 
-            if (cleanStorageRequired) {
-                self.reset();
-                $scope.tempData.currentState = "/insurance/thankyou";
-            }
+                if (cleanStorageRequired) {
+                    self.reset();
+                    $scope.tempData.currentState = "/insurance/thankyou";
+                }
 
-            if (redirectRequired) {
-                $location.path('/insurance');
-                $location.replace();
+                if (redirectRequired) {
+                    $location.path('/insurance');
+                    $location.replace();
+                }
+            } else {
+                self.initFirstState();
             }
-        } else {
-            $scope.start = true;
-        }
+        };
+
+        self.onPageLoad();
 
         if ($scope.start == true && !foundStorageData) {
             $scope.start = false;
-            $location.path('/insurance/');
-            $location.replace();
+            $scope.tempData.currentState = $location.path();
+            $state.go('^.destination');
         }
 
         // comment for testing
@@ -170,11 +216,13 @@
                 $location.replace();
             }
             else {
-                if (!$scope.start && !$scope.tempData.step1Completed) {
+                if ($scope.tempData.currentState == "/insurance/thankyou" || !$scope.tempData.step1Completed) {
+                    $scope.tempData.currentState = $location.path();
                     $location.path('/insurance/destination');
                     $location.replace();
+                } else {
+                    $scope.tempData.currentState = $location.path();
                 }
-                $scope.tempData.currentState = $location.path();
             }
 
         });
@@ -207,10 +255,6 @@
             self.initSessionTimer();
         };
 
-        if (!foundStorageData) {
-            self.init();
-        }
-
         $scope.$watch('travel.startTravelDate', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.travelDateChanged = true;
@@ -231,10 +275,14 @@
             }
         });
 
-        $scope.$watch('travel.country', function () {
+        $scope.$watch('tempData.destinations', function () {
             if ($location.path() != '/insurance/destination') {
                 $scope.tempData.countryChanged = true;
             }
+        }, true);
+
+        $scope.$watch('travel.promoCode', function (newValue, oldValue) {
+            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
         });
 
         $scope.passengersChange = function () {
@@ -250,7 +298,6 @@
                 var profileArray = $scope.range(0, $scope.tempData.passengersProfile.length - 1);
                 var differenceArray = _.difference(profileArray, passengersArray);
                 var profileLength = $scope.tempData.passengersProfile.length;
-                //console.log(differenceArray);
                 if (profileLength > $scope.travel.passengers) {
                     $scope.travel.applicationList.splice(_.first(differenceArray), differenceArray.length);
                     $scope.tempData.passengersProfile.splice(_.first(differenceArray), differenceArray.length);
@@ -310,11 +357,6 @@
             }
         };
 
-        $scope.checkPromotionCodeChange = function () {
-            $scope.tempData.promoCodeChanged = $scope.tempData.promoCode !== $scope.travel.promoCode;
-            $scope.tempData.promoCode = $scope.travel.promoCode;
-        };
-
         $scope.getPriceRate = function (plan) {
             var price = 0;
             if (plan && plan.rateScale && plan.rateScale.price) {//if any
@@ -357,11 +399,12 @@
             }
 
             $scope.tempData.selectedPlanIndex = foundIndexRateScale;
+
             $scope.travel.mandatory = {
                 topicDetail: campaign.mandatory.topicDetail,
                 coverageList: campaign.mandatory.coverageList,
                 rateScale: rateScale
-            }
+            };
 
 
             //Voluntary if any
@@ -391,11 +434,15 @@
 
         };
 
-        self.updateSelectedCampaign = function (campaign) {
+        self.updateSelectedCampaign = function (campaign, backupIndex) {
             $scope.travel.campaignCode = campaign.campaignCode;
             $scope.travel.minAge = campaign.minAge;
             $scope.travel.maxAge = campaign.maxAge;
             $scope.travel.calculateMethod = campaign.calculateMethod;
+
+            if (backupIndex != undefined) {
+                $scope.tempData.selectedPlanIndex = backupIndex;
+            }
 
             $scope.travel.mandatory = {
                 topicDetail: campaign.mandatory.topicDetail,
@@ -405,11 +452,23 @@
 
             for (var i = 0, len = campaign.voluntaryList.length; i < len; i++) {
                 var voluntary = campaign.voluntaryList[i];
-                $scope.travel.voluntaryList[i] = {
-                    topicDetail: voluntary.topicDetail,
-                    coverageList: voluntary.coverageList,
-                    rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
-                };
+                if (backupIndex != undefined) {
+                    if ($scope.tempData.voluntaryList[i].coverageList) {
+                        $scope.travel.voluntaryList[i] = {
+                            topicDetail: voluntary.topicDetail,
+                            coverageList: voluntary.coverageList,
+                            rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                        };
+                    } else {
+                        $scope.travel.voluntaryList[i] = {};
+                    }
+                } else {
+                    $scope.travel.voluntaryList[i] = {
+                        topicDetail: voluntary.topicDetail,
+                        coverageList: voluntary.coverageList,
+                        rateScale: voluntary.rateScaleList[$scope.tempData.selectedPlanIndex]
+                    };
+                }
             }
         };
 
@@ -437,8 +496,10 @@
                     }
                 }
                 if (campaign) {
+                    var backupSelectedPlanIndex = $scope.tempData.selectedPlanIndex;
+                    $scope.tempData.voluntaryList = $scope.travel.voluntaryList;
                     self.setupCampaign(campaign);
-                    self.updateSelectedCampaign(campaign);
+                    self.updateSelectedCampaign(campaign, backupSelectedPlanIndex);
                 }
             }
         };
@@ -497,7 +558,6 @@
         };
 
         $scope.copyPassengerAddress = function (templateIndex, targetIndex) {
-            console.log(templateIndex + ':' + targetIndex);
             if (!$scope.travel.applicationList[targetIndex]) {
                 $scope.travel.applicationList[targetIndex] = {};
             }
@@ -593,7 +653,7 @@
                     }
                 }
                 return false;
-            }
+            };
             if ($scope.isSchengen() && $scope.isAsia() || isWorld()) {
                 return true;
             }
@@ -623,7 +683,6 @@
             else {
                 $scope.tempData.passengersProfile[index].termsAccepted = false;
             }
-            // console.log($scope.tempData.passengersProfile[index].termsAccepted);
         };
 
         $scope.voluntaryToggle = function (campaignIndex, voluntaryIndex, rateScaleIndex) {
@@ -656,11 +715,20 @@
                 submitOrderParams.numberOfInsure = submitOrderParams.passengers;
                 submitOrderParams.mandatoryCode = $scope.travel.mandatory.rateScale.groupId;
                 submitOrderParams.rateScale = $scope.travel.mandatory.rateScale.rateScale;
-                submitOrderParams.voluntaryCodeList = _.pluck(_.pluck($scope.travel.voluntaryList, 'rateScale'), 'groupId');
+                submitOrderParams.country = _.pluck($scope.tempData.destinations, 'id').join(',');
+
+                submitOrderParams.voluntaryCodeList = [];
+                for (var i = 0, len = $scope.travel.voluntaryList.length; i < len; i++) {
+                    var voluntary = $scope.travel.voluntaryList[i];
+                    if (voluntary.rateScale) {
+                        submitOrderParams.voluntaryCodeList.push(voluntary.rateScale.groupId);
+                    }
+                }
+
                 submitOrderParams.startTravelDate = moment(submitOrderParams.startTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 submitOrderParams.endTravelDate = moment(submitOrderParams.endTravelDate, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
-                for (var i = 0, len = submitOrderParams.applicationList.length; i < len; i++) {
-                    var profile = submitOrderParams.applicationList[i];
+                for (var j = 0, len2 = submitOrderParams.applicationList.length; j < len2; j++) {
+                    var profile = submitOrderParams.applicationList[j];
                     profile.dateOfBirth = moment(profile.dateOfBirth, CONSTANTS.DATE_FORMAT_DISPLAY).format(CONSTANTS.DATE_FORMAT);
                 }
 
@@ -716,7 +784,11 @@
                         }
                     };
 
-                    $rootScope.$broadcast('gateway.redirect', data);
+                    if (response.data.trackingNumber) {
+                        $rootScope.$broadcast('gateway.redirect', data);
+                    } else {
+                        dialogs.error('Error', MESSAGES.UNKNOWN_ERROR);
+                    }
                 });
             } else {
                 $event.preventDefault();
@@ -730,25 +802,32 @@
                 tokenCode: $scope.travel.tokenCode,
                 promoCode: $scope.travel.promoCode
             };
-            $scope.tempData.promoCodeChanged = false;
+
             if ($scope.travel.promoCode) {
                 QueryService.query('POST', 'validatePromoCode', validatePromoCodeParams, validatePromoCodeParams).then(function (response) {
                     self.restartTimer();
                     $scope.tempData.promotion = response.data.promotion;
                     if ($scope.tempData.promotion.promoFull === 'Y') {
+                        $scope.travel.promoCode = $scope.tempData.promoCode;
                         deferred.reject(response);
-                        $scope.travel.promoCode = null;
                         dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                     } else {
+                        $scope.tempData.promoCode = $scope.travel.promoCode;
                         deferred.resolve(response);
                     }
                 }, function (response) {
-                    $scope.travel.promoCode = null;
+                    $scope.travel.promoCode = $scope.tempData.promoCode;
+                    deferred.reject(response);
                     if (response.status == 500) {
                         dialogs.error('Error', $scope.messages['ER_ESA_004']);
                     }
                 });
+            } else {
+                $scope.tempData.promoCode = $scope.travel.promoCode;
+                deferred.resolve({});
             }
+
+            $scope.tempData.promoCodeChanged = false;
             return deferred.promise;
         };
 
@@ -807,7 +886,6 @@
                             QueryService.query('POST', 'validateOverlap', undefined, checkOverlapParam).then(function (response) {
                                 self.restartTimer();
                                 var overlaps = _.where(response.data.overlaps, {result: true});
-                                //console.log('overlaps : '+overlaps);
                                 if (overlaps && overlaps.length > 0) {
                                     dialogs.error('Error', self.buildProfileWarningMessage(overlaps, $scope.messages['ER_ESA_009']));
                                 } else {
@@ -927,7 +1005,6 @@
                     $scope.travelData.destinationList = $filter('filter')($scope.travelData.destinationList, {country: "!" + $scope.tempData.destination.country}, true);
                     $scope.tempData.destination = "";
                     $scope.tempData.area = $scope.getProtectionArea();
-                    $scope.travel.country = _.pluck($scope.tempData.destinations, 'id').join(',')
                     $scope.isSchengen();
                     $scope.isRequiredEng();
                 }
@@ -938,7 +1015,6 @@
             $scope.travelData.destinationList.push($scope.tempData.destinations[index]);
             $scope.tempData.destinations = $filter('filter')($scope.tempData.destinations, {country: "!" + $scope.tempData.destinations[index].country}, true);
             $scope.travel.destination = $scope.getProtectionArea();
-            $scope.travel.country = _.pluck($scope.tempData.destinations, 'country').join('|')
             $scope.isSchengen();
             $scope.isRequiredEng();
         };
@@ -1101,7 +1177,6 @@
         };
 
         $scope.changeProvince = function (applicationIndex, provinceCode) {
-            //console.log('changeProvince..' + provinceCode);
             if (!provinceCode)
                 return;
             var provinceParam = {
@@ -1123,7 +1198,6 @@
         };
 
         $scope.changeDistrict = function (applicationIndex, districtCode) {
-            //console.log('changeDistrict..' + districtCode);
             if (!districtCode)
                 return;
             var districtParam = {
