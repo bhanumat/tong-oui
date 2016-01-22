@@ -341,10 +341,10 @@
                                                             </div>
                                                             <div class="col-xs-12 col-sm-8">
                                                                 <p><span ng-if="tempData.passengerNoAddrCompleteList.length" >ใช้ที่อยู่เหมือนผู้ขอเอาประกันภัยคนที่</span>
-                                                                    <span ng-repeat="passengerNo in tempData.passengerNoAddrCompleteList" >
-                                                                      <span ng-class="{'active':tempData.passengersProfile[applicationIndex].referenceAddress == $index}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress($index, applicationIndex)"
-                                                                            ng-if="(passengerNo != ((applicationIndex + 1) + ''))" >
-                                                                        {{passengerNo}}
+                                                                    <span ng-repeat="passengerObj in tempData.passengerNoAddrCompleteList" >
+                                                                      <span ng-class="{'active':tempData.passengersProfile[applicationIndex].referenceAddress == passengerObj.passengerIndex}" class="copyPassengerAddressButton" ng-click="copyPassengerAddress(passengerObj.passengerIndex, applicationIndex)"
+                                                                            ng-if="passengerObj.passengerIndex != applicationIndex" >
+                                                                        {{passengerObj.passengerNo}}
                                                                       </span>
                                                                     </span>
                                                                 </p>
