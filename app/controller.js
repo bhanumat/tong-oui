@@ -519,7 +519,7 @@
             }
             // For fix bug copy address feature.
             var passengerNoStr = ((index + 1) + '');
-            var passengerNoIndex = _.indexOf($scope.tempData.passengerNoAddrCompleteList, {passengerNo : passengerNoStr});
+            var passengerNoIndex = _.indexOf($scope.tempData.passengerNoAddrCompleteList, {passengerNo: passengerNoStr});
 
             if (stage == 'edit') {
                 $scope.tempData.passengersProfile[index].profileFormSubmitted = false;
@@ -536,7 +536,10 @@
                     $scope.tempData.passengersProfile[index].profileForm = true;
                     $scope.tempData.passengersProfile[index].stage = stage;
                     $scope.tempData.passengersProfile[index].isManualAddress = true;
-                    $scope.tempData.passengerNoAddrCompleteList.push({passengerIndex : index, passengerNo : passengerNoStr});
+                    $scope.tempData.passengerNoAddrCompleteList.push({
+                        passengerIndex: index,
+                        passengerNo: passengerNoStr
+                    });
                 } else if (passengerNoIndex > -1) {
                     $scope.tempData.passengerNoAddrCompleteList.splice(passengerNoIndex, 1);
                 }
@@ -809,10 +812,12 @@
                     $scope.tempData.promotion = response.data.promotion;
                     if ($scope.tempData.promotion.promoFull === 'Y') {
                         $scope.travel.promoCode = $scope.tempData.promoCode;
+                        $scope.tempData.promotion = $scope.temp.promotion;
                         deferred.reject(response);
                         dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                     } else {
                         $scope.tempData.promoCode = $scope.travel.promoCode;
+                        $scope.temp.promotion = $scope.tempData.promotion
                         deferred.resolve(response);
                     }
                 }, function (response) {

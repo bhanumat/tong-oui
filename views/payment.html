@@ -67,10 +67,10 @@
                                     <div class="col-xs-12 col-sm-7" style="padding:0;">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <input type="password" name="cvv2" mask="9999?" restrict="reject"
+                                                <input type="password" name="cvv2" mask="999?" restrict="reject"
                                                        clean="true"
                                                        ng-model="payment.cvv2" class="form-control" required
-                                                       autocomplete="off" ng-pattern="/^[0-9][0-9][0-9][0-9]?$/">
+                                                       autocomplete="off" ng-pattern="/^[0-9][0-9][0-9]?$/">
 
                                                 <div class="help-block" ng-messages="paymentForm.cvv2.$error"
                                                      ng-if="paymentForm.cvv2.$invalid && (formStepSubmitted || paymentForm.cvv2.$touched)">
