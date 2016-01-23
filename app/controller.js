@@ -822,6 +822,7 @@
                     }
                 }, function (response) {
                     $scope.travel.promoCode = $scope.tempData.promoCode;
+                    $scope.tempData.promotion = $scope.temp.promotion;
                     deferred.reject(response);
                     if (response.status == 500) {
                         dialogs.error('Error', $scope.messages['ER_ESA_004']);
