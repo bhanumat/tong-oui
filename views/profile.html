@@ -490,7 +490,7 @@
                                                                            name="postcode"
                                                                            placeholder="รหัสไปรษณีย์"
                                                                            ng-pattern="/^\d{5}$/"
-                                                                           required>
+                                                                           required ng-disabled="true">
                                                                     <div class="help-block"
                                                                          ng-messages="profileForm.postcode.$error"
                                                                          ng-if="tempData.passengersProfile[applicationIndex].profileFormSubmitted || profileForm.postcode.$touched">
