@@ -834,6 +834,7 @@
                     "promoValue": null,
                     "promoFull": null
                 };
+                $scope.tempData.promoCode = null;
                 deferred.resolve({});
             }
 
