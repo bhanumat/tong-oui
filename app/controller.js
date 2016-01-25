@@ -812,17 +812,17 @@
                     $scope.tempData.promotion = response.data.promotion;
                     if ($scope.tempData.promotion.promoFull === 'Y') {
                         $scope.travel.promoCode = $scope.tempData.promoCode;
-                        $scope.tempData.promotion = $scope.temp.promotion;
+                        $scope.tempData.promotion = $scope.promotion;
                         deferred.reject(response);
                         dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                     } else {
                         $scope.tempData.promoCode = $scope.travel.promoCode;
-                        $scope.temp.promotion = $scope.tempData.promotion
+                        $scope.promotion = $scope.tempData.promotion
                         deferred.resolve(response);
                     }
                 }, function (response) {
                     $scope.travel.promoCode = $scope.tempData.promoCode;
-                    $scope.tempData.promotion = $scope.temp.promotion;
+                    $scope.tempData.promotion = $scope.promotion;
                     deferred.reject(response);
                     if (response.status == 500) {
                         dialogs.error('Error', $scope.messages['ER_ESA_004']);
