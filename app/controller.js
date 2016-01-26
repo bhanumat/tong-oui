@@ -817,7 +817,7 @@
                         dialogs.error('Warning', $scope.messages['ER_ESA_005']);
                     } else {
                         $scope.tempData.promoCode = $scope.travel.promoCode;
-                        $scope.promotion = $scope.tempData.promotion
+                        $scope.promotion = $scope.tempData.promotion;
                         deferred.resolve(response);
                     }
                 }, function (response) {
@@ -834,6 +834,7 @@
                     "promoValue": null,
                     "promoFull": null
                 };
+                $scope.promotion = null;
                 $scope.tempData.promoCode = null;
                 deferred.resolve({});
             }

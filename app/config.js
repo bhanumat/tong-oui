@@ -11,8 +11,8 @@
     angular
         .module('cignaApp')
         .constant('CONSTANTS', {
-            //'API_URL': 'https://traveluat.cigna.co.th/CignaPortalWebService/rest/',
-            'API_URL': '/',
+            'API_URL': 'https://traveluat.cigna.co.th/CignaPortalWebService/rest/',
+            //'API_URL': '/',
             'DATE_FORMAT_DISPLAY': 'DD MMMM YYYY',
             'DATE_FORMAT': 'DD/MM/YYYY',
             'WARNING_BEFORE_TIMEOUT': 5
