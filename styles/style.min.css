@@ -421,7 +421,7 @@ footer{position:relative}
 .caution{padding:0 .5em;margin-top:-10px;margin-bottom:20px;-webkit-border-radius:4px;-khtml-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;color:#fff}
 .caution h4{font-size:22px}
 .caution h4 img{margin-top:-5px}
-.caution p{color:#fff}
+.caution p{color:#fff;font-size:19px}
 .banner a{display:block}
 .form-navigation{padding:0 20px;margin:20px 0 60px;text-align:center}
 .bg{padding:0}
