@@ -13,12 +13,12 @@
 
     MainController.$inject = [
         '$rootScope', '$scope', '$http', '$parse', 'parallaxHelper', '$filter', '$timeout', '$location', '$state', '$sce', '$q',
-        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'LocalStorage', 'QueryService', 'dialogs', 'GoogleTagManager'
+        'CONSTANTS', 'MESSAGES', 'PAYMENT_INFO', 'LocalStorage', 'QueryService', 'dialogs', '$analytics'
     ];
 
 
     function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state,
-                            $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, LocalStorage, QueryService, dialogs, GoogleTagManager) {
+                            $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, LocalStorage, QueryService, dialogs, $analytics) {
 
         // 'controller as' syntax
         var self = this;
@@ -139,7 +139,7 @@
                             });
                         }
 
-                        GoogleTagManager.push({
+                        $analytics.setPaymentInfo({
                             'ecommerce': {
                                 'purchase': {
                                     'actionField': {
@@ -153,15 +153,6 @@
                                         'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
                                     },
                                     'products': products
-                                }
-                            }
-                        });
-
-                        GoogleTagManager.push({
-                            'event': 'checkout',
-                            'ecommerce': {
-                                'checkout': {
-                                    'actionField': {'step': 5, 'option': 'Travel Completed'}
                                 }
                             }
                         });

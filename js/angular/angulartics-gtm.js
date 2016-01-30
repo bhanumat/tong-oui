@@ -11,6 +11,14 @@
     angular.module('angulartics.google.tagmanager', ['angulartics'])
         .config(['$analyticsProvider', function ($analyticsProvider) {
 
+            $analyticsProvider.settings.ga = {
+                paymentInfo: null
+            };
+
+            $analyticsProvider.registerSetPaymentInfo(function (paymentInfo) {
+                $analyticsProvider.settings.ga.paymentInfo = paymentInfo;
+            });
+
             /**
              * Send content views to the dataLayer
              *
@@ -21,7 +29,8 @@
                 var dataLayer = window.dataLayer = window.dataLayer || [];
                 dataLayer.push({
                     'event': 'content-view',
-                    'content-name': path
+                    'content-name': path,
+                    'ecommerce': $analyticsProvider.settings.ga.paymentInfo
                 });
 
                 if (path.indexOf("destination") > 9) {
@@ -67,6 +76,7 @@
                         }
                     });
                 }
+
             });
 
             /**
