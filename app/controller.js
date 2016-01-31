@@ -123,39 +123,8 @@
                     } else if ($location.path() == "/insurance/thankyou") {
                         cleanStorageRequired = true;
 
-                        //GTM Info
-                        var travelInfo = angular.copy($scope.travel);
-                        var planName = _.result(_.findWhere($scope.travelData.campaignList[0].mandatory.rateScaleList, {'rateScale': travelInfo.mandatory.rateScale.rateScale}), 'description');
-                        var price = travelInfo.premiumAmount / travelInfo.passengers;
-                        var products = [];
-                        for (var i = 1; i <= travelInfo.passengers; i++) {
-                            products.push({
-                                'name': planName,
-                                'id': travelInfo.mandatory.rateScale.rateScale,
-                                'price': price,
-                                'brand': 'CIGNA',
-                                'category': 'Travel',
-                                'quantity': 1
-                            });
-                        }
-
-                        $analytics.setPaymentInfo({
-                            'ecommerce': {
-                                'purchase': {
-                                    'actionField': {
-                                        'id': $scope.refId,
-                                        'affiliation': '',
-                                        'revenue': travelInfo.premiumAmount,
-                                        'tax': '0.00',
-                                        'shipping': '0.00',
-                                        'step': 5,
-                                        'option': 'Travel Completed',
-                                        'coupon': travelInfo.promoCode ? travelInfo.promoCode : ''
-                                    },
-                                    'products': products
-                                }
-                            }
-                        });
+                        //GTM page track trigger
+                        //$analytics.pageTrack($location.path());
                     }
                 }
 
