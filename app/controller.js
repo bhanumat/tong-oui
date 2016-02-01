@@ -19,6 +19,7 @@
 
     function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state,
                             $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, LocalStorage, QueryService, dialogs, $analytics) {
+        console.log('HIT');
 
         // 'controller as' syntax
         var self = this;
@@ -122,9 +123,10 @@
                         dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
                     } else if ($location.path() == "/insurance/thankyou") {
                         cleanStorageRequired = true;
-
-                        //GTM page track trigger
-                        //$analytics.pageTrack($location.path());
+                    } else {
+                        //Come from BBL
+                        $location.path('/insurance/thankyou');
+                        $location.replace();
                     }
                 }
 
@@ -157,15 +159,22 @@
         if ($scope.start == true && !foundStorageData) {
             $scope.start = false;
             $scope.tempData.currentState = $location.path();
-            $state.go('^.destination');
+            $location.path('/insurance/destination');
+            $location.replace();
         }
 
         // comment for testing
 
         $scope.$on('$locationChangeStart', function (next, current) {
+            var refId = $location.search().Ref;
             if ($location.path() == '/insurance') {
-                $location.path('/insurance/destination');
-                $location.replace();
+               if( !refId) {
+                   $location.path('/insurance/destination');
+                   $location.replace();
+               } else {
+                   $location.path('/insurance/thankyou');
+                   $location.replace();
+               }
             }
             else if ($location.path() == '/plan') {
                 $location.path('/insurance/plan');

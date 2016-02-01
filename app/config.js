@@ -28,7 +28,7 @@
             'currCode': '764',
             'cvv2Url': 'https://psipay.bangkokbank.com/b2c/eng/payment/vm_howto.html',
             'failUrl': 'http://localhost:3000/#/insurance/payment',
-			'successUrl': 'http://localhost:3000/#/insurance/thankyou',
+			'successUrl': 'http://localhost:3000/#/insurance',
             'cancelUrl': 'http://localhost:3000/#/insurance/payment',
             'payType': 'N',
             'lang': 'T',
