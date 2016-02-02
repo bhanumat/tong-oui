@@ -127,14 +127,14 @@
 
             // Catch errors
             responseError: function (response) {
-                if( $rootScope.instanceModalDialog) {
+                if ($rootScope.instanceModalDialog) {
                     $rootScope.instanceModalDialog.close();
                 }
                 var dialogs = $injector.get('dialogs');
 
                 if (response.data && response.data.resultCode) {
                     var msg = MESSAGES[response.data.resultCode];
-                    if( msg) {
+                    if (msg) {
                         $rootScope.instanceModalDialog = dialogs.error('Error', msg);
                     }
                     return $q.reject(response);
@@ -161,7 +161,7 @@
     function CustomDialogCtrl($scope, $modalInstance, data) {
         $scope.msg = data.message;
         $scope.header = data.title;
-        $scope.close = function(){
+        $scope.close = function () {
             $modalInstance.close();
             $scope.$destroy();
         };
@@ -174,14 +174,14 @@
         .module('cignaApp')
         .run(run);
 
-    run.$inject = ['$rootScope', '$location', '$templateCache','$interpolate'];
+    run.$inject = ['$rootScope', '$location', '$templateCache', '$interpolate'];
 
-    function run($rootScope, $location, $templateCache,$interpolate) {
+    function run($rootScope, $location, $templateCache, $interpolate) {
         // put here everything that you need to run on page load
 
         var startSym = $interpolate.startSymbol();
         var endSym = $interpolate.endSymbol();
-        $templateCache.put('/dialogs/custom-close-to-continue.html', '<div class="modal-header dialog-header-error"><button type="button" class="close" ng-click="close()">&times;</button><h4 class="modal-title text-danger"><span class="glyphicon glyphicon-warning-sign"></span> <span ng-bind-html="header"></span></h4></div><div class="modal-body text-danger" ng-bind-html="msg"></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close()">'+startSym+'"DIALOGS_CLOSE_TO_CONTINUE" | translate'+endSym+'</button></div>');
+        $templateCache.put('/dialogs/custom-close-to-continue.html', '<div class="modal-header dialog-header-error"><button type="button" class="close" ng-click="close()">&times;</button><h4 class="modal-title text-danger"><span class="glyphicon glyphicon-warning-sign"></span> <span ng-bind-html="header"></span></h4></div><div class="modal-body text-danger" ng-bind-html="msg"></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close()">' + startSym + '"DIALOGS_CLOSE_TO_CONTINUE" | translate' + endSym + '</button></div>');
     }
 
 
