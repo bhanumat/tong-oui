@@ -19,8 +19,6 @@
 
     function MainController($rootScope, $scope, $http, $parse, parallaxHelper, $filter, $timeout, $location, $state,
                             $sce, $q, CONSTANTS, MESSAGES, PAYMENT_INFO, LocalStorage, QueryService, dialogs, $analytics) {
-        console.log('HIT');
-
         // 'controller as' syntax
         var self = this;
         var sessionTimeWarningPromise;
@@ -115,21 +113,19 @@
                 $scope.messages = LocalStorage.get('insurance.messages');
                 var sessionStartDate = LocalStorage.get('insurance.sessionStartDate');
 
-                var cleanStorageRequired;
+                var cleanStorageRequired = LocalStorage.get('insurance.cleanStorageRequired');
                 var redirectRequired;
                 $scope.tempData.currentState = $location.path() != $scope.tempData.currentState ? $location.path() : $scope.tempData.currentState;
                 if ($scope.refId) {
                     if ($location.path() == "/insurance/payment") {
                         dialog = dialogs.error('Error', $scope.messages['ER_ESA_011']);
-                    } else if ($location.path() == "/insurance/thankyou") {
-                        cleanStorageRequired = true;
                     } else {
                         //Come from BBL
                         $location.path('/insurance/thankyou');
                         $location.replace();
+                        LocalStorage.update('insurance.cleanStorageRequired', true);
                     }
                 }
-
                 if (sessionStartDate) {
                     var startDate = moment(sessionStartDate);
                     var sessionStartTimeout = startDate.add($scope.travelData.timeOut, 'minutes');
@@ -142,6 +138,7 @@
 
                 if (cleanStorageRequired) {
                     self.reset();
+                    redirectRequired = true;
                     $scope.tempData.currentState = "/insurance/thankyou";
                 }
 
@@ -168,13 +165,13 @@
         $scope.$on('$locationChangeStart', function (next, current) {
             var refId = $location.search().Ref;
             if ($location.path() == '/insurance') {
-               if( !refId) {
-                   $location.path('/insurance/destination');
-                   $location.replace();
-               } else {
-                   $location.path('/insurance/thankyou');
-                   $location.replace();
-               }
+                if (!refId) {
+                    $location.path('/insurance/destination');
+                    $location.replace();
+                } else {
+                    $location.path('/insurance/thankyou');
+                    $location.replace();
+                }
             }
             else if ($location.path() == '/plan') {
                 $location.path('/insurance/plan');

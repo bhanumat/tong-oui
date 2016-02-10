@@ -76,7 +76,6 @@
                 }
 
                 if (path.indexOf("thankyou") > 9) {
-                    console.log('hit########################');
                     var storagePaymentInfo = window.localStorage && angular.fromJson(window.localStorage.getItem('insurance.travel'));
                     var storageTravelInfo = window.localStorage && angular.fromJson(window.localStorage.getItem('insurance.travelData'));
                     var refId = getParameterByName('Ref');
@@ -89,11 +88,11 @@
                         for (var i = 1; i <= paymentInfo.passengers; i++) {
                             products.push({
                                 'name': planName,
-                                'id': paymentInfo.mandatory.rateScale.rateScale,
-                                'price': price,
+                                'id': paymentInfo.mandatory.rateScale.rateScale+'',
+                                'price': price+'',
                                 'brand': 'CIGNA',
                                 'category': 'Travel',
-                                'quantity': 1
+                                'quantity': 1+''
                             });
                         }
 
@@ -101,12 +100,12 @@
                             'ecommerce': {
                                 'purchase': {
                                     'actionField': {
-                                        'id': refId,
+                                        'id': refId+'',
                                         'affiliation': '',
-                                        'revenue': paymentInfo.premiumAmount,
+                                        'revenue': paymentInfo.premiumAmount+'',
                                         'tax': '0.00',
                                         'shipping': '0.00',
-                                        'step': 5,
+                                        'step': 5+'',
                                         'option': 'Travel Completed',
                                         'coupon': paymentInfo.promoCode ? paymentInfo.promoCode : ''
                                     },
