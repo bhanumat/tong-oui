@@ -33,7 +33,7 @@
             onSelect: function(date) {
               $scope.travel.endTravelDate = date;
               $scope.tempData.endDateForCal = element.datepicker('getDate');
-              var monthname=new Array("ม.ค.","ก.พ.","มี.ค","ม.ย","พ.ค","มิ.ย","ก.ค","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+              var monthname=new Array("ม.ค.","ก.พ.","มี.ค","เม.ย.","พ.ค","มิ.ย","ก.ค","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
               var monName = monthname[$scope.tempData.endDateForCal.getMonth()];
               $scope.tempData.shortEndDate = "" + $scope.tempData.endDateForCal.getDate() + " " + monName + " " + $scope.tempData.endDateForCal.getFullYear() + "";
               if ($scope.tempData.startDateForCal) {

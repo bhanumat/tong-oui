@@ -92,7 +92,7 @@
                                 'price': price+'',
                                 'brand': 'CIGNA',
                                 'category': 'Travel',
-                                'quantity': 1+''
+                                'quantity': 1
                             });
                         }
 
