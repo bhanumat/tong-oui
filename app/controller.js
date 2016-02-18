@@ -137,14 +137,13 @@
                 }
 
                 if (cleanStorageRequired) {
-                    self.reset();
+                    //self.reset();
                     redirectRequired = true;
                     $scope.tempData.currentState = "/insurance/thankyou";
                 }
 
                 if (redirectRequired) {
-                    $location.path('/insurance');
-                    $location.replace();
+                    $state.go('insurance');
                 }
             } else {
                 self.initFirstState();
@@ -186,7 +185,7 @@
                     $scope.tempData.currentState = $location.path();
                     $location.path('/insurance/destination');
                     $location.replace();
-                } else {
+                }else {
                     $scope.tempData.currentState = $location.path();
                 }
             }
