@@ -137,7 +137,7 @@
                 }
 
                 if (cleanStorageRequired) {
-                    //self.reset();
+                    self.reset();
                     redirectRequired = true;
                     $scope.tempData.currentState = "/insurance/thankyou";
                 }
